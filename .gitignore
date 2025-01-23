@@ -1,0 +1,48 @@
+# Laravel & Node
+/vendor
+/node_modules
+
+# Archivos de entorno
+.env
+.env.local
+.env.testing
+.env.*.php
+
+# Archivos de caché y de log
+/storage/*
+!.storage/.gitkeep
+/storage/app/*
+/storage/framework/*
+/storage/logs/*
+
+# Directorios del sistema de archivos
+/public/storage
+/public/hot
+/public/.well-known
+
+# IDEs y editores
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de dependencias de Composer
+composer.lock
+
+# Archivos de caché de Composer
+/.composer
+/composer.phar
+
+# Archivos de PHPUnit
+.phpunit.result.cache
+
+# Node.js y NPM
+npm-debug.log
+yarn-error.log
+
+# Archivos de configuración de OSX y otros SO
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de IDEs
+*.iml
