@@ -2,9 +2,79 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 body {
   background-color: #FEFFEB;
+  font-family: "Itim";
+  color: #455A64;
 }
 
 .navbar {
   font-family: "Lilita One";
   font-size: x-large;
+}
+
+.footer {
+  font-family: "Itim";
+  color: #455A64;
+  background-color: #FFD87F;
+}
+
+a {
+  text-decoration: none;
+  color: #455A64;
+}
+
+.letra:nth-child(2),
+.letra:nth-child(6) {
+  color: #EF5350;
+}
+
+.letra:nth-child(3),
+.letra:nth-child(7) {
+  color: #FFB300;
+}
+
+.letra:nth-child(4),
+.letra:nth-child(9) {
+  color: #06AAF4;
+}
+
+.letra:nth-child(5),
+.letra:nth-child(8) {
+  color: #8CC34C;
+}
+
+.letra:nth-child(2) {
+  color: #EF5350;
+}
+
+.letra:nth-child(3) {
+  color: #FFB300;
+}
+
+.letra:nth-child(2) {
+  color: #EF5350;
+}
+
+.letra:nth-child(3) {
+  color: #FFB300;
+}
+
+.texto-animado {
+  font-size: 8vw;
+  font-family: "Lilita One";
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: -8px;
+  max-width: 80%;
+}
+
+.texto-animado span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.1s ease-in-out;
+}
+
+.texto-animado span:hover {
+  transform: scale(1.5);
 }/*# sourceMappingURL=style.css.map */

@@ -2,8 +2,81 @@
 
 body{
   background-color: $amarillo_fondo;
+  font-family: $fuenteTexto;
+  color: $gris;
 }
 
 .navbar{
    @include menu_pc;
+}
+
+.footer{
+  font-family: $fuenteTexto;
+  color: $gris;
+  background-color: $amarillo_footer;
+}
+
+a{
+  text-decoration: none;
+  color: $gris;
+}
+
+
+
+.letra:nth-child(2),
+.letra:nth-child(6){
+  color: $rojo;
+}
+
+.letra:nth-child(3),
+.letra:nth-child(7){
+  color: $amarillo;
+}
+
+.letra:nth-child(4),
+.letra:nth-child(9){
+  color: $azul;
+}
+
+.letra:nth-child(5),
+.letra:nth-child(8){
+  color: $verde;
+}
+.letra:nth-child(2){
+  color: $rojo;
+}
+
+.letra:nth-child(3){
+  color: $amarillo;
+}
+.letra:nth-child(2){
+  color: $rojo;
+}
+
+.letra:nth-child(3){
+  color: $amarillo;
+}
+
+
+
+
+.texto-animado {
+  font-size: 8vw;
+  font-family: $fuenteTitulos;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: -8px;
+  max-width: 80%;
+}
+
+.texto-animado span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.1s ease-in-out;
+}
+
+.texto-animado span:hover {
+  transform: scale(1.5);
 }
