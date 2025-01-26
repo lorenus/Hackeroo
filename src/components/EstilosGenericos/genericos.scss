@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+$amarillo_fondo: #FEFFEB;
+$amarillo_footer: #FFD87F; 
+$gris: #455A64;
+$rojo: #EF5350;
+$amarillo: #FFB300;
+$azul: #06AAF4;
+$verde: #8CC34C;
+
+$fuenteTitulos: 'Lilita One';
+$fuenteTexto: 'Itim';
+
+@mixin menu_pc {
+        font-family: $fuenteTitulos;
+        font-size: x-large;
+}

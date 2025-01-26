@@ -1,0 +1,9 @@
+@use 'EstilosGenericos/genericos.scss' as *; 
+
+body{
+  background-color: $amarillo_fondo;
+}
+
+.navbar{
+   @include menu_pc;
+}
