@@ -1,6 +1,6 @@
-@use 'EstilosGenericos/genericos.scss' as *; 
+@use 'EstilosGenericos/genericos.scss' as *;
 
-body{
+body {
   background-color: $amarillo_footer;
   font-family: $fuenteTexto;
   color: $gris;
@@ -8,74 +8,61 @@ body{
 
 .contenedor {
   background-color: $amarillo_fondo;
-  min-height: 80vh;
-  border-bottom-left-radius: 50px; /* Add rounded bottom-left corner */
-  border-bottom-right-radius: 50px; /* Add rounded bottom-right corner */
+  min-height: 75vh;
+  display: flex;
+  /* Agrega display: flex */
+  flex-direction: column;
+  /* Organiza elementos en columna */
+  align-items: center;
+  /* Centra elementos horizontalmente */
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
-.navbar{
-   @include menu_pc;
+.navbar {
+  @include menu_pc;
 }
 
-.footer{
+.footer {
   font-family: $fuenteTexto;
   color: $gris;
   background-color: $amarillo_footer;
 }
 
-a{
+.logo {
+  min-height: 60vh;
+}
+
+a {
   text-decoration: none;
   color: $gris;
 }
 
-
-
 .letra:nth-child(2),
-.letra:nth-child(6){
+.letra:nth-child(6) {
   color: $rojo;
 }
 
 .letra:nth-child(3),
-.letra:nth-child(7){
+.letra:nth-child(7) {
   color: $amarillo;
 }
 
 .letra:nth-child(4),
-.letra:nth-child(9){
+.letra:nth-child(9) {
   color: $azul;
 }
 
 .letra:nth-child(5),
-.letra:nth-child(8){
+.letra:nth-child(8) {
   color: $verde;
 }
-.letra:nth-child(2){
-  color: $rojo;
-}
-
-.letra:nth-child(3){
-  color: $amarillo;
-}
-.letra:nth-child(2){
-  color: $rojo;
-}
-
-.letra:nth-child(3){
-  color: $amarillo;
-}
-
-
-
 
 .texto-animado {
   font-size: 8vw;
   font-family: $fuenteTitulos;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  letter-spacing: -8px;
-  max-width: 80%;
+  text-align: center;
+  /* Centra el texto horizontalmente */
 }
 
 .texto-animado span {
@@ -86,4 +73,22 @@ a{
 
 .texto-animado span:hover {
   transform: scale(1.5);
+}
+
+.boton {
+  background-image: url('./../../img/boton.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  color: $amarillo_fondo;
+  text-decoration: none;
+
+  >a {
+    margin-top: -7px;
+    color: $amarillo_fondo;
+    font-size: x-large;
+  }
 }

@@ -15,4 +15,5 @@ $fuenteTexto: 'Itim';
 @mixin menu_pc {
         font-family: $fuenteTitulos;
         font-size: x-large;
+        background-color: $amarillo_fondo;
 }

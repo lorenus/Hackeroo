@@ -8,20 +8,31 @@ body {
 
 .contenedor {
   background-color: #FEFFEB;
-  min-height: 80vh;
-  border-bottom-left-radius: 50px; /* Add rounded bottom-left corner */
-  border-bottom-right-radius: 50px; /* Add rounded bottom-right corner */
+  min-height: 75vh;
+  display: flex;
+  /* Agrega display: flex */
+  flex-direction: column;
+  /* Organiza elementos en columna */
+  align-items: center;
+  /* Centra elementos horizontalmente */
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .navbar {
   font-family: "Lilita One";
   font-size: x-large;
+  background-color: #FEFFEB;
 }
 
 .footer {
   font-family: "Itim";
   color: #455A64;
   background-color: #FFD87F;
+}
+
+.logo {
+  min-height: 60vh;
 }
 
 a {
@@ -49,31 +60,11 @@ a {
   color: #8CC34C;
 }
 
-.letra:nth-child(2) {
-  color: #EF5350;
-}
-
-.letra:nth-child(3) {
-  color: #FFB300;
-}
-
-.letra:nth-child(2) {
-  color: #EF5350;
-}
-
-.letra:nth-child(3) {
-  color: #FFB300;
-}
-
 .texto-animado {
   font-size: 8vw;
   font-family: "Lilita One";
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  letter-spacing: -8px;
-  max-width: 80%;
+  text-align: center;
+  /* Centra el texto horizontalmente */
 }
 
 .texto-animado span {
@@ -84,4 +75,21 @@ a {
 
 .texto-animado span:hover {
   transform: scale(1.5);
+}
+
+.boton {
+  background-image: url("./../../img/boton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  color: #FEFFEB;
+  text-decoration: none;
+}
+.boton > a {
+  margin-top: -7px;
+  color: #FEFFEB;
+  font-size: x-large;
 }/*# sourceMappingURL=style.css.map */
