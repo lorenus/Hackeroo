@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 body {
-  background-color: #FEFFEB;
+  background-color: #FFD87F;
   font-family: "Itim";
   color: #455A64;
+}
+
+.contenedor {
+  background-color: #FEFFEB;
+  min-height: 80vh;
+  border-bottom-left-radius: 50px; /* Add rounded bottom-left corner */
+  border-bottom-right-radius: 50px; /* Add rounded bottom-right corner */
 }
 
 .navbar {

@@ -1,9 +1,16 @@
 @use 'EstilosGenericos/genericos.scss' as *; 
 
 body{
-  background-color: $amarillo_fondo;
+  background-color: $amarillo_footer;
   font-family: $fuenteTexto;
   color: $gris;
+}
+
+.contenedor {
+  background-color: $amarillo_fondo;
+  min-height: 80vh;
+  border-bottom-left-radius: 50px; /* Add rounded bottom-left corner */
+  border-bottom-right-radius: 50px; /* Add rounded bottom-right corner */
 }
 
 .navbar{
