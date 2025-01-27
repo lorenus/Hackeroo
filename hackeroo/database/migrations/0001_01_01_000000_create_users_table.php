@@ -6,21 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->text('birth_date')->nullable();
+            $table->date('birth_date'); 
+            $table->enum('role', ['profesor', 'alumno'])->default('alumno'); // Campo para diferenciar roles
+            $table->boolean('status')->default(true); // Indica si está activo, se usará para notificaciones
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('users');
     }
 };
-
