@@ -1,12 +1,17 @@
 <?php
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\PaginasEstaticasController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [PaginasEstaticasController::class, 'index']);
+Route::get('/info', [PaginasEstaticasController::class, 'info']);
+Route::get('/faq', [PaginasEstaticasController::class, 'faq']);
+
+Route::get('/contacto', [ContactoController::class, 'contacto']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
