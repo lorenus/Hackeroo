@@ -15,13 +15,13 @@
   <nav class="navbar navbar-expand-sm justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item me-3">
-        <a class="nav-link" href="#">Conócenos</a>
+        <a class="nav-link"  href="{{ route('info') }}">Conócenos</a>
       </li>
       <li class="nav-item me-3">
-        <a class="nav-link" href="#">Contáctanos</a>
+        <a class="nav-link"  href="{{ route('contact') }}">Contáctanos</a>
       </li>
       <li class="nav-item me-4">
-        <a class="nav-link" href="#">Ayuda</a>
+        <a class="nav-link"  href="{{ route('faq') }}">Ayuda</a>
       </li>
     </ul>
   </nav>

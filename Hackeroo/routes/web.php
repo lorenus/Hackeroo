@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
 
-Route::get('/', [PaginasEstaticasController::class, 'index']);
-Route::get('/info', [PaginasEstaticasController::class, 'info']);
-Route::get('/faq', [PaginasEstaticasController::class, 'faq']);
+Route::get('/', [PaginasEstaticasController::class, 'index'])->name('home'); 
+Route::get('/info', [PaginasEstaticasController::class, 'info'])->name('info'); 
+Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq'); 
 
-Route::get('/contacto', [ContactoController::class, 'contacto']);
+Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contact'); 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
