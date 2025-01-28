@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 body, html {
@@ -29,13 +30,73 @@ a {
   text-decoration: none;
 }
 .boton > a {
+  font-family: "Lilita One";
   margin-top: -7px;
   color: #FEFFEB;
   font-size: x-large;
 }
 
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggler {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  outline: none; /* Elimina el borde cuando el botón está enfocado */
+  box-shadow: none;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  outline: none; /* Elimina el borde de enfoque */
+  box-shadow: none; /* Elimina cualquier sombra en foco */
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+.custom-menu {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  list-style: none; /* Elimina los estilos de lista */
+}
+
+/* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
+@media (max-width: 576px) {
+  .custom-menu {
+    height: 100vh; /* Ocupa el 100% del alto de la ventana */
+  }
+}
+.boton-menu {
+  background-image: url("/img/botones/boton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
 .navbar {
-  min-height: 10vh;
   font-family: "Lilita One";
   font-size: x-large;
   background-color: #FEFFEB;
