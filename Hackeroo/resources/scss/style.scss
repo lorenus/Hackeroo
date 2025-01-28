@@ -1,41 +1,38 @@
 @use 'genericos.scss' as *;
 
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Asegura que el cuerpo ocupe toda la altura */
+}
+
 body {
   background-color: $amarillo_footer;
   font-family: $fuenteTexto;
   color: $gris;
 }
 
-.contenedor {
-  background-color: $amarillo_fondo;
-  min-height: 75vh;
-  display: flex;
-  /* Agrega display: flex */
-  flex-direction: column;
-  /* Organiza elementos en columna */
-  align-items: center;
-  /* Centra elementos horizontalmente */
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-.navbar {
-  @include menu_pc;
-}
-
-.footer {
-  font-family: $fuenteTexto;
-  color: $gris;
-  background-color: $amarillo_footer;
-}
-
-.logo {
-  min-height: 60vh;
-}
-
 a {
   text-decoration: none;
   color: $gris;
+}
+.navbar{
+  min-height: 10vh;
+  @include menu_pc;
+}
+
+footer{
+  min-height: 20vh;
+}
+.contenido {
+  flex-grow: 1; /* Hace que el contenido ocupe todo el espacio restante */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* Asegura que ocupe el espacio restante */
+  background-color: $amarillo_fondo;
+  border-bottom-left-radius: 25px; /* Bordes redondeados en la parte inferior */
+  border-bottom-right-radius: 25px; /* Bordes redondeados en la parte inferior */
 }
 
 .letra:nth-child(2),
@@ -75,20 +72,3 @@ a {
   transform: scale(1.5);
 }
 
-.boton {
-  background-image: url('./../../img/boton.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 180px;
-  display: inline-block;
-  padding: 10px 20px;
-  text-align: center;
-  color: $amarillo_fondo;
-  text-decoration: none;
-
-  >a {
-    margin-top: -7px;
-    color: $amarillo_fondo;
-    font-size: x-large;
-  }
-}
