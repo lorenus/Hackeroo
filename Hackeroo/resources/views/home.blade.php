@@ -33,8 +33,9 @@
   </nav>
 
   <!-- Container fluid (contenido de la página) -->
-  <div class="contenido container-fluid">
-    <div class="logo col-12 text-center">
+  <div class="contenido container-fluid d-flex flex-column align-items-center">
+    <!-- Logo -->
+    <div class="logo col-12 text-center mb-5">
       <h1 class="texto-animado">
         <span>&lt;</span>
         <span class="letra">H</span>
@@ -49,7 +50,14 @@
         <span>&gt;</span>
       </h1>
     </div>
-  </div>
+
+    <!-- Botón -->
+    <div class="boton col-12 d-flex justify-content-center">
+        <a href="#">
+            <p>Entrar</p>
+        </a>
+    </div>
+</div>
 
   <!-- Footer -->
   <footer class="pt-4 px-5 pb-3">

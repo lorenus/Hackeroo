@@ -16,6 +16,25 @@ a {
   text-decoration: none;
   color: $gris;
 }
+
+.boton {
+  background-image: url('/img/botones/boton.png');  
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+
+  >a {
+    margin-top: -7px;
+    color: $amarillo_fondo;
+    font-size: x-large;
+  }
+}
+
 .navbar{
   min-height: 10vh;
   @include menu_pc;

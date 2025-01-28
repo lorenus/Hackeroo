@@ -17,6 +17,23 @@ a {
   color: #455A64;
 }
 
+.boton {
+  background-image: url("/img/botones/boton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+.boton > a {
+  margin-top: -7px;
+  color: #FEFFEB;
+  font-size: x-large;
+}
+
 .navbar {
   min-height: 10vh;
   font-family: "Lilita One";
