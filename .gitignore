@@ -2,12 +2,6 @@
 /vendor
 /node_modules
 
-# Archivos de entorno
-.env
-.env.local
-.env.testing
-.env.*.php
-
 # Archivos de caché y de log
 /storage/*
 !.storage/.gitkeep
