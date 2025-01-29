@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\usuarios;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+
 
 class RegisteredUserController extends Controller
 {
@@ -27,24 +28,30 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'DNI' => 'required|string|unique:usuarios,DNI',
+            'nombre' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios,email',
+            'password' => 'required|string|confirmed|min:8',
+            'rol' => 'in:alumno,profesor',
         ]);
-
-        $user = User::create([
-            'name' => $request->name,
+    
+        // Crear el usuario
+        $user = Usuarios::create([
+            'DNI' => $request->DNI,
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'contraseña' => Hash::make($request->password),
+            'rol' => $request->rol ?? 'alumno',
         ]);
-
-        event(new Registered($user));
-
+    
+        // Autenticación automática tras el registro
         Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+    
+        return redirect('/');
     }
 }
