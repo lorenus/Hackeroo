@@ -45,12 +45,6 @@
         </h1>
       </div>
     </div>
-    <div class="row mt-4">
-  <div class="col-12 d-flex justify-content-center gap-4">
-    <a href="#" class="btn-app">Registrarse</a>
-    <a href="#" class="btn-app">Iniciar sesión</a>
-  </div>
-</div>
 
 
     <div class="row">

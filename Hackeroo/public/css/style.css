@@ -94,34 +94,6 @@ a {
   font-size: x-large;
 }
 
-/* Botón estilo app */
-.btn-app {
-  display: inline-block;          /* Hace que ocupe su espacio completo */
-  background-color: #FFB300;     /* Color de fondo */
-  border: none;                  /* Sin bordes */
-  border-radius: 30px;           /* Bordes redondeados */
-  color: #FEFFEB;                /* Color del texto */
-  font-family: "Lilita One";     /* Fuente personalizada */
-  font-size: large;              /* Tamaño de texto */
-  padding: 15px 30px;            /* Espaciado interno */
-  text-align: center;            /* Centra el texto */
-  text-decoration: none;         /* Sin subrayado */
-  cursor: pointer;               /* Manito al pasar */
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-/* Efecto hover */
-.btn-app:hover {
-  transform: scale(1.1);         /* Aumenta ligeramente el tamaño */
-  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
-  background-color: #EF5350;     /* Cambia el color de fondo */
-}
-
-/* Efecto al hacer clic */
-.btn-app:active {
-  transform: scale(1);           /* Vuelve al tamaño normal */
-}
 
 
 
