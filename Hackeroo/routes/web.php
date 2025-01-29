@@ -3,9 +3,13 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PaginasEstaticasController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
+
+
+
 
 Route::get('/', [PaginasEstaticasController::class, 'index']);
 Route::get('/info', [PaginasEstaticasController::class, 'info']);
