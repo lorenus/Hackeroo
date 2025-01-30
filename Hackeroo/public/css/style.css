@@ -80,7 +80,7 @@ h1 {
   display: none;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 600px) {
   .navbar-nav {
     flex-direction: row;
     justify-content: flex-end;
@@ -88,6 +88,12 @@ h1 {
   }
   .texto-info {
     margin-left: 10vw;
+  }
+  #accordion {
+    width: 40vw;
+  }
+  .img-fluid {
+    max-width: 30vw;
   }
 }
 .custom-menu {
@@ -329,6 +335,14 @@ footer {
 
 .card-header {
   border-bottom: none;
+}
+
+#accordion {
+  width: 80vw;
+}
+
+.img-fluid {
+  width: 60vw;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -85,6 +85,14 @@ h1{
   .texto-info{
     margin-left: 10vw;
   }
+
+  #accordion{
+    width: 40vw;
+  }
+
+  .img-fluid{
+    max-width: 30vw;
+    }
 }
 
 
@@ -307,3 +315,10 @@ footer {
   border-bottom: none;  // Elimina el borde inferior (la línea gris)
 }
 
+#accordion{
+  width: 80vw;
+}
+
+.img-fluid{
+width: 60vw;
+}
