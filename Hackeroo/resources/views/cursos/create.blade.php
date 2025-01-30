@@ -1,14 +1,22 @@
 @extends('layouts.app')
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @section('content')
 <div class="container">
     <h1>Crear Curso</h1>
 
     <!-- Mostrar mensaje de éxito -->
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @endif
 
     <!-- Formulario para añadir un curso -->
@@ -26,10 +34,10 @@
         </div>
 
         <div class="mb-3">
-            <label for="profesor_dni" class="form-label">Selecciona Profesor</label>
-            <select class="form-control" id="profesor_dni" name="profesor_dni" required>
-                @foreach($profesores as $profesor)
-                    <option value="{{ $profesor->DNI }}">{{ $profesor->nombre }} {{ $profesor->apellidos }}</option>
+            <label for="alumnos" class="form-label">Selecciona Alumnos</label>
+            <select class="form-control" id="alumnos" name="alumnos[]" multiple required>
+                @foreach($alumnos as $alumno)
+                <option value="{{ $alumno->DNI }}">{{ $alumno->nombre }} {{ $alumno->apellidos }}</option>
                 @endforeach
             </select>
         </div>
