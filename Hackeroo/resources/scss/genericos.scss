@@ -17,3 +17,46 @@ $fuenteTexto: 'Itim';
         font-size: x-large;
         background-color: $amarillo_fondo;
 }
+
+@mixin boton {
+        background-image: url('/img/botones/boton.png');  
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 180px;
+        height: 60px;
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+}
+
+@mixin subrayado($imagen) {
+        position: absolute;
+        bottom: 0; 
+        width: 100%;
+        height: 15px; 
+        background-image: url($imagen); 
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        opacity: 0; 
+        transition: opacity 0.3s ease; 
+      }
+
+      @mixin bolita($posicion) {
+        position: absolute; /* Para posicionarlas respecto a su contenedor */
+        @if $posicion == 'left' {
+          left: -20px; /* Ajusta la distancia de la bolita desde el borde izquierdo */
+        } @else {
+          right: -20px; /* Ajusta la distancia de la bolita desde el borde derecho */
+        }
+        top: 40%; /* Centra verticalmente */
+        transform: translateY(-50%); /* Ajusta la bolita al centro exacto */
+        width: 15px; /* Ajusta el tamaño de la bolita */
+        height: 15px; /* Ajusta el tamaño de la bolita */
+        background-image: url(/img/botones/bolita.png); /* Ruta a la imagen de la bolita */
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0; /* Las bolitas no son visibles por defecto */
+        transition: opacity 0.3s ease; /* Transición suave al hacer hover */
+      }
+      
