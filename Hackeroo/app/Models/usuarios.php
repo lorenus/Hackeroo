@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Curso;
 
 class Usuarios extends Authenticatable
 {
@@ -33,6 +35,7 @@ class Usuarios extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    // Autenticación: Indicar que el email es el identificador del usuario
     public function getAuthIdentifierName()
     {
         return 'email';
@@ -41,5 +44,17 @@ class Usuarios extends Authenticatable
     public function getAuthPassword()
     {
         return $this->contraseña;
+    }
+
+    // 🔹 Relación muchos a muchos con los cursos (para los alumnos)
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'curso_usuario', 'usuario_dni', 'curso_id');
+    }
+
+    // 🔹 Relación uno a muchos con los cursos (para los profesores)
+    public function cursos_profesor()
+    {
+        return $this->hasMany(Curso::class, 'profesor_dni', 'DNI');
     }
 }
