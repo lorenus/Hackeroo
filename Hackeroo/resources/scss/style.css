@@ -31,7 +31,6 @@ a {
   text-align: center;
   text-decoration: none;
 }
-
 .boton > a {
   font-family: "Lilita One";
   margin-top: -7px;
@@ -309,6 +308,4 @@ footer {
   100% {
     transform: translateX(0); /* Se mueve a su posición original */
   }
-} 
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
