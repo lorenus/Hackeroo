@@ -18,27 +18,27 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm">
+  <nav class="navbar navbar-expand-sm pe-4">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir"> <!-- Imagen de abrir -->
-        <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;"> <!-- Imagen de cerrar -->
+        <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir"> 
+        <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;">
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto custom-menu"> <!-- Clase personalizada -->
-          <li class="nav-item">
+        <ul class="navbar-nav ms-auto custom-menu"> 
+          <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
                <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
                <div class="subrayado1"></div>
             </div>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
                <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
                <div class="subrayado3"></div>
             </div>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
             <a class="nav-link" href="{{ route('faq') }}">Ayuda</a>
                <div class="subrayado2"></div>
@@ -51,9 +51,9 @@
 
 
 
-  <!-- Container fluid (contenido de la página) -->
+  <!-- Contenido de la página -->
   <div class="contenido container-fluid d-flex flex-column align-items-center">
-    <!-- Logo -->
+  
     <div class="logo col-12 text-center mb-5">
       <h1 class="texto-animado">
         <span>&lt;</span>
