@@ -26,6 +26,9 @@
 <body>
   <nav class="navbar navbar-expand-sm pe-4">
     <div class="container-fluid">
+    <a class="navbar-brand" href="{{ route('home') }}">
+    <img src="/img/imagenes/logo.png" width="150" alt="Logo">  
+    </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir">
@@ -61,25 +64,6 @@
     </div>
     </div>
   </nav>
-
-
-
-  <div class="logo-menu col-12 text-center mb-5">
-  <h1 class="texto-animado-menu">
-    <span>&lt;</span>
-    <span class="letra">H</span>
-    <span class="letra">a</span>
-    <span class="letra">c</span>
-    <span class="letra">k</span>
-    <span class="letra">e</span>
-    <span class="letra">r</span>
-    <span class="letra">o</span>
-    <span class="letra">o</span>
-    <span>/</span>
-    <span>&gt;</span>
-  </h1>
-</div>
-
 
 
   
