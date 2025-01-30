@@ -31,15 +31,14 @@ class CursoController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'profesor_dni' => 'required|exists:usuarios,DNI', // Asegurarse de que el profesor exista
+            'descripcion' => 'required|string', // Asegurarse de que el profesor exista
         ]);
 
         // Crear el curso
         Curso::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
-            'profesor_dni' => $request->profesor_dni,
+            'profesor_dni' => Auth::user()->DNI,
         ]);
 
         // Redirigir con éxito
