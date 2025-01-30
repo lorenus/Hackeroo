@@ -27,21 +27,27 @@ class CursoController extends Controller
 
     // Guardar el curso en la base de datos
     public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string', // Asegurarse de que el profesor exista
-        ]);
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'alumnos' => 'required|array', // Validación de los alumnos seleccionados
+        'alumnos.*' => 'exists:usuarios,DNI' // Asegurarse de que los alumnos existen
+    ]);
 
-        // Crear el curso
-        Curso::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'profesor_dni' => Auth::user()->DNI,
-        ]);
+    // Crear el curso
+    $curso = Curso::create([
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'profesor_dni' => Auth::user()->DNI,
+    ]);
 
-        // Redirigir con éxito
-        return redirect()->route('cursos.create')->with('success', 'Curso creado correctamente.');
-    }
+    // Asociar los alumnos seleccionados al curso
+    $curso->alumnos()->attach($request->alumnos);
+
+    // Redirigir con éxito
+    return redirect()->route('cursos.create')->with('success', 'Curso creado correctamente.');
+}
+
 }
