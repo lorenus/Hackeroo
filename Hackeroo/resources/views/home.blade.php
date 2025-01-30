@@ -20,28 +20,29 @@
 <body>
   <nav class="navbar navbar-expand-sm pe-4">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir"> 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir">
         <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;">
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto custom-menu"> 
+        <ul class="navbar-nav ms-auto custom-menu">
           <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
-               <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
-               <div class="subrayado1"></div>
+              <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
+              <div class="subrayado1"></div>
             </div>
           </li>
           <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
-               <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
-               <div class="subrayado3"></div>
+              <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
+              <div class="subrayado3"></div>
             </div>
           </li>
           <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
-            <a class="nav-link" href="{{ route('faq') }}">Ayuda</a>
-               <div class="subrayado2"></div>
+              <a class="nav-link" href="{{ route('faq') }}">Ayuda</a>
+              <div class="subrayado2"></div>
             </div>
           </li>
         </ul>
@@ -53,7 +54,7 @@
 
   <!-- Contenido de la página -->
   <div class="contenido container-fluid d-flex flex-column align-items-center">
-  
+
     <div class="logo col-12 text-center mb-5">
       <h1 class="texto-animado">
         <span>&lt;</span>
@@ -80,27 +81,46 @@
 
   <!-- Footer -->
   <footer class="pt-4 px-5 pb-3">
-    <div class="row align-items-center">
-      <!-- Primer div (izquierda) -->
-      <div class="col-6 col-md-4 order-1 order-md-1">
+  <div class="row align-items-center">
+    <!-- Primer div (izquierda) -->
+    <div class="col-6 col-md-4 order-1 order-md-1 d-flex flex-column">
+      <div class="enlace-bolita">
         <a href="#" class="d-block mb-2">Instagram</a>
+        <div class="bolitaI"></div>
+      </div>
+      <div class="enlace-bolita">
         <a href="#" class="d-block mb-2">Twitter</a>
+        <div class="bolitaI"></div>
+      </div>
+      <div class="enlace-bolita">
         <a href="#" class="d-block mb-2">Youtube</a>
-      </div>
-
-      <!-- Segundo div (centro) -->
-      <div class="col-12 col-md-4 text-center order-3 order-md-2">
-        <p>&copy; 2025 Mi Página. Todos los derechos reservados.</p>
-      </div>
-
-      <!-- Tercer div (derecha) -->
-      <div class="col-6 col-md-4 text-end order-2 order-md-3">
-        <a href="#" class="d-block mb-2">Cookies</a>
-        <a href="#" class="d-block mb-2">Política de privacidad</a>
-        <a href="#" class="d-block mb-2">Términos y condiciones</a>
+        <div class="bolitaI"></div>
       </div>
     </div>
-  </footer>
+
+    <!-- Segundo div (centro) -->
+    <div class="col-12 col-md-4 text-center order-3 order-md-2">
+      <p>&copy; 2025 Mi Página. Todos los derechos reservados.</p>
+    </div>
+
+    <!-- Tercer div (derecha) -->
+    <div class="col-6 col-md-4 text-end order-2 order-md-3 d-flex flex-column">
+      <div class="enlace-bolita">
+        <a href="#" class="d-block mb-2">Cookies</a>
+        <div class="bolitaD"></div>
+      </div>
+      <div class="enlace-bolita">
+        <a href="#" class="d-block mb-2">Política de privacidad</a>
+        <div class="bolitaD"></div>
+      </div>
+      <div class="enlace-bolita">
+        <a href="#" class="d-block mb-2">Términos y condiciones</a>
+        <div class="bolitaD"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 
 </body>
 

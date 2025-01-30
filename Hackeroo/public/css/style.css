@@ -1,10 +1,12 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  height: 100%; /* Asegura que el cuerpo ocupe toda la altura */
+  height: 100%;
+  /* Asegura que el cuerpo ocupe toda la altura */
 }
 
 body {
@@ -47,14 +49,17 @@ a {
   position: absolute;
   right: 15px;
   top: 15px;
-  outline: none; /* Elimina el borde cuando el botón está enfocado */
+  outline: none;
+  /* Elimina el borde cuando el botón está enfocado */
   box-shadow: none;
   border: none;
 }
 
 .navbar-toggler:focus {
-  outline: none; /* Elimina el borde de enfoque */
-  box-shadow: none; /* Elimina cualquier sombra en foco */
+  outline: none;
+  /* Elimina el borde de enfoque */
+  box-shadow: none;
+  /* Elimina cualquier sombra en foco */
   border: none;
 }
 
@@ -71,17 +76,23 @@ a {
 }
 .custom-menu {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  margin: 0; /* Elimina el margen predeterminado */
-  padding: 0; /* Elimina el padding predeterminado */
-  list-style: none; /* Elimina los estilos de lista */
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin: 0;
+  /* Elimina el margen predeterminado */
+  padding: 0;
+  /* Elimina el padding predeterminado */
+  list-style: none;
+  /* Elimina los estilos de lista */
 }
 
 /* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
 @media (max-width: 576px) {
   .custom-menu {
-    height: 100vh; /* Ocupa el 100% del alto de la ventana */
+    height: 100vh;
+    /* Ocupa el 100% del alto de la ventana */
   }
 }
 .boton-menu {
@@ -159,11 +170,6 @@ footer {
   display: inline-block;
 }
 
-.enlace {
-  text-decoration: none;
-  display: inline-block;
-}
-
 .subrayado1 {
   position: absolute;
   bottom: 0;
@@ -203,7 +209,45 @@ footer {
 .enlace-con-subrayado:hover .subrayado1,
 .enlace-con-subrayado:hover .subrayado2,
 .enlace-con-subrayado:hover .subrayado3 {
-  opacity: 1; /* El subrayado con imagen se muestra al hacer hover */
+  opacity: 1;
+}
+
+.enlace-bolita {
+  position: relative;
+  display: inline-block;
+}
+
+.bolitaI {
+  position: absolute; /* Para posicionarlas respecto a su contenedor */
+  left: -20px; /* Ajusta la distancia de la bolita desde el borde izquierdo */
+  top: 40%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta la bolita al centro exacto */
+  width: 15px; /* Ajusta el tamaño de la bolita */
+  height: 15px; /* Ajusta el tamaño de la bolita */
+  background-image: url(/img/botones/bolita.png); /* Ruta a la imagen de la bolita */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0; /* Las bolitas no son visibles por defecto */
+  transition: opacity 0.3s ease; /* Transición suave al hacer hover */
+}
+
+.bolitaD {
+  position: absolute; /* Para posicionarlas respecto a su contenedor */
+  right: -20px; /* Ajusta la distancia de la bolita desde el borde derecho */
+  top: 40%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta la bolita al centro exacto */
+  width: 15px; /* Ajusta el tamaño de la bolita */
+  height: 15px; /* Ajusta el tamaño de la bolita */
+  background-image: url(/img/botones/bolita.png); /* Ruta a la imagen de la bolita */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0; /* Las bolitas no son visibles por defecto */
+  transition: opacity 0.3s ease; /* Transición suave al hacer hover */
+}
+
+.enlace-bolita:hover .bolitaI,
+.enlace-bolita:hover .bolitaD {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=style.css.map */

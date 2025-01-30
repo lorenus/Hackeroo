@@ -1,9 +1,11 @@
 @use 'genericos.scss' as *;
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  height: 100%; /* Asegura que el cuerpo ocupe toda la altura */
+  height: 100%;
+  /* Asegura que el cuerpo ocupe toda la altura */
 }
 
 body {
@@ -18,7 +20,7 @@ a {
 }
 
 .boton {
- @include boton;
+  @include boton;
 
   >a {
     font-family: $fuenteTitulos;
@@ -40,13 +42,17 @@ a {
   position: absolute;
   right: 15px;
   top: 15px;
-  outline: none; /* Elimina el borde cuando el botón está enfocado */
-  box-shadow: none; 
+  outline: none;
+  /* Elimina el borde cuando el botón está enfocado */
+  box-shadow: none;
   border: none;
 }
+
 .navbar-toggler:focus {
-  outline: none; /* Elimina el borde de enfoque */
-  box-shadow: none; /* Elimina cualquier sombra en foco */
+  outline: none;
+  /* Elimina el borde de enfoque */
+  box-shadow: none;
+  /* Elimina cualquier sombra en foco */
   border: none;
 }
 
@@ -56,11 +62,11 @@ a {
 
 
 
-@media (min-width: 576px) {  
+@media (min-width: 576px) {
   .navbar-nav {
-    flex-direction: row; 
-    justify-content: flex-end; 
-    text-align: right; 
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
   }
 }
 
@@ -70,22 +76,28 @@ a {
 
 .custom-menu {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  margin: 0; /* Elimina el margen predeterminado */
-  padding: 0; /* Elimina el padding predeterminado */
-  list-style: none; /* Elimina los estilos de lista */
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin: 0;
+  /* Elimina el margen predeterminado */
+  padding: 0;
+  /* Elimina el padding predeterminado */
+  list-style: none;
+  /* Elimina los estilos de lista */
 }
 
 /* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
 @media (max-width: 576px) {
   .custom-menu {
-      height: 100vh; /* Ocupa el 100% del alto de la ventana */
+    height: 100vh;
+    /* Ocupa el 100% del alto de la ventana */
   }
 }
 
 
-.boton-menu{
+.boton-menu {
   @include boton;
 }
 
@@ -94,25 +106,25 @@ a {
 
 
 
-.navbar{
+.navbar {
   @include menu_pc;
-  
+
 }
 
 
-footer{
+footer {
   min-height: 20vh;
 }
 
 .contenido {
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; 
+  min-height: 70vh;
   background-color: $amarillo_fondo;
-  border-bottom-left-radius: 25px; 
-  border-bottom-right-radius: 25px; 
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .letra:nth-child(2),
@@ -161,10 +173,6 @@ footer{
   display: inline-block;
 }
 
-.enlace {
-  text-decoration: none; 
-  display: inline-block;
-}
 
 .subrayado1 {
   @include subrayado('/img/botones/linea1.png');
@@ -186,5 +194,24 @@ footer{
 .enlace-con-subrayado:hover .subrayado1,
 .enlace-con-subrayado:hover .subrayado2,
 .enlace-con-subrayado:hover .subrayado3 {
-  opacity: 1; /* El subrayado con imagen se muestra al hacer hover */
+  opacity: 1;
+}
+
+
+.enlace-bolita {
+  position: relative;
+  display: inline-block;
+}
+
+.bolitaI {
+  @include bolita('left');
+}
+
+.bolitaD {
+  @include bolita('right');
+}
+
+.enlace-bolita:hover .bolitaI,
+.enlace-bolita:hover .bolitaD {
+  opacity: 1; 
 }
