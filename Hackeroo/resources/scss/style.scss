@@ -30,6 +30,15 @@ a {
   }
 }
 
+h1{
+ font-family:  $fuenteTitulos;
+ font-size: 5rem;
+}
+
+#info{
+  font-size: 2rem;
+}
+
 
 .navbar-nav {
   display: flex;
@@ -67,6 +76,10 @@ a {
     flex-direction: row;
     justify-content: flex-end;
     text-align: right;
+  }
+
+  .texto-info{
+    margin-left: 10vw;
   }
 }
 
@@ -215,3 +228,60 @@ footer {
 .enlace-bolita:hover .bolitaD {
   opacity: 1; 
 }
+
+
+
+
+
+.logo {
+  font-family: sans-serif; /* Usa la fuente que prefieras */
+  font-size: 3rem; /* Tamaño grande para el logo */
+  overflow: hidden; /* Evita que el contenido se vea antes de tiempo */
+  display: inline-block;
+}
+
+
+/* Contenedor de las letras */
+.texto-animado-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* Las letras por defecto, solo el <H> visible */
+.texto-animado-menu .letra {
+  opacity: 0; /* Las letras estarán ocultas por defecto */
+  transition: opacity 0.3s ease; /* Transición para mostrar las letras */
+}
+
+/* El primer span con el <H> visible */
+.texto-animado-menu span:first-child, /* < */
+.texto-animado-menu span:nth-child(2), /* H */
+.texto-animado-menu span:nth-child(3)  /* / */
+{
+  opacity: 1; /* Este ya es visible */
+}
+
+/* Cuando se hace hover, las letras aparecerán */
+.logo:hover .letra {
+  opacity: 1; /* Las letras se muestran */
+}
+
+/* Para el efecto de expansión: De izquierda a derecha */
+.logo:hover .texto-animado-menu {
+  animation: expand 0.6s forwards;
+}
+
+/* La animación que expande el texto */
+@keyframes expand {
+  0% {
+    transform: translateX(-100%); /* Empieza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0); /* Se mueve a su posición original */
+  }
+}
+
+
+

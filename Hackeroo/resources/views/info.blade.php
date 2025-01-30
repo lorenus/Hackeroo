@@ -64,23 +64,45 @@
 
 
 
-  <!-- Contenido de la página -->
-  <div class="contenido container-fluid d-flex flex-column align-items-center">
-
-   
-
-
-
-
-
-
-
-
+  <div class="logo-menu col-12 text-center mb-5">
+  <h1 class="texto-animado-menu">
+    <span>&lt;</span>
+    <span class="letra">H</span>
+    <span class="letra">a</span>
+    <span class="letra">c</span>
+    <span class="letra">k</span>
+    <span class="letra">e</span>
+    <span class="letra">r</span>
+    <span class="letra">o</span>
+    <span class="letra">o</span>
+    <span>/</span>
+    <span>&gt;</span>
+  </h1>
+</div>
 
 
 
   
+
+
+  <div class="contenido container-fluid d-flex flex-column flex-md-row p-5">
+  <!-- Caja de texto a la izquierda -->
+  <div class="texto-info col-12 col-md-6 d-flex justify-content-center text-center order-1 order-md-0">
+    <div>
+      <h1>¡Hola!</h1>
+      <p id="info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque error sint, consequuntur quibusdam consectetur autem nostrum eius <br>Quo dolorum ab distinctio ipsam natus! Natus animi corrupti, provident ea cumque vero?</p>
+    </div>
   </div>
+
+  <!-- Imagen a la derecha -->
+  <div class="col-12 col-md-6 d-flex justify-content-center align-items-center pe-4 order-0 order-md-1">
+    <img src="/img/imagenes/info.png" alt="Imagen" class="img-fluid">
+  </div>
+</div>
+
+
+
+
 
   <!-- Footer -->
   <footer class="pt-4 px-5 pb-3">
