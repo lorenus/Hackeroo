@@ -27,15 +27,23 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto custom-menu"> <!-- Clase personalizada -->
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
+            <div class="enlace-con-subrayado">
+               <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
+               <div class="subrayado1"></div>
+            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('contact') }}">Contáctanos</a>
+            <div class="enlace-con-subrayado">
+               <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
+               <div class="subrayado3"></div>
+            </div>
           </li>
           <li class="nav-item">
+            <div class="enlace-con-subrayado">
             <a class="nav-link" href="{{ route('faq') }}">Ayuda</a>
+               <div class="subrayado2"></div>
+            </div>
           </li>
-
         </ul>
       </div>
     </div>

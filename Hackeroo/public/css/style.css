@@ -107,14 +107,14 @@ footer {
 }
 
 .contenido {
-  flex-grow: 1; /* Hace que el contenido ocupe todo el espacio restante */
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Asegura que ocupe el espacio restante */
+  min-height: 70vh;
   background-color: #FEFFEB;
-  border-bottom-left-radius: 25px; /* Bordes redondeados en la parte inferior */
-  border-bottom-right-radius: 25px; /* Bordes redondeados en la parte inferior */
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .letra:nth-child(2),
@@ -152,6 +152,58 @@ footer {
 
 .texto-animado span:hover {
   transform: scale(1.5);
+}
+
+.enlace-con-subrayado {
+  position: relative;
+  display: inline-block;
+}
+
+.enlace {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.subrayado1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea1.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subrayado2 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea2.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subrayado3 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea3.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.enlace-con-subrayado:hover .subrayado1,
+.enlace-con-subrayado:hover .subrayado2,
+.enlace-con-subrayado:hover .subrayado3 {
+  opacity: 1; /* El subrayado con imagen se muestra al hacer hover */
 }
 
 /*# sourceMappingURL=style.css.map */

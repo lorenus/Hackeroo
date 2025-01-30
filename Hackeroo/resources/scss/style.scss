@@ -54,6 +54,8 @@ a {
   display: none;
 }
 
+
+
 @media (min-width: 576px) {  
   .navbar-nav {
     flex-direction: row; 
@@ -94,6 +96,7 @@ a {
 
 .navbar{
   @include menu_pc;
+  
 }
 
 
@@ -102,14 +105,14 @@ footer{
 }
 
 .contenido {
-  flex-grow: 1; /* Hace que el contenido ocupe todo el espacio restante */
+  flex-grow: 1; 
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Asegura que ocupe el espacio restante */
+  min-height: 70vh; 
   background-color: $amarillo_fondo;
-  border-bottom-left-radius: 25px; /* Bordes redondeados en la parte inferior */
-  border-bottom-right-radius: 25px; /* Bordes redondeados en la parte inferior */
+  border-bottom-left-radius: 25px; 
+  border-bottom-right-radius: 25px; 
 }
 
 .letra:nth-child(2),
@@ -149,3 +152,39 @@ footer{
   transform: scale(1.5);
 }
 
+
+
+
+
+.enlace-con-subrayado {
+  position: relative;
+  display: inline-block;
+}
+
+.enlace {
+  text-decoration: none; 
+  display: inline-block;
+}
+
+.subrayado1 {
+  @include subrayado('/img/botones/linea1.png');
+
+}
+
+.subrayado2 {
+  @include subrayado('/img/botones/linea2.png');
+
+
+}
+
+.subrayado3 {
+  @include subrayado('/img/botones/linea3.png');
+
+
+}
+
+.enlace-con-subrayado:hover .subrayado1,
+.enlace-con-subrayado:hover .subrayado2,
+.enlace-con-subrayado:hover .subrayado3 {
+  opacity: 1; /* El subrayado con imagen se muestra al hacer hover */
+}
