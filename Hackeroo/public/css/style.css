@@ -20,6 +20,10 @@ a {
   color: #455A64;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lilita One";
+}
+
 .boton {
   background-image: url("/img/botones/boton.png");
   background-size: contain;
@@ -31,7 +35,6 @@ a {
   text-align: center;
   text-decoration: none;
 }
-
 .boton > a {
   font-family: "Lilita One";
   margin-top: -7px;
@@ -309,6 +312,23 @@ footer {
   100% {
     transform: translateX(0); /* Se mueve a su posición original */
   }
-} 
+}
+.card-header a h3 {
+  font-family: "Lilita One";
+}
+
+#accordion {
+  width: 40vw;
+}
+
+.card {
+  background-color: #FEFFEB;
+  border: 3px solid #FFD87F;
+  border-radius: 15px;
+}
+
+.card-header {
+  border-bottom: none;
+}
 
 /*# sourceMappingURL=style.css.map */
