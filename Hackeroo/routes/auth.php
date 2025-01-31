@@ -61,7 +61,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
     Route::post('/configurar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
-        
-    Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
-    Route::post('cursos', [CursoController::class, 'store'])->name('cursos.store');
+
+    Route::get('cursos/create/step1', [CursoController::class, 'step1'])->name('cursos.create.step1');
+    Route::post('cursos/create/step1', [CursoController::class, 'storeStep1'])->name('cursos.store.step1');
+
+    // Paso 2: Mostrar el formulario para seleccionar alumnos
+    Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('cursos.create.step2');
+    Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2');
 });

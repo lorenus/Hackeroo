@@ -14,7 +14,7 @@ Route::get('/', [PaginasEstaticasController::class, 'index'])->name('home');
 Route::get('/info', [PaginasEstaticasController::class, 'info'])->name('info'); 
 Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq'); 
 
-Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contact'); 
+Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto'); 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
