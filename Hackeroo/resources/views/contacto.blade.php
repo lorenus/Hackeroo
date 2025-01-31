@@ -81,23 +81,23 @@
                 <form action="" class=" mt-4">
                     <div class="mb-3 text-start">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control form-lineas"  name="nombre" id="nombre" />
+                        <input type="text" class="form-lineas" name="nombre" id="nombre" />
                     </div>
                     <div class="mb-3 text-start">
                         <label for="mail" class="form-label">Mail:</label>
-                        <input type="email" class="form-control" name="mail" id="mail" />
+                        <input type="email" class="form-lineas" name="mail" id="mail" />
                     </div>
                     <div class="mb-3 text-start">
                         <label for="mensaje" class="form-label">Mensaje:</label>
-                        <textarea class="form-control" name="mensaje" id="mensaje" rows="4"></textarea>
+                        <textarea class="libreta" name="mensaje" id="mensaje" rows="4"></textarea>
                     </div>
-                        <input type="image" src="/img/botones/boton.png"> 
+                    <button type="submit" class="boton">Enviar </button>
                 </form>
             </div>
         </div>
-
-
     </div>
+
+
 
 
     <!-- Footer -->

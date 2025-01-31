@@ -80,7 +80,7 @@ h1 {
   display: none;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 576px) {
   .navbar-nav {
     flex-direction: row;
     justify-content: flex-end;
@@ -343,6 +343,36 @@ footer {
 
 .img-fluid {
   width: 60vw;
+}
+
+form .form-lineas {
+  display: block;
+  width: 100%;
+  padding: 0.32rem 0.7rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 2px solid #FFB300;
+}
+
+.libreta {
+  background: linear-gradient(to bottom, #000 1px, transparent 1px) repeat-y;
+  background-size: 100% 1.5em; /* Ajusta la distancia entre las líneas */
+  padding-left: 5px; /* Para asegurarte de que el texto no se sobreponga a la línea */
+  line-height: 1.5em; /* Ajusta la altura de la línea, similar a la de una libreta */
+  border: 1px solid #ccc; /* Estilo del borde */
+  font-family: "Courier New", monospace; /* O una fuente que simule una libreta */
+  font-size: 14px; /* Tamaño de la fuente */
+  padding-top: 5px; /* Ajuste del padding superior */
+  resize: vertical; /* Permite que el textarea cambie de tamaño verticalmente */
+}
+
+button {
+  border: none;
+  background-color: transparent;
 }
 
 /*# sourceMappingURL=style.css.map */
