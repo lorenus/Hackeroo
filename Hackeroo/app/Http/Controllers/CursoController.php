@@ -78,5 +78,16 @@ class CursoController extends Controller
         // Redirigir con mensaje de éxito
         return redirect()->route('cursos.create.step1')->with('success', 'Curso creado correctamente.');
     }
-}
+    public function index()
+    {
+        // Verificar si el usuario está autenticado y es un profesor
+        if (Auth::check() && Auth::user()->rol === 'profesor') {
+            // Obtener los cursos del profesor logueado
+            $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
+            return view('cursos.index', compact('cursos')); // Vista para mostrar los cursos
+        }
 
+        // Si no es profesor, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para acceder a esta página.');
+    }
+}

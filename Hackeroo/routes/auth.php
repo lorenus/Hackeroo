@@ -68,4 +68,6 @@ Route::middleware('auth')->group(function () {
     // Paso 2: Mostrar el formulario para seleccionar alumnos
     Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('cursos.create.step2');
     Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2');
+
+    Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
 });
