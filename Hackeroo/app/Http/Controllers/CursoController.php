@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
-use App\Models\Usuarios;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +15,8 @@ class CursoController extends Controller
     // Verificar si el usuario está autenticado y tiene el rol de 'profesor'
     if (Auth::check() && Auth::user()->rol === 'profesor') {
         // Obtener todos los profesores y alumnos
-        $profesores = Usuarios::where('rol', 'profesor')->get();
-        $alumnos = Usuarios::where('rol', 'alumno')->get(); // Obtener los alumnos registrados
+        $profesores = Usuario::where('rol', 'profesor')->get();
+        $alumnos = Usuario::where('rol', 'alumno')->get(); // Obtener los alumnos registrados
 
         return view('cursos.create', compact('profesores', 'alumnos'));
     }
