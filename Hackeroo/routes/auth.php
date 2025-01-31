@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -74,5 +75,11 @@ Route::middleware('auth')->group(function () {
     Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
     Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
     Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
-
+    Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->middleware('auth')->name('profesor.index');;
+    // routes/web.php
+    Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos.ver');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    });
 });

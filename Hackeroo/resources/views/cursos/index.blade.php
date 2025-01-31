@@ -42,6 +42,6 @@
     <!-- Botón para crear nuevo curso -->
     <a href="{{ route('cursos.create.step1') }}" class="btn btn-primary">Crear Nuevo Curso</a>
 </div>
-<a href="{{ route('cursos.index') }}" class="btn btn-secondary">Mis Cursos</a>
+<a href="{{ route('profesor.index') }}" class="btn btn-secondary">Volver</a>
 
 @endsection
