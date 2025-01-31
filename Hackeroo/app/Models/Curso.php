@@ -20,14 +20,14 @@ class Curso extends Model
     // 🔹 Relación muchos a muchos con los alumnos
     public function alumnos()
     {
-        return $this->belongsToMany(Usuarios::class, 'curso_usuario', 'curso_id', 'usuario_dni')
+        return $this->belongsToMany(Usuario::class, 'curso_usuario', 'curso_id', 'usuario_dni')
             ->where('rol', 'alumno'); // Filtra solo alumnos
     }
 
     // 🔹 Relación uno a muchos con el profesor
     public function profesor()
     {
-        return $this->belongsTo(Usuarios::class, 'profesor_dni', 'DNI')
+        return $this->belongsTo(Usuario::class, 'profesor_dni', 'DNI')
             ->where('rol', 'profesor'); // Filtra solo profesores
     }
 }
