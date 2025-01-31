@@ -345,11 +345,8 @@ footer {
   width: 60vw;
 }
 
-x-text-input {
-  border: none;
-  border-bottom: 2px solid #3490dc;
-  background: transparent;
-  outline: none;
+.custom-label {
+  font-family: "Lilita One";
 }
 
 /*# sourceMappingURL=style.css.map */
