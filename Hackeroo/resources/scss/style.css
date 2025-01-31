@@ -20,6 +20,10 @@ a {
   color: #455A64;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lilita One";
+}
+
 .boton {
   background-image: url("/img/botones/boton.png");
   background-size: contain;
@@ -84,6 +88,12 @@ h1 {
   }
   .texto-info {
     margin-left: 10vw;
+  }
+  #accordion {
+    width: 40vw;
+  }
+  .img-fluid {
+    max-width: 30vw;
   }
 }
 .custom-menu {
@@ -308,4 +318,34 @@ footer {
   100% {
     transform: translateX(0); /* Se mueve a su posición original */
   }
+}
+.card-header a h3 {
+  font-family: "Lilita One";
+}
+
+#accordion {
+  width: 40vw;
+}
+
+.card {
+  background-color: #FEFFEB;
+  border: 3px solid #FFD87F;
+  border-radius: 15px;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+#accordion {
+  width: 80vw;
+}
+
+.img-fluid {
+  width: 60vw;
+}
+
+.form-lineas {
+  color: red;
+  background-color: blue;
 }/*# sourceMappingURL=style.css.map */
