@@ -1,41 +1,155 @@
 @use 'genericos.scss' as *;
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* Asegura que el cuerpo ocupe toda la altura */
+}
+
 body {
   background-color: $amarillo_footer;
   font-family: $fuenteTexto;
   color: $gris;
 }
 
-.contenedor {
-  background-color: $amarillo_fondo;
-  min-height: 75vh;
-  display: flex;
-  /* Agrega display: flex */
-  flex-direction: column;
-  /* Organiza elementos en columna */
-  align-items: center;
-  /* Centra elementos horizontalmente */
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-.navbar {
-  @include menu_pc;
-}
-
-.footer {
-  font-family: $fuenteTexto;
-  color: $gris;
-  background-color: $amarillo_footer;
-}
-
-.logo {
-  min-height: 60vh;
-}
-
 a {
   text-decoration: none;
   color: $gris;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $fuenteTitulos;
+}
+
+.boton {
+  @include boton;
+
+  >a {
+    font-family: $fuenteTitulos;
+    margin-top: -7px;
+    color: $amarillo_fondo;
+    font-size: x-large;
+  }
+}
+
+h1{
+ font-family:  $fuenteTitulos;
+ font-size: 5rem;
+}
+
+#info{
+  font-size: 2rem;
+}
+
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggler {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  outline: none;
+  /* Elimina el borde cuando el botón está enfocado */
+  box-shadow: none;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  /* Elimina el borde de enfoque */
+  box-shadow: none;
+  /* Elimina cualquier sombra en foco */
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+@media (min-width: 576px) {
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .texto-info{
+    margin-left: 10vw;
+  }
+
+  #accordion{
+    width: 40vw;
+  }
+
+  .img-fluid{
+    max-width: 30vw;
+    }
+}
+
+
+
+
+
+.custom-menu {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin: 0;
+  /* Elimina el margen predeterminado */
+  padding: 0;
+  /* Elimina el padding predeterminado */
+  list-style: none;
+  /* Elimina los estilos de lista */
+}
+
+/* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
+@media (max-width: 576px) {
+  .custom-menu {
+    height: 100vh;
+    /* Ocupa el 100% del alto de la ventana */
+  }
+}
+
+
+.boton-menu {
+  @include boton;
+}
+
+
+
+
+
+
+.navbar {
+  @include menu_pc;
+
+}
+
+
+footer {
+  min-height: 15vh;
+}
+
+.contenido {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  background-color: $amarillo_fondo;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .letra:nth-child(2),
@@ -75,20 +189,136 @@ a {
   transform: scale(1.5);
 }
 
-.boton {
-  background-image: url('./../../img/boton.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 180px;
-  display: inline-block;
-  padding: 10px 20px;
-  text-align: center;
-  color: $amarillo_fondo;
-  text-decoration: none;
 
-  >a {
-    margin-top: -7px;
-    color: $amarillo_fondo;
-    font-size: x-large;
+
+
+
+.enlace-con-subrayado {
+  position: relative;
+  display: inline-block;
+}
+
+
+.subrayado1 {
+  @include subrayado('/img/botones/linea1.png');
+
+}
+
+.subrayado2 {
+  @include subrayado('/img/botones/linea2.png');
+
+
+}
+
+.subrayado3 {
+  @include subrayado('/img/botones/linea3.png');
+
+
+}
+
+.enlace-con-subrayado:hover .subrayado1,
+.enlace-con-subrayado:hover .subrayado2,
+.enlace-con-subrayado:hover .subrayado3 {
+  opacity: 1;
+}
+
+
+.enlace-bolita {
+  position: relative;
+  display: inline-block;
+}
+
+.bolitaI {
+  @include bolita('left');
+}
+
+.bolitaD {
+  @include bolita('right');
+}
+
+.enlace-bolita:hover .bolitaI,
+.enlace-bolita:hover .bolitaD {
+  opacity: 1; 
+}
+
+
+
+
+
+.logo {
+  font-family: sans-serif; /* Usa la fuente que prefieras */
+  font-size: 3rem; /* Tamaño grande para el logo */
+  overflow: hidden; /* Evita que el contenido se vea antes de tiempo */
+  display: inline-block;
+}
+
+
+/* Contenedor de las letras */
+.texto-animado-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* Las letras por defecto, solo el <H> visible */
+.texto-animado-menu .letra {
+  opacity: 0; /* Las letras estarán ocultas por defecto */
+  transition: opacity 0.3s ease; /* Transición para mostrar las letras */
+}
+
+/* El primer span con el <H> visible */
+.texto-animado-menu span:first-child, /* < */
+.texto-animado-menu span:nth-child(2), /* H */
+.texto-animado-menu span:nth-child(3)  /* / */
+{
+  opacity: 1; /* Este ya es visible */
+}
+
+/* Cuando se hace hover, las letras aparecerán */
+.logo:hover .letra {
+  opacity: 1; /* Las letras se muestran */
+}
+
+/* Para el efecto de expansión: De izquierda a derecha */
+.logo:hover .texto-animado-menu {
+  animation: expand 0.6s forwards;
+}
+
+/* La animación que expande el texto */
+@keyframes expand {
+  0% {
+    transform: translateX(-100%); /* Empieza fuera de la pantalla */
   }
+  100% {
+    transform: translateX(0); /* Se mueve a su posición original */
+  }
+}
+
+
+
+.card-header a h3 {
+  font-family: $fuenteTitulos;
+}
+
+#accordion{
+  width: 40vw;
+}
+
+.card{
+  background-color: $amarillo_fondo;
+  border: 3px solid $amarillo_footer;
+  border-radius: 15px;
+}
+
+.card-header {
+  border-bottom: none;  // Elimina el borde inferior (la línea gris)
+}
+
+#accordion{
+  width: 80vw;
+}
+
+.img-fluid{
+width: 60vw;
 }

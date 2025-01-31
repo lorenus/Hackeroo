@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
 
@@ -61,4 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
     Route::post('/configurar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
         
+    Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
+    Route::post('cursos', [CursoController::class, 'store'])->name('cursos.store');
 });
