@@ -90,4 +90,53 @@ class CursoController extends Controller
         // Si no es profesor, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
+    public function edit(Curso $curso)
+    {
+        // Verificar que el curso pertenece al profesor logueado
+        if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
+            return view('cursos.edit', compact('curso')); // Vista para editar el curso
+        }
+
+        // Si no es el profesor del curso, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para editar este curso.');
+    }
+
+    public function update(Request $request, Curso $curso)
+    {
+        // Verificar que el curso pertenece al profesor logueado
+        if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
+            // Validar los datos del formulario
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+            ]);
+
+            // Actualizar el curso
+            $curso->update([
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+            ]);
+
+            // Redirigir con mensaje de éxito
+            return redirect()->route('cursos.index')->with('success', 'Curso actualizado correctamente.');
+        }
+
+        // Si no es el profesor del curso, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para actualizar este curso.');
+    }
+    public function destroy(Curso $curso)
+{
+    // Verificar que el curso pertenece al profesor logueado
+    if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
+        // Eliminar el curso
+        $curso->delete();
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('cursos.index')->with('success', 'Curso eliminado correctamente.');
+    }
+
+    // Si no es el profesor del curso, redirigir o abortar con un error 403
+    return abort(403, 'No tienes permiso para eliminar este curso.');
+}
+
 }

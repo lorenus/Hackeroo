@@ -70,4 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2');
 
     Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
+
+    Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+    Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+    Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
+
 });

@@ -25,6 +25,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Continuar</button>
+        <a href="{{ route('cursos.index') }}" class="btn btn-secondary">Mis Cursos</a>
     </form>
 </div>
 @endsection
