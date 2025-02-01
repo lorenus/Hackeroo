@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\usuarios;
+use App\Models\usuario;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
         ]);
     
         // Crear el usuario
-        $user = Usuarios::create([
+        $user = Usuario::create([
             'DNI' => $request->DNI,
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos,

@@ -11,6 +11,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TareaController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -57,6 +59,27 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-    Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
-    Route::post('cursos', [CursoController::class, 'store'])->name('cursos.store');
+
+    Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
+    Route::post('/configurar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
+
+    Route::get('cursos/create/step1', [CursoController::class, 'step1'])->name('cursos.create.step1');
+    Route::post('cursos/create/step1', [CursoController::class, 'storeStep1'])->name('cursos.store.step1');
+
+    // Paso 2: Mostrar el formulario para seleccionar alumnos
+    Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('cursos.create.step2');
+    Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2');
+
+    Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
+
+    Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
+    Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+    Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
+    Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->middleware('auth')->name('profesor.index');;
+    // routes/web.php
+    Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos.ver');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    });
 });

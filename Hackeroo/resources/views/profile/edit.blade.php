@@ -1,29 +1,40 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('content')
+<div class="container">
+    <h1>Editar Perfil</h1>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+    <!-- Mensaje de éxito al actualizar -->
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
+    <form action="{{ route('profile.update') }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <!-- Campo para el nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', Auth::user()->nombre) }}" required>
         </div>
-    </div>
-</x-app-layout>
+
+        <!-- Campo para los apellidos -->
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{ old('apellidos', Auth::user()->apellidos) }}" required>
+        </div>
+
+        <!-- Campo para el correo electrónico -->
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+        </div>
+
+        <!-- Botón para actualizar -->
+        <button type="submit" class="btn btn-primary mt-3">Actualizar Perfil</button>
+        <a href="{{ route('profesor.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    </form>
+    
+</div>
+@endsection

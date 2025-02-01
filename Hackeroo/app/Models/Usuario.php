@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Curso;
 
-class Usuarios extends Authenticatable
+class Usuario extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -33,6 +33,7 @@ class Usuarios extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'rol' => 'string',
     ];
     
     // Autenticación: Indicar que el email es el identificador del usuario
@@ -58,3 +59,4 @@ class Usuarios extends Authenticatable
         return $this->hasMany(Curso::class, 'profesor_dni', 'DNI');
     }
 }
+ 
