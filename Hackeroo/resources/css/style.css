@@ -349,4 +349,9 @@ footer {
   font-family: "Lilita One";
 }
 
+.custom-input {
+  border-color: #FEFFEB;
+  border: 4px solid;
+}
+
 /*# sourceMappingURL=style.css.map */
