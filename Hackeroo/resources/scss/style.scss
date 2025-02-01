@@ -325,34 +325,59 @@ width: 60vw;
 }
 
 
-form{
-   .form-lineas {
+form {
+  padding: 0.32rem 0.7rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: $fuenteTitulos;
+
+  // Estilo común para los elementos con fondo y texto
+  .form-lineas, .libreta {
+    color: $fuenteTexto;
     display: block;
     width: 100%;
-    padding: 0.32rem 0.7rem;
-    font-size: 1rem;
-    font-weight: 400;
+    font-family: $fuenteTexto;
+    border: none;
+  }
+
+  // Estilo específico para .form-lineas
+  .form-lineas {
     line-height: 1.2;
     background-color: transparent;
     background-clip: padding-box;
-    border: none;
-    border-bottom: 2px solid #FFB300;
+    border-bottom: 2px solid $amarillo;
+
+    &:focus {
+      border-bottom: 2px solid $azul;
+      outline: none; /* Elimina el borde predeterminado del focus */
+    }
+
+  }
+
+  // Estilo específico para .libreta
+  .libreta {
+    background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
+    background-size: 100% 1.5em;
+    padding-left: 5px;
+    line-height: 1.5em;
+    padding-top: 5px;
+    resize: none; 
+
+    &:focus {
+      background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
+      outline: none; /* Elimina el borde predeterminado del focus */
+    }
+
   }
 }
 
-.libreta {
-  background: linear-gradient(to bottom, #000 1px, transparent 1px) repeat-y;
-  background-size: 100% 1.5em; /* Ajusta la distancia entre las líneas */
-  padding-left: 5px; /* Para asegurarte de que el texto no se sobreponga a la línea */
-  line-height: 1.5em; /* Ajusta la altura de la línea, similar a la de una libreta */
-  border: 1px solid #ccc; /* Estilo del borde */
-  font-family: 'Courier New', monospace; /* O una fuente que simule una libreta */
-  font-size: 14px; /* Tamaño de la fuente */
-  padding-top: 5px; /* Ajuste del padding superior */
-  resize: vertical; /* Permite que el textarea cambie de tamaño verticalmente */
-}
 
 button{
   border:none;
   background-color: transparent;
+  font-family: "Lilita One";
+  margin-top: -7px;
+  color: #FEFFEB;
+  font-size: x-large;
+  background-position: center 5px;
 }
