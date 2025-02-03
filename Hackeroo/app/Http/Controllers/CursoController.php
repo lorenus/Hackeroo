@@ -90,6 +90,21 @@ class CursoController extends Controller
         // Si no es profesor, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
+    public function indexForAlumnos()
+    {
+        // Verificar si el usuario está autenticado y es un alumno
+        if (Auth::check() && Auth::user()->rol === 'alumno') {
+            // Obtener los cursos en los que el alumno está inscrito
+            $cursos = Auth::user()->cursos;  // Suponiendo que tienes una relación `cursos()` en el modelo Usuario
+
+            // Retornar la vista con los cursos del alumno
+            return view('cursos.index_alumno', compact('cursos'));
+        }
+
+        // Si no es alumno, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para acceder a esta página.');
+    }
+
     public function edit(Curso $curso)
     {
         // Verificar que el curso pertenece al profesor logueado

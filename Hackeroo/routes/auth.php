@@ -69,8 +69,17 @@ Route::middleware('auth')->group(function () {
     // Paso 2: Mostrar el formulario para seleccionar alumnos
     Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('cursos.create.step2');
     Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    // En routes/web.php
 
-    Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
+    Route::middleware('auth')->group(function () {
+        // Para profesores
+        Route::get('/cursos', [CursoController::class, 'index'])->name('cursos.index');
+
+        // Para alumnos
+        Route::get('/cursos/alumno', [CursoController::class, 'indexForAlumnos'])->name('cursos.index.alumno');
+    });
+
 
     Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
     Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
@@ -82,4 +91,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     });
+    // Ruta para la página del alumno
+    Route::get('/profile/alumno', [ProfileController::class, 'alumnoPage'])->middleware('auth')->name('alumno.index');
+    Route::get('/profile/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos');
+
 });
