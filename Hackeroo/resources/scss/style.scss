@@ -324,11 +324,16 @@ width: 60vw;
 }
 
 
-.custom-label{
+form .form-label.custom-label{
   font-family: $fuenteTitulos;
 }
 
-.custom-input{
-border-color: $amarillo_fondo;
+.custom-input#email{
+border-color: $amarillo_footer;
 border: 4px solid;
+}
+
+x-primary-button{
+  @include boton;
+  font-family: $fuenteTitulos;
 }
