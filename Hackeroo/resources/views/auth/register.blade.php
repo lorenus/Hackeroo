@@ -12,16 +12,14 @@
         <div class="row">
 
             <div class="col-12 mb-3 text-center">
-                <!-- <select id="rol" name="rol" class="form-select text-center block">
-                    <option value="alumno" selected>{{ __('Alumno') }}</option>
-                    <option value="profesor">{{ __('Profesor') }}</option>
-                </select> -->
 
                 <div class="custom-select text-center" id="rol" name="rol">
                     <div class="option" value="alumno">Alumno</div>
                     <div class="option" value="profesor" >Profesor</div>
                     <div class="selector"></div>
                 </div>
+                
+                <input type="hidden" id="rol" name="rol" value="">
             </div>
 
             <div class="col-12 col-md-6 mt-3 mb-3 text-md-start text-center">
