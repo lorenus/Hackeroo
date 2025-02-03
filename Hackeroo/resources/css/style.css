@@ -427,20 +427,23 @@ form .libreta:focus {
 }
 
 .contenedor-perfil {
-  height: 70vh;
+  height: 67vh;
   max-width: 50vw;
+  overflow: hidden;
 }
 
 .img-fluid.img-perfil-cabecera {
   height: 90%;
   width: auto;
+  border-radius: 15px;
 }
 
 .puntuacion {
+  color: #455A64;
   background-color: #FEFFEB;
   border-radius: 15px;
-  width: 50px; /* Ejemplo de ancho */
-  height: 50px; /* Ejemplo de alto */
+  width: auto; /* Ejemplo de ancho */
+  height: 90%; /* Ejemplo de alto */
   display: flex;
   justify-content: center;
   align-items: center;

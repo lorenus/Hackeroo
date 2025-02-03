@@ -13,17 +13,22 @@
 <h1>img-Perfil del Profesor</h1>
 <p>Aquí va el contenido específico para profesores...</p>
 @elseif(Auth::user()->rol == 'alumno')
-<div class="container contenedor-perfil d-flex flex-column">
+<div class="container contenedor-perfil d-flex flex-column justify-content-center ">
     <!-- Primera fila -->
-        <div class="perfil row-12 mb-4 d-flex justify-content-between align-items-center ps-5 pe-5">
+        <div class="perfil row-12 mb-3 d-flex justify-content-between align-items-center ps-5 pe-5">
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-fluid img-perfil-cabecera">
             <h2>Hola, <span id="nombreUsuario">Usuario</span></h2>
-            <div class="puntuacion"><img src="/img/iconos/corona.png" alt="Imagen 2" class="img-fluid img-perfil"></div>
+            <div class="puntuacion d-flex flex-column ps-3 pe-3">
+                <img src="/img/iconos/corona.png" alt="Imagen 2" class="img-fluid img-perfil">
+                <h5>Nivel 3</h5>
+                <br>
+                <h5>100 pts</h5>
+            </div>
         </div>
 
 
     <!-- Segunda fila (enlaces) -->
-    <div class="row d-flex justify-content-between mb-4 text-center">
+    <div class="row d-flex justify-content-between mb-3 text-center">
         <div class="col-12 col-md-6">
             <div class="div-enlace">
                 <a href="#">
@@ -45,7 +50,7 @@
 
 
     <!-- Tercera fila (enlaces, oculta en móvil) -->
-    <div class="row d-flex justify-content-between mb-4 text-center d-none d-md-flex">
+    <div class="row d-flex justify-content-between mb-3 text-center d-none d-md-flex">
         <div class="col-12 col-md-6 ">
             <div class="div-enlace">
                 <a href="#">
