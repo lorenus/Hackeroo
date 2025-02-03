@@ -437,22 +437,60 @@ form {
   color: $amarillo_fondo;
   background-color: $azul;
   border-radius: 20px;
+  height: 20vh;
+  padding: 20px;
 }
-
-// .div-enlace{
-//   border: 3px solid $azul;
-//   border-radius: 20px;
-// }
-
-// .cerrar-sesion{
-//   border: 3px solid $rojo;
-//   border-radius: 20px;
-// }
-
-.img-fluid.img-perfil{
-  max-width: 60%;
-}
-
 .contenedor-perfil{
   height: 70vh;
+  max-width: 50vw;
+}
+.img-fluid.img-perfil-cabecera{
+  height: 90%;
+  width: auto;
+}
+.puntuacion{
+  background-color: $amarillo_fondo;
+  border-radius: 15px;
+  width: 50px; /* Ejemplo de ancho */
+    height: 50px; /* Ejemplo de alto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.puntuacion img {
+  max-height: 100%;
+  width: auto;
+}
+
+
+
+.div-enlace{
+  border: 3px solid $azul;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+.cerrar-sesion{
+  border: 3px solid $rojo;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+.div-enlace, .cerrar-sesion {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-fluid.img-perfil{
+  max-height: 8vh; /* La imagen no será más alta que su contenedor */
+  width: auto; /* Mantiene la proporción de la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: contain;
+}
+
+.div-enlace p {
+margin-bottom: 10px;
 }
