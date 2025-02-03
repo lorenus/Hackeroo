@@ -434,19 +434,20 @@ form {
 
 //PERFIL USUARIO
 .perfil{
+  color: $amarillo_fondo;
   background-color: $azul;
   border-radius: 20px;
 }
 
-.div-enlace{
-  border: 3px solid $azul;
-  border-radius: 20px;
-}
+// .div-enlace{
+//   border: 3px solid $azul;
+//   border-radius: 20px;
+// }
 
-.cerrar-sesion{
-  border: 3px solid $rojo;
-  border-radius: 20px;
-}
+// .cerrar-sesion{
+//   border: 3px solid $rojo;
+//   border-radius: 20px;
+// }
 
 .img-fluid.img-perfil{
   max-width: 60%;
