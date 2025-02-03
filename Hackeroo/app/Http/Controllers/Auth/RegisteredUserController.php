@@ -52,6 +52,6 @@ class RegisteredUserController extends Controller
         // Autenticación automática tras el registro
         Auth::login($user);
     
-        return redirect('/');
+        return redirect()->route('perfil');
     }
 }
