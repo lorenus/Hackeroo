@@ -393,7 +393,7 @@ form .libreta:focus {
 .custom-select {
   position: relative;
   display: inline-flex;
-  border: 2px solid #FFD87F;
+  border: 2px solid #FFB300;
   border-radius: 50px; /* Bordes muy redondeados */
   overflow: hidden;
   background-color: #FEFFEB;
