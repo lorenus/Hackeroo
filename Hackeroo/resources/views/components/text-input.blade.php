@@ -12,4 +12,5 @@
     box-shadow: none; 
     padding: 0.5rem 0; 
     text-align: left;
-    margin-top:-5px;']) }}>
+    margin-top:-5px;
+    outline: none;']) }}> 
