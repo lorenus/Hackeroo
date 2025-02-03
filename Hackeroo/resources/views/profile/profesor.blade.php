@@ -13,10 +13,13 @@
     
     <h2><a href="{{ route('alumnos.ver') }}">Ver alumnos de tus cursos</a></h2>
 
-    <a href="{{ route('cursos.index') }}" class="btn btn-primary">Ver mis cursos</a>
+    <a href="{{ route('cursos.index') }}" class="btn btn-primary">Mis cursos</a>
 
     <!-- Enlace para editar la cuenta -->
     <a href="{{ route('profile.edit') }}" class="btn btn-secondary mt-3">Editar cuenta</a>
+
+    <a href="{{ route('alumnos.ver') }}" class="btn btn-secondary mt-3">Mis alumnos</a>
+
 </div>
 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
     @csrf

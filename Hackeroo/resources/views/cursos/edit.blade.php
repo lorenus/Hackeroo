@@ -18,6 +18,19 @@
             <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required>{{ old('descripcion', $curso->descripcion) }}</textarea>
         </div>
 
+        <!-- Campo de selección de alumnos -->
+        <div class="form-group">
+            <label for="alumnos">Selecciona Alumnos</label>
+            <select class="form-control" id="alumnos" name="alumnos[]" multiple required>
+                @foreach($alumnos as $alumno)
+                    <option value="{{ $alumno->DNI }}" 
+                        @if(in_array($alumno->DNI, $curso->alumnos->pluck('DNI')->toArray())) selected @endif>
+                        {{ $alumno->nombre }} {{ $alumno->apellidos }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-success mt-3">Actualizar Curso</button>
     </form>
 

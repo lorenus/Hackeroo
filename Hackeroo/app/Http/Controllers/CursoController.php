@@ -94,12 +94,16 @@ class CursoController extends Controller
     {
         // Verificar que el curso pertenece al profesor logueado
         if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
-            return view('cursos.edit', compact('curso')); // Vista para editar el curso
+            // Obtener todos los alumnos disponibles
+            $alumnos = Usuario::where('rol', 'alumno')->get();
+
+            return view('cursos.edit', compact('curso', 'alumnos')); // Pasar el curso y los alumnos a la vista
         }
 
         // Si no es el profesor del curso, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para editar este curso.');
     }
+
 
     public function update(Request $request, Curso $curso)
     {
@@ -109,6 +113,8 @@ class CursoController extends Controller
             $request->validate([
                 'nombre' => 'required|string|max:255',
                 'descripcion' => 'required|string',
+                'alumnos' => 'required|array', // Asegurarse de que los alumnos sean un arreglo
+                'alumnos.*' => 'exists:usuarios,DNI', // Validar que los alumnos existan
             ]);
 
             // Actualizar el curso
@@ -117,6 +123,10 @@ class CursoController extends Controller
                 'descripcion' => $request->descripcion,
             ]);
 
+            // Actualizar la relación de alumnos
+            // Primero, eliminamos los alumnos previamente asignados
+            $curso->alumnos()->sync($request->alumnos); // Esto reemplaza la lista de alumnos por la nueva selección
+
             // Redirigir con mensaje de éxito
             return redirect()->route('cursos.index')->with('success', 'Curso actualizado correctamente.');
         }
@@ -124,19 +134,19 @@ class CursoController extends Controller
         // Si no es el profesor del curso, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para actualizar este curso.');
     }
+
     public function destroy(Curso $curso)
-{
-    // Verificar que el curso pertenece al profesor logueado
-    if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
-        // Eliminar el curso
-        $curso->delete();
+    {
+        // Verificar que el curso pertenece al profesor logueado
+        if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
+            // Eliminar el curso
+            $curso->delete();
 
-        // Redirigir con mensaje de éxito
-        return redirect()->route('cursos.index')->with('success', 'Curso eliminado correctamente.');
+            // Redirigir con mensaje de éxito
+            return redirect()->route('cursos.index')->with('success', 'Curso eliminado correctamente.');
+        }
+
+        // Si no es el profesor del curso, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para eliminar este curso.');
     }
-
-    // Si no es el profesor del curso, redirigir o abortar con un error 403
-    return abort(403, 'No tienes permiso para eliminar este curso.');
-}
-
 }
