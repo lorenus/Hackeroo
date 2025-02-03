@@ -75,47 +75,76 @@ class TareaController extends Controller
 
     // Actualizar un test existente
     public function actualizarTest(Request $request, $id)
-    {
-        $request->validate([
-            'titulo' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'curso_id' => 'required|exists:cursos,id',
-            'preguntas' => 'required|array',
-            'preguntas.*.enunciado' => 'required|string',
-            'preguntas.*.opciones_respuestas' => 'required|array|min:2',
-            'preguntas.*.respuesta_correcta' => 'required|integer',
-        ]);
+{
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'curso_id' => 'required|exists:cursos,id',
+        'preguntas' => 'required|array',
+        'preguntas.*.enunciado' => 'required|string',
+        'preguntas.*.opciones_respuestas' => 'required|array|min:2',
+        'preguntas.*.respuesta_correcta' => 'required|integer',
+    ]);
 
-        // Actualizar la tarea
-        $tarea = Tarea::findOrFail($id);
-        $tarea->update([
-            'titulo' => $request->titulo,
-            'descripcion' => $request->descripcion,
-            'curso_id' => $request->curso_id,
-        ]);
+    // Actualizar la tarea
+    $tarea = Tarea::findOrFail($id);
+    $tarea->update([
+        'titulo' => $request->titulo,
+        'descripcion' => $request->descripcion,
+        'curso_id' => $request->curso_id,
+    ]);
 
-        // Actualizar las preguntas y sus opciones
-        foreach ($request->preguntas as $preguntaData) {
+    // Obtener las preguntas existentes
+    $preguntasExistentes = $tarea->preguntas;
+
+    // Actualizar las preguntas y sus opciones
+    foreach ($request->preguntas as $preguntaData) {
+        if (isset($preguntaData['id'])) {
+            // Si la pregunta ya existe, actualizarla
+            $pregunta = Pregunta::find($preguntaData['id']);
+            if ($pregunta) {
+                $pregunta->update([
+                    'enunciado' => $preguntaData['enunciado'],
+                ]);
+
+                // Actualizar las opciones de respuesta
+                foreach ($preguntaData['opciones_respuestas'] as $opcionData) {
+                    $opcion = OpcionesRespuesta::find($opcionData['id']);
+                    if ($opcion) {
+                        $opcion->update([
+                            'respuesta' => $opcionData['respuesta'],
+                            'es_correcta' => $opcionData['es_correcta'] == $preguntaData['respuesta_correcta'],
+                        ]);
+                    }
+                }
+            }
+        } else {
+            // Si la pregunta no existe, crearla
             $pregunta = Pregunta::create([
                 'tarea_id' => $tarea->id,
                 'enunciado' => $preguntaData['enunciado'],
                 'tipo' => 'test',
             ]);
-        
+
             foreach ($preguntaData['opciones_respuestas'] as $opcionData) {
                 OpcionesRespuesta::create([
                     'pregunta_id' => $pregunta->id,
                     'respuesta' => $opcionData['respuesta'],
-                    'es_correcta' => isset($opcionData['es_correcta']) && $opcionData['es_correcta'] == '1',
+                    'es_correcta' => $opcionData['es_correcta'] == $preguntaData['respuesta_correcta'],
                 ]);
             }
-            
         }
-        
-
-        return redirect()->route('tarea.test.index')->with('success', 'Test actualizado correctamente');
     }
 
+    // Eliminar preguntas que ya no están en el formulario
+    $preguntasIds = collect($request->preguntas)->pluck('id')->filter();
+    $preguntasExistentes->whereNotIn('id', $preguntasIds)->each(function ($pregunta) {
+        $pregunta->opciones_respuestas()->delete();
+        $pregunta->delete();
+    });
+
+    return redirect()->route('tarea.test.index')->with('success', 'Test actualizado correctamente');
+}
     // Eliminar un test
     public function eliminarTest($id)
     {

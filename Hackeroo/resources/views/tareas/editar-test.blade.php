@@ -59,7 +59,7 @@
 </div>
 
 <script>
-   let preguntaIndex = @json($tarea->preguntas->count());
+
 
 
 document.getElementById('add-question').addEventListener('click', function() {
