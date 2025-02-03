@@ -325,6 +325,21 @@ width: 60vw;
 }
 
 
+form .form-label.custom-label{
+  font-family: $fuenteTitulos;
+}
+
+.custom-input#email{
+border-color: $amarillo_footer;
+border: 4px solid;
+}
+
+x-primary-button{
+  @include boton;
+  font-family: $fuenteTitulos;
+}
+
+
 form {
   padding: 0.32rem 0.7rem;
   font-size: 1rem;

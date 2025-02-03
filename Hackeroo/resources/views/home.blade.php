@@ -53,6 +53,7 @@
           </li>
           <div class="boton col-12 d-flex justify-content-center mt-5 ms-4 d-block d-sm-none">
             <a href="{{route('login')}}">
+            <a href="{{ route('login') }}">
               <p>Entrar</p>
             </a>
           </div>
@@ -85,7 +86,7 @@
 
     <!-- Botón -->
     <div class="boton col-12 d-flex justify-content-center">
-      <a href="#">
+      <a href="{{ route('login') }}">
         <p>Entrar</p>
       </a>
     </div>
