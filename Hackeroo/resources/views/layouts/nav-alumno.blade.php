@@ -12,27 +12,40 @@
             <ul class="navbar-nav ms-auto custom-menu">
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('info') }}">Mis cursos</a>
+                        <a class="nav-link" href="{{ route('home') }}">Inicio</a>
                         <div class="subrayado1"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('contacto') }}">Editar perfil</a>
+                        <a class="nav-link" href="{{ route('cursos.index.alumno') }}">Mis Cursos</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('faq') }}">Ranking</a>
+                        <a class="nav-link" href="{{ route('alumnos.ver') }}">Ranking</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
-                <div class="boton col-12 d-flex justify-content-center mt-5 ms-4 d-block ">
-                    <a href="{{ route('login') }}">
-                        <p>Cerrar sesión</p>
-                    </a>
-                </div>
+                <li class="nav-item ms-4">
+                    <div class="enlace-con-subrayado">
+                        <a class="nav-link" href="{{ route('profile.edit') }}">Editar Perfil</a>
+                        <div class="subrayado2"></div>
+                    </div>
+                </li>
+                @if(Auth::check())
+                <li class="nav-item ms-4">
+                    <div class="enlace-con-subrayado">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" class="nav-link">
+                                Cerrar sesión</a>
+                        </form>
+                    </div>
+                </li>
+                @else
+                @endif
         </div>
         </ul>
     </div>

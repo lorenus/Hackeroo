@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Hackeroo</title>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet" />
@@ -53,7 +53,6 @@
           </li>
           <div class="boton col-12 d-flex justify-content-center mt-5 ms-4 d-block d-sm-none">
             <a href="{{route('login')}}">
-            <a href="{{ route('login') }}">
               <p>Entrar</p>
             </a>
           </div>
