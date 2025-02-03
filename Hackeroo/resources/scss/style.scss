@@ -334,10 +334,10 @@ border-color: $amarillo_footer;
 border: 4px solid;
 }
 
-x-primary-button{
-  @include boton;
-  font-family: $fuenteTitulos;
-}
+// x-primary-button{
+//   @include boton;
+//   font-family: $fuenteTitulos;
+// }
 
 
 form {
@@ -386,13 +386,45 @@ form {
   }
 }
 
+// button{
+//   border:none;
+//   background-color: transparent;
+//   font-family: "Lilita One";
+//   margin-top: -7px;
+//   color: $amarillo_fondo;
+//   font-size: x-large;
+//   background-position: center 5px;
+// }
 
-button{
-  border:none;
-  background-color: transparent;
-  font-family: "Lilita One";
-  margin-top: -7px;
-  color: #FEFFEB;
-  font-size: x-large;
-  background-position: center 5px;
+
+
+
+// SELECT
+.custom-select {
+  position: relative;
+  display: inline-flex;
+  border: 2px solid $amarillo_footer;
+  border-radius: 50px; /* Bordes muy redondeados */
+  overflow: hidden;
+  background-color: $amarillo_fondo;
+  padding: 5px;
+}
+
+.option {
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+
+.selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: $amarillo_footer;
+  border-radius: 50px;
+  transition: transform 0.3s ease;
+  z-index: 0;
 }

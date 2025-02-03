@@ -81,7 +81,6 @@ h1 {
 }
 
 @media (min-width: 576px) {
-@media (min-width: 576px) {
   .navbar-nav {
     flex-direction: row;
     justify-content: flex-end;
@@ -355,18 +354,6 @@ form .form-label.custom-label {
   border: 4px solid;
 }
 
-x-primary-button {
-  background-image: url("/img/botones/boton.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 180px;
-  height: 60px;
-  display: inline-block;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-}
-
 form {
   padding: 0.32rem 0.7rem;
   font-size: 1rem;
@@ -374,7 +361,6 @@ form {
   font-family: "Lilita One";
 }
 form .form-lineas, form .libreta {
-  color: "Itim";
   display: block;
   width: 100%;
   font-family: "Itim";
@@ -400,18 +386,35 @@ form .libreta {
 }
 form .libreta:focus {
   background: linear-gradient(to bottom, #06AAF4 2px, transparent 1px) repeat-y;
-  background-size: 100% 1.5em;
   outline: none; /* Elimina el borde predeterminado del focus */
 }
 
-button {
-  border: none;
-  background-color: transparent;
-  font-family: "Lilita One";
-  margin-top: -7px;
-  color: #FEFFEB;
-  font-size: x-large;
-  background-position: center 5px;
+.custom-select {
+  position: relative;
+  display: inline-flex;
+  border: 2px solid #FFD87F;
+  border-radius: 50px; /* Bordes muy redondeados */
+  overflow: hidden;
+  background-color: #FEFFEB;
+  padding: 5px;
+}
+
+.option {
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #FFD87F;
+  border-radius: 50px;
+  transition: transform 0.3s ease;
+  z-index: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

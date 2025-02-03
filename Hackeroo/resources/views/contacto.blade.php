@@ -91,7 +91,7 @@
                         <label for="mensaje" class="form-label">Mensaje:</label>
                         <textarea class="libreta" name="mensaje" id="mensaje" rows="4"></textarea>
                     </div>
-                    <button type="submit" class="boton">Enviar </button>
+                    <x-primary-button type="submit" class="boton">Enviar </x-primary-button>
                 </form>
             </div>
         </div>
