@@ -428,3 +428,88 @@ form {
   transition: transform 0.3s ease;
   z-index: 0;
 }
+
+
+// PERFIL USUARIO
+.contenedor-perfil{
+  max-width: 50vw;
+  @media (max-width: 576px) {
+      min-width: 70vw;
+    }
+}
+.perfil {
+  color: $amarillo_fondo;
+  background-color: $azul;
+  border-radius: 20px;
+  height: 20vh;
+  padding: 20px;
+}
+
+.img-perfil-cabecera {
+  height: 80px; /* Tamaño fijo para la imagen en móvil */
+  width: auto;
+  border-radius: 15px;
+
+  @media (min-width: 768px) {
+    height: 120px; 
+  }
+}
+
+.puntuacion {
+  width: auto;
+  
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gris;
+  background-color: $amarillo_fondo;
+  border-radius: 15px;
+  @media (min-width: 768px) {
+    min-width: 110px;
+  min-height: 120px;
+  }
+}
+
+.puntuacion img {
+  max-height: 100%;
+  width: auto;
+}
+
+.div-enlace {
+  border: 3px solid $azul;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+
+.cerrar-sesion {
+  border: 3px solid $rojo;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+
+.div-enlace, .cerrar-sesion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-perfil {
+  max-height: 8vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.div-enlace p {
+  margin-bottom: 10px;
+}
+.img-corona {
+  max-height: 50px !important; 
+  width: auto !important; 
+  object-fit: contain !important;
+}

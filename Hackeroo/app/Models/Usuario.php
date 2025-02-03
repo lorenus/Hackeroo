@@ -58,5 +58,8 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Curso::class, 'profesor_dni', 'DNI');
     }
+
+
+
 }
  
