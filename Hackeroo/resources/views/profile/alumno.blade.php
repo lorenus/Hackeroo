@@ -9,12 +9,10 @@
         Esta es tu página de alumno. Desde aquí podrás ver tus cursos y más.
     </div>
 
-    <!-- Mostrar los puntos del alumno -->
-    <div class="alert alert-info">
-        <strong>Tus puntos:</strong> {{ Auth::user()->puntos }} puntos
-    </div>
+    <!-- Enlace al ranking de alumnos -->
+    <h2><a href="{{ route('ranking') }}" class="btn btn-primary mt-3">Ver Ranking de Alumnos</a></h2>
 
-    <h2><a href="{{ route('cursos.index.alumno') }}"  class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
+    <h2><a href="{{ route('cursos.index.alumno') }}" class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
 
     <!-- Enlace para editar la cuenta -->
     <a href="{{ route('profile.edit') }}" class="btn btn-secondary mt-3">Editar cuenta</a>

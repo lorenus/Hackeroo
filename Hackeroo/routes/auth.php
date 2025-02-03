@@ -13,6 +13,7 @@ use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RankingController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -95,4 +96,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/alumno', [ProfileController::class, 'alumnoPage'])->middleware('auth')->name('alumno.index');
     Route::get('/profile/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos');
 
+    // Ruta para ver el ranking
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
 });
