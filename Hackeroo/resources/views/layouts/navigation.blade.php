@@ -18,7 +18,7 @@
           </li>
           <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
-              <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
+              <a class="nav-link" href="{{ route('contacto') }}">Contáctanos</a>
               <div class="subrayado3"></div>
             </div>
           </li>

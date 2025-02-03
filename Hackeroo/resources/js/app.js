@@ -1,4 +1,5 @@
-import '../css/style.css'; // Importa el archivo CSS
+import '../css/style.css';
+import '../js/animaciones.js';
 import './bootstrap';
 
 import Alpine from 'alpinejs';
