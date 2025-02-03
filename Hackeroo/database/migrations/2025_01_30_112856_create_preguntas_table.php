@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,9 +9,9 @@ class CreatePreguntasTable extends Migration
     {
         Schema::create('preguntas', function (Blueprint $table) {
             $table->id();
-            $table->text('enunciado'); 
-            $table->enum('tipo', ['opcion_multiple', 'completar_palabras', 'codigo']);
-            $table->foreignId('tarea_id')->constrained('tareas')->onDelete('cascade'); 
+            $table->text('enunciado');
+            $table->enum('tipo', ['test', 'completar_palabras', 'codigo']);
+            $table->foreignId('tarea_id')->constrained('tareas')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,3 +21,4 @@ class CreatePreguntasTable extends Migration
         Schema::dropIfExists('preguntas');
     }
 }
+

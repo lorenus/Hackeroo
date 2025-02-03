@@ -60,8 +60,15 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
-    Route::post('/configurar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
+        Route::middleware(['auth'])->group(function () {
+            Route::get('/tareas', [TareaController::class, 'index'])->name('tarea.test.index');
+            Route::get('/tareas/crear', [TareaController::class, 'crearTest'])->name('tarea.test.create');
+            Route::post('/tareas', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
+            Route::get('/tareas/{id}/editar', [TareaController::class, 'editarTest'])->name('tarea.test.edit');
+            Route::put('/tareas/{id}', [TareaController::class, 'actualizarTest'])->name('tarea.test.update');
+            Route::delete('/tareas/{id}', [TareaController::class, 'eliminarTest'])->name('tarea.test.destroy');
+        });
+        
 
     Route::get('cursos/create/step1', [CursoController::class, 'step1'])->name('cursos.create.step1');
     Route::post('cursos/create/step1', [CursoController::class, 'storeStep1'])->name('cursos.store.step1');
