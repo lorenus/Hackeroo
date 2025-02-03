@@ -1,5 +1,3 @@
-<!-- resources/views/profile/alumno.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -9,6 +7,11 @@
     
     <div class="alert alert-info">
         Esta es tu página de alumno. Desde aquí podrás ver tus cursos y más.
+    </div>
+
+    <!-- Mostrar los puntos del alumno -->
+    <div class="alert alert-info">
+        <strong>Tus puntos:</strong> {{ Auth::user()->puntos }} puntos
     </div>
 
     <h2><a href="{{ route('cursos.index.alumno') }}"  class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
