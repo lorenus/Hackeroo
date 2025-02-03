@@ -26,7 +26,7 @@
 
     
     <div class="mt-3 mb-3 text-center">
-        <x-primary-button class="btn btn-warning text-center">  {{ __('Log in') }}
+        <x-primary-button class="btn btn-warning text-center">  {{ __('Entrar') }}
         </x-primary-button>
     </div>
 
