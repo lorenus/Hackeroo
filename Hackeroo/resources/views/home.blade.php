@@ -31,6 +31,8 @@
         <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir">
         <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;">
       </button>
+    
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto custom-menu">
           <li class="nav-item ms-4">
