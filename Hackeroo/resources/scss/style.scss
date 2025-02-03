@@ -428,3 +428,30 @@ form {
   transition: transform 0.3s ease;
   z-index: 0;
 }
+
+
+
+
+//PERFIL USUARIO
+.perfil{
+  background-color: $azul;
+  border-radius: 20px;
+}
+
+.div-enlace{
+  border: 3px solid $azul;
+  border-radius: 20px;
+}
+
+.cerrar-sesion{
+  border: 3px solid $rojo;
+  border-radius: 20px;
+}
+
+.img-fluid.img-perfil{
+  max-width: 60%;
+}
+
+.contenedor-perfil{
+  height: 70vh;
+}

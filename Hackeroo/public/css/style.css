@@ -418,4 +418,27 @@ form .libreta:focus {
   z-index: 0;
 }
 
+.perfil {
+  background-color: #06AAF4;
+  border-radius: 20px;
+}
+
+.div-enlace {
+  border: 3px solid #06AAF4;
+  border-radius: 20px;
+}
+
+.cerrar-sesion {
+  border: 3px solid #EF5350;
+  border-radius: 20px;
+}
+
+.img-fluid.img-perfil {
+  max-width: 60%;
+}
+
+.contenedor-perfil {
+  height: 70vh;
+}
+
 /*# sourceMappingURL=style.css.map */

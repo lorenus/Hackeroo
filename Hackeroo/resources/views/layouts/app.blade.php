@@ -21,9 +21,6 @@
     @yield('nav', View::make('layouts.navigation'))
 
 
-        
-
-
   <div class="contenido container-fluid d-flex flex-column flex-md-row p-5">
   @yield('content')
 </div>
