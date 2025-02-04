@@ -5,8 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-
-
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\TareaController;
 
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
@@ -29,6 +29,27 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->get('/perfil', [PerfilController::class, 'index'])->name('perfil');
 
+Route::get('/cursos/{id}', [CursoController::class, 'show'])->name('cursos.show');
+
+
+Route::get('/tareas/{curso_id}/crear', [TareaController::class, 'crear'])->name('tarea.test.create');
+
+Route::post('/tareas/guardar', [TareaController::class, 'guardar'])->name('tarea.guardar');
+
+// Rutas para configurar un test
+Route::get('/tareas/{curso_id}/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
+Route::post('/tareas/{curso_id}/guardar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
+
+// Rutas para subir un archivo
+Route::get('/tareas/{curso_id}/subir-archivo', [TareaController::class, 'crearArchivo'])->name('tarea.archivo.create');
+Route::post('/tareas/{curso_id}/guardar-archivo', [TareaController::class, 'guardarArchivo'])->name('tarea.archivo.store');
+
+// Rutas para agregar un link
+Route::get('/tareas/{curso_id}/agregar-link', [TareaController::class, 'crearLink'])->name('tarea.link.create');
+Route::post('/tareas/{curso_id}/guardar-link', [TareaController::class, 'guardarLink'])->name('tarea.link.store');
+
+// Ruta para eliminar una tarea
+Route::delete('/tareas/{id}', [TareaController::class, 'eliminar'])->name('tarea.eliminar');
 
 
 require __DIR__.'/auth.php';

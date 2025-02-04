@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TareaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 
@@ -60,15 +59,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-
-        Route::middleware(['auth'])->group(function () {
-            Route::get('/tareas', [TareaController::class, 'index'])->name('tarea.test.index');
-            Route::get('/tareas/crear', [TareaController::class, 'crearTest'])->name('tarea.test.create');
-            Route::post('/tareas', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
-            Route::get('/tareas/{id}/editar', [TareaController::class, 'editarTest'])->name('tarea.test.edit');
-            Route::put('/tareas/{id}', [TareaController::class, 'actualizarTest'])->name('tarea.test.update');
-            Route::delete('/tareas/{id}', [TareaController::class, 'eliminarTest'])->name('tarea.test.destroy');
-        });
         
 
     Route::get('cursos/create/step1', [CursoController::class, 'step1'])->name('cursos.create.step1');
@@ -105,4 +95,6 @@ Route::middleware('auth')->group(function () {
 
     // Ruta para ver el ranking
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+
+
 });

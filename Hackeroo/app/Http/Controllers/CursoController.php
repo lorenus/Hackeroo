@@ -164,4 +164,9 @@ class CursoController extends Controller
         // Si no es el profesor del curso, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para eliminar este curso.');
     }
+    public function show($id)
+    {
+        $curso = Curso::with('tareas')->findOrFail($id);
+        return view('cursos.show', compact('curso'));
+    }
 }
