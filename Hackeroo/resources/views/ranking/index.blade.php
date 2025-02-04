@@ -13,7 +13,7 @@
         <!-- Contenedor de ranking y tabla -->
         <div class="col-12 col-md-6 order-1 order-md-1">
             <!-- Ranking Superior -->
-            <div class="ranking-container">
+            <div class="ranking-container mb-4">
                 @php
                     $colores = ['amarillo', 'verde', 'azul']; // Clases de colores
                 @endphp
@@ -31,10 +31,11 @@
             </div>
 
             <!-- Tabla (Solo muestra a partir del puesto 4) -->
-            <table class="table table-bordered">
+            <table>
                 <tbody>
                     @foreach($usuarios as $index => $usuario)
                         @if($index >= 3) 
+                        <tr></tr>
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
