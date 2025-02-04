@@ -10,12 +10,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto custom-menu">
-                <li class="nav-item ms-4">
+                <!-- <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
                         <a class="nav-link" href="{{ route('perfil') }}">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
                         <a class="nav-link" href="{{ route('cursos-alumno') }}">Mis Cursos</a>
