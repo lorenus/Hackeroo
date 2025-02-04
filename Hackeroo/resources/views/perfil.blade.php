@@ -100,7 +100,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center">
         <div class="col-12 col-md-6">
             <div class="div-enlace mb-3">
-                <a href="{{route('alumno.cursos')}}">
+                <a href="{{route('cursos-alumno')}}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
                     <h4>Mis cursos</h4>
                 </a>

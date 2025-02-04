@@ -35,11 +35,18 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   text-decoration: none;
 }
-.boton > a {
+.boton > a, .boton a.boton {
   font-family: "Lilita One";
   margin-top: -7px;
   color: #FEFFEB;
   font-size: x-large;
+}
+
+a.boton {
+  font-family: "Lilita One";
+  margin-top: -7px;
+  color: #455A64;
+  font-size: large;
 }
 
 h1 {
@@ -525,5 +532,9 @@ form .libreta:focus {
   background-color: azul;
 }
 
+
+.contenido-cursos {
+  min-height: 50vh;
+}
 
 /*# sourceMappingURL=style.css.map */
