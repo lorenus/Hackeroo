@@ -109,7 +109,7 @@
 
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('ranking') }}">
                     <img src="/img/iconos/trofeo.png" alt="Enlace 2" class="img-fluid img-perfil">
                     <h4>Ranking</h4>
                 </a>

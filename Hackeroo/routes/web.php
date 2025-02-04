@@ -74,9 +74,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/profile/alumno', [ProfileController::class, 'alumnoPage'])->middleware('auth')->name('alumno.index');
 Route::get('/profile/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos');
 
-//ALUMNOS
-
-
+//RANKING
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
 
 require __DIR__.'/auth.php';
 
