@@ -93,10 +93,6 @@ class CursoController extends Controller
     // Obtener los cursos del profesor logueado
     $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
 
-    // Verificar si hay cursos
-    if ($cursos->isEmpty()) {
-        return view('cursos.index')->with('message', 'No tienes cursos asignados.');
-    }
 
     // Retornar la vista con los cursos
     return view('cursos.index', compact('cursos'));
