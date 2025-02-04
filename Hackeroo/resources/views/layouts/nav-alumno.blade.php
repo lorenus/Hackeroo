@@ -30,16 +30,16 @@
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="#">Editar Perfil</a>
+                        <a class="nav-link" href="{{ route('editar-perfil') }}">Editar Perfil</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 @if(Auth::check())
-                <li class="nav-item ms-4">
+                <li class="nav-item">
                     <div class="enlace-con-subrayado">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-primary-button class='btn border-0 mt-5 d-block d-sm-none'>
+                            <x-primary-button class='btn ms-4 border-0 mt-5 d-block d-sm-none'>
                     {{ __('Cerrar sesión') }}
                     </x-primary-button>
                         </form>
