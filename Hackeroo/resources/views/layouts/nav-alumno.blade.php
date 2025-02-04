@@ -12,7 +12,7 @@
             <ul class="navbar-nav ms-auto custom-menu">
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('home') }}">Inicio</a>
+                        <a class="nav-link" href="{{ route('perfil') }}">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
                 </li>
