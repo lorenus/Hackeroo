@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Mis Cursos</h1>
+<div class="container text-center">
+
+<a href="{{ route('perfil') }}"><img src="/img/botones/volver.png" alt="Volver"></a>
+    <div class="titulo"><h2>Mis Cursos</h2></div>
 
     @if($cursos->isEmpty())
     <p>No tienes cursos creados aún.</p>
@@ -40,8 +42,8 @@
     @endif
 
     <!-- Botón para crear nuevo curso -->
-    <a href="{{ route('cursos.create.step1') }}" class="btn btn-primary">Crear Nuevo Curso</a>
+    <a href="{{ route('cursos.create.step1') }}" class="btn boton">Crear Curso</a>
 </div>
-<a href="{{ route('profesor.index') }}" class="btn btn-secondary">Volver</a>
+
 
 @endsection
