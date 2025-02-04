@@ -17,22 +17,24 @@
                     </div>
                     <div>
                         @if($tarea->tipo === 'test')
-                            <a href="{{ route('tarea.test.edit', $tarea->id) }}" class="btn btn-sm btn-warning">Editar Test</a>
-                            <form action="{{ route('tarea.test.destroy', $tarea->id) }}" method="POST" style="display:inline;">
+                   
+                            <form action="{{ route('tarea.eliminar', $tarea->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">Eliminar Test</button>
                             </form>
                         @elseif($tarea->tipo === 'archivo')
-                            <a href="{{ route('tarea.archivo.edit', $tarea->id) }}" class="btn btn-sm btn-warning">Editar Archivo</a>
-                            <form action="{{ route('tarea.archivo.destroy', $tarea->id) }}" method="POST" style="display:inline;">
+                           <!--   <a href="{{ route('tarea.archivo.edit', $tarea->id) }}" class="btn btn-sm btn-warning">Editar Archivo</a>-->
+
+
+                            <form action="{{ route('tarea.eliminar', $tarea->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">Eliminar Archivo</button>
                             </form>
                         @elseif($tarea->tipo === 'link')
-                            <a href="{{ route('tarea.link.edit', $tarea->id) }}" class="btn btn-sm btn-warning">Editar Link</a>
-                            <form action="{{ route('tarea.link.destroy', $tarea->id) }}" method="POST" style="display:inline;">
+                           <!-- <a href="{{ route('tarea.link.edit', $tarea->id) }}" class="btn btn-sm btn-warning">Editar Link</a>-->
+                            <form action="{{ route('tarea.eliminar', $tarea->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">Eliminar Link</button>
@@ -46,7 +48,7 @@
 
     <a href="{{ route('tarea.create', ['curso_id' => $curso->id]) }}" class="btn btn-success mt-3">Añadir Tarea</a>
 
-    <a href="{{ route('cursos.index') }}" class="btn btn-secondary mt-3">Volver</a>
+    <a href="{{ route('cursos') }}" class="btn btn-secondary mt-3">Volver</a>
 </div>
 @endsection
 

@@ -8,17 +8,16 @@ use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
 use App\Models\RecursoMultimedia;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-
 
 class TareaController extends Controller
 {
+    // Mostrar formulario para crear una tarea
     public function crear($curso_id)
     {
-        return view('tareas.crear',compact('curso_id'));
+        return view('tareas.crear', compact('curso_id'));
     }
 
+    // Guardar una nueva tarea
     public function guardar(Request $request)
     {
         $request->validate([
@@ -46,14 +45,18 @@ class TareaController extends Controller
         }
     }
 
-    public function crearTest($id)
+    // Mostrar formulario para configurar un test
+    public function crearTest($curso_id)
     {
-        $tarea = Tarea::findOrFail($id);
-        return view('tarea.configurar-test', compact('tarea'));
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+        return view('tareas.configurar-test', compact('tarea', 'curso_id'));
     }
 
-    public function guardarTest(Request $request, $id)
+    // Guardar un test
+    public function guardarTest(Request $request, $curso_id)
     {
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+
         $request->validate([
             'preguntas' => 'required|array',
             'preguntas.*.enunciado' => 'required|string',
@@ -63,7 +66,7 @@ class TareaController extends Controller
 
         foreach ($request->preguntas as $preguntaData) {
             $pregunta = Pregunta::create([
-                'tarea_id' => $id,
+                'tarea_id' => $tarea->id,
                 'enunciado' => $preguntaData['enunciado'],
                 'tipo' => 'test',
             ]);
@@ -77,55 +80,66 @@ class TareaController extends Controller
             }
         }
 
-        return redirect()->route('tarea.index')->with('success', 'Test creado correctamente');
+        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Test creado correctamente');
     }
 
-    public function crearArchivo($id)
+    // Mostrar formulario para subir un archivo
+    public function crearArchivo($curso_id)
     {
-        $tarea = Tarea::findOrFail($id);
-        return view('tareas.subir-archivo', compact('tarea'));
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+        return view('tareas.subir-archivo', compact('tarea', 'curso_id'));
     }
 
-    public function guardarArchivo(Request $request, $id)
+    // Guardar un archivo
+    public function guardarArchivo(Request $request, $curso_id)
     {
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+
         $request->validate([
-            'archivo' => 'required|file|mimes:pdf,doc,docx,ppt,pptx',
+            'archivo' => 'required|file|mimes:pdf,doc,docx,ppt,pptx|max:2048', // 2MB máximo
         ]);
 
         $ruta = $request->file('archivo')->store('archivos', 'public');
         RecursoMultimedia::create([
-            'tarea_id' => $id,
+            'tarea_id' => $tarea->id,
             'tipo' => 'archivo',
             'url' => $ruta,
         ]);
 
-        return redirect()->route('tareas.index')->with('success', 'Archivo subido correctamente');
+        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Archivo subido correctamente');
     }
 
-    public function crearLink($id)
+    // Mostrar formulario para agregar un link
+    public function crearLink($curso_id)
     {
-        $tarea = Tarea::findOrFail($id);
-        return view('tareas.link', compact('tarea'));
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+        return view('tareas.link', compact('tarea', 'curso_id'));
     }
 
-    public function guardarLink(Request $request, $id)
+    // Guardar un link
+    public function guardarLink(Request $request, $curso_id)
     {
+        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
+
         $request->validate([
             'url' => 'required|url',
         ]);
 
         RecursoMultimedia::create([
-            'tarea_id' => $id,
+            'tarea_id' => $tarea->id,
             'tipo' => 'link',
             'url' => $request->url,
         ]);
 
-        return redirect()->route('tarea.index')->with('success', 'Link agregado correctamente');
+        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Link agregado correctamente');
     }
-    public function eliminar($id)
+
+    // Eliminar una tarea
+    public function eliminar($curso_id, $tarea_id)
     {
-        $tarea = Tarea::findOrFail($id);
+        $tarea = Tarea::where('id', $tarea_id)->where('curso_id', $curso_id)->firstOrFail();
         $tarea->delete();
-        return redirect()->route('tarea.index')->with('success', 'Tarea eliminada correctamente');
+
+        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
 }
