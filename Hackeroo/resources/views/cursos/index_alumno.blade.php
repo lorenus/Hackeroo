@@ -35,29 +35,10 @@
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
-                            <h5>{{ $curso->nombre }}</h5>
+                            <h5 class="text-center">{{ $curso->nombre }}</h5>
                             <p>{{$curso->descripcion}}</p>
                         </div>
 
-                        <!-- Parte derecha: Acciones (editar y eliminar) -->
-                        <div class="curso-acciones d-flex flex-column gap-2">
-                            <!-- Enlace de editar -->
-                            <div class="accion-editar">
-                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
-                                    <img src="/img/iconos/editar.png" alt="">
-                                </a>
-                            </div>
-
-                            <!-- Enlace de eliminar -->
-                            <div class="accion-eliminar">
-                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm" onclick="return confirm('¿Estás seguro de eliminar este curso?')">
-                                        <img src="/img/iconos/eliminar.png" alt="">
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                     @endforeach
