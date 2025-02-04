@@ -29,51 +29,51 @@
     <div class="row contenido-cursos">
         <div class="col-12">
             @if($cursos->isEmpty())
-                <p class="text-center">No tienes cursos creados aún.</p>
+            <p class="text-center">No tienes cursos creados aún.</p>
             @else
 
-            <div class="container mw-md-60">
-    <div class="row">
-        @foreach($cursos as $curso)
-        <div class="curso-item col-md-5 ms-md-5 mb-3"> 
-           
-                <!-- Parte izquierda: Nombre del curso -->
-                <div class="curso-nombre">
-                    <h5>{{ $curso->nombre }}</h5>
-                    <p>{{$curso->descripcion}}</p>
-                </div>
+            <div class="contenedor-cursos mw-md-60">
+                <div class="row justify-content-center">
+                    @foreach($cursos as $curso)
+                    <div class="curso-item col-md-5 ms-md-5 mb-3">
 
-                <!-- Parte derecha: Acciones (editar y eliminar) -->
-                <div class="curso-acciones d-flex flex-column gap-2">
-                    <!-- Enlace de editar -->
-                    <div class="accion-editar">
-                        <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
-                            <img src="/img/iconos/editar.png" alt="">
-                        </a>
+                        <!-- Parte izquierda: Nombre del curso -->
+                        <div class="curso-nombre">
+                            <h5>{{ $curso->nombre }}</h5>
+                            <p>{{$curso->descripcion}}</p>
+                        </div>
+
+                        <!-- Parte derecha: Acciones (editar y eliminar) -->
+                        <div class="curso-acciones d-flex flex-column gap-2">
+                            <!-- Enlace de editar -->
+                            <div class="accion-editar">
+                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
+                                    <img src="/img/iconos/editar.png" alt="">
+                                </a>
+                            </div>
+
+                            <!-- Enlace de eliminar -->
+                            <div class="accion-eliminar">
+                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm" onclick="return confirm('¿Estás seguro de eliminar este curso?')">
+                                        <img src="/img/iconos/eliminar.png" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Enlace de eliminar -->
-                    <div class="accion-eliminar">
-                        <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm" onclick="return confirm('¿Estás seguro de eliminar este curso?')">
-                                <img src="/img/iconos/eliminar.png" alt="">
-                            </button>
-                        </form>
-                    </div>
+                    @endforeach
                 </div>
-        </div>
-        @endforeach
-    </div>
-</div>
+            </div>
 
 
 
 
 
 
-                <!-- <table class="table">
+            <!-- <table class="table">
                     <thead>
                         <tr>
                             <th>Nombre del Curso</th>

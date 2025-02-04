@@ -556,6 +556,12 @@ legend {
   overflow-y: auto;
 }
 
+.contenedor-cursos {
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 table {
   width: 100%;
   text-align: center;
