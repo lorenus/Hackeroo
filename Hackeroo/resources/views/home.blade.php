@@ -24,15 +24,13 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm pe-4">
+<nav class="navbar navbar-expand-sm pe-4">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir">
         <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;">
       </button>
-    
-
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto custom-menu">
           <li class="nav-item ms-4">
