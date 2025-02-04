@@ -68,39 +68,6 @@
                 </div>
             </div>
 
-
-
-
-
-
-            <!-- <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nombre del Curso</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($cursos as $curso)
-                        <tr>
-                            <td>{{ $curso->nombre }}</td>
-                            <td>{{ $curso->descripcion }}</td>
-                            <td>
-                                
-                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm btn-warning">Editar</a>
-
-                                
-                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este curso?')">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table> -->
             @endif
         </div>
     </div>
