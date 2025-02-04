@@ -9,10 +9,9 @@ class RankingController extends Controller
 {
     public function index()
     {
-        // Obtener los usuarios (alumnos) ordenados por el campo 'puntos' de mayor a menor
-        $usuarios = Usuario::orderBy('puntos', 'desc')->get();
+        // Obtener solo los usuarios con rol de "alumno" ordenados por puntos
+        $usuarios = Usuario::where('rol', 'alumno')->orderBy('puntos', 'desc')->get();
 
-        // Retornar la vista con los usuarios
         return view('ranking.index', compact('usuarios'));
     }
 }
