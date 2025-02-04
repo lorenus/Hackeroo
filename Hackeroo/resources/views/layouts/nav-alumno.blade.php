@@ -12,19 +12,19 @@
             <ul class="navbar-nav ms-auto custom-menu">
                 <!-- <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="#">Mi Perfil</a>
+                        <a class="nav-link" href="{{ route('perfil') }}">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
                 </li> -->
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="#">Mis Cursos</a>
+                        <a class="nav-link" href="{{ route('cursos-alumno') }}">Mis Cursos</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="#">Ranking</a>
+                        <a class="nav-link" href="{{ route('ranking') }}">Ranking</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
@@ -37,7 +37,7 @@
                 @if(Auth::check())
                 <li class="nav-item">
                     <div class="enlace-con-subrayado">
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-primary-button class='btn ms-4 border-0 mt-5 d-block d-sm-none'>
                     {{ __('Cerrar sesión') }}
