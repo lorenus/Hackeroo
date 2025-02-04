@@ -5,7 +5,7 @@
         "build": "vite build",
         "dev": "vite",
         "build-css": "sass resources/scss:public/css",
-        "watch-css": "sass --watch resources/scss:public/css"
+        "watch-css": "sass --watch resources/scss:public/scss"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
