@@ -41,12 +41,13 @@
                     </tbody>
                 </table>
             </div>
-        </form>
-    </div>
-</div>
             <div class="col-12 mt-3 text-center mt-4">
                 <x-primary-button type="submit">Crear curso</x-primary-button>
             </div>
+        </form>
+    </div>
+</div>
+            
     </fieldset>
 
 
