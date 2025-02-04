@@ -20,7 +20,12 @@ a {
   color: #455A64;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Lilita One";
 }
 
@@ -360,7 +365,8 @@ form {
   font-weight: 400;
   font-family: "Lilita One";
 }
-form .form-lineas, form .libreta {
+form .form-lineas,
+form .libreta {
   color: "Itim";
   display: block;
   width: 100%;
@@ -482,7 +488,8 @@ form .libreta:focus {
   position: relative;
 }
 
-.div-enlace, .cerrar-sesion {
+.div-enlace,
+.cerrar-sesion {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -505,6 +512,30 @@ form .libreta:focus {
   max-height: 50px !important;
   width: auto !important;
   object-fit: contain !important;
+}
+
+.ranking-container .ranking-item {
+  color: #FEFFEB;
+  font-size: large;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ranking-container .ranking-item.amarillo {
+  background-color: #FFB300;
+  width: 90%;
+  border-radius: 0 0 15px 0;
+}
+.ranking-container .ranking-item.verde {
+  background-color: #8CC34C;
+  width: 70%;
+  border-radius: 0 0 15px 0;
+}
+.ranking-container .ranking-item.azul {
+  background-color: #06AAF4;
+  width: 50%;
+  border-radius: 0 0 15px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -507,4 +507,23 @@ form .libreta:focus {
   object-fit: contain !important;
 }
 
+.ranking-container .ranking-item {
+  color: #FEFFEB;
+  font-size: large;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ranking-container .ranking-item.amarillo {
+  background-color: amarillo;
+}
+.ranking-container .ranking-item.verde {
+  background-color: verde;
+}
+.ranking-container .ranking-item.azul {
+  background-color: azul;
+}
+
+
 /*# sourceMappingURL=style.css.map */

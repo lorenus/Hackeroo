@@ -1,337 +1,306 @@
-@use 'genericos.scss' as *;
+@use "genericos.scss" as *;
 
 body,
 html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  /* Asegura que el cuerpo ocupe toda la altura */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* Asegura que el cuerpo ocupe toda la altura */
 }
 
 body {
-  background-color: $amarillo_footer;
-  font-family: $fuenteTexto;
-  color: $gris;
+    background-color: $amarillo_footer;
+    font-family: $fuenteTexto;
+    color: $gris;
 }
 
 a {
-  text-decoration: none;
-  color: $gris;
+    text-decoration: none;
+    color: $gris;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $fuenteTitulos;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $fuenteTitulos;
 }
 
 .boton {
-  @include boton;
+    @include boton;
 
-  >a {
-    font-family: $fuenteTitulos;
-    margin-top: -7px;
-    color: $amarillo_fondo;
-    font-size: x-large;
-  }
-
-}
-
-h1{
- font-family:  $fuenteTitulos;
- font-size: 5rem;
-}
-
-#info{
-  font-size: 2rem;
-}
-
-
-.navbar-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.navbar-toggler {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  outline: none;
-  /* Elimina el borde cuando el botón está enfocado */
-  box-shadow: none;
-  border: none;
-}
-
-.navbar-toggler:focus {
-  outline: none;
-  /* Elimina el borde de enfoque */
-  box-shadow: none;
-  /* Elimina cualquier sombra en foco */
-  border: none;
-}
-
-.hidden {
-  display: none;
-}
-
-
-
-@media (min-width: 576px) {
-  .navbar-nav {
-    flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
-  }
-
-  .texto-info{
-    margin-left: 10vw;
-  }
-
-  #accordion{
-    width: 40vw;
-  }
-
-  .img-fluid{
-    max-width: 30vw;
+    > a {
+        font-family: $fuenteTitulos;
+        margin-top: -7px;
+        color: $amarillo_fondo;
+        font-size: x-large;
     }
 }
 
+h1 {
+    font-family: $fuenteTitulos;
+    font-size: 5rem;
+}
 
+#info {
+    font-size: 2rem;
+}
 
+.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.navbar-toggler {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    outline: none;
+    /* Elimina el borde cuando el botón está enfocado */
+    box-shadow: none;
+    border: none;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    /* Elimina el borde de enfoque */
+    box-shadow: none;
+    /* Elimina cualquier sombra en foco */
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .texto-info {
+        margin-left: 10vw;
+    }
+
+    #accordion {
+        width: 40vw;
+    }
+
+    .img-fluid {
+        max-width: 30vw;
+    }
+}
 
 .custom-menu {
-  display: flex;
-  justify-content: center;
-  /* Centra horizontalmente */
-  align-items: center;
-  /* Centra verticalmente */
-  margin: 0;
-  /* Elimina el margen predeterminado */
-  padding: 0;
-  /* Elimina el padding predeterminado */
-  list-style: none;
-  /* Elimina los estilos de lista */
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    margin: 0;
+    /* Elimina el margen predeterminado */
+    padding: 0;
+    /* Elimina el padding predeterminado */
+    list-style: none;
+    /* Elimina los estilos de lista */
 }
 
 /* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
 @media (max-width: 576px) {
-  .custom-menu {
-    height: 100vh;
-    /* Ocupa el 100% del alto de la ventana */
-  }
+    .custom-menu {
+        height: 100vh;
+        /* Ocupa el 100% del alto de la ventana */
+    }
 }
-
 
 .boton-menu {
-  @include boton;
+    @include boton;
 }
-
-
-
-
-
 
 .navbar {
-  @include menu_pc;
-
+    @include menu_pc;
 }
 
-
 footer {
-  min-height: 15vh;
+    min-height: 15vh;
 }
 
 .contenido {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 75vh;
-  background-color: $amarillo_fondo;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    background-color: $amarillo_fondo;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .letra:nth-child(2),
 .letra:nth-child(6) {
-  color: $rojo;
+    color: $rojo;
 }
 
 .letra:nth-child(3),
 .letra:nth-child(7) {
-  color: $amarillo;
+    color: $amarillo;
 }
 
 .letra:nth-child(4),
 .letra:nth-child(9) {
-  color: $azul;
+    color: $azul;
 }
 
 .letra:nth-child(5),
 .letra:nth-child(8) {
-  color: $verde;
+    color: $verde;
 }
 
 .texto-animado {
-  font-size: 8vw;
-  font-family: $fuenteTitulos;
-  text-align: center;
-  /* Centra el texto horizontalmente */
+    font-size: 8vw;
+    font-family: $fuenteTitulos;
+    text-align: center;
+    /* Centra el texto horizontalmente */
 }
 
 .texto-animado span {
-  position: relative;
-  display: inline-block;
-  transition: transform 0.1s ease-in-out;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
 }
 
 .texto-animado span:hover {
-  transform: scale(1.5);
+    transform: scale(1.5);
 }
-
-
-
-
 
 .enlace-con-subrayado {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
-
 .subrayado1 {
-  @include subrayado('/img/botones/linea1.png');
-
+    @include subrayado("/img/botones/linea1.png");
 }
 
 .subrayado2 {
-  @include subrayado('/img/botones/linea2.png');
-
-
+    @include subrayado("/img/botones/linea2.png");
 }
 
 .subrayado3 {
-  @include subrayado('/img/botones/linea3.png');
-
-
+    @include subrayado("/img/botones/linea3.png");
 }
 
 .enlace-con-subrayado:hover .subrayado1,
 .enlace-con-subrayado:hover .subrayado2,
 .enlace-con-subrayado:hover .subrayado3 {
-  opacity: 1;
+    opacity: 1;
 }
 
-
 .enlace-bolita {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .bolitaI {
-  @include bolita('left');
+    @include bolita("left");
 }
 
 .bolitaD {
-  @include bolita('right');
+    @include bolita("right");
 }
 
 .enlace-bolita:hover .bolitaI,
 .enlace-bolita:hover .bolitaD {
-  opacity: 1; 
+    opacity: 1;
 }
-
-
-
-
 
 .logo {
-  font-family: sans-serif; /* Usa la fuente que prefieras */
-  font-size: 3rem; /* Tamaño grande para el logo */
-  overflow: hidden; /* Evita que el contenido se vea antes de tiempo */
-  display: inline-block;
+    font-family: sans-serif; /* Usa la fuente que prefieras */
+    font-size: 3rem; /* Tamaño grande para el logo */
+    overflow: hidden; /* Evita que el contenido se vea antes de tiempo */
+    display: inline-block;
 }
-
 
 /* Contenedor de las letras */
 .texto-animado-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 /* Las letras por defecto, solo el <H> visible */
 .texto-animado-menu .letra {
-  opacity: 0; /* Las letras estarán ocultas por defecto */
-  transition: opacity 0.3s ease; /* Transición para mostrar las letras */
+    opacity: 0; /* Las letras estarán ocultas por defecto */
+    transition: opacity 0.3s ease; /* Transición para mostrar las letras */
 }
 
 /* El primer span con el <H> visible */
 .texto-animado-menu span:first-child, /* < */
 .texto-animado-menu span:nth-child(2), /* H */
-.texto-animado-menu span:nth-child(3)  /* / */
-{
-  opacity: 1; /* Este ya es visible */
+.texto-animado-menu span:nth-child(3)  /* / */ {
+    opacity: 1; /* Este ya es visible */
 }
 
 /* Cuando se hace hover, las letras aparecerán */
 .logo:hover .letra {
-  opacity: 1; /* Las letras se muestran */
+    opacity: 1; /* Las letras se muestran */
 }
 
 /* Para el efecto de expansión: De izquierda a derecha */
 .logo:hover .texto-animado-menu {
-  animation: expand 0.6s forwards;
+    animation: expand 0.6s forwards;
 }
 
 /* La animación que expande el texto */
 @keyframes expand {
-  0% {
-    transform: translateX(-100%); /* Empieza fuera de la pantalla */
-  }
-  100% {
-    transform: translateX(0); /* Se mueve a su posición original */
-  }
+    0% {
+        transform: translateX(-100%); /* Empieza fuera de la pantalla */
+    }
+    100% {
+        transform: translateX(0); /* Se mueve a su posición original */
+    }
 }
-
-
 
 .card-header a h3 {
-  font-family: $fuenteTitulos;
+    font-family: $fuenteTitulos;
 }
 
-#accordion{
-  width: 40vw;
+#accordion {
+    width: 40vw;
 }
 
-.card{
-  background-color: $amarillo_fondo;
-  border: 3px solid $amarillo_footer;
-  border-radius: 15px;
+.card {
+    background-color: $amarillo_fondo;
+    border: 3px solid $amarillo_footer;
+    border-radius: 15px;
 }
 
 .card-header {
-  border-bottom: none;  // Elimina el borde inferior (la línea gris)
+    border-bottom: none; // Elimina el borde inferior (la línea gris)
 }
 
-#accordion{
-  width: 80vw;
+#accordion {
+    width: 80vw;
 }
 
-.img-fluid{
-width: 60vw;
+.img-fluid {
+    width: 60vw;
 }
 
-
-form .form-label.custom-label{
-  font-family: $fuenteTitulos;
+form .form-label.custom-label {
+    font-family: $fuenteTitulos;
 }
 
-.custom-input#email{
-border-color: $amarillo_footer;
-border: 4px solid;
+.custom-input#email {
+    border-color: $amarillo_footer;
+    border: 4px solid;
 }
 
 // x-primary-button{
@@ -339,51 +308,51 @@ border: 4px solid;
 //   font-family: $fuenteTitulos;
 // }
 
-
 form {
-  padding: 0.32rem 0.7rem;
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: $fuenteTitulos;
+    padding: 0.32rem 0.7rem;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: $fuenteTitulos;
 
-  // Estilo común para los elementos con fondo y texto
-  .form-lineas, .libreta {
-    color: $fuenteTexto;
-    display: block;
-    width: 100%;
-    font-family: $fuenteTexto;
-    border: none;
-  }
-
-  // Estilo específico para .form-lineas
-  .form-lineas {
-    line-height: 1.2;
-    background-color: transparent;
-    background-clip: padding-box;
-    border-bottom: 2px solid $amarillo;
-
-    &:focus {
-      border-bottom: 2px solid $azul;
-      outline: none; /* Elimina el borde predeterminado del focus */
+    // Estilo común para los elementos con fondo y texto
+    .form-lineas,
+    .libreta {
+        color: $fuenteTexto;
+        display: block;
+        width: 100%;
+        font-family: $fuenteTexto;
+        border: none;
     }
 
-  }
+    // Estilo específico para .form-lineas
+    .form-lineas {
+        line-height: 1.2;
+        background-color: transparent;
+        background-clip: padding-box;
+        border-bottom: 2px solid $amarillo;
 
-  // Estilo específico para .libreta
-  .libreta {
-    background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
-    background-size: 100% 1.5em;
-    padding-left: 5px;
-    line-height: 1.5em;
-    padding-top: 5px;
-    resize: none; 
-
-    &:focus {
-      background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
-      outline: none; /* Elimina el borde predeterminado del focus */
+        &:focus {
+            border-bottom: 2px solid $azul;
+            outline: none; /* Elimina el borde predeterminado del focus */
+        }
     }
 
-  }
+    // Estilo específico para .libreta
+    .libreta {
+        background: linear-gradient(to bottom, $amarillo 2px, transparent 1px)
+            repeat-y;
+        background-size: 100% 1.5em;
+        padding-left: 5px;
+        line-height: 1.5em;
+        padding-top: 5px;
+        resize: none;
+
+        &:focus {
+            background: linear-gradient(to bottom, $azul 2px, transparent 1px)
+                repeat-y;
+            outline: none; /* Elimina el borde predeterminado del focus */
+        }
+    }
 }
 
 // button{
@@ -396,120 +365,143 @@ form {
 //   background-position: center 5px;
 // }
 
-
-
-
 // SELECT
 .custom-select {
-  position: relative;
-  display: inline-flex;
-  border: 2px solid $amarillo;
-  border-radius: 50px; /* Bordes muy redondeados */
-  overflow: hidden;
-  background-color: $amarillo_fondo;
-  padding: 5px;
+    position: relative;
+    display: inline-flex;
+    border: 2px solid $amarillo;
+    border-radius: 50px; /* Bordes muy redondeados */
+    overflow: hidden;
+    background-color: $amarillo_fondo;
+    padding: 5px;
 }
 
 .option {
-  padding: 10px 20px;
-  cursor: pointer;
-  z-index: 1;
-  transition: color 0.3s ease;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease;
 }
-
 
 .selector {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: $amarillo_footer;
-  border-radius: 50px;
-  transition: transform 0.3s ease;
-  z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $amarillo_footer;
+    border-radius: 50px;
+    transition: transform 0.3s ease;
+    z-index: 0;
 }
 
-
 // PERFIL USUARIO
-.contenedor-perfil{
-  max-width: 50vw;
-  @media (max-width: 576px) {
-      min-width: 70vw;
+.contenedor-perfil {
+    max-width: 50vw;
+    @media (max-width: 576px) {
+        min-width: 70vw;
     }
 }
 .perfil {
-  color: $amarillo_fondo;
-  background-color: $azul;
-  border-radius: 20px;
-  height: 20vh;
-  padding: 20px;
+    color: $amarillo_fondo;
+    background-color: $azul;
+    border-radius: 20px;
+    height: 20vh;
+    padding: 20px;
 }
 
 .img-perfil-cabecera {
-  height: 80px; /* Tamaño fijo para la imagen en móvil */
-  width: auto;
-  border-radius: 15px;
+    height: 80px; /* Tamaño fijo para la imagen en móvil */
+    width: auto;
+    border-radius: 15px;
 
-  @media (min-width: 768px) {
-    height: 120px; 
-  }
+    @media (min-width: 768px) {
+        height: 120px;
+    }
 }
 
 .puntuacion {
-  width: auto;
-  
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $gris;
-  background-color: $amarillo_fondo;
-  border-radius: 15px;
-  @media (min-width: 768px) {
-    min-width: 110px;
-  min-height: 120px;
-  }
+    width: auto;
+
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $gris;
+    background-color: $amarillo_fondo;
+    border-radius: 15px;
+    @media (min-width: 768px) {
+        min-width: 110px;
+        min-height: 120px;
+    }
 }
 
 .puntuacion img {
-  max-height: 100%;
-  width: auto;
+    max-height: 100%;
+    width: auto;
 }
 
 .div-enlace {
-  border: 3px solid $azul;
-  border-radius: 20px;
-  height: 20vh;
-  position: relative;
+    border: 3px solid $azul;
+    border-radius: 20px;
+    height: 20vh;
+    position: relative;
 }
 
 .cerrar-sesion {
-  border: 3px solid $rojo;
-  border-radius: 20px;
-  height: 20vh;
-  position: relative;
+    border: 3px solid $rojo;
+    border-radius: 20px;
+    height: 20vh;
+    position: relative;
 }
 
-.div-enlace, .cerrar-sesion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.div-enlace,
+.cerrar-sesion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .img-perfil {
-  max-height: 8vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+    max-height: 8vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .div-enlace p {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .img-corona {
-  max-height: 50px !important; 
-  width: auto !important; 
-  object-fit: contain !important;
+    max-height: 50px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+//RANKING
+.ranking-container {
+  .ranking-item {
+      color: $amarillo_fondo; 
+      font-size: large;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      $color-width-list: (
+          (amarillo, $amarillo, 90%),
+          (verde, $verde, 70%),
+          (azul, $azul, 50%),
+      );
+
+      // Iterar sobre la lista para aplicar colores y tamaños
+      @each $name, $color, $width in $color-width-list {
+          &.#{$name} {
+              background-color: $color; 
+              width: $width;
+              border-radius: 0 0 15px 0;
+          }
+      }
+  }
 }
