@@ -85,9 +85,15 @@
 
         <!-- Botón -->
         <div class="boton col-12 d-flex justify-content-center">
+            @if (Auth::check())
+            <a href="{{ route('perfil') }}">
+                <p>Entrar</p>
+            </a>
+            @else
             <a href="{{ route('login') }}">
                 <p>Entrar</p>
             </a>
+            @endif
         </div>
     </div>
 
