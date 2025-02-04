@@ -34,6 +34,6 @@
         <button type="submit" class="btn btn-success mt-3">Actualizar Curso</button>
     </form>
 
-    <a href="{{ route('cursos.index') }}" class="btn btn-secondary mt-3">Cancelar</a>
+    <a href="{{ route('cursos') }}" class="btn btn-secondary mt-3">Cancelar</a>
 </div>
 @endsection

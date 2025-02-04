@@ -2,13 +2,15 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla Básica</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackeroo</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantilla Básica</title>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,15 +24,13 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm pe-4">
+<nav class="navbar navbar-expand-sm pe-4">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <img src="{{ asset('img/botones/abrir.svg') }}" alt="Hamburguesa" class="abrir">
         <img src="{{ asset('img/botones/cerrar.svg') }}" alt="Cerrar" class="cerrar" style="display: none;">
       </button>
-    
-
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto custom-menu">
           <li class="nav-item ms-4">
@@ -38,10 +38,29 @@
               <a class="nav-link" href="{{ route('info') }}">Conócenos</a>
               <div class="subrayado1"></div>
             </div>
-            </ul>
-        </div>
-        </div>
-    </nav>
+          </li>
+          <li class="nav-item ms-4">
+            <div class="enlace-con-subrayado">
+              <a class="nav-link" href="{{ route('contacto') }}">Contáctanos</a>
+              <div class="subrayado3"></div>
+            </div>
+          </li>
+          <li class="nav-item ms-4">
+            <div class="enlace-con-subrayado">
+              <a class="nav-link" href="{{ route('faq') }}">Ayuda</a>
+              <div class="subrayado2"></div>
+            </div>
+          </li>
+          <div class="boton col-12 d-flex justify-content-center mt-5 ms-4 d-block d-sm-none">
+            <a href="{{route('login')}}">
+              <p>Entrar</p>
+            </a>
+          </div>
+      </div>
+      </ul>
+    </div>
+    </div>
+  </nav>
 
 
 
