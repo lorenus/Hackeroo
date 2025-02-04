@@ -1,39 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <h1>Editar Curso: {{ $curso->nombre }}</h1>
+    <div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('cursos') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
+    </div>
+
+    <h2 class='text-center'>Editar {{ $curso->nombre }}</h2>
 
     <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <div class="form-group">
-            <label for="nombre">Nombre del Curso</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $curso->nombre) }}" required>
+        <div class="mb-5 mt-3 text-md-start">
+            <x-input-label for="nombre" :value="__('Nombre del curso:')" />
+            <x-text-input id="nombre"
+                class="form-control block"
+                type="text" name="nombre" : value="{{ old('nombre', $curso->nombre) }}" required />
         </div>
 
-        <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required>{{ old('descripcion', $curso->descripcion) }}</textarea>
+        <div class="mb-5 mt-3 text-md-start">
+            <x-input-label for="descripcion" :value="__('Descripción:')" />
+            <x-text-area class="form-control" id="descripcion" name="descripcion">{{ old('descripcion', $curso->descripcion) }}</x-text-area>
         </div>
 
-        <!-- Campo de selección de alumnos -->
-        <div class="form-group">
-            <label for="alumnos">Selecciona Alumnos</label>
-            <select class="form-control" id="alumnos" name="alumnos[]" multiple required>
-                @foreach($alumnos as $alumno)
-                    <option value="{{ $alumno->DNI }}" 
-                        @if(in_array($alumno->DNI, $curso->alumnos->pluck('DNI')->toArray())) selected @endif>
-                        {{ $alumno->nombre }} {{ $alumno->apellidos }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <div class="mb-5 mt-3 text-md-start">
+            <h6>Selecciona los alumnos que quieras añadir:</h6>
 
-        <button type="submit" class="btn btn-success mt-3">Actualizar Curso</button>
+
+
+            @csrf
+            <div class="tabla-scroll-container"> <!-- Contenedor para el scroll -->
+                <table> <!-- Eliminamos la clase .tabla-scroll -->
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>DNI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($alumnos as $alumno)
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
+                            </td>
+                            <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
+                            <td>{{ $alumno->DNI }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 mt-3 text-center mt-4">
+                <x-primary-button type="submit">Actualizar</x-primary-button>
+            </div>
     </form>
-
-    <a href="{{ route('cursos') }}" class="btn btn-secondary mt-3">Cancelar</a>
+</div>
 </div>
 @endsection
