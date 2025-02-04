@@ -54,10 +54,13 @@
 
         <div class="col-12 col-md-6">
             <div class="cerrar-sesion">
-                <a href="#">
-                    <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                    <h4>Cerrar sesión</h4>
-                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" style="background: none; border: none;">
+                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
+                        <h4>Cerrar sesión</h4>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -127,10 +130,13 @@
 
         <div class="col-12 col-md-6">
             <div class="cerrar-sesion">
-                <a href="#">
-                    <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                    <h4>Cerrar sesión</h4>
-                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" style="background: none; border: none;">
+                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
+                        <h4>Cerrar sesión</h4>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
