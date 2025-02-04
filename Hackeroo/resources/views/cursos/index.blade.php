@@ -32,11 +32,11 @@
                 <p class="text-center">No tienes cursos creados aún.</p>
             @else
 
-            <div class="container mw-75">
+            <div class="container mw-md-60">
     <div class="row">
         @foreach($cursos as $curso)
-        <div class="curso-item col-md-5 md-ms-5 mb-3"> 
-            <div class="curso-item d-flex justify-content-between align-items-center p-3 border rounded">
+        <div class="curso-item col-md-5 ms-md-5 mb-3"> 
+           
                 <!-- Parte izquierda: Nombre del curso -->
                 <div class="curso-nombre">
                     <h5>{{ $curso->nombre }}</h5>
@@ -63,7 +63,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
         @endforeach
     </div>
