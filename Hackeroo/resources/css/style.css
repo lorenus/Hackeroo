@@ -551,4 +551,13 @@ legend {
   }
 }
 
+table {
+  width: 100%;
+  text-align: center;
+}
+
+tr {
+  border-bottom: 3px solid #FFB300;
+}
+
 /*# sourceMappingURL=style.css.map */

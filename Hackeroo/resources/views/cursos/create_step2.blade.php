@@ -2,28 +2,59 @@
 
 @section('content')
 <div class="container">
-    <h1>Crear Curso - Paso 2</h1>
 
-    <!-- Mostrar mensaje de éxito -->
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+<div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('perfil') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
     </div>
-    @endif
+ <fieldset class="reset">
+            <legend class="reset">Nuevo curso</legend>
+            <div class="mb-5 mt-3 text-md-start">
+                <h6>Selecciona los alumnos que quieras añadir</h6>
+               
+                <div class="mb-5 mt-3 text-md-start">
+            <div class="mb-3">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>DNI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($alumnos as $alumno)
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
+                            </td>
+                            <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
+                            <td>{{ $alumno->DNI }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            <div class="col-12 mt-3 text-center mt-4">    
+            <x-primary-button type="submit">Crear curso</x-primary-button>
+            </div>
+        </fieldset>
+
+
+
+
+
 
     <form action="{{ route('cursos.store.step2') }}" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label for="alumnos" class="form-label">Selecciona Alumnos</label>
-            <select class="form-control" id="alumnos" name="alumnos[]" multiple required>
-                @foreach($alumnos as $alumno)
-                <option value="{{ $alumno->DNI }}">{{ $alumno->nombre }} {{ $alumno->apellidos }}</option>
-                @endforeach
-            </select>
-        </div>
+        
 
-        <button type="submit" class="btn btn-primary">Crear Curso</button>
+        
     </form>
 </div>
 @endsection
