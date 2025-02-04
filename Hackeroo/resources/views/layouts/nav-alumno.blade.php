@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm pe-4">
+<nav class="navbar navbar-expand-sm">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="/img/imagenes/logo.png" width="150" alt="Logo">
@@ -10,12 +10,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto custom-menu">
-                <li class="nav-item ms-4">
+                <!-- <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
                         <a class="nav-link" href="#">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
                         <a class="nav-link" href="#">Mis Cursos</a>
@@ -30,19 +30,18 @@
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="#">Editar Perfil</a>
-                        <div class="subrayado2"></div>
+                        <a class="nav-link" href="{{ route('editar-perfil') }}">Editar Perfil</a>
+                        <div class="subrayado3"></div>
                     </div>
                 </li>
                 @if(Auth::check())
-                <li class="nav-item ms-4">
+                <li class="nav-item">
                     <div class="enlace-con-subrayado">
                         <form method="POST" action="#">
                             @csrf
-                            <div>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" class="nav-link" style="font-size: x-large;">
-                                Cerrar sesión</a>
-                                </div>
+                            <x-primary-button class='btn ms-4 border-0 mt-5 d-block d-sm-none'>
+                    {{ __('Cerrar sesión') }}
+                    </x-primary-button>
                         </form>
                     </div>
                 </li>
