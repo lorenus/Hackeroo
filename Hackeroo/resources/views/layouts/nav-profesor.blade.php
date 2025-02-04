@@ -39,7 +39,7 @@
                     <div class="enlace-con-subrayado">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" class="nav-link">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" class="nav-link" style="font-size: x-large;">
                                 Cerrar sesión</a>
                         </form>
                     </div>
