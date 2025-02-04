@@ -18,7 +18,15 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-    @yield('nav', View::make('layouts.navigation'))
+        @if(auth()->check())
+            @if(auth()->user()->rol === 'profesor')
+                @include('layouts.nav-profesor')
+            @elseif(auth()->user()->rol === 'alumno')
+                @include('layouts.nav-alumno')
+            @endif
+        @else
+            @include('layouts.navigation')
+        @endif
 
 
   <div class="contenido container-fluid d-flex flex-column flex-md-row p-5">

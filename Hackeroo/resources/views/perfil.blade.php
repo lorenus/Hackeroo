@@ -16,7 +16,7 @@
         <!-- Imagen y nombre de usuario -->
         <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
-            <h2>Hola, <span id="nombreUsuario">Profesor</span></h2>
+            <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center ">
         <div class="col-12 col-md-6 align-items-center">
             <div class="div-enlace mb-3">
-                <a href="#">
+                <a href="{{ route('cursos') }}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
                     <h4>Mis cursos</h4>
                 </a>
@@ -33,7 +33,7 @@
 
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('alumnos') }}">
                     <img src="/img/iconos/alumnos.png" alt="Enlace 2" class="img-fluid img-perfil">
                     <h4>Alumnos</h4>
                 </a>
@@ -45,7 +45,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center d-none d-md-flex">
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('editar-perfil') }}">
                     <img src="/img/iconos/editar_perfil.png" alt="Enlace 3" class="img-fluid img-perfil">
                     <h4>Editar perfil</h4>
                 </a>
@@ -54,10 +54,13 @@
 
         <div class="col-12 col-md-6">
             <div class="cerrar-sesion">
-                <a href="#">
-                    <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                    <h4>Cerrar sesión</h4>
-                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" style="background: none; border: none;">
+                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
+                        <h4>Cerrar sesión</h4>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -78,7 +81,7 @@
         <!-- Imagen y nombre de usuario -->
         <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
-            <h2>Hola, <span id="nombreUsuario">Usuario</span></h2>
+            <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
 
         <!-- Puntuación (nivel y puntos) -->
@@ -97,7 +100,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center">
         <div class="col-12 col-md-6">
             <div class="div-enlace mb-3">
-                <a href="#">
+                <a href="{{route('alumno.cursos')}}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
                     <h4>Mis cursos</h4>
                 </a>
@@ -106,7 +109,7 @@
 
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('ranking') }}">
                     <img src="/img/iconos/trofeo.png" alt="Enlace 2" class="img-fluid img-perfil">
                     <h4>Ranking</h4>
                 </a>
@@ -118,7 +121,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center d-none d-md-flex">
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('editar-perfil') }}">
                     <img src="/img/iconos/editar_perfil.png" alt="Enlace 3" class="img-fluid img-perfil">
                     <h4>Editar perfil</h4>
                 </a>
@@ -127,10 +130,13 @@
 
         <div class="col-12 col-md-6">
             <div class="cerrar-sesion">
-                <a href="#">
-                    <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                    <h4>Cerrar sesión</h4>
-                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" style="background: none; border: none;">
+                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
+                        <h4>Cerrar sesión</h4>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
