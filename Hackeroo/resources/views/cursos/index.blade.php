@@ -39,7 +39,7 @@
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
-                            <h5>{{ $curso->nombre }}</h5>
+                        <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">   <h5>{{ $curso->nombre }}</h5></a>
                             <p>{{$curso->descripcion}}</p>
                         </div>
 

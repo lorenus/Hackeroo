@@ -173,7 +173,15 @@ class CursoController extends Controller
     }
     public function show($id)
     {
+       
         $curso = Curso::with('tareas')->findOrFail($id);
+    
+      
+        if ($curso->profesor_dni !== Auth::user()->DNI) {
+            return abort(403, 'No tienes permiso para ver este curso.');
+        }
+    
+       
         return view('cursos.show', compact('curso'));
     }
 }
