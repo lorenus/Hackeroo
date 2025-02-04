@@ -24,7 +24,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center ">
         <div class="col-12 col-md-6 align-items-center">
             <div class="div-enlace mb-3">
-                <a href="#">
+                <a href="{{ route('cursos-index') }}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
                     <h4>Mis cursos</h4>
                 </a>

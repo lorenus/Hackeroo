@@ -80,15 +80,26 @@ class CursoController extends Controller
     }
     public function index()
     {
-        // Verificar si el usuario está autenticado y es un profesor
-        if (Auth::check() && Auth::user()->rol === 'profesor') {
-            // Obtener los cursos del profesor logueado
-            $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
-            return view('cursos.index', compact('cursos')); // Vista para mostrar los cursos
-        }
+        // Verificar si el usuario está autenticado
+    if (!Auth::check()) {
+        return redirect()->route('login'); // Redirigir al login si no está autenticado
+    }
 
-        // Si no es profesor, redirigir o abortar con un error 403
+    // Verificar si el usuario es un profesor
+    if (Auth::user()->rol !== 'profesor') {
         return abort(403, 'No tienes permiso para acceder a esta página.');
+    }
+
+    // Obtener los cursos del profesor logueado
+    $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
+
+    // Verificar si hay cursos
+    if ($cursos->isEmpty()) {
+        return view('cursos.index')->with('message', 'No tienes cursos asignados.');
+    }
+
+    // Retornar la vista con los cursos
+    return view('cursos.index', compact('cursos'));
     }
     public function indexForAlumnos()
     {
