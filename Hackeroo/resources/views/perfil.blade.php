@@ -16,7 +16,7 @@
         <!-- Imagen y nombre de usuario -->
         <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
-            <h2>Hola, <span id="nombreUsuario">Profesor</span></h2>
+            <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
     </div>
 
@@ -81,7 +81,7 @@
         <!-- Imagen y nombre de usuario -->
         <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
-            <h2>Hola, <span id="nombreUsuario">Usuario</span></h2>
+            <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
 
         <!-- Puntuación (nivel y puntos) -->
