@@ -551,13 +551,24 @@ legend {
   }
 }
 
+.tabla-scroll-container {
+  height: 30vh;
+  overflow-y: auto;
+}
+
 table {
   width: 100%;
   text-align: center;
+  table-layout: fixed;
+}
+
+th, td {
+  padding: 10px;
+  word-wrap: break-word;
 }
 
 tr {
-  border-bottom: 3px solid #FFB300;
+  border-bottom: 3px solid #FFB300; /* Color de borde */
 }
 
 .cursos-container {
