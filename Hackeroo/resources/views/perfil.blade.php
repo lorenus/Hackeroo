@@ -33,7 +33,7 @@
 
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('alumnos') }}">
                     <img src="/img/iconos/alumnos.png" alt="Enlace 2" class="img-fluid img-perfil">
                     <h4>Alumnos</h4>
                 </a>
