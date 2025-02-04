@@ -12,25 +12,25 @@
             <ul class="navbar-nav ms-auto custom-menu">
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('perfil') }}">Mi Perfil</a>
+                        <a class="nav-link" href="#">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('cursos') }}">Mis Cursos</a>
+                        <a class="nav-link" href="#">Mis Cursos</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('alumnos') }}">Mis Alumnos</a>
+                        <a class="nav-link" href="#">Mis Alumnos</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('profile.edit') }}">Editar Perfil</a>
+                        <a class="nav-link" href="#">Editar Perfil</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
