@@ -12,38 +12,35 @@
 
         <!-- Contenedor de ranking y tabla -->
         <div class="col-12 col-md-6 order-1 order-md-1">
-            <!-- Ranking -->
+            <!-- Ranking Superior -->
             <div class="ranking-container">
-                <!-- Ranking item 1 -->
-                <div class="ranking-item amarillo d-flex justify-content-between h-25 mb-2 p-3">
-                    <h3><span>1</span> <span>Nombre Apellido</span></h3>
-                </div>
-                <!-- Ranking item 2 -->
-                <div class="ranking-item verde d-flex justify-content-between h-25 mb-2 p-3">
-                    <h3><span>2</span> <span>Nombre Apellido</span></h3>
-                </div>
-                <!-- Ranking item 3 -->
-                <div class="ranking-item azul d-flex justify-content-between h-25 mb-2 p-3">
-                    <h3><span>3</span> <span>Nombre Apellido</span></h3>
-                </div>
+                @php
+                    $colores = ['amarillo', 'verde', 'azul']; // Clases de colores
+                @endphp
+                
+                @foreach($usuarios as $index => $usuario)
+                    @if($index < 3) 
+                        <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between h-23 mb-2 p-3">
+                            <h3><span>{{ $index + 1 }}</span> &nbsp; &nbsp; 
+                            <span>{{ $usuario->nombre }} {{ $usuario->apellidos }}</span>
+                            &nbsp; &nbsp; 
+                            <span>{{ $usuario->puntos }} pts.</span></h3>
+                        </div>
+                    @endif
+                @endforeach
             </div>
 
-            <!-- Tabla -->
+            <!-- Tabla (Solo muestra a partir del puesto 4) -->
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Puntos</th>
-                    </tr>
-                </thead>
                 <tbody>
                     @foreach($usuarios as $index => $usuario)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
-                        <td>{{ $usuario->puntos }} puntos</td>
-                    </tr>
+                        @if($index >= 3) 
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
+                                <td>{{ $usuario->puntos }} puntos</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

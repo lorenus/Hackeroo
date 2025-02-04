@@ -524,17 +524,17 @@ form .libreta:focus {
 }
 .ranking-container .ranking-item.amarillo {
   background-color: #FFB300;
-  width: 90%;
+  width: 100%;
   border-radius: 0 0 15px 0;
 }
 .ranking-container .ranking-item.verde {
   background-color: #8CC34C;
-  width: 70%;
+  width: 85%;
   border-radius: 0 0 15px 0;
 }
 .ranking-container .ranking-item.azul {
   background-color: #06AAF4;
-  width: 50%;
+  width: 65%;
   border-radius: 0 0 15px 0;
 }
 

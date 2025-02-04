@@ -490,9 +490,9 @@ form {
       align-items: center;
 
       $color-width-list: (
-          (amarillo, $amarillo, 90%),
-          (verde, $verde, 70%),
-          (azul, $azul, 50%),
+          (amarillo, $amarillo, 100%),
+          (verde, $verde, 85%),
+          (azul, $azul, 65%),
       );
 
       // Iterar sobre la lista para aplicar colores y tamaños
