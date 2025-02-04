@@ -518,4 +518,36 @@ form .libreta:focus {
   min-height: 50vh;
 }
 
+fieldset {
+  border: 5px solid #FFB300;
+  border-radius: 25px; /* Esquinas redondeadas */
+  padding: 20px; /* Espacio interno */
+  margin: 20px 0; /* Margen exterior */
+  position: relative; /* Necesario para posicionar el legend */
+}
+
+legend {
+  font-family: "Lilita One";
+  width: auto; /* Fuente personalizada */
+  font-size: xx-large; /* Tamaño de fuente */
+  color: #455A64; /* Color del texto */
+  background-color: #FEFFEB;
+  padding: 0 10px; /* Espacio interno para el legend */
+  position: absolute; /* Posiciona el legend sobre el borde */
+  top: -27px; /* Ajusta la posición vertical */
+  left: 50%; /* Centra el legend horizontalmente */
+  transform: translateX(-50%); /* Ajusta el centrado */
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-family: "Itim", cursive;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 /*# sourceMappingURL=style.css.map */
