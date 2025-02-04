@@ -32,21 +32,27 @@ Route::middleware('auth')->get('/perfil', [PerfilController::class, 'index'])->n
 Route::get('/cursos/{id}', [CursoController::class, 'show'])->name('cursos.show');
 
 
-Route::get('/tareas/{curso_id}/crear', [TareaController::class, 'crear'])->name('tarea.test.create');
+Route::get('/tareas/{curso_id}/crear', [TareaController::class, 'crear'])->name('tarea.create');
 
 Route::post('/tareas/guardar', [TareaController::class, 'guardar'])->name('tarea.guardar');
 
-// Rutas para configurar un test
+// Rutas para  tests
 Route::get('/tareas/{curso_id}/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
-Route::post('/tareas/{curso_id}/guardar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.store');
+Route::post('/tareas/{curso_id}/guardar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.guardar');
+Route::get('/tareas/{curso_id}/editar-test/{tarea_id}', [TareaController::class, 'editarTest'])->name('tarea.test.edit');
+Route::post('/tareas/{curso_id}/guardar-editar-test/{tarea_id}', [TareaController::class, 'guardarEditarTest'])->name('tarea.test.update');
 
-// Rutas para subir un archivo
+// Rutas para  archivos
 Route::get('/tareas/{curso_id}/subir-archivo', [TareaController::class, 'crearArchivo'])->name('tarea.archivo.create');
-Route::post('/tareas/{curso_id}/guardar-archivo', [TareaController::class, 'guardarArchivo'])->name('tarea.archivo.store');
+Route::post('/tareas/{curso_id}/guardar-archivo', [TareaController::class, 'guardarArchivo'])->name('tarea.archivo.guardar');
+Route::get('/tareas/{curso_id}/editar-archivo/{tarea_id}', [TareaController::class, 'editarArchivo'])->name('tarea.archivo.edit');
+Route::post('/tareas/{curso_id}/guardar-editar-archivo/{tarea_id}', [TareaController::class, 'guardarEditarArchivo'])->name('tarea.archivo.update');
 
-// Rutas para agregar un link
+// Rutas para links
 Route::get('/tareas/{curso_id}/agregar-link', [TareaController::class, 'crearLink'])->name('tarea.link.create');
-Route::post('/tareas/{curso_id}/guardar-link', [TareaController::class, 'guardarLink'])->name('tarea.link.store');
+Route::post('/tareas/{curso_id}/guardar-link', [TareaController::class, 'guardarLink'])->name('tarea.link');
+Route::get('/tareas/{curso_id}/editar-link/{tarea_id}', [TareaController::class, 'editarLink'])->name('tarea.link.edit');
+Route::post('/tareas/{curso_id}/guardar-editar-link/{tarea_id}', [TareaController::class, 'guardarEditarLink'])->name('tarea.link.update');
 
 // Ruta para eliminar una tarea
 Route::delete('/tareas/{id}', [TareaController::class, 'eliminar'])->name('tarea.eliminar');

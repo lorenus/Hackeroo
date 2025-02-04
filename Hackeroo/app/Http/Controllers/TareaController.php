@@ -38,18 +38,18 @@ class TareaController extends Controller
         ]);
 
         if ($request->tipo === 'test') {
-            return redirect()->route('tarea.test.create', ['id' => $tarea->id]);
+            return redirect()->route('tarea.test.create', ['curso_id' => $request->curso_id]);
         } elseif ($request->tipo === 'archivo') {
-            return redirect()->route('tarea.archivo.create', ['id' => $tarea->id]);
+            return redirect()->route('tarea.archivo.create', ['curso_id' => $request->curso_id]);
         } else {
-            return redirect()->route('tarea.link.create', ['id' => $tarea->id]);
+            return redirect()->route('tarea.link.create', ['curso_id' => $request->curso_id]);
         }
     }
 
     public function crearTest($id)
     {
         $tarea = Tarea::findOrFail($id);
-        return view('tareas.configurar-test', compact('tarea'));
+        return view('tarea.configurar-test', compact('tarea'));
     }
 
     public function guardarTest(Request $request, $id)
@@ -99,13 +99,13 @@ class TareaController extends Controller
             'url' => $ruta,
         ]);
 
-        return redirect()->route('tarea.index')->with('success', 'Archivo subido correctamente');
+        return redirect()->route('tareas.index')->with('success', 'Archivo subido correctamente');
     }
 
     public function crearLink($id)
     {
         $tarea = Tarea::findOrFail($id);
-        return view('tareas.agregar-link', compact('tarea'));
+        return view('tareas.link', compact('tarea'));
     }
 
     public function guardarLink(Request $request, $id)

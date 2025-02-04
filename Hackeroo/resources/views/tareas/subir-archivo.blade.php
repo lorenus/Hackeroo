@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Subir Archivo</h1>
-    <form action="{{ route('tarea.archivo.guardar', ['id' => $tarea->id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('tarea.archivo.guardar', ['curso_id' => $curso->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="archivo">Selecciona un archivo</label>

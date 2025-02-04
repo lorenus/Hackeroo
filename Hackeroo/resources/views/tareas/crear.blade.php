@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="numero_preguntas">Número de Preguntas (solo para test)</label>
-            <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1" disabled>
+            <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1" >
         </div>
         <div class="form-group">
             <label for="titulo">Título</label>

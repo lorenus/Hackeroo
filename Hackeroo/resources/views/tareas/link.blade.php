@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Agregar Link</h1>
-    <form action="{{ route('tarea.link.guardar', ['id' => $tarea->id]) }}" method="POST">
+    <form action="{{ route('tarea.link.guardar', ['curso_id' => $tarea->curso_id]) }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="url">URL del Recurso</label>
