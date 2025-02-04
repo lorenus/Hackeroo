@@ -45,7 +45,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center d-none d-md-flex">
         <div class="col-12 col-md-6">
             <div class="div-enlace">
-                <a href="#">
+                <a href="{{ route('editar-perfil') }}">
                     <img src="/img/iconos/editar_perfil.png" alt="Enlace 3" class="img-fluid img-perfil">
                     <h4>Editar perfil</h4>
                 </a>
