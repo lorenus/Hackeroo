@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Pregunta;
-use App\Models\Respuesta;
+use App\Models\OpcionesRespuesta;
 use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
 {
+    public function index()
+    {
+        // Obtener las tareas de los cursos que el profesor imparte
+        $tareas = Tarea::whereHas('curso', function ($query) {
+            $query->where('profesor_dni', Auth::user()->DNI);
+        })->get();
+
+        return view('tareas.index', compact('tareas'));
+    }
+
     public function crearTest()
     {
         return view('tareas.configurar-test');
@@ -22,7 +32,7 @@ class TareaController extends Controller
             'curso_id' => 'required|exists:cursos,id',
             'preguntas' => 'required|array',
             'preguntas.*.enunciado' => 'required|string',
-            'preguntas.*.respuestas' => 'required|array|min:2', // Al menos 2 respuestas
+            'preguntas.*.opcionesespuestas' => 'required|array|min:2', // Al menos 2 respuestas
             'preguntas.*.respuesta_correcta' => 'required|string',
         ]);
 
@@ -41,15 +51,106 @@ class TareaController extends Controller
                 'tipo' => 'test',
             ]);
 
-            foreach ($preguntaData['respuestas'] as $respuestaTexto) {
-                Respuesta::create([
+            foreach ($preguntaData['opcionesespuestas'] as $opcionData) {
+                OpcionesRespuesta::create([
                     'pregunta_id' => $pregunta->id,
-                    'texto' => $respuestaTexto,
-                    'es_correcta' => $respuestaTexto === $preguntaData['respuesta_correcta'],
+                    'respuesta' => $opcionData['respuesta'],
+                    'es_correcta' => $opcionData['es_correcta'] == '1',
                 ]);
             }
         }
 
         return redirect()->route('tarea.test.create')->with('success', 'Test creado correctamente');
+    }
+
+
+
+    // Mostrar el formulario para editar un test
+    public function editarTest($id)
+    {
+        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($id);
+
+        return view('tareas.editar-test', compact('tarea'));
+    }
+
+    // Actualizar un test existente
+    public function actualizarTest(Request $request, $id)
+{
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'curso_id' => 'required|exists:cursos,id',
+        'preguntas' => 'required|array',
+        'preguntas.*.enunciado' => 'required|string',
+        'preguntas.*.opciones_respuestas' => 'required|array|min:2',
+        'preguntas.*.respuesta_correcta' => 'required|integer',
+    ]);
+
+    // Actualizar la tarea
+    $tarea = Tarea::findOrFail($id);
+    $tarea->update([
+        'titulo' => $request->titulo,
+        'descripcion' => $request->descripcion,
+        'curso_id' => $request->curso_id,
+    ]);
+
+    // Obtener las preguntas existentes
+    $preguntasExistentes = $tarea->preguntas;
+
+    // Actualizar las preguntas y sus opciones
+    foreach ($request->preguntas as $preguntaData) {
+        if (isset($preguntaData['id'])) {
+            // Si la pregunta ya existe, actualizarla
+            $pregunta = Pregunta::find($preguntaData['id']);
+            if ($pregunta) {
+                $pregunta->update([
+                    'enunciado' => $preguntaData['enunciado'],
+                ]);
+
+                // Actualizar las opciones de respuesta
+                foreach ($preguntaData['opciones_respuestas'] as $opcionData) {
+                    $opcion = OpcionesRespuesta::find($opcionData['id']);
+                    if ($opcion) {
+                        $opcion->update([
+                            'respuesta' => $opcionData['respuesta'],
+                            'es_correcta' => $opcionData['es_correcta'] == $preguntaData['respuesta_correcta'],
+                        ]);
+                    }
+                }
+            }
+        } else {
+            // Si la pregunta no existe, crearla
+            $pregunta = Pregunta::create([
+                'tarea_id' => $tarea->id,
+                'enunciado' => $preguntaData['enunciado'],
+                'tipo' => 'test',
+            ]);
+
+            foreach ($preguntaData['opciones_respuestas'] as $opcionData) {
+                OpcionesRespuesta::create([
+                    'pregunta_id' => $pregunta->id,
+                    'respuesta' => $opcionData['respuesta'],
+                    'es_correcta' => $opcionData['es_correcta'] == $preguntaData['respuesta_correcta'],
+                ]);
+            }
+        }
+    }
+
+    // Eliminar preguntas que ya no están en el formulario
+    $preguntasIds = collect($request->preguntas)->pluck('id')->filter();
+    $preguntasExistentes->whereNotIn('id', $preguntasIds)->each(function ($pregunta) {
+        $pregunta->opciones_respuestas()->delete();
+        $pregunta->delete();
+    });
+
+    return redirect()->route('tarea.test.index')->with('success', 'Test actualizado correctamente');
+}
+    // Eliminar un test
+    public function eliminarTest($id)
+    {
+        $tarea = Tarea::findOrFail($id);
+        $tarea->delete();
+
+        return redirect()->route('tarea.test.index')->with('success', 'Test eliminado correctamente');
     }
 }

@@ -1,5 +1,3 @@
-<!-- resources/views/profile/alumno.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +9,10 @@
         Esta es tu página de alumno. Desde aquí podrás ver tus cursos y más.
     </div>
 
-    <h2><a href="{{ route('cursos.index.alumno') }}"  class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
+    <!-- Enlace al ranking de alumnos -->
+    <h2><a href="{{ route('ranking') }}" class="btn btn-primary mt-3">Ver Ranking de Alumnos</a></h2>
+
+    <h2><a href="{{ route('cursos.index.alumno') }}" class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
 
     <!-- Enlace para editar la cuenta -->
     <a href="{{ route('profile.edit') }}" class="btn btn-secondary mt-3">Editar cuenta</a>

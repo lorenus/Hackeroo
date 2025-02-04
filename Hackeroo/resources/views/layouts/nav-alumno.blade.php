@@ -18,13 +18,13 @@
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('cursos.index.alumno') }}">Mis Cursos</a>
+                        <a class="nav-link" href="{{ route('cursos-alumno') }}">Mis Cursos</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('alumnos.ver') }}">Ranking</a>
+                        <a class="nav-link" href="{{ route('ranking') }}">Ranking</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>

@@ -15,4 +15,8 @@ class Pregunta extends Model
     {
         return $this->belongsTo(Tarea::class);
     }
+    public function opciones_respuestas()
+    {
+        return $this->hasMany(OpcionesRespuesta::class);
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('contraseña', 255);
             $table->enum('rol', ['alumno', 'profesor'])->default('alumno');
+            $table->integer('puntos')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
