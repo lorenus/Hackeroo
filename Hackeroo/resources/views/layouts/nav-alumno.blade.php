@@ -12,32 +12,32 @@
             <ul class="navbar-nav ms-auto custom-menu">
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('perfil') }}">Mi Perfil</a>
+                        <a class="nav-link" href="#">Mi Perfil</a>
                         <div class="subrayado1"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('cursos-alumno') }}">Mis Cursos</a>
+                        <a class="nav-link" href="#">Mis Cursos</a>
                         <div class="subrayado3"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('ranking') }}">Ranking</a>
+                        <a class="nav-link" href="#">Ranking</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <a class="nav-link" href="{{ route('profile.edit') }}">Editar Perfil</a>
+                        <a class="nav-link" href="#">Editar Perfil</a>
                         <div class="subrayado2"></div>
                     </div>
                 </li>
                 @if(Auth::check())
                 <li class="nav-item ms-4">
                     <div class="enlace-con-subrayado">
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="#">
                             @csrf
                             <div>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" class="nav-link" style="font-size: x-large;">
