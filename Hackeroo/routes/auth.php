@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TareaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 

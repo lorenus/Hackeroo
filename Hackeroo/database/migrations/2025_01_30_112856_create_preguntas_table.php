@@ -10,8 +10,7 @@ class CreatePreguntasTable extends Migration
         Schema::create('preguntas', function (Blueprint $table) {
             $table->id();
             $table->text('enunciado');
-            $table->enum('tipo', ['test', 'completar_palabras', 'codigo']);
-            $table->foreignId('tarea_id')->constrained('tareas')->onDelete('cascade');
+             $table->foreignId('tarea_id')->constrained('tareas')->onDelete('cascade');
             $table->timestamps();
         });
     }
