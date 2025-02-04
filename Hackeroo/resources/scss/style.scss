@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 .boton {
   @include boton;
 
-  >a {
+  >a, a.boton {
     font-family: $fuenteTitulos;
     margin-top: -7px;
     color: $amarillo_fondo;
@@ -35,6 +35,12 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+a.boton {
+  font-family: $fuenteTitulos;
+  margin-top: -7px;
+  color: $gris;
+  font-size: large;
+}
 h1{
  font-family:  $fuenteTitulos;
  font-size: 5rem;
@@ -512,4 +518,11 @@ form {
   max-height: 50px !important; 
   width: auto !important; 
   object-fit: contain !important;
+}
+
+
+
+//CURSOS
+.contenido-cursos{
+min-height: 50vh;
 }
