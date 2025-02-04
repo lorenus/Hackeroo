@@ -46,7 +46,7 @@ class CursoController extends Controller
         if (Auth::check() && Auth::user()->rol === 'profesor') {
             // Obtener todos los alumnos
             $alumnos = Usuario::where('rol', 'alumno')->get();
-            return view('cursos.create_step2', compact('alumnos')); // vista para seleccionar los alumnos
+            return view('cursos', compact('alumnos')); // vista para seleccionar los alumnos
         }
 
         // Si no es profesor, redirigir o abortar con un error 403
