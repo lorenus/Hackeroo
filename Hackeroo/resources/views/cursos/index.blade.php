@@ -31,12 +31,55 @@
             @if($cursos->isEmpty())
                 <p class="text-center">No tienes cursos creados aún.</p>
             @else
-                <table class="table">
+
+            <div class="container mw-75">
+    <div class="row">
+        @foreach($cursos as $curso)
+        <div class="curso-item col-md-5 md-ms-5 mb-3"> 
+            <div class="curso-item d-flex justify-content-between align-items-center p-3 border rounded">
+                <!-- Parte izquierda: Nombre del curso -->
+                <div class="curso-nombre">
+                    <h5>{{ $curso->nombre }}</h5>
+                    <p>{{$curso->descripcion}}</p>
+                </div>
+
+                <!-- Parte derecha: Acciones (editar y eliminar) -->
+                <div class="curso-acciones d-flex flex-column gap-2">
+                    <!-- Enlace de editar -->
+                    <div class="accion-editar">
+                        <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
+                            <img src="/img/iconos/editar.png" alt="">
+                        </a>
+                    </div>
+
+                    <!-- Enlace de eliminar -->
+                    <div class="accion-eliminar">
+                        <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm" onclick="return confirm('¿Estás seguro de eliminar este curso?')">
+                                <img src="/img/iconos/eliminar.png" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+
+
+
+
+
+                <!-- <table class="table">
                     <thead>
                         <tr>
                             <th>Nombre del Curso</th>
                             <th>Descripción</th>
-                            <th>Acciones</th> <!-- Columna para las acciones -->
+                            <th>Acciones</th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -45,10 +88,10 @@
                             <td>{{ $curso->nombre }}</td>
                             <td>{{ $curso->descripcion }}</td>
                             <td>
-                                <!-- Enlace de editar -->
+                                
                                 <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm btn-warning">Editar</a>
 
-                                <!-- Enlace de eliminar -->
+                                
                                 <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -58,7 +101,7 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> -->
             @endif
         </div>
     </div>

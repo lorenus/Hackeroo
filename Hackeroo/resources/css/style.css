@@ -560,4 +560,50 @@ tr {
   border-bottom: 3px solid #FFB300;
 }
 
+.cursos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre cada curso */
+}
+
+.curso-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.curso-nombre {
+  flex: 1; /* Ocupa el espacio restante */
+}
+
+.curso-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Espacio entre los botones */
+}
+
+.accion-editar, .accion-eliminar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.curso-item {
+  border: 5px solid #8CC34C;
+  border-radius: 20px;
+  max-width: 300px;
+}
+
+.curso-acciones {
+  border-left: 5px solid #8CC34C;
+}
+
 /*# sourceMappingURL=style.css.map */

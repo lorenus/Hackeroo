@@ -23,19 +23,10 @@
                     class="form-control block"
                     type="text" name="nombre" :value="old('nombre')" required />
             </div>
-            <!-- 
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre del Curso</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div> -->
+           
         <div class="mb-5 mt-3 text-md-start">
-
                 <x-input-label for="descripcion" :value="__('Descripción')" />
                 <x-text-area class="form-control" id="descripcion" name="descripcion"></x-text-area>
-                <!-- <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
-            </div> -->
         </div>
             <div class="col-12 mt-3 text-center mt-4">
             <x-primary-button type="submit" class="btn btn-primary">Continuar</x-primary-button>
