@@ -11,6 +11,7 @@
     </div>
     <h2 class="text-center">Ranking</h2>
     <!--<p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>-->
+    <!-- contenedor de imagen y ranking -->
     <div class="container-fluid d-flex flex-column flex-md-row p-3">
         <!-- Imagen -->
         <div class="col-12 col-md-6 d-flex justify-content-center text-center order-0 order-md-0">
