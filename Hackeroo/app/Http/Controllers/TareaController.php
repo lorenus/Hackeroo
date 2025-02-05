@@ -70,21 +70,21 @@ class TareaController extends Controller
     public function guardarTest(Request $request, $curso_id)
     {
         $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-    
+
         $request->validate([
             'preguntas' => 'required|array',
             'preguntas.*.enunciado' => 'required|string',
             'preguntas.*.opciones' => 'required|array|min:2',
             'preguntas.*.respuesta_correcta' => 'required|string',
         ]);
-    
+
         foreach ($request->preguntas as $preguntaData) {
             $pregunta = Pregunta::create([
                 'tarea_id' => $tarea->id,
                 'enunciado' => $preguntaData['enunciado'],
                 'tipo' => 'test',
             ]);
-    
+
             foreach ($preguntaData['opciones'] as $j => $opcionData) {
                 OpcionesRespuesta::create([
                     'pregunta_id' => $pregunta->id,
@@ -93,7 +93,7 @@ class TareaController extends Controller
                 ]);
             }
         }
-    
+
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Test creado correctamente');
     }
     public function eliminar($curso_id, $tarea_id)
@@ -103,65 +103,53 @@ class TareaController extends Controller
 
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
-    public function show($curso_id, $tarea_id)
+    public function mostrarTareas($curso_id)
     {
-        $curso = Curso::findOrFail($curso_id);
-        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+        $curso = Curso::with('tareas')->findOrFail($curso_id);
 
-
-        return view('tareas.show', compact('curso', 'tarea'));
+        return view('cursos.tareas', compact('curso'));
     }
-    public function responder(Request $request, $curso_id, $tarea_id)
+    public function verTarea($curso_id, $tarea_id)
     {
-        $validated = $request->validate([
-            'respuesta' => 'required|array', // Asegura que se envíe al menos una respuesta
-            'respuesta.*' => 'required|exists:opciones_respuestas,id',
-        ]);
-
         $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
-        $respuestas_usuario = $request->input('respuesta'); // Respuestas enviadas por el usuario
 
-        $resultados = []; // Guarda el resultado de cada pregunta
-        $aciertos = 0;
-        $errores = 0;
+        return view('tareas.ver', compact('tarea', 'curso_id'));
+    }
+    public function enviarRespuestas(Request $request, $curso_id, $tarea_id)
+    {
+        // Obtener la tarea y el curso
+        $curso = Curso::findOrFail($curso_id);
+        $tarea = Tarea::findOrFail($tarea_id);
 
+        // Inicializar un array para almacenar los resultados
+        $resultados = [];
+
+        // Evaluar cada pregunta
         foreach ($tarea->preguntas as $pregunta) {
-            if (isset($respuestas_usuario[$pregunta->id])) {
-                $opcion_seleccionada_id = $respuestas_usuario[$pregunta->id];
-                $opcion_seleccionada = OpcionesRespuesta::find($opcion_seleccionada_id);
-                $correcta = $pregunta->opciones_respuestas->where('es_correcta', true)->first();
+            // Verificar si se ha enviado una respuesta para esta pregunta
+            $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
 
-                $correcto = $opcion_seleccionada && $opcion_seleccionada->es_correcta;
-                $correcto ? $aciertos++ : $errores++;
+            // Si el usuario ha respondido
+            if ($respuesta_usuario) {
+                // Obtener la opción seleccionada por el alumno
+                $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
 
+                // Verificar si la opción seleccionada es correcta
+                // Aquí comparamos con el campo `es_correcta`
                 $resultados[] = [
                     'pregunta' => $pregunta->enunciado,
-                    'respuesta_usuario' => $opcion_seleccionada->respuesta ?? 'No respondida',
-                    'correcta' => $correcta->respuesta ?? 'No definida',
-                    'es_correcta' => $correcto
+                    'respuesta_usuario' => $opcion->respuesta,
+                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
+                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
                 ];
             }
         }
 
-        // Guardar resultados en sesión
-        session([
-            'resultados' => $resultados,
-            'aciertos' => $aciertos,
-            'errores' => $errores
-        ]);
+        // Calcular el puntaje (puedes hacerlo si quieres mostrar el puntaje total)
+        $aciertos = count(array_filter($resultados, fn($resultado) => $resultado['acertada']));
+        $total = count($tarea->preguntas);
 
-        return redirect()->route('tarea.resultados', ['curso_id' => $curso_id, 'tarea_id' => $tarea_id]);
+        // Pasar los resultados a la vista para mostrar al usuario
+        return view('tareas.resultado', compact('resultados', 'aciertos', 'total', 'curso', 'tarea'));
     }
-
-    public function mostrarResultados($curso_id, $tarea_id)
-{
-    $curso = Curso::findOrFail($curso_id);
-    $tarea = Tarea::findOrFail($tarea_id);
-    $resultados = session('resultados', []);
-    $aciertos = session('aciertos', 0);
-    $errores = session('errores', 0);
-
-    return view('tareas.resultados', compact('curso', 'tarea', 'resultados', 'aciertos', 'errores'));
-}
-
 }

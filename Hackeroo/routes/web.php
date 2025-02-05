@@ -90,6 +90,15 @@ require __DIR__.'/auth.php';
 
 Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
 
+Route::get('/curso/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('curso.tareas');
+
+Route::get('/curso/{curso_id}/tarea/{tarea_id}', [TareaController::class, 'verTarea'])->name('tarea.ver');
+
+Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class, 'enviarRespuestas'])->name('tarea.enviar');
+
+// Muestra las tareas de un curso específico para un alumno
+Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
+
 
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
     ->name('tarea.resultados');
