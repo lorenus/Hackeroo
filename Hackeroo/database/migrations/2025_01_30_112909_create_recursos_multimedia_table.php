@@ -12,6 +12,7 @@ class CreateRecursosMultimediaTable extends Migration
             $table->id();
             $table->string('tipo'); // Tipo de recurso (imagen, video, enlace)
             $table->string('url'); // URL del recurso
+            $table->foreignId('tarea_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
