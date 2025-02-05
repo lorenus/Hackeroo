@@ -31,24 +31,29 @@
                         @if(count($alumnos) > 0)
                         @foreach($alumnos as $index => $alumno)
                         <tr>
-                            <a href="{{ route('alumno.detalle', $alumno->id) }}"> 
-                                    <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
-                                    <td>{{ $alumno->curso }}</td>
-                            </a>
+                        <tr>
+                            <form action="{{ route('ver.alumno', $alumno->dni) }}" method="POST">
+                                @csrf <input type="hidden" name="dni" value="{{ $alumno->dni }}">
+                                <td onclick="this.parentNode.submit()" style="cursor: pointer;">
+                                    {{ $alumno->nombre }} {{ $alumno->apellidos }}
+                                </td>
+                                <td onclick="this.parentNode.submit()" style="cursor: pointer;">
+                                    {{ $alumno->curso }}
+                                </td>
+                            </form>
                         </tr>
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="2">No tienes alumnos asociados a tus cursos.</td> <--- Mensaje en una celda
-                                </tr>
-                                @endif
+                            <td colspan="2">No tienes alumnos asociados a tus cursos.</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
         </fieldset>
     </form>
 </div>
-
 </div> <!-- fin contenedor principal-->
 
 @endsection

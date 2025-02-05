@@ -100,6 +100,16 @@ class ProfileController extends Controller
         }
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
+
+    public function verAlumno(Request $request)
+    {
+        $dni = $request->input('dni'); // Obtiene el DNI del request
+
+        $alumno = Usuario::where('dni', $dni)->first();
+        // Pasar los datos del alumno a la vista
+        return view('ver.alumno', compact('alumno'));
+    }
+
     public function alumnoPage()
     {
         // Verificar si el usuario está autenticado y es un alumno
