@@ -36,6 +36,16 @@
                                     {{ $alumno->nombre }} {{ $alumno->apellidos }}
                                 </a>
                             </td>
+                            <td>
+                                <a href="{{ route('ver.alumno', $alumno->DNI) }}" style="text-decoration: none; color: inherit; display: block;">
+                                    0
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('ver.alumno', $alumno->DNI) }}" style="text-decoration: none; color: inherit; display: block;">
+                                    0
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                         @else
