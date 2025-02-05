@@ -32,15 +32,11 @@
                         @foreach($alumnos as $index => $alumno)
                         <tr>
                         <tr>
-                            <form action="{{ route('ver.alumno', $alumno->dni) }}" method="POST">
-                                @csrf <input type="hidden" name="dni" value="{{ $alumno->dni }}">
-                                <td onclick="this.parentNode.submit()" style="cursor: pointer;">
+                            <td>
+                                <a href="{{ route('ver.alumno', $alumno->DNI) }}" style="text-decoration: none; color: inherit; display: block;">
                                     {{ $alumno->nombre }} {{ $alumno->apellidos }}
-                                </td>
-                                <td onclick="this.parentNode.submit()" style="cursor: pointer;">
-                                    {{ $alumno->curso }}
-                                </td>
-                            </form>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                         @else
