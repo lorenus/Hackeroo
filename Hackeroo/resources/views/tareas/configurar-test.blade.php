@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <h1>Configurar Test</h1>
-    <form action="{{ route('tarea.test.guardar', ['id' => $tarea->id]) }}" method="POST">
+    <form action="{{ route('tarea.test.guardar', ['curso_id' => $tarea->curso_id]) }}" method="POST">
         @csrf
-        @for ($i = 1; $i <= $tarea->numero_preguntas; $i++)
+
+        @for ($i = 1; $i <= $numero_preguntas; $i++)
             <div class="form-group">
                 <label for="pregunta{{ $i }}">Pregunta {{ $i }}</label>
                 <input type="text" class="form-control" id="pregunta{{ $i }}" name="preguntas[{{ $i }}][enunciado]" required>

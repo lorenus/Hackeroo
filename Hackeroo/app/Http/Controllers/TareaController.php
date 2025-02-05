@@ -8,6 +8,7 @@ use App\Models\Curso;
 use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
 use App\Models\RecursoMultimedia;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class TareaController extends Controller
@@ -36,8 +37,10 @@ class TareaController extends Controller
             'curso_id' => $request->curso_id,
             'profesor_dni' => Auth::user()->DNI,
         ]);
+      
 
         if ($request->tipo === 'test') {
+            Session::put('numero_preguntas', $request->numero_preguntas);
             return redirect()->route('tarea.test.create', ['curso_id' => $request->curso_id]);
         } elseif ($request->tipo === 'archivo') {
             return redirect()->route('tarea.archivo.create', ['curso_id' => $request->curso_id]);
@@ -46,11 +49,14 @@ class TareaController extends Controller
         }
     }
 
-    // Mostrar formulario para configurar un test
     public function crearTest($curso_id)
     {
         $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-        return view('tareas.configurar-test', compact('tarea', 'curso_id'));
+       
+        // Obtener el número de preguntas de la sesión
+        $numero_preguntas = Session::get('numero_preguntas', 5); // Valor predeterminado si no existe
+    
+        return view('tareas.configurar-test', compact('tarea', 'curso_id', 'numero_preguntas'));
     }
 
     // Guardar un test
@@ -97,7 +103,7 @@ class TareaController extends Controller
         $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
 
         $request->validate([
-            'archivo' => 'required|file|mimes:pdf,doc,docx,ppt,pptx|max:2048', // 2MB máximo
+            'archivo' => 'required|file|mimes:pdf,doc,docx,ppt,pptx|max:10240', // 2MB máximo
         ]);
 
         $ruta = $request->file('archivo')->store('archivos', 'public');
