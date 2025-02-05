@@ -1,5 +1,3 @@
-<!-- resources/views/cursos/index_alumno.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -20,34 +18,30 @@
         </div>
     </div>
 
-
     <!-- Mensaje o contenido de los cursos -->
     <div class="row contenido-cursos">
         <div class="col-12">
             @if($cursos->isEmpty())
-            <p class="text-center">No estás inscrito en ningún curso.</p>
+                <p class="text-center">No estás inscrito en ningún curso.</p>
             @else
+                <div class="contenedor-cursos mw-md-60">
+                    <div class="row justify-content-center">
+                        @foreach($cursos as $curso)
+                            <div class="curso-item col-md-5 ms-md-5 mb-3">
+                                <!-- Enlace al curso -->
+                                <a href="{{ route('cursos.show.alumno', $curso->id) }}" class="text-decoration-none text-dark">
 
-            <div class="contenedor-cursos mw-md-60">
-                <div class="row justify-content-center">
-                    @foreach($cursos as $curso)
-                    <div class="curso-item col-md-5 ms-md-5 mb-3">
-
-                        <!-- Parte izquierda: Nombre del curso -->
-                        <div class="curso-nombre">
-                            <h5 class="text-center">{{ $curso->nombre }}</h5>
-                            <p>{{$curso->descripcion}}</p>
-                        </div>
-
-                        </div>
+                                    <div class="curso-nombre">
+                                        <h5 class="text-center">{{ $curso->nombre }}</h5>
+                                        <p>{{ $curso->descripcion }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
-
             @endif
         </div>
     </div>
 </div>
-
 @endsection

@@ -81,21 +81,21 @@ class CursoController extends Controller
     public function index()
     {
         // Verificar si el usuario está autenticado
-    if (!Auth::check()) {
-        return redirect()->route('login'); // Redirigir al login si no está autenticado
-    }
+        if (!Auth::check()) {
+            return redirect()->route('login'); // Redirigir al login si no está autenticado
+        }
 
-    // Verificar si el usuario es un profesor
-    if (Auth::user()->rol !== 'profesor') {
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
+        // Verificar si el usuario es un profesor
+        if (Auth::user()->rol !== 'profesor') {
+            return abort(403, 'No tienes permiso para acceder a esta página.');
+        }
 
-    // Obtener los cursos del profesor logueado
-    $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
+        // Obtener los cursos del profesor logueado
+        $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
 
 
-    // Retornar la vista con los cursos
-    return view('cursos.index', compact('cursos'));
+        // Retornar la vista con los cursos
+        return view('cursos', compact('cursos'));
     }
     public function indexForAlumnos()
     {
@@ -173,15 +173,24 @@ class CursoController extends Controller
     }
     public function show($id)
     {
-       
+
         $curso = Curso::with('tareas')->findOrFail($id);
-    
-      
+
+
         if ($curso->profesor_dni !== Auth::user()->DNI) {
             return abort(403, 'No tienes permiso para ver este curso.');
         }
-    
-       
+
+
         return view('cursos.show', compact('curso'));
+    }
+    public function showAlumno($id)
+    {
+        $curso = Curso::findOrFail($id);
+
+
+        $tareas = $curso->tareas; // Obtener las tareas del curso
+
+        return view('cursos.show_alumno', compact('curso', 'tareas'));
     }
 }

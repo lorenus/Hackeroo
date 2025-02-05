@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tarea;
+use App\Models\Curso;
 use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
 use App\Models\RecursoMultimedia;
@@ -141,5 +142,30 @@ class TareaController extends Controller
         $tarea->delete();
 
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
+    }
+    public function show($curso_id, $tarea_id)
+    {
+        $curso = Curso::findOrFail($curso_id);
+        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+
+
+        return view('tareas.show', compact('curso', 'tarea'));
+    }
+    public function responder(Request $request, $curso_id, $tarea_id)
+    {
+        // Validar las respuestas
+        $validated = $request->validate([
+            'respuesta.*' => 'required|exists:opciones_respuestas,id', // aseguramos que las respuestas sean válidas
+        ]);
+
+        // Procesar las respuestas
+        foreach ($request->respuesta as $pregunta_id => $opcion_id) {
+            $opcion = OpcionesRespuesta::findOrFail($opcion_id);
+
+            // Aquí puedes guardar la respuesta, verificar si es correcta, etc.
+        }
+
+        // Redirigir al usuario con un mensaje de éxito
+        return redirect()->route('tareas.show', ['curso_id' => $curso_id, 'tarea_id' => $tarea_id])->with('success', 'Respuestas enviadas correctamente.');
     }
 }

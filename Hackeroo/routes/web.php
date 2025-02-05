@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PaginasEstaticasController;
 use App\Http\Controllers\ProfileController;
@@ -13,11 +14,11 @@ use App\Http\Controllers\RankingController;
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
 
-Route::get('/', [PaginasEstaticasController::class, 'index'])->name('home'); 
-Route::get('/info', [PaginasEstaticasController::class, 'info'])->name('info'); 
-Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq'); 
+Route::get('/', [PaginasEstaticasController::class, 'index'])->name('home');
+Route::get('/info', [PaginasEstaticasController::class, 'info'])->name('info');
+Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq');
 
-Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto'); 
+Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,7 +50,6 @@ Route::middleware('auth')->group(function () {
     // Para alumnos
     Route::get('/cursos/alumno', [CursoController::class, 'indexForAlumnos'])->name('cursos-alumno'); //cursos del alumno
     Route::get('/cursos/{id}', [CursoController::class, 'show'])->name('cursos.show');
-
 });
 Route::get('cursos/create/step1', [CursoController::class, 'step1'])->name('cursos.create.step1'); //primer paso de crear el curso (pagina)
 Route::post('cursos/create/step1', [CursoController::class, 'storeStep1'])->name('cursos.store.step1'); //primer paso de crear el curso (post)
@@ -90,8 +90,14 @@ Route::post('/tareas/{curso_id}/guardar-link', [TareaController::class, 'guardar
 // Ruta para eliminar una tarea
 Route::delete('/tareas/{curso_id}/{tarea_id}', [TareaController::class, 'eliminar'])->name('tarea.eliminar');
 
+Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])
+    ->middleware('auth')
+    ->name('cursos.show.alumno');
 
-require __DIR__.'/auth.php';
+// Ruta para ver una tarea específica
+Route::get('/tareas/{curso_id}/{tarea_id}', [TareaController::class, 'show'])->name('tareas.show');
+
+Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
 
 
-
+require __DIR__ . '/auth.php';
