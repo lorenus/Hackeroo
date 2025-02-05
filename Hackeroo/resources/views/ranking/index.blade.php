@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-center">
+<div class="container text-center h-25">
     <h1>Ranking</h1>
     <p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>
     <div class="contenido container-fluid d-flex flex-column flex-md-row p-3">
@@ -26,7 +26,7 @@
                             <span>{{ $index + 1 }}</span> &nbsp; &nbsp;
                             <span>{{ $usuario->nombre }} {{ $usuario->apellidos }}</span>
                         </div>
-                        <div class="d-flex justify-content-end">{{ $usuario->puntos }} pts.</div>
+                        <div class="d-flex justify-content-end"><b>{{ $usuario->puntos }} pts.</b></div>
                     </h3>
             </div>
 
@@ -35,20 +35,22 @@
         </div>
 
         <!-- Tabla (Solo muestra a partir del puesto 4) -->
-        <table>
-            <tbody>
-                @foreach($usuarios as $index => $usuario)
-                @if($index >= 3)
-                <tr></tr>
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
-                    <td>{{ $usuario->puntos }} puntos</td>
-                </tr>
-                @endif
-                @endforeach
-            </tbody>
-        </table>
+        <div class="tabla-scroll-container">
+            <table>
+                <tbody>
+                    @foreach($usuarios as $index => $usuario)
+                    @if($index >= 3)
+                    <tr></tr>
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
+                        <td>{{ $usuario->puntos }} puntos</td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </div>
