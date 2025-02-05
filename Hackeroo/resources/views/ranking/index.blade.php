@@ -3,7 +3,7 @@
 @section('content')
 <div class="container text-center h-25">
     <h1>Ranking</h1>
-    <p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>
+    <!--<p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>-->
     <div class="contenido container-fluid d-flex flex-column flex-md-row p-3">
         <!-- Imagen -->
         <div class="col-12 col-md-6 d-flex justify-content-center text-center order-0 order-md-0">
