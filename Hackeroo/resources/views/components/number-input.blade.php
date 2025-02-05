@@ -25,7 +25,7 @@
             line-height: 1;
             margin-bottom: -3px;'
     ]) }}
-    @if ($min !== null) min="{{ $min }}" @endif  {{-- Conditionally add min --}}
-    @if ($max !== null) max="{{ $max }}" @endif  {{-- Conditionally add max --}}
-    @if ($step !== null) step="{{ $step }}" @endif  {{-- Conditionally add step --}}
+    @if ($min !== null) min="{{ $min }}" @endif  
+    @if ($max !== null) max="{{ $max }}" @endif 
+    @if ($step !== null) step="{{ $step }}" @endif 
 >

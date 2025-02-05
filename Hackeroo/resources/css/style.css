@@ -654,4 +654,45 @@ tr {
   border-radius: 0 0 15px 0;
 }
 
+/* Estilos para el contenedor del select */
+/* Estilos para el contenedor del select */
+.custom-select-container {
+  display: flex; /* Activa Flexbox */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 10px; /* Espacio entre los elementos */
+  border: 2px solid #000;
+  border-radius: 10px;
+  background-color: yellow;
+  padding: 8px 10px; /* Ajusta el padding */
+  position: relative;
+}
+
+/* Estilos para el label */
+.custom-select-container label {
+  margin: 0; /* Elimina el margen predeterminado */
+  font-family: "Itim";
+  font-size: 18px;
+  color: #455A64;
+}
+
+/* Estilos para el select */
+.custom-select-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background: transparent;
+  font-family: "Itim";
+  font-size: 18px;
+  color: #455A64;
+  outline: none;
+  cursor: pointer;
+  flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+/* Estilos para la flecha de despliegue */
+.custom-select-arrow {
+  pointer-events: none;
+}
+
 /*# sourceMappingURL=style.css.map */
