@@ -76,7 +76,7 @@ class CursoController extends Controller
         Session::forget('curso');
 
         // Redirigir con mensaje de éxito
-        return redirect()->route('cursos.index')->with('success', 'Curso creado correctamente.');
+        return redirect()->route('cursos')->with('success', 'Curso creado correctamente.');
     }
     public function index()
     {
