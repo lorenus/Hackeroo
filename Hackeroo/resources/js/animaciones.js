@@ -3,21 +3,20 @@ import "../css/style.css"; // Importa el archivo CSS
 console.log("El archivo animaciones.js se está ejecutando");
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Código para el navbar toggler
+    // Código para el navbar toggler (sin cambios)
     const toggler = document.querySelector(".navbar-toggler");
     const abrir = document.querySelector(".abrir");
     const cerrar = document.querySelector(".cerrar");
 
     if (toggler && abrir && cerrar) {
         toggler.addEventListener("click", function () {
-            const isExpanded =
-                toggler.getAttribute("aria-expanded") === "false";
+            const isExpanded = toggler.getAttribute("aria-expanded") === "false";
             abrir.style.display = isExpanded ? "block" : "none";
             cerrar.style.display = isExpanded ? "none" : "block";
         });
     }
 
-    // Código para el select personalizado
+    // Código para el select personalizado (sin cambios)
     const options = document.querySelectorAll(".option");
     const selector = document.querySelector(".selector");
     const customSelect = document.querySelector(".custom-select");
@@ -63,40 +62,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Mostrar campos según el tipo de tarea seleccionado
+    // Mostrar campos según el tipo de tarea seleccionado (CON CAMBIOS)
     const tipoSelect = document.getElementById('tipo');
-    if (tipoSelect) {
-        tipoSelect.addEventListener('change', function () {
-            var tipo = this.value;
-            var numeroPreguntasContainer = document.getElementById('numero_preguntas_container');
-            var archivoContainer = document.getElementById('archivo_container');
-            var linkContainer = document.getElementById('link_container');
+    const numeroPreguntasContainer = document.getElementById('numero_preguntas_container');
+    const archivoContainer = document.getElementById('archivo_container');
+    const linkContainer = document.getElementById('link_container');
+    const botonTexto = document.getElementById('boton_texto');
 
-            // Mostrar el campo para número de preguntas solo si es un test
-            if (tipo === 'test') {
-                numeroPreguntasContainer.style.display = 'flex'; // Usamos flex para mantener la alineación
-                archivoContainer.style.display = 'none';
-                linkContainer.style.display = 'none';
-            }
-            // Mostrar el campo para archivo solo si es archivo
-            else if (tipo === 'archivo') {
-                numeroPreguntasContainer.style.display = 'none';
-                archivoContainer.style.display = 'block';
-                linkContainer.style.display = 'none';
-            }
-            // Mostrar el campo para link solo si es link
-            else if (tipo === 'link') {
-                numeroPreguntasContainer.style.display = 'none';
-                archivoContainer.style.display = 'none';
-                linkContainer.style.display = 'block';
+    if (tipoSelect && numeroPreguntasContainer && archivoContainer && linkContainer) { // Verifica que todos los elementos existan
+        tipoSelect.addEventListener('change', function () {
+            const tipo = this.value; 
+
+            // Oculta todos los contenedores primero
+            numeroPreguntasContainer.style.display = 'none';
+            archivoContainer.style.display = 'none';
+            linkContainer.style.display = 'none';
+
+            // Luego muestra el contenedor correspondiente
+            switch (tipo) {
+                case 'test':
+                    numeroPreguntasContainer.style.display = 'flex';
+                    botonTexto.textContent = "Siguiente";
+                    break;
+                case 'archivo':
+                    archivoContainer.style.display = 'block';
+                    botonTexto.textContent = "Crear";
+                    break;
+                case 'link':
+                    linkContainer.style.display = 'block';
+                    botonTexto.textContent = "Crear";
+                    break;
             }
         });
 
-        // Disparar el evento 'change' al cargar la página para establecer el estado inicial
-        tipoSelect.dispatchEvent(new Event('change'));
+        // Disparar el evento 'change' al cargar la página (CON CAMBIOS)
+        tipoSelect.dispatchEvent(new Event('change')); // Usa 'change' en lugar de 'input'
+    } else {
+        console.error("Elementos para mostrar/ocultar campos no encontrados:", {
+            tipoSelect,
+            numeroPreguntasContainer,
+            archivoContainer,
+            linkContainer
+        });
     }
-
-    // Asegurarse de que si no se ingresa número de preguntas, se asigne 5
+   
+    // Asegurarse de que si no se ingresa número de preguntas, se asigne 5 (sin cambios)
     const form = document.querySelector('form');
     if (form) {
         form.addEventListener('submit', function (event) {
