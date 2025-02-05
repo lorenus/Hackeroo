@@ -15,37 +15,41 @@
             <!-- Ranking Superior -->
             <div class="ranking-container mb-4">
                 @php
-                    $colores = ['amarillo', 'verde', 'azul']; // Clases de colores
+                $colores = ['amarillo', 'verde', 'azul'];
                 @endphp
-                
+
                 @foreach($usuarios as $index => $usuario)
-                    @if($index < 3) 
-                        <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between h-23 mb-2 p-3">
-                            <h3><span>{{ $index + 1 }}</span> &nbsp; &nbsp; 
+                @if($index < 3)
+                    <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between align-items-center h-23 mb-2 p-3">
+                    <h3 class="d-flex w-100 justify-content-between">
+                        <div class="d-flex">
+                            <span>{{ $index + 1 }}</span> &nbsp; &nbsp;
                             <span>{{ $usuario->nombre }} {{ $usuario->apellidos }}</span>
-                            &nbsp; &nbsp; 
-                            <span>{{ $usuario->puntos }} pts.</span></h3>
                         </div>
-                    @endif
-                @endforeach
+                        <div class="d-flex justify-content-end">{{ $usuario->puntos }} pts.</div>
+                    </h3>
             </div>
 
-            <!-- Tabla (Solo muestra a partir del puesto 4) -->
-            <table>
-                <tbody>
-                    @foreach($usuarios as $index => $usuario)
-                        @if($index >= 3) 
-                        <tr></tr>
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
-                                <td>{{ $usuario->puntos }} puntos</td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
+            @endif
+            @endforeach
         </div>
+
+        <!-- Tabla (Solo muestra a partir del puesto 4) -->
+        <table>
+            <tbody>
+                @foreach($usuarios as $index => $usuario)
+                @if($index >= 3)
+                <tr></tr>
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
+                    <td>{{ $usuario->puntos }} puntos</td>
+                </tr>
+                @endif
+                @endforeach
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 @endsection
