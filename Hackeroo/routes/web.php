@@ -79,16 +79,9 @@ Route::post('/tareas/guardar', [TareaController::class, 'guardar'])->name('tarea
 Route::get('/tareas/{curso_id}/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
 Route::post('/tareas/{curso_id}/guardar-test', [TareaController::class, 'guardarTest'])->name('tarea.test.guardar');
 
-// Rutas para archivos
-Route::get('/tareas/{curso_id}/subir-archivo', [TareaController::class, 'crearArchivo'])->name('tarea.archivo.create');
-Route::post('/tareas/{curso_id}/guardar-archivo', [TareaController::class, 'guardarArchivo'])->name('tarea.archivo.guardar');
-
-// Rutas para links
-Route::get('/tareas/{curso_id}/agregar-link', [TareaController::class, 'crearLink'])->name('tarea.link.create');
-Route::post('/tareas/{curso_id}/guardar-link', [TareaController::class, 'guardarLink'])->name('tarea.link.guardar');
-
 // Ruta para eliminar una tarea
 Route::delete('/tareas/{curso_id}/{tarea_id}', [TareaController::class, 'eliminar'])->name('tarea.eliminar');
+
 
 
 require __DIR__.'/auth.php';

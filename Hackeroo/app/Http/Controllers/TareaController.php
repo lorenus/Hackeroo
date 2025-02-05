@@ -29,6 +29,7 @@ class TareaController extends Controller
             'numero_preguntas' => 'nullable|integer|min:1'
         ]);
 
+        // Crear la tarea
         $tarea = Tarea::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
@@ -36,111 +37,64 @@ class TareaController extends Controller
             'curso_id' => $request->curso_id,
             'profesor_dni' => Auth::user()->DNI,
         ]);
-      
 
+        // Si la tarea es de tipo 'test', redirigimos a la vista para configurar el test
         if ($request->tipo === 'test') {
-            Session::put('numero_preguntas', $request->numero_preguntas);
+            Session::put('numero_preguntas', $request->numero_preguntas ?? 5); // Si no se pasa, se asigna 5
             return redirect()->route('tarea.test.create', ['curso_id' => $request->curso_id]);
-        } elseif ($request->tipo === 'archivo') {
-            return redirect()->route('tarea.archivo.create', ['curso_id' => $request->curso_id]);
-        } else {
-            return redirect()->route('tarea.link.create', ['curso_id' => $request->curso_id]);
+        }
+
+        // Si la tarea es de tipo 'archivo' o 'link', creamos el recurso multimedia en la misma vista
+        if ($request->tipo === 'archivo' || $request->tipo === 'link') {
+            $recurso = RecursoMultimedia::create([
+                'tarea_id' => $tarea->id,
+                'tipo' => $request->tipo,
+                'url' => $request->url ?? $request->file('archivo')->store('archivos', 'public'), // 'url' si es link, 'archivo' si es archivo
+            ]);
+
+            return redirect()->route('cursos.show', ['id' => $request->curso_id])->with('success', ucfirst($request->tipo) . ' creado correctamente');
         }
     }
 
+    // Crear test - Vista para configurar el test
     public function crearTest($curso_id)
     {
         $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-       
+
         // Obtener el número de preguntas de la sesión
         $numero_preguntas = Session::get('numero_preguntas', 5); // Valor predeterminado si no existe
-    
+
         return view('tareas.configurar-test', compact('tarea', 'curso_id', 'numero_preguntas'));
     }
-
-    // Guardar un test
     public function guardarTest(Request $request, $curso_id)
     {
         $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-
+    
         $request->validate([
             'preguntas' => 'required|array',
             'preguntas.*.enunciado' => 'required|string',
             'preguntas.*.opciones' => 'required|array|min:2',
             'preguntas.*.respuesta_correcta' => 'required|string',
         ]);
-
+    
         foreach ($request->preguntas as $preguntaData) {
             $pregunta = Pregunta::create([
                 'tarea_id' => $tarea->id,
                 'enunciado' => $preguntaData['enunciado'],
                 'tipo' => 'test',
             ]);
-
-            foreach ($preguntaData['opciones'] as $opcionData) {
+    
+            foreach ($preguntaData['opciones'] as $j => $opcionData) {
                 OpcionesRespuesta::create([
                     'pregunta_id' => $pregunta->id,
                     'respuesta' => $opcionData['respuesta'],
-                    'es_correcta' => $opcionData['es_correcta'] == '1',
+                    'es_correcta' => ($j == $preguntaData['respuesta_correcta']), // Comparar con la respuesta correcta
                 ]);
             }
         }
-
+    
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Test creado correctamente');
     }
-
-    // Mostrar formulario para subir un archivo
-    public function crearArchivo($curso_id)
-    {
-        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-        return view('tareas.subir-archivo', compact('tarea', 'curso_id'));
-    }
-
-    // Guardar un archivo
-    public function guardarArchivo(Request $request, $curso_id)
-    {
-        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-
-        $request->validate([
-            'archivo' => 'required|file|mimes:pdf,doc,docx,ppt,pptx|max:10240', // 2MB máximo
-        ]);
-
-        $ruta = $request->file('archivo')->store('archivos', 'public');
-        RecursoMultimedia::create([
-            'tarea_id' => $tarea->id,
-            'tipo' => 'archivo',
-            'url' => $ruta,
-        ]);
-
-        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Archivo subido correctamente');
-    }
-
-    // Mostrar formulario para agregar un link
-    public function crearLink($curso_id)
-    {
-        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-        return view('tareas.link', compact('tarea', 'curso_id'));
-    }
-
-    // Guardar un link
-    public function guardarLink(Request $request, $curso_id)
-    {
-        $tarea = Tarea::where('curso_id', $curso_id)->firstOrFail();
-
-        $request->validate([
-            'url' => 'required|url',
-        ]);
-
-        RecursoMultimedia::create([
-            'tarea_id' => $tarea->id,
-            'tipo' => 'link',
-            'url' => $request->url,
-        ]);
-
-        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Link agregado correctamente');
-    }
-
-    // Eliminar una tarea
     public function eliminar($curso_id, $tarea_id)
     {
         $tarea = Tarea::where('id', $tarea_id)->where('curso_id', $curso_id)->firstOrFail();
@@ -148,4 +102,8 @@ class TareaController extends Controller
 
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
+
+
 }
+
+
