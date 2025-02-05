@@ -95,7 +95,7 @@ class CursoController extends Controller
 
 
         // Retornar la vista con los cursos
-        return view('cursos', compact('cursos'));
+        return view('cursos.index', compact('cursos'));
     }
     public function indexForAlumnos()
     {
