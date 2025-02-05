@@ -15,9 +15,8 @@
 
     <form action="#" method="POST">
         @csrf
-
-        <fieldset class="reset">
-            <legend class="reset">Mis Alumnos</legend>
+        <fieldset>
+            <legend>Mis Alumnos</legend>
             <div class="tabla-scroll-container">
                 <table>
                     <thead>
