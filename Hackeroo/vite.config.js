@@ -6,13 +6,19 @@ export default defineConfig({
         cors: true, // Habilita CORS
         host: 'localhost', // Usa localhost en lugar de [::1]
         port: 5173, // Puerto del servidor de desarrollo
-      },
+    },
     plugins: [
         laravel({
             input: [
                 'resources/css/style.css', 
-                'resources/js/animaciones.js'],
+                'resources/js/animaciones.js'
+            ],
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '~bootstrap': '/node_modules/bootstrap', // Alias para Bootstrap
+        }
+    },
 });
