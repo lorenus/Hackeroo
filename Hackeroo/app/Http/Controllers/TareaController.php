@@ -103,4 +103,65 @@ class TareaController extends Controller
 
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
+    public function show($curso_id, $tarea_id)
+    {
+        $curso = Curso::findOrFail($curso_id);
+        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+
+
+        return view('tareas.show', compact('curso', 'tarea'));
+    }
+    public function responder(Request $request, $curso_id, $tarea_id)
+    {
+        $validated = $request->validate([
+            'respuesta' => 'required|array', // Asegura que se envíe al menos una respuesta
+            'respuesta.*' => 'required|exists:opciones_respuestas,id',
+        ]);
+
+        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+        $respuestas_usuario = $request->input('respuesta'); // Respuestas enviadas por el usuario
+
+        $resultados = []; // Guarda el resultado de cada pregunta
+        $aciertos = 0;
+        $errores = 0;
+
+        foreach ($tarea->preguntas as $pregunta) {
+            if (isset($respuestas_usuario[$pregunta->id])) {
+                $opcion_seleccionada_id = $respuestas_usuario[$pregunta->id];
+                $opcion_seleccionada = OpcionesRespuesta::find($opcion_seleccionada_id);
+                $correcta = $pregunta->opciones_respuestas->where('es_correcta', true)->first();
+
+                $correcto = $opcion_seleccionada && $opcion_seleccionada->es_correcta;
+                $correcto ? $aciertos++ : $errores++;
+
+                $resultados[] = [
+                    'pregunta' => $pregunta->enunciado,
+                    'respuesta_usuario' => $opcion_seleccionada->respuesta ?? 'No respondida',
+                    'correcta' => $correcta->respuesta ?? 'No definida',
+                    'es_correcta' => $correcto
+                ];
+            }
+        }
+
+        // Guardar resultados en sesión
+        session([
+            'resultados' => $resultados,
+            'aciertos' => $aciertos,
+            'errores' => $errores
+        ]);
+
+        return redirect()->route('tarea.resultados', ['curso_id' => $curso_id, 'tarea_id' => $tarea_id]);
+    }
+
+    public function mostrarResultados($curso_id, $tarea_id)
+{
+    $curso = Curso::findOrFail($curso_id);
+    $tarea = Tarea::findOrFail($tarea_id);
+    $resultados = session('resultados', []);
+    $aciertos = session('aciertos', 0);
+    $errores = session('errores', 0);
+
+    return view('tareas.resultados', compact('curso', 'tarea', 'resultados', 'aciertos', 'errores'));
+}
+
 }

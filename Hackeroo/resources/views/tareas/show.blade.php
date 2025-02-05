@@ -21,21 +21,26 @@
     <div class="row">
         <div class="col-12">
             <h3 class="text-center">Preguntas</h3>
-            @foreach($tarea->preguntas as $pregunta)
-                <div class="mb-3">
-                    <p><strong>{{ $pregunta->enunciado }}</strong></p>
-                    <form action="{{ route('tarea.responder', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}" method="POST">
-                        @csrf
+            
+            <!-- Un solo formulario para todas las preguntas -->
+            <form action="{{ route('tarea.responder', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}" method="POST">
+                @csrf
+                
+                @foreach($tarea->preguntas as $pregunta)
+                    <div class="mb-3">
+                        <p><strong>{{ $pregunta->enunciado }}</strong></p>
+                        
                         @foreach($pregunta->opciones_respuestas as $opcion)
                             <div>
                                 <input type="radio" name="respuesta[{{ $pregunta->id }}]" value="{{ $opcion->id }}">
                                 <label>{{ $opcion->respuesta }}</label>
                             </div>
                         @endforeach
-                        <button type="submit" class="btn btn-primary mt-2">Responder</button>
-                    </form>
-                </div>
-            @endforeach
+                    </div>
+                @endforeach
+
+                <button type="submit" class="btn btn-primary mt-3">Enviar Respuestas</button>
+            </form>
         </div>
     </div>
 </div>

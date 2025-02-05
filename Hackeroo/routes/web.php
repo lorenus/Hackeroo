@@ -91,4 +91,7 @@ require __DIR__.'/auth.php';
 Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
 
 
+Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
+    ->name('tarea.resultados');
+
 
