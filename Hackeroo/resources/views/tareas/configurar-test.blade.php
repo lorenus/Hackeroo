@@ -9,16 +9,20 @@
         @for ($i = 1; $i <= $numero_preguntas; $i++)
             <div class="form-group">
                 <label for="pregunta{{ $i }}">Pregunta {{ $i }}</label>
-                <input type="text" class="form-control" id="pregunta{{ $i }}" name="preguntas[{{ $i }}][enunciado]" required>
+                <input type="text" class="form-control form-control-sm" id="pregunta{{ $i }}" name="preguntas[{{ $i }}][enunciado]" required>
+                
                 @for ($j = 1; $j <= 4; $j++)
-                    <div class="form-group">
-                        <label for="opcion{{ $i }}{{ $j }}">Opción {{ $j }}</label>
-                        <input type="text" class="form-control" id="opcion{{ $i }}{{ $j }}" name="preguntas[{{ $i }}][opciones][{{ $j }}][respuesta]" required>
-                        <input type="radio" name="preguntas[{{ $i }}][respuesta_correcta]" value="{{ $j }}" required> Correcta
+                    <div class="form-group d-flex align-items-center mb-2">
+                        <input type="text" class="form-control form-control-sm me-2" id="opcion{{ $i }}{{ $j }}" name="preguntas[{{ $i }}][opciones][{{ $j }}][respuesta]" required>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="preguntas[{{ $i }}][respuesta_correcta]" value="{{ $j }}" required>
+                            <label class="form-check-label" for="opcion{{ $i }}{{ $j }}">Correcta</label>
+                        </div>
                     </div>
                 @endfor
             </div>
         @endfor
+
         <button type="submit" class="btn btn-primary">Guardar Test</button>
     </form>
 </div>
