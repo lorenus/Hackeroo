@@ -81,15 +81,15 @@
                 <form action="" class=" mt-4">
                     <div class="mb-3 text-start">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-lineas" name="nombre" id="nombre" />
+                        <x-text-input type="text" class="form-lineas" name="nombre" id="nombre" />
                     </div>
                     <div class="mb-3 text-start">
                         <label for="mail" class="form-label">Mail:</label>
-                        <input type="email" class="form-lineas" name="mail" id="mail" />
+                        <x-text-input type="email" class="form-lineas" name="mail" id="mail" />
                     </div>
                     <div class="mb-3 text-start">
                         <label for="mensaje" class="form-label">Mensaje:</label>
-                        <textarea class="libreta" name="mensaje" id="mensaje" rows="4"></textarea>
+                        <x-text-area class="libreta" name="mensaje" id="mensaje" rows="4"></x-text-area>
                     </div>
                     <x-primary-button type="submit" class="boton">Enviar </x-primary-button>
                 </form>
