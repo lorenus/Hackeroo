@@ -1,13 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-center h-25">
-    <h1>Ranking</h1>
+<div class="container">
+<div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('perfil') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
+    </div>
+    <h2 class="text-center">Ranking</h2>
     <!--<p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>-->
-    <div class="contenido container-fluid d-flex flex-column flex-md-row p-3">
+    <div class="container-fluid d-flex flex-column flex-md-row p-3">
         <!-- Imagen -->
         <div class="col-12 col-md-6 d-flex justify-content-center text-center order-0 order-md-0">
-            <img src="/img/imagenes/ranking.png" alt="Imagen" class="img-fluid">
+            <img src="/img/imagenes/ranking.png" alt="Imagen" class="img-fluid img-responsive" >
         </div>
 
         <!-- Contenedor de ranking y tabla -->
@@ -20,14 +27,14 @@
 
                 @foreach($usuarios as $index => $usuario)
                 @if($index < 3)
-                    <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between align-items-center h-23 mb-2 p-3">
-                    <h3 class="d-flex w-100 justify-content-between">
-                        <div class="d-flex">
+                    <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between align-items-center mb-2 p-2">
+                    <h4 class="d-flex w-100 justify-content-between">
+                        <div class="d-flex" >
                             <span>{{ $index + 1 }}</span> &nbsp; &nbsp;
                             <span>{{ $usuario->nombre }} {{ $usuario->apellidos }}</span>
                         </div>
-                        <div class="d-flex justify-content-end"><b>{{ $usuario->puntos }} pts.</b></div>
-                    </h3>
+                        <div class="d-flex justify-content-end">{{ $usuario->puntos }} pts.</div>
+                    </h4>
             </div>
 
             @endif
