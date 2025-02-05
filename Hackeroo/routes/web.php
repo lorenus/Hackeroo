@@ -94,4 +94,7 @@ Route::delete('/tareas/{curso_id}/{tarea_id}', [TareaController::class, 'elimina
 require __DIR__.'/auth.php';
 
 
+Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
+    ->name('tarea.resultados');
+
 
