@@ -18,7 +18,6 @@
         method="POST">
         @csrf
 
-
         @for ($i = 1; $i <= $numero_preguntas; $i++) <div class="form-group mb-5">
             <h4>Pregunta {{ $i}}</h4>
             <div class="form-group d-flex align-items-center mb-2">
@@ -47,6 +46,7 @@
 </div>
 
 
+</form>
 </form>
 </div>
 </div>
