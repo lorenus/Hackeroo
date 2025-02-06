@@ -27,7 +27,7 @@ p, h1, h2, h3, h4, h5, h6, span, input[type="text"], textarea, .text-cursor {
 }
 
 /* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor, .boton, .btn {
+a, button, .hand-cursor, .boton, .btn, input[type="checkbox"]{
     cursor: url('/img/cursors/pointer.cur'), auto !important;
 }
 
@@ -365,7 +365,6 @@ form {
     // Estilo común para los elementos con fondo y texto
     .form-lineas,
     .libreta {
-        color: $fuenteTexto;
         display: block;
         width: 100%;
         font-family: $fuenteTexto;
@@ -594,15 +593,15 @@ td {
     word-wrap: break-word;
 }
 
-td{
-    font-family: $fuenteTexto;
-}
-
 tr {
     border-bottom: 3px solid $amarillo;
-    /* Color de borde */
 }
-
+.tabla-con-fuente .texto-tabla {
+    font-family: $fuenteTexto;
+}
+tr.texto-tabla {
+    font-family: $fuenteTexto;
+}
 .cursos-container {
     display: flex;
     flex-direction: column;

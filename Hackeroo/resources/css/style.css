@@ -25,7 +25,7 @@ p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
 }
 
 /* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor, .boton, .btn {
+a, button, .hand-cursor, .boton, .btn, input[type=checkbox] {
   cursor: url("/img/cursors/pointer.cur"), auto !important;
 }
 
@@ -399,7 +399,6 @@ form {
 }
 form .form-lineas,
 form .libreta {
-  color: "Itim";
   display: block;
   width: 100%;
   font-family: "Itim";
@@ -609,13 +608,16 @@ td {
   word-wrap: break-word;
 }
 
-td {
+tr {
+  border-bottom: 3px solid #FFB300;
+}
+
+.tabla-con-fuente .texto-tabla {
   font-family: "Itim";
 }
 
-tr {
-  border-bottom: 3px solid #FFB300;
-  /* Color de borde */
+tr.texto-tabla {
+  font-family: "Itim";
 }
 
 .cursos-container {

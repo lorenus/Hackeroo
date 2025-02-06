@@ -14,15 +14,15 @@
     <div class="d-flex justify-content-center">
         <fieldset class="reset">
             <legend class="reset">Nuevo curso</legend>
-            <div class="mb-5 mt-3 text-md-start">
+            <div class="mb-5 mt-3 text-center">
                 <h6>Selecciona los alumnos que quieras añadir</h6>
 
                 <div class="mb-5 mt-3 text-md-start">
                     <div class="mb-3">
                         <form action="{{ route('cursos.store.step2') }}" method="POST">
                             @csrf
-                            <div class="tabla-scroll-container"> <!-- Contenedor para el scroll -->
-                                <table> <!-- Eliminamos la clase .tabla-scroll -->
+                            <div class="tabla-scroll-container"> 
+                                <table class="tabla-con-fuente"> 
                                     <thead>
                                         <tr>
                                             <td></td>
@@ -32,7 +32,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($alumnos as $alumno)
-                                        <tr>
+                                        <tr class="texto-tabla">
                                             <td>
                                                 <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
                                             </td>
