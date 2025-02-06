@@ -51,8 +51,10 @@
 
         <!-- Campo para el archivo (solo visible si el tipo es 'archivo') -->
         <div class="form-group" id="archivo_container" style="display: none;">
-            <label for="archivo">Selecciona un Archivo</label>
-            <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx">
+        <x-file-input class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx" label="Selecciona un archivo:" />
+
+            <!-- <label for="archivo">Selecciona un Archivo</label>
+            <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx"> -->
         </div>
 
         <!-- Campo para el enlace (solo visible si el tipo es 'link') -->
