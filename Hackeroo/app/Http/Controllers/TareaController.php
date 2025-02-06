@@ -10,6 +10,8 @@ use App\Models\OpcionesRespuesta;
 use App\Models\RecursoMultimedia;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class TareaController extends Controller
 {
@@ -111,45 +113,63 @@ class TareaController extends Controller
     }
     public function verTarea($curso_id, $tarea_id)
     {
-        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+        $tarea = Tarea::findOrFail($tarea_id);
 
-        return view('tareas.ver', compact('tarea', 'curso_id'));
+        switch ($tarea->tipo) {
+            case 'test':
+                return view('tareas.ver', compact('tarea', 'curso_id'));
+            case 'archivo':
+                $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
+                return view('tareas.ver-archivo', compact('tarea', 'curso_id', 'recurso'));
+            case 'link':
+                $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
+                return redirect()->away($recurso->url);
+            default:
+                return redirect()->route('cursos.show', $curso_id)->with('error', 'Tipo de tarea desconocido');
+        }
     }
+
     public function enviarRespuestas(Request $request, $curso_id, $tarea_id)
     {
         // Obtener la tarea y el curso
         $curso = Curso::findOrFail($curso_id);
-        $tarea = Tarea::findOrFail($tarea_id);
+        $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
+        $usuario = Auth::user(); // Obtener el usuario autenticado
 
         // Inicializar un array para almacenar los resultados
         $resultados = [];
 
-        // Evaluar cada pregunta
         foreach ($tarea->preguntas as $pregunta) {
-            // Verificar si se ha enviado una respuesta para esta pregunta
+            // Verificar si el usuario ha respondido esta pregunta
             $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
 
-            // Si el usuario ha respondido
             if ($respuesta_usuario) {
-                // Obtener la opción seleccionada por el alumno
+                // Obtener la opción seleccionada
                 $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
 
-                // Verificar si la opción seleccionada es correcta
-                // Aquí comparamos con el campo `es_correcta`
+                // Guardar la respuesta en la base de datos
+                DB::table('respuestas_alumnos')->insert([
+                    'pregunta_id' => $pregunta->id,
+                    'usuario_dni' => $usuario->DNI,
+                    'opcion_respuesta_id' => $opcion->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+                // Evaluar si la respuesta es correcta
                 $resultados[] = [
                     'pregunta' => $pregunta->enunciado,
                     'respuesta_usuario' => $opcion->respuesta,
-                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
-                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
+                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',
+                    'acertada' => $opcion->es_correcta
                 ];
             }
         }
 
-        // Calcular el puntaje (puedes hacerlo si quieres mostrar el puntaje total)
+        // Calcular el puntaje
         $aciertos = count(array_filter($resultados, fn($resultado) => $resultado['acertada']));
         $total = count($tarea->preguntas);
 
-        // Pasar los resultados a la vista para mostrar al usuario
         return view('tareas.resultado', compact('resultados', 'aciertos', 'total', 'curso', 'tarea'));
     }
 }
