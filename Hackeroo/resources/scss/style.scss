@@ -671,6 +671,11 @@ tr {
     padding-left: 7vh;
 }
 
-#tabla-scroll-container-tarea{
-    height: 40vh;;
+.tabla-scroll-container-tarea{
+    height: 39vh;;
 }
+
+.form-check-input:checked {
+    background-color: $azul; /* Cambiar el color de fondo del círculo cuando está seleccionado */
+     /* Cambiar el color del borde del círculo cuando está seleccionado */
+  }

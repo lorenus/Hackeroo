@@ -19,18 +19,20 @@
                         <!-- <p>{{ $tarea->descripcion }}</p> -->
                     </div>
             </legend>
-            <div class="tabla-scroll-container" id="tabla-scroll-container-tarea">
+            <div class="tabla-scroll-container tabla-scroll-container-tarea">
                 <table class="ver-tareas-alumnos">
                     @foreach($tarea->preguntas as $pregunta)
                     <tr>
                         <td>
                             <div class="pregunta">
 
-                                <h5>{{ $pregunta->enunciado }}</h5>
+                                <h5>{{ $loop->iteration }}. {{ $pregunta->enunciado }}</h5>
 
                                 @foreach($pregunta->opciones_respuestas as $opcion)
                                 <div class="align-items-start text-left">
+                                    
                                     <input type="radio" class="form-check-input" name="pregunta[{{ $pregunta->id }}]" value="{{ $opcion->id }}" id="opcion_{{ $opcion->id }}">
+                                    &nbsp;&nbsp;
                                     <label class="form-check-label" for="opcion_{{ $opcion->id }}">{{ $opcion->respuesta }}</label>
                                 </div>
 
