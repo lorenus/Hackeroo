@@ -100,6 +100,13 @@ class ProfileController extends Controller
         }
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
+
+    public function verAlumno($dni)
+    {
+        $alumno = Usuario::where('dni', $dni)->firstOrFail();
+        return view('profile.alumno', compact('alumno'));
+    }
+
     public function alumnoPage()
     {
         // Verificar si el usuario está autenticado y es un alumno
@@ -123,17 +130,16 @@ class ProfileController extends Controller
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
     public function verCursos()
-{
-    // Verificar si el usuario está autenticado y es un alumno
-    if (Auth::check() && Auth::user()->rol === 'alumno') {
-        // Obtener los cursos asociados al alumno logueado
-        $cursos = Auth::user()->cursos;  // Esto es posible gracias a la relación definida en el modelo Usuario
+    {
+        // Verificar si el usuario está autenticado y es un alumno
+        if (Auth::check() && Auth::user()->rol === 'alumno') {
+            // Obtener los cursos asociados al alumno logueado
+            $cursos = Auth::user()->cursos;  // Esto es posible gracias a la relación definida en el modelo Usuario
 
-        return view('profile.alumno_cursos', compact('cursos')); // Pasamos los cursos a la vista
+            return view('profile.alumno_cursos', compact('cursos')); // Pasamos los cursos a la vista
+        }
+
+        // Si no es alumno, redirigir o abortar con un error 403
+        return abort(403, 'No tienes permiso para acceder a esta página.');
     }
-
-    // Si no es alumno, redirigir o abortar con un error 403
-    return abort(403, 'No tienes permiso para acceder a esta página.');
-}
-
 }

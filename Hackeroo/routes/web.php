@@ -62,7 +62,7 @@ Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->mid
 
 // ALUMNOS PROFESOR
 Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos'); //listado de alumnos del profesor
-
+Route::get('/alumnos/{dni}', [ProfileController::class, 'verAlumno'])->name('ver.alumno'); //alumno seleccionado de la lista de alumnos del profesor
 
 //ALUMNO
 Route::get('/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos'); //cursos del ALUMNO
@@ -89,6 +89,15 @@ Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])
 require __DIR__.'/auth.php';
 
 Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
+
+Route::get('/curso/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('curso.tareas');
+
+Route::get('/curso/{curso_id}/tarea/{tarea_id}', [TareaController::class, 'verTarea'])->name('tarea.ver');
+
+Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class, 'enviarRespuestas'])->name('tarea.enviar');
+
+// Muestra las tareas de un curso específico para un alumno
+Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
 
 
 
