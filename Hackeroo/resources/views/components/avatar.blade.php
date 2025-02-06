@@ -1,24 +1,19 @@
 @props([
-    'src' => null,
+    'src' =>'',
     'alt' => '',
     'width' => null,
     'height' => null,
-    'class' => '',
-    'style' => '',
+    'class' => '', 
 ])
-
 <img
     src="{{ $src }}"
     alt="{{ $alt }}"
-    class="img-fluid {{ $class }}"
+    class="img-fluid {{ $class }} @if ($width) w-{{ $width }} @endif @if ($height) h-{{ $height }} @endif"
     style="
-        @if ($width) width: {{ $width }}; @endif
-        @if ($height) height: {{ $height }}; @endif
-        max-width: 100px; 
-        border: 3px solid #455A64; 
-        border-radius: 20px; 
+        max-width: 100px;
+        border: 3px solid #455A64;
+        border-radius: 20px;
         object-fit: cover;
-        {{ $style }}
     "
     {{ $attributes }}
 />
