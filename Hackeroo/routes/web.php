@@ -62,7 +62,7 @@ Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->mid
 
 // ALUMNOS PROFESOR
 Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos'); //listado de alumnos del profesor
-
+Route::get('/alumnos/{dni}', [ProfileController::class, 'verAlumno'])->name('ver.alumno'); //alumno seleccionado de la lista de alumnos del profesor
 
 //ALUMNO
 Route::get('/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos'); //cursos del ALUMNO
