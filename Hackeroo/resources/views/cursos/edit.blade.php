@@ -53,7 +53,8 @@
                         @foreach($alumnos as $alumno)
                         <tr>
                             <td>
-                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
+                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}"
+                                {{ $cursos_alumnos->contains($alumno->DNI) ? 'checked' : '' }}>
                             </td>
                             <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
                             <td>{{ $alumno->DNI }}</td>

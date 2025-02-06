@@ -31,10 +31,11 @@ class TareaController extends Controller
             'descripcion' => 'required|string',
             'curso_id' => 'required|exists:cursos,id',
             'tipo' => 'required|in:test,archivo,link',
-            'numero_preguntas' => 'nullable|integer|min:1'
+            'numero_preguntas' => 'nullable|integer|min:1',
+            'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Validación para archivos
+            'url' => 'nullable|url', // Validación para URLs (solo si tipo es 'link')
         ]);
-
-
+    
         // Crear la tarea
         $tarea = Tarea::create([
             'titulo' => $request->titulo,
@@ -43,26 +44,38 @@ class TareaController extends Controller
             'curso_id' => $request->curso_id,
             'profesor_dni' => Auth::user()->DNI,
         ]);
-
-
+    
         // Si la tarea es de tipo 'test', redirigimos a la vista para configurar el test
         if ($request->tipo === 'test') {
             Session::put('numero_preguntas', $request->numero_preguntas ?? 5); // Si no se pasa, se asigna 5
-
-
+    
             // Redirigir incluyendo el ID de la tarea recién creada
             return redirect()->route('tarea.test.create', ['curso_id' => $request->curso_id, 'tarea_id' => $tarea->id]);
         }
-
-
+    
         // Si la tarea es de tipo 'archivo' o 'link', creamos el recurso multimedia en la misma vista
         if ($request->tipo === 'archivo' || $request->tipo === 'link') {
+            // Determinar la URL o almacenar el archivo según el tipo
+            $url = null;
+    
+            if ($request->tipo === 'archivo') {
+                // Usar storeAs para mantener el nombre original del archivo
+                $nombreArchivo = $request->file('archivo')->getClientOriginalName();
+                $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
+            } elseif ($request->tipo === 'link') {
+                $url = $request->url;
+            }
+    
+            // Crear el recurso multimedia
             $recurso = RecursoMultimedia::create([
                 'tarea_id' => $tarea->id,
                 'tipo' => $request->tipo,
-                'url' => $request->url ?? $request->file('archivo')->store('archivos', 'public'), // 'url' si es link, 'archivo' si es archivo
+                'url' => $url,
             ]);
-            return redirect()->route('cursos.show', ['id' => $request->curso_id])->with('success', ucfirst($request->tipo) . ' creado correctamente');
+    
+            // Redirigir al curso con mensaje de éxito
+            return redirect()->route('cursos.show', ['id' => $request->curso_id])
+                ->with('success', ucfirst($request->tipo) . ' creado correctamente');
         }
     }
 
