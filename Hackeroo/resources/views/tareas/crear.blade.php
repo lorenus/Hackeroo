@@ -20,7 +20,7 @@
             <div class="form-group col-5">
                 <div class=" d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
                     <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
-                    <select class="form-select custom-select border-0" id="tipo" name="tipo" required>
+                    <select class="form-select custom-select border-0 text-center" id="tipo" name="tipo" required>
                         <option value="test">Test</option>
                         <option value="archivo">Archivo</option>
                         <option value="link">Link</option>
