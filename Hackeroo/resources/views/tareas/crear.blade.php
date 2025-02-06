@@ -36,13 +36,13 @@
         <!-- Campo para el título de la tarea -->
         <div class="form-group mb-3">
             <label for="titulo">Título</label>
-            <x-text-input class="form-control" id="titulo" name="titulo" required/>
+            <x-text-input class="form-control" id="titulo" name="titulo" required />
         </div>
 
         <!-- Campo para la descripción de la tarea -->
         <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <x-text-area class="form-control" id="descripcion" name="descripcion" rows="3" required/>
+            <x-text-area class="form-control" id="descripcion" name="descripcion" rows="3" required />
         </div>
 
         <!-- Campo para el archivo (solo visible si el tipo es 'archivo') -->
@@ -56,9 +56,10 @@
             <label for="url">Enlace</label>
             <input type="url" class="form-control" id="url" name="url" placeholder="http://">
         </div>
-
-        <input type="hidden" name="curso_id" value="{{ $curso_id }}">
-        <button type="submit" class="btn btn-primary">Siguiente</button>
+        <div class="col-12 mt-3 text-center mt-4">
+            <input type="hidden" name="curso_id" value="{{ $curso_id }}">
+            <x-primary-button type="submit" class="btn btn-primary">Continuar</x-primary-button>
+        </div>
     </form>
 </div>
 @endsection
