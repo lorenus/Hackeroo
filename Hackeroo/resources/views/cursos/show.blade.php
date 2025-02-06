@@ -11,11 +11,9 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-12 text-center">
-            <h2>{{ $curso->nombre }}</h2>
-        </div>
-    </div>
+
+            <h2 class='text-center'>{{ $curso->nombre }}</h2>
+ 
 
     <div class="row mb-3">
         <div class="col-12 text-center">
