@@ -13,9 +13,9 @@
         </div>
     </div>
 
-    <form action="#" method="POST">
+    <form action="#" method="POST" class='d-flex justify-content-center align-items-center'>
         @csrf
-        <fieldset>
+        <fieldset class=''>
             <legend>Mis Alumnos</legend>
             <div class="tabla-scroll-container">
                 <table>
