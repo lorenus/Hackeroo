@@ -165,7 +165,7 @@ class CursoController extends Controller
             $curso->delete();
 
             // Redirigir con mensaje de éxito
-            return redirect()->route('cursos.index')->with('success', 'Curso eliminado correctamente.');
+            return redirect()->route('cursos')->with('success', 'Curso eliminado correctamente.');
         }
 
         // Si no es el profesor del curso, redirigir o abortar con un error 403

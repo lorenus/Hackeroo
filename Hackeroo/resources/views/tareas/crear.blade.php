@@ -28,10 +28,11 @@
                 </div>
             </div>
 
-            <div class="form-group col-5" id="numero_preguntas_container" >
+            <div class="form-group col-5" id="numero_preguntas_container">
                 <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
                     <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
-                    <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1' max='25' value='1' />
+                    <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1' max='25'
+                        value='1' />
                 </div>
             </div>
         </div>
@@ -51,7 +52,8 @@
 
         <!-- Campo para el archivo (solo visible si el tipo es 'archivo') -->
         <div class="form-group" id="archivo_container" style="display: none;">
-        <x-file-input class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx" label="Selecciona un archivo:" />
+            <x-file-input class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx"
+                label="Selecciona un archivo:" />
 
             <!-- <label for="archivo">Selecciona un Archivo</label>
             <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx"> -->
@@ -60,7 +62,7 @@
         <!-- Campo para el enlace (solo visible si el tipo es 'link') -->
         <div class="form-group" id="link_container" style="display: none;">
             <label for="url">Enlace</label>
-            <x-text-input id="url" class="form-control" type="url" id="url" name="url" placeholder="http://" required />
+            <x-text-input id="url" class="form-control" type="url" name="url" placeholder="http://" />
             <!-- <input type="url" class="form-control" id="url" name="url" placeholder="http://"> -->
         </div>
         <div class="col-12 mt-3 text-center mt-4">
