@@ -557,7 +557,7 @@ legend {
   font-family: "Lilita One";
   width: auto;
   font-size: 22px;
-  color: #455A64;
+  color: #455a64;
   background-color: #FEFFEB;
   padding: 0 10px;
   position: absolute;
@@ -650,6 +650,10 @@ tr {
   border-left: 5px solid #8CC34C;
 }
 
+.tarea-card {
+  color: #455A64;
+}
+
 .ranking-container .ranking-item {
   color: #FEFFEB;
   font-size: large;
@@ -689,12 +693,31 @@ tr {
 }
 
 .tabla-scroll-container-tarea {
-  height: 39vh;
+  height: 38vh;
+  width: 97%;
 }
 
-.form-check-input:checked {
-  background-color: #06AAF4; /* Cambiar el color de fondo del círculo cuando está seleccionado */
-  /* Cambiar el color del borde del círculo cuando está seleccionado */
+.fieldset-solucion-tarea {
+  margin: 0 auto;
+  width: 100%;
+  height: 40vh;
+  padding: 0;
+}
+
+.fieldset-solucion-tarea,
+.fieldset-solucion-tarea * {
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.fieldset-solucion-tarea table,
+.fieldset-solucion-tarea tr,
+.fieldset-solucion-tarea td {
+  margin: 0;
+  padding: 0;
+}
+
+.text-danger, .text-success {
+  opacity: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -140,8 +140,7 @@ class TareaController extends Controller
                     'pregunta' => $pregunta->enunciado,
                     'respuesta_usuario' => $opcion->respuesta,
                     'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
-                    'acertada' => $opcion->es_correcta, // Aquí verificamos si la respuesta es correcta
-                    'respuesta_correcta_texto' => $opcion->respuesta
+                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
                 ];
             }
         }
