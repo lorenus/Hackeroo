@@ -60,7 +60,8 @@
         <!-- Campo para el enlace (solo visible si el tipo es 'link') -->
         <div class="form-group" id="link_container" style="display: none;">
             <label for="url">Enlace</label>
-            <input type="url" class="form-control" id="url" name="url" placeholder="http://">
+            <x-text-input id="url" class="form-control" type="url" id="url" name="url" placeholder="http://" required />
+            <!-- <input type="url" class="form-control" id="url" name="url" placeholder="http://"> -->
         </div>
         <div class="col-12 mt-3 text-center mt-4">
             <input type="hidden" name="curso_id" value="{{ $curso_id }}">
