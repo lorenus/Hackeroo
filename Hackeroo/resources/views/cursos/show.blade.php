@@ -12,8 +12,8 @@
     </div>
 
 
-            <h2 class='text-center'>{{ $curso->nombre }}</h2>
- 
+    <h2 class='text-center'>{{ $curso->nombre }}</h2>
+
 
     <div class="row mb-3">
         <div class="col-12 text-center">
@@ -45,15 +45,19 @@
                         <div class="curso-acciones d-flex flex-column gap-2">
                             <!-- Enlace de editar -->
                             <div class="accion-editar">
-                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
+                                <!-- <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm "> -->
+                                @if($tarea->tipo!=='test')
+                                <a href="#" class="btn btn-sm ">
                                     <img src="/img/iconos/editar.png" alt="">
                                 </a>
+                                @endif
                             </div>
 
                             <!-- Enlace de eliminar -->
                             <div class="accion-eliminar">
-                                <form action="{{ route('tarea.eliminar',['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}" method="POST"
-                                    style="display:inline;">
+                                <form
+                                    action="{{ route('tarea.eliminar',['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}"
+                                    method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm"
