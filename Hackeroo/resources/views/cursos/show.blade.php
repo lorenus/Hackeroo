@@ -54,12 +54,12 @@
 
                             <!-- Enlace de eliminar -->
                             <div class="accion-eliminar">
-                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST"
+                                <form action="{{ route('tarea.eliminar',['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm"
-                                        onclick="return confirm('¿Estás seguro de eliminar este curso?')">
+                                        onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">
                                         <img src="/img/iconos/eliminar.png" alt="">
                                     </button>
                                 </form>
