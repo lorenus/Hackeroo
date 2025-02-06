@@ -37,7 +37,7 @@
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
 
-                            <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">
+                            <a href="{{ route('tareas.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}">
                                 <h5>{{ $tarea->titulo }}</h5>
                             </a>
                             <p>{{$tarea->descripcion}}</p>
