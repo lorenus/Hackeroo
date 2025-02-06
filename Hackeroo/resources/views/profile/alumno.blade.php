@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form action="#" method="">
+    <form action="#" method="" class='d-flex justify-content-center align-items-center'>
         @csrf
         <fieldset>
             <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }}</legend>
