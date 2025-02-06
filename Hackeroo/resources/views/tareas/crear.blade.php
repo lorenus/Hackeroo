@@ -17,9 +17,9 @@
         @csrf
 
         <div class="row justify-content-center mb-3">
-            <div class="form-group">
-                <div class="col-5 d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
-                    <label for="tipo">Tipo de contenido</label>
+            <div class="form-group col-5">
+                <div class=" d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
+                    <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
                     <select class="form-select custom-select border-0" id="tipo" name="tipo" required>
                         <option value="test">Test</option>
                         <option value="archivo">Archivo</option>
@@ -28,14 +28,16 @@
                 </div>
             </div>
 
-            <div class="form-group" id="numero_preguntas_container" style="display: block;">
-                <div class="col-5 d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
-                    <label for="numero_preguntas">Número de Preguntas</label>
+            <div class="form-group col-5" id="numero_preguntas_container" >
+                <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
+                    <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
                     <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1"
                         value="5">
                 </div>
             </div>
         </div>
+
+
         <!-- Campo para el título de la tarea -->
         <div class="form-group mb-3">
             <label for="titulo">Título</label>
