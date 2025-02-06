@@ -21,9 +21,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Curso 1</th>
-                            <th>Curso 2</th>
+                            <td>Nombre</td>
+                            <td>Curso</td>
+                            <td>Tareas realizadas</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="2">No tienes alumnos asociados a tus cursos.</td>
+                            <td colspan="3" class="text-center">No tienes alumnos asociados a tus cursos.</td>
                         </tr>
                         @endif
                     </tbody>

@@ -612,14 +612,6 @@ tr {
   border-bottom: 3px solid #FFB300;
 }
 
-.tabla-con-fuente .texto-tabla {
-  font-family: "Itim";
-}
-
-tr.texto-tabla {
-  font-family: "Itim";
-}
-
 .cursos-container {
   display: flex;
   flex-direction: column;

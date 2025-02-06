@@ -545,7 +545,6 @@ fieldset {
     padding: 20px;
     margin: 20px 0;
     position: relative;
-
     @media (min-width: 780px) {
         max-width: 50vw;
     }
@@ -596,12 +595,7 @@ td {
 tr {
     border-bottom: 3px solid $amarillo;
 }
-.tabla-con-fuente .texto-tabla {
-    font-family: $fuenteTexto;
-}
-tr.texto-tabla {
-    font-family: $fuenteTexto;
-}
+
 .cursos-container {
     display: flex;
     flex-direction: column;
