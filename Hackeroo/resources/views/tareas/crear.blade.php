@@ -31,8 +31,7 @@
             <div class="form-group col-5" id="numero_preguntas_container" >
                 <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
                     <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
-                    <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1"
-                        value="5">
+                    <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1' max='25' value='1' />
                 </div>
             </div>
         </div>
