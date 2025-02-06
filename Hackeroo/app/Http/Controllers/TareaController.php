@@ -10,6 +10,7 @@ use App\Models\Curso;
 use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
 use App\Models\RecursoMultimedia;
+use App\Models\RespuestasAlumno;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -141,44 +142,44 @@ class TareaController extends Controller
         }
     }
     public function enviarRespuestas(Request $request, $curso_id, $tarea_id)
-    {
-        // Obtener la tarea y el curso
-        $curso = Curso::findOrFail($curso_id);
-        $tarea = Tarea::findOrFail($tarea_id);
+{
+    $curso = Curso::findOrFail($curso_id);
+    $tarea = Tarea::findOrFail($tarea_id);
+    $usuario = Auth::user(); // Obtener el usuario autenticado
 
+    $resultados = [];
 
-        // Inicializar un array para almacenar los resultados
-        $resultados = [];
+    if (!Auth::check()) { // Verifica *primero* si el usuario está autenticado
+        return redirect()->route('login')->with('error', 'Debes iniciar sesión para responder.');
+    }
 
+    foreach ($tarea->preguntas as $pregunta) {
+        $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
 
-        // Evaluar cada pregunta
-        foreach ($tarea->preguntas as $pregunta) {
-            // Verificar si se ha enviado una respuesta para esta pregunta
-            $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
+        if ($respuesta_usuario) {
+            $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
 
+            // Crear el registro en respuestas_alumnos *dentro* del if
+            $respuesta = new RespuestasAlumno(); // Instancia el modelo
+            $respuesta->usuario_dni = $usuario->DNI; // Asigna el DNI *después* de la verificación
+            $respuesta->pregunta_id = $pregunta->id;
+            $respuesta->opcion_respuesta_id = $opcion->id;
+            $respuesta->save(); // Guarda el modelo
 
-            // Si el usuario ha respondido
-            if ($respuesta_usuario) {
-                // Obtener la opción seleccionada por el alumno
-                $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
+            $es_correcta = $opcion->es_correcta;
 
-
-                // Verificar si la opción seleccionada es correcta
-                // Aquí comparamos con el campo `es_correcta`
-                $resultados[] = [
-                    'pregunta' => $pregunta->enunciado,
-                    'respuesta_usuario' => $opcion->respuesta,
-                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
-                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
-                ];
-            }
+            $resultados[] = [
+                'pregunta' => $pregunta->enunciado,
+                'respuesta_usuario' => $opcion->respuesta,
+                'respuesta_correcta' => $es_correcta ? 'Correcta' : 'Incorrecta',
+                'acertada' => $es_correcta
+            ];
         }
+    }
 
-
-        // Calcular el puntaje (puedes hacerlo si quieres mostrar el puntaje total)
+        // Calcular el puntaje (si lo deseas mostrar)
         $aciertos = count(array_filter($resultados, fn($resultado) => $resultado['acertada']));
         $total = count($tarea->preguntas);
-
 
         // Pasar los resultados a la vista para mostrar al usuario
         return view('tareas.resultado', compact('resultados', 'aciertos', 'total', 'curso', 'tarea'));
