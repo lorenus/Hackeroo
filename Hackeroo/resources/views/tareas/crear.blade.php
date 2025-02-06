@@ -17,7 +17,7 @@
         @csrf
 
         <div class="row justify-content-center mb-3">
-            <div class="form-group col-5">
+            <div class="form-group col-md-5 col-lg-4 col-xl-3">
                 <div class=" d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
                     <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
                     <select class="form-select custom-select border-0 text-center" id="tipo" name="tipo" required>
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-5" id="numero_preguntas_container">
+            <div class="form-group col-md-5 col-lg-4 col-xl-3" id="numero_preguntas_container">
                 <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
                     <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
                     <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1' max='25'
