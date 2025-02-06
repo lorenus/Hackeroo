@@ -13,6 +13,7 @@
     </div>
 
     <h2 class='text-center'>Crear test</h2>
+    <div class='contenedor-cursos'>
     <form action="{{ route('tarea.test.guardar', ['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}"
         method="POST">
         @csrf
@@ -47,5 +48,6 @@
 
 
 </form>
+</div>
 </div>
 @endsection
