@@ -16,26 +16,31 @@
     <form action="{{ route('tarea.guardar') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <div class="row justify-content-center mb-3">
-            <div class="form-group col-md-5 col-lg-4 col-xl-3">
-                <div class=" d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
-                    <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
-                    <select class="form-select custom-select border-0 text-center" id="tipo" name="tipo" required>
-                        <option value="test">Test</option>
-                        <option value="archivo">Archivo</option>
-                        <option value="link">Link</option>
-                    </select>
+        
+            <!-- Contenedor padre con Flexbox -->
+            <div class="row d-flex justify-content-center align-items-stretch mb-3">
+                <!-- Primer contenedor -->
+                <div class="form-group col-md-5 col-lg-4 col-xl-3">
+                    <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3 h-100">
+                        <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
+                        <select class="form-select custom-select border-0 text-center" id="tipo" name="tipo" required>
+                            <option value="test">Test</option>
+                            <option value="archivo">Archivo</option>
+                            <option value="link">Link</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-5 col-lg-4 col-xl-3" id="numero_preguntas_container">
-                <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
-                    <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
-                    <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1' max='25'
-                        value='1' />
+                <!-- Segundo contenedor -->
+                <div class="form-group col-md-5 col-lg-4 col-xl-3" id="numero_preguntas_container">
+                    <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3 h-100">
+                        <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
+                        <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1'
+                            max='25' value='1' />
+                    </div>
                 </div>
             </div>
-        </div>
+     
 
 
         <!-- Campo para el título de la tarea -->
