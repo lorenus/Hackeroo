@@ -34,15 +34,15 @@
         </div>
 
         <!-- Campo para el título de la tarea -->
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label for="titulo">Título</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" required>
+            <x-text-input class="form-control" id="titulo" name="titulo" required/>
         </div>
 
         <!-- Campo para la descripción de la tarea -->
         <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+            <x-text-area class="form-control" id="descripcion" name="descripcion" rows="3" required/>
         </div>
 
         <!-- Campo para el archivo (solo visible si el tipo es 'archivo') -->
