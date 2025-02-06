@@ -27,9 +27,9 @@
             <div class="contenedor-cursos mw-md-60">
                 <div class="row justify-content-center">
                     @foreach($cursos as $curso)
-                    <div class="curso-item col-md-5 ms-md-5 mb-3">
+                    <div class="curso-item col-md-5 ms-md-5 mb-3 ">
                         <!-- Enlace al curso -->
-                        <<a href="{{ route('tareas.show', $curso->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('tareas.show', $curso->id) }}" class="text-decoration-none text-dark">
                             <div class="curso-nombre">
                                 <h5 class="text-center">{{ $curso->nombre }}</h5>
                                 <p>{{ $curso->descripcion }}</p>
