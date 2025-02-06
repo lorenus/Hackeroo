@@ -102,3 +102,7 @@ Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'
 
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}', [TareaController::class, 'verTarea'])->name('tareas.ver');
 
+Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
+    ->name('tarea.resultados');
+
+
