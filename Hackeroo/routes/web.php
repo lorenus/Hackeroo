@@ -101,4 +101,7 @@ Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class
 Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
 
 
+Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
+    ->name('tarea.resultados');
+
 
