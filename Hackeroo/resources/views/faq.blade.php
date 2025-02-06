@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla Básica</title>
+    <title>Hackeroo</title>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                     </li>
                     <li class="nav-item ms-4">
                         <div class="enlace-con-subrayado">
-                            <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
+                            <a class="nav-link" href="{{ route('contacto') }}">Contáctanos</a>
                             <div class="subrayado3"></div>
                         </div>
                     </li>
@@ -73,8 +73,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="btn" data-bs-toggle="collapse" href="#collapseCuenta">
-                            <h3>Cuenta</h3>
+                        <a class="btn hand-cursor" data-bs-toggle="collapse" href="#collapseCuenta">
+                            <h3 class="hand-cursor">Cuenta</h3>
                         </a>
                     </div>
                     <div id="collapseCuenta" class="collapse show" data-bs-parent="#accordion">
@@ -90,8 +90,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseCursos">
-                            <h3>Cursos</h3>
+                        <a class="collapsed btn hand-cursor " data-bs-toggle="collapse" href="#collapseCursos">
+                            <h3 class="hand-cursor">Cursos</h3>
                            </a>
                     </div>
                     <div id="collapseCursos" class="collapse" data-bs-parent="#accordion">
@@ -107,8 +107,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseRanking">
-                            <h3>Ranking</h3>
+                        <a class="collapsed btn hand-cursor " data-bs-toggle="collapse" href="#collapseRanking">
+                            <h3 class="hand-cursor">Ranking</h3>
                         </a>
                     </div>
                     <div id="collapseRanking" class="collapse" data-bs-parent="#accordion">
@@ -122,8 +122,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTareas">
-                            <h3>Tareas</h3>
+                        <a class="collapsed btn hand-cursor " data-bs-toggle="collapse" href="#collapseTareas">
+                            <h3 class="hand-cursor">Tareas</h3>
                         </a>
                     </div>
                     <div id="collapseTareas" class="collapse" data-bs-parent="#accordion">
@@ -145,7 +145,7 @@
         </div>
 
         <!-- Imagen a la derecha -->
-        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center pe-4 order-0 order-md-1">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center pe-4 order-0 order-md-0">
             <img src="/img/imagenes/faq.png" alt="Imagen" class="img-fluid">
         </div>
     </div>
