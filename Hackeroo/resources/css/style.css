@@ -609,6 +609,10 @@ td {
   word-wrap: break-word;
 }
 
+td {
+  font-family: "Itim";
+}
+
 tr {
   border-bottom: 3px solid #FFB300;
   /* Color de borde */

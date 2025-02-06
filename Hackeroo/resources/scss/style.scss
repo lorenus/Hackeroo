@@ -594,6 +594,10 @@ td {
     word-wrap: break-word;
 }
 
+td{
+    font-family: $fuenteTexto;
+}
+
 tr {
     border-bottom: 3px solid $amarillo;
     /* Color de borde */

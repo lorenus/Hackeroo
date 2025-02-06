@@ -10,56 +10,52 @@
             </a>
         </div>
     </div>
-    <fieldset class="reset">
-        <legend class="reset">Nuevo curso</legend>
-        <div class="mb-5 mt-3 text-md-start">
-            <h6>Selecciona los alumnos que quieras añadir</h6>
 
+    <div class="d-flex justify-content-center">
+        <fieldset class="reset">
+            <legend class="reset">Nuevo curso</legend>
             <div class="mb-5 mt-3 text-md-start">
-    <div class="mb-3">
-        <form action="{{ route('cursos.store.step2') }}" method="POST">
-            @csrf
-            <div class="tabla-scroll-container"> <!-- Contenedor para el scroll -->
-                <table> <!-- Eliminamos la clase .tabla-scroll -->
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nombre</th>
-                            <th>DNI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($alumnos as $alumno)
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
-                            </td>
-                            <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
-                            <td>{{ $alumno->DNI }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-12 mt-3 text-center mt-4">
-                <x-primary-button type="submit">Crear curso</x-primary-button>
-            </div>
-        </form>
+                <h6>Selecciona los alumnos que quieras añadir</h6>
+
+                <div class="mb-5 mt-3 text-md-start">
+                    <div class="mb-3">
+                        <form action="{{ route('cursos.store.step2') }}" method="POST">
+                            @csrf
+                            <div class="tabla-scroll-container"> <!-- Contenedor para el scroll -->
+                                <table> <!-- Eliminamos la clase .tabla-scroll -->
+                                    <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>Nombre</td>
+                                            <td>DNI</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($alumnos as $alumno)
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
+                                            </td>
+                                            <td class="texto-tabla">{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
+                                            <td class="texto-tabla">{{ $alumno->DNI }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 mt-3 text-center mt-4">
+                                <x-primary-button type="submit">Crear curso</x-primary-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+        </fieldset>
+
+
+
+
     </div>
-</div>
-            
-    </fieldset>
 
-
-
-
-
-
-
-
-
-
-
-    </form>
 </div>
 @endsection
