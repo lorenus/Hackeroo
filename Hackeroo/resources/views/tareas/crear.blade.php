@@ -12,27 +12,30 @@
     </div>
 
 
-    <h2>Crear nuevo contenido</h2>
+    <h2 class='text-center'>Crear nuevo contenido</h2>
     <form action="{{ route('tarea.guardar') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
+        <div class="row justify-content-center mb-3">
+            <div class="form-group">
+                <div class="col-5 d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
+                    <label for="tipo">Tipo de contenido</label>
+                    <select class="form-select custom-select border-0" id="tipo" name="tipo" required>
+                        <option value="test">Test</option>
+                        <option value="archivo">Archivo</option>
+                        <option value="link">Link</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <div class="col-5 d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
-                <label for="tipo">Tipo de contenido</label>
-                <select class="form-select custom-select border-0" id="tipo" name="tipo" required>
-                    <option value="test">Test</option>
-                    <option value="archivo">Archivo</option>
-                    <option value="link">Link</option>
-                </select>
+            <div class="form-group" id="numero_preguntas_container" style="display: block;">
+                <div class="col-5 d-flex align-items-center border border-3 rounded border-warning p-2 me-3">
+                    <label for="numero_preguntas">Número de Preguntas</label>
+                    <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1"
+                        value="5">
+                </div>
             </div>
         </div>
-
-        <div class="form-group" id="numero_preguntas_container" style="display: block;">
-            <label for="numero_preguntas">Número de Preguntas</label>
-            <input type="number" class="form-control" id="numero_preguntas" name="numero_preguntas" min="1" value="5">
-        </div>
-
         <!-- Campo para el título de la tarea -->
         <div class="form-group mb-3">
             <label for="titulo">Título</label>
