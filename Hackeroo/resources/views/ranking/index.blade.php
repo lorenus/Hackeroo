@@ -1,13 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container text-center">
-    <h1>Ranking</h1>
-    <p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>
-    <div class="contenido container-fluid d-flex flex-column flex-md-row p-3">
+<div class="container">
+<div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('perfil') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
+    </div>
+    <h2 class="text-center">Ranking</h2>
+    <!--<p>A continuación, verás a todos los alumnos ordenados por su número de puntos:</p>-->
+    <!-- contenedor de imagen y ranking -->
+    <div class="container-fluid d-flex flex-column flex-md-row p-3">
         <!-- Imagen -->
         <div class="col-12 col-md-6 d-flex justify-content-center text-center order-0 order-md-0">
-            <img src="/img/imagenes/ranking.png" alt="Imagen" class="img-fluid">
+            <img src="/img/imagenes/ranking.png" alt="Imagen" class="img-fluid img-responsive" >
         </div>
 
         <!-- Contenedor de ranking y tabla -->
@@ -15,37 +23,43 @@
             <!-- Ranking Superior -->
             <div class="ranking-container mb-4">
                 @php
-                    $colores = ['amarillo', 'verde', 'azul']; // Clases de colores
+                $colores = ['amarillo', 'verde', 'azul'];
                 @endphp
-                
+
                 @foreach($usuarios as $index => $usuario)
-                    @if($index < 3) 
-                        <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between h-23 mb-2 p-3">
-                            <h3><span>{{ $index + 1 }}</span> &nbsp; &nbsp; 
+                @if($index < 3)
+                    <div class="ranking-item {{ $colores[$index] }} d-flex justify-content-between align-items-center mb-2 p-2">
+                    <h4 class="d-flex w-100 justify-content-between">
+                        <div class="d-flex" >
+                            <span>{{ $index + 1 }}</span> &nbsp; &nbsp;
                             <span>{{ $usuario->nombre }} {{ $usuario->apellidos }}</span>
-                            &nbsp; &nbsp; 
-                            <span>{{ $usuario->puntos }} pts.</span></h3>
                         </div>
-                    @endif
-                @endforeach
+                        <div class="d-flex justify-content-end">{{ $usuario->puntos }} pts.</div>
+                    </h4>
             </div>
 
-            <!-- Tabla (Solo muestra a partir del puesto 4) -->
+            @endif
+            @endforeach
+        </div>
+
+        <!-- Tabla (Solo muestra a partir del puesto 4) -->
+        <div class="tabla-scroll-container">
             <table>
                 <tbody>
                     @foreach($usuarios as $index => $usuario)
-                        @if($index >= 3) 
-                        <tr></tr>
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
-                                <td>{{ $usuario->puntos }} puntos</td>
-                            </tr>
-                        @endif
+                    @if($index >= 3)
+                    <tr></tr>
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $usuario->nombre }} {{ $usuario->apellidos }}</td>
+                        <td>{{ $usuario->puntos }} puntos</td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+</div>
 </div>
 @endsection

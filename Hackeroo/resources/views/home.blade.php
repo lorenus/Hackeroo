@@ -69,17 +69,17 @@
 
         <div class="logo col-12 text-center mb-5">
             <h1 class="texto-animado">
-                <span>&lt;</span>
-                <span class="letra">H</span>
-                <span class="letra">a</span>
-                <span class="letra">c</span>
-                <span class="letra">k</span>
-                <span class="letra">e</span>
-                <span class="letra">r</span>
-                <span class="letra">o</span>
-                <span class="letra">o</span>
-                <span>/</span>
-                <span>&gt;</span>
+                <span class="hand-cursor">&lt;</span>
+                <span class="letra hand-cursor">H</span>
+                <span class="letra hand-cursor">a</span>
+                <span class="letra hand-cursor">c</span>
+                <span class="letra hand-cursor">k</span>
+                <span class="letra hand-cursor">e</span>
+                <span class="letra hand-cursor">r</span>
+                <span class="letra hand-cursor">o</span>
+                <span class="letra hand-cursor">o</span>
+                <span class="hand-cursor">/</span>
+                <span class="hand-cursor">&gt;</span>
             </h1>
         </div>
 
@@ -87,11 +87,11 @@
         <div class="boton col-12 d-flex justify-content-center">
             @if (Auth::check())
             <a href="{{ route('perfil') }}">
-                <p>Entrar</p>
+                <p class="hand-cursor">Entrar</p>
             </a>
             @else
             <a href="{{ route('login') }}">
-                <p>Entrar</p>
+                <p class="hand-cursor">Entrar</p>
             </a>
             @endif
         </div>

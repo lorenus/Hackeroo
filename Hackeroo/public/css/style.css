@@ -6,13 +6,27 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  /* Asegura que el cuerpo ocupe toda la altura */
 }
 
 body {
   background-color: #FFD87F;
   font-family: "Itim";
   color: #455A64;
+}
+
+/* Cursor normal (flecha) */
+body {
+  cursor: url("/img/cursors/left_ptr.cur"), auto;
+}
+
+/* Cursor de texto (I-beam) */
+p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
+  cursor: url("/img/cursors/xterm.cur"), auto;
+}
+
+/* Cursor de mano (para enlaces y elementos interactivos) */
+a, button, .hand-cursor {
+  cursor: url("/img/cursors/pointer.cur"), auto;
 }
 
 a {
@@ -40,7 +54,8 @@ h6 {
   text-align: center;
   text-decoration: none;
 }
-.boton > a, .boton a.boton {
+.boton > a,
+.boton a.boton {
   font-family: "Lilita One";
   margin-top: -7px;
   color: #FEFFEB;
@@ -285,9 +300,12 @@ footer {
 }
 
 .logo {
-  font-family: sans-serif; /* Usa la fuente que prefieras */
-  font-size: 3rem; /* Tamaño grande para el logo */
-  overflow: hidden; /* Evita que el contenido se vea antes de tiempo */
+  font-family: sans-serif;
+  /* Usa la fuente que prefieras */
+  font-size: 3rem;
+  /* Tamaño grande para el logo */
+  overflow: hidden;
+  /* Evita que el contenido se vea antes de tiempo */
   display: inline-block;
 }
 
@@ -301,20 +319,24 @@ footer {
 
 /* Las letras por defecto, solo el <H> visible */
 .texto-animado-menu .letra {
-  opacity: 0; /* Las letras estarán ocultas por defecto */
-  transition: opacity 0.3s ease; /* Transición para mostrar las letras */
+  opacity: 0;
+  /* Las letras estarán ocultas por defecto */
+  transition: opacity 0.3s ease;
+  /* Transición para mostrar las letras */
 }
 
 /* El primer span con el <H> visible */
 .texto-animado-menu span:first-child,
 .texto-animado-menu span:nth-child(2),
 .texto-animado-menu span:nth-child(3) {
-  opacity: 1; /* Este ya es visible */
+  opacity: 1;
+  /* Este ya es visible */
 }
 
 /* Cuando se hace hover, las letras aparecerán */
 .logo:hover .letra {
-  opacity: 1; /* Las letras se muestran */
+  opacity: 1;
+  /* Las letras se muestran */
 }
 
 /* Para el efecto de expansión: De izquierda a derecha */
@@ -325,10 +347,12 @@ footer {
 /* La animación que expande el texto */
 @keyframes expand {
   0% {
-    transform: translateX(-100%); /* Empieza fuera de la pantalla */
+    transform: translateX(-100%);
+    /* Empieza fuera de la pantalla */
   }
   100% {
-    transform: translateX(0); /* Se mueve a su posición original */
+    transform: translateX(0);
+    /* Se mueve a su posición original */
   }
 }
 .card-header a h3 {
@@ -388,7 +412,8 @@ form .form-lineas {
 }
 form .form-lineas:focus {
   border-bottom: 2px solid #06AAF4;
-  outline: none; /* Elimina el borde predeterminado del focus */
+  outline: none;
+  /* Elimina el borde predeterminado del focus */
 }
 form .libreta {
   background: linear-gradient(to bottom, #FFB300 2px, transparent 1px) repeat-y;
@@ -400,14 +425,16 @@ form .libreta {
 }
 form .libreta:focus {
   background: linear-gradient(to bottom, #06AAF4 2px, transparent 1px) repeat-y;
-  outline: none; /* Elimina el borde predeterminado del focus */
+  outline: none;
+  /* Elimina el borde predeterminado del focus */
 }
 
 .custom-select {
   position: relative;
   display: inline-flex;
   border: 2px solid #FFB300;
-  border-radius: 50px; /* Bordes muy redondeados */
+  border-radius: 50px;
+  /* Bordes muy redondeados */
   overflow: hidden;
   background-color: #FEFFEB;
   padding: 5px;
@@ -449,7 +476,8 @@ form .libreta:focus {
 }
 
 .img-perfil-cabecera {
-  height: 80px; /* Tamaño fijo para la imagen en móvil */
+  height: 80px;
+  /* Tamaño fijo para la imagen en móvil */
   width: auto;
   border-radius: 15px;
 }
@@ -535,7 +563,6 @@ fieldset {
 @media (min-width: 780px) {
   fieldset {
     max-width: 50vw;
-    margin-left: 15%;
   }
 }
 
@@ -575,19 +602,22 @@ table {
   table-layout: fixed;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   word-wrap: break-word;
 }
 
 tr {
-  border-bottom: 3px solid #FFB300; /* Color de borde */
+  border-bottom: 3px solid #FFB300;
+  /* Color de borde */
 }
 
 .cursos-container {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espacio entre cada curso */
+  gap: 10px;
+  /* Espacio entre cada curso */
 }
 
 .curso-item {
@@ -600,16 +630,19 @@ tr {
 }
 
 .curso-nombre {
-  flex: 1; /* Ocupa el espacio restante */
+  flex: 1;
+  /* Ocupa el espacio restante */
 }
 
 .curso-acciones {
   display: flex;
   flex-direction: column;
-  gap: 5px; /* Espacio entre los botones */
+  gap: 5px;
+  /* Espacio entre los botones */
 }
 
-.accion-editar, .accion-eliminar {
+.accion-editar,
+.accion-eliminar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -633,7 +666,6 @@ tr {
 .ranking-container .ranking-item {
   color: #FEFFEB;
   font-size: large;
-  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -653,9 +685,14 @@ tr {
   width: 65%;
   border-radius: 0 0 15px 0;
 }
+.ranking-container .ranking-item h4 {
+  margin-bottom: 0;
+}
 
-#avatar {
-  width: 5vw;
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 /*# sourceMappingURL=style.css.map */
