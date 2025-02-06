@@ -25,8 +25,8 @@ p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
 }
 
 /* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor {
-  cursor: url("/img/cursors/pointer.cur"), auto;
+a, button, .hand-cursor, .boton, .btn {
+  cursor: url("/img/cursors/pointer.cur"), auto !important;
 }
 
 a {
@@ -172,6 +172,7 @@ footer {
   justify-content: center;
   align-items: center;
   min-height: 75vh;
+  max-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
