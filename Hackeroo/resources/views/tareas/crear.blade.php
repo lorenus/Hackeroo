@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Crear Nueva Tarea</h1>
+    <h2>Crear Nueva Tarea</h2>
     <form action="{{ route('tarea.guardar') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
@@ -47,42 +47,4 @@
     <button type="submit" class="btn btn-primary">Siguiente</button>
 </form>
 </div>
-
-<script>
-    // Mostrar campos según el tipo de tarea seleccionado
-    document.getElementById('tipo').addEventListener('change', function() {
-        var tipo = this.value;
-        var numeroPreguntasContainer = document.getElementById('numero_preguntas_container');
-        var archivoContainer = document.getElementById('archivo_container');
-        var linkContainer = document.getElementById('link_container');
-
-        // Mostrar el campo para número de preguntas solo si es un test
-        if (tipo === 'test') {
-            numeroPreguntasContainer.style.display = 'block';
-            archivoContainer.style.display = 'none';
-            linkContainer.style.display = 'none';
-        } 
-        // Mostrar el campo para archivo solo si es archivo
-        else if (tipo === 'archivo') {
-            numeroPreguntasContainer.style.display = 'none';
-            archivoContainer.style.display = 'block';
-            linkContainer.style.display = 'none';
-        } 
-        // Mostrar el campo para link solo si es link
-        else if (tipo === 'link') {
-            numeroPreguntasContainer.style.display = 'none';
-            archivoContainer.style.display = 'none';
-            linkContainer.style.display = 'block';
-        }
-    });
-
-    // Asegurarse de que si no se ingresa número de preguntas, se asigne 5
-    document.querySelector('form').addEventListener('submit', function(event) {
-        var numeroPreguntas = document.getElementById('numero_preguntas');
-        // Si no se ha introducido un valor, poner el valor por defecto (5)
-        if (numeroPreguntas.value === '') {
-            numeroPreguntas.value = 5;
-        }
-    });
-</script>
 @endsection
