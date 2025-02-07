@@ -96,29 +96,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-         ////////FILTRAR ALUMNOS
-    function filterAlumnos() {
-        const searchTerm = document.getElementById('search').value.toLowerCase();
-        const rows = document.querySelectorAll('.alumno-row');
 
-        rows.forEach(row => {
-            const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-
-            if (nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-
-    // Añadir el event listener al campo de búsqueda
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('search');
-        if (searchInput) {
-            searchInput.addEventListener('input', filterAlumnos);
-        }
-    });
-});
 });
