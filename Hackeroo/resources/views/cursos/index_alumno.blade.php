@@ -28,13 +28,15 @@
                 <div class="row justify-content-center">
                     @foreach($cursos as $curso)
                     <div class="curso-item col-md-5 mb-3 p-3">
-                        <!-- Enlace al curso -->
-                        <a href="{{ route('curso.tareas', $curso->id) }}" class="text-decoration-none text-dark">
-                            <div class="curso-nombre tarea-card">
+                       <div class="curso-nombre text-center">
+                         <!-- Enlace al curso -->
+                         <a href="{{ route('curso.tareas', $curso->id) }}" class="text-decoration-none text-dark">
+                            <div class="tarea-card">
                                 <h5 class="text-center">{{ $curso->nombre }}</h5>
                                 <p>{{ $curso->descripcion }}</p>
                             </div>
                             </a>
+                       </div>
                     </div>
                     @endforeach
                 </div>
