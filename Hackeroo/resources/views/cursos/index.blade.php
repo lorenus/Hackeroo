@@ -11,16 +11,29 @@
         </div>
     </div>
 
+    @if (session('status'))
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success d-flex align-items-center w-auto mx-3" role="alert" style="max-width: 500px;">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+                {{ session('status') }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+@endif
+
     <!-- Título centrado -->
     <div class="row mb-3">
         <div class="col-12 text-center">
             <h2>Mis Cursos</h2>
         </div>
     </div>
-    @if (session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
-    @endif
-<!-- Mostrar mensaje de estado -->
+
+    
+    <!-- Mostrar mensaje de estado -->
 
 
     <!-- Botón para crear nuevo curso -->
@@ -40,11 +53,13 @@
             <div class="contenedor-cursos mw-md-60">
                 <div class="row justify-content-center">
                     @foreach($cursos as $curso)
-                    <div class="curso-item col-md-5 ms-md-5 mb-3 p-3">
+                    <div class="curso-item col-md-5 mb-3">
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
-                        <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">   <h5>{{ $curso->nombre }}</h5></a>
+                            <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">
+                                <h5>{{ $curso->nombre }}</h5>
+                            </a>
                             <p>{{$curso->descripcion}}</p>
                         </div>
 
