@@ -67,7 +67,7 @@
         rows.forEach(row => {
             const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
 
-            if (searchTerm === "" || nombre.includes(searchTerm) {
+            if (searchTerm === "" || nombre.includes(searchTerm) ){
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
