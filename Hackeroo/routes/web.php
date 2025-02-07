@@ -10,7 +10,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\RankingController;
 
-
 // Route::get('/', function () {return view('welcome');});
 // routes/web.php
 
@@ -87,7 +86,7 @@ Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])
     ->name('cursos.show.alumno');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
 
@@ -104,5 +103,3 @@ Route::get('/cursos/{curso_id}/tareas/{tarea_id}', [TareaController::class, 'ver
 
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
     ->name('tarea.resultados');
-
-

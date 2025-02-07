@@ -1,5 +1,3 @@
-<!-- resources/views/profile/alumnos.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
