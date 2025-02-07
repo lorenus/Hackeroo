@@ -23,10 +23,10 @@
     <!-- Segunda fila (enlaces) -->
     <div class="row d-flex justify-content-between mb-3 text-center ">
         <div class="col-12 col-md-6 align-items-center">
-            <div class="div-enlace mb-3">
+            <div class="div-enlace mb-3 hand-cursor">
                 <a href="{{ route('cursos') }}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
-                    <h4>Mis cursos</h4>
+                    <h4 class="hand-cursor">Mis cursos</h4>
                 </a>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="div-enlace">
                 <a href="{{ route('alumnos') }}">
                     <img src="/img/iconos/alumnos.png" alt="Enlace 2" class="img-fluid img-perfil">
-                    <h4>Alumnos</h4>
+                    <h4 class="hand-cursor">Alumnos</h4>
                 </a>
             </div>
         </div>
@@ -47,18 +47,18 @@
             <div class="div-enlace">
                 <a href="{{ route('editar-perfil') }}">
                     <img src="/img/iconos/editar_perfil.png" alt="Enlace 3" class="img-fluid img-perfil">
-                    <h4>Editar perfil</h4>
+                    <h4 class="hand-cursor">Editar perfil</h4>
                 </a>
             </div>
         </div>
 
         <div class="col-12 col-md-6">
             <div class="cerrar-sesion">
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" >
                     @csrf
-                    <button type="submit" style="background: none; border: none; color: #455A64;">
-                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                        <h4>Cerrar sesión</h4>
+                    <button type="submit" style="background: none; border: none; color: #455A64;" class="hand-cursor">
+                        <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil hand-cursor">
+                        <h4 class="hand-cursor">Cerrar sesión</h4>
                     </button>
                 </form>
             </div>
@@ -102,7 +102,7 @@
             <div class="div-enlace mb-3">
                 <a href="{{route('cursos-alumno')}}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
-                    <h4>Mis cursos</h4>
+                    <h4 class="hand-cursor">Mis cursos</h4>
                 </a>
             </div>
         </div>
@@ -111,7 +111,7 @@
             <div class="div-enlace">
                 <a href="{{ route('ranking') }}">
                     <img src="/img/iconos/trofeo.png" alt="Enlace 2" class="img-fluid img-perfil">
-                    <h4>Ranking</h4>
+                    <h4 class="hand-cursor">Ranking</h4>
                 </a>
             </div>
         </div>
@@ -123,7 +123,7 @@
             <div class="div-enlace">
                 <a href="{{ route('editar-perfil') }}">
                     <img src="/img/iconos/editar_perfil.png" alt="Enlace 3" class="img-fluid img-perfil">
-                    <h4>Editar perfil</h4>
+                    <h4 class="hand-cursor">Editar perfil</h4>
                 </a>
             </div>
         </div>
@@ -134,7 +134,7 @@
                     @csrf
                     <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
-                        <h4>Cerrar sesión</h4>
+                        <h4 class="hand-cursor">Cerrar sesión</h4>
                     </button>
                 </form>
             </div>

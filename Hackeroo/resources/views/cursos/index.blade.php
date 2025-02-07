@@ -26,7 +26,7 @@
             <div>
                 {{ $message }}
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
     @endif
@@ -44,9 +44,9 @@
 
 
     <!-- Botón para crear nuevo curso -->
-    <div class="row mb-3">
-        <div class="col-12 text-center">
-            <a href="{{ route('cursos.create.step1') }}" class="btn boton">Crear Curso</a>
+    <div class="row mb-3 ">
+        <div class="col-12 text-center ">
+            <a href="{{ route('cursos.create.step1') }}" class="btn boton hand-cursor">Crear Curso</a>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
                             <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">
-                                <h5>{{ $curso->nombre }}</h5>
+                                <h5 class="hand-cursor">{{ $curso->nombre }}</h5>
                             </a>
                             <p>{{$curso->descripcion}}</p>
                         </div>
@@ -74,7 +74,7 @@
                         <div class="curso-acciones d-flex flex-column gap-2">
                             <!-- Enlace de editar -->
                             <div class="accion-editar">
-                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
+                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm hand-cursor">
                                     <img src="/img/iconos/editar.png" alt="">
                                 </a>
                             </div>
@@ -84,8 +84,8 @@
                                 <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm" onclick="return confirm('¿Estás seguro de eliminar este curso?')">
-                                        <img src="/img/iconos/eliminar.png" alt="">
+                                    <button type="submit" class="btn btn-sm " onclick="return confirm('¿Estás seguro de eliminar este curso?')">
+                                        <img src="/img/iconos/eliminar.png" alt="" class="hand-cursor">
                                     </button>
                                 </form>
                             </div>

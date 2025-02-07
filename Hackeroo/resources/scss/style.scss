@@ -22,18 +22,27 @@ body {
 }
 
 /* Cursor de texto (I-beam) */
-p, h1, h2, h3, h4, h5, h6, span, input[type="text"], textarea, .text-cursor {
+p, h1, h2, h3, h4, h5, h6, span, input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="tel"], input[type="url"], textarea, .text-cursor {
     cursor: url('/img/cursors/xterm.cur'), auto;
 }
 
-/* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor, .boton, .btn, input[type="checkbox"]{
-    cursor: url('/img/cursors/pointer.cur'), auto !important;
+/* Cursor de mano (para elementos interactivos) */
+a, button, .hand-cursor, .boton, .btn, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], input[type="file"], input[type="file"]::-webkit-file-upload-button, select, option, label, .interactive-element {
+    cursor: url('/img/cursors/pointer.cur'), pointer !important;
+}
+
+
+/* Cursor de mano para elementos hover */
+a:hover, button:hover, input:hover, select:hover, label:hover, .interactive-element:hover {
+    cursor: url('/img/cursors/pointer.cur'), pointer !important;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-
+input[type="text"],
+input[type="text"]::-webkit-file-upload-button {
+    cursor: url('/img/cursors/pointer.cur'), pointer !important;
+}
 
 
 
@@ -49,6 +58,10 @@ h4,
 h5,
 h6 {
     font-family: $fuenteTitulos;
+}
+
+button, button * {
+    cursor: url('/img/cursors/pointer.cur'), pointer !important;
 }
 
 .boton {
@@ -349,10 +362,7 @@ form .form-label.custom-label {
     border: 4px solid;
 }
 
-// x-primary-button{
-//   @include boton;
-//   font-family: $fuenteTitulos;
-// }
+
 
 form {
     padding: 0.32rem 0.7rem;
@@ -402,15 +412,6 @@ form {
     }
 }
 
-// button{
-//   border:none;
-//   background-color: transparent;
-//   font-family: "Lilita One";
-//   margin-top: -7px;
-//   color: $amarillo_fondo;
-//   font-size: x-large;
-//   background-position: center 5px;
-// }
 
 // SELECT
 .custom-select {
@@ -697,3 +698,19 @@ tr {
 .text-danger, .text-success{
     opacity: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

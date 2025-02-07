@@ -29,7 +29,7 @@
                 <x-text-area class="form-control" id="descripcion" name="descripcion"></x-text-area>
         </div>
             <div class="col-12 mt-3 text-center mt-4">
-            <x-primary-button type="submit" class="btn btn-primary">Continuar</x-primary-button>
+            <x-primary-button type="submit" class="btn btn-primary ">Continuar</x-primary-button>
             </div>
         </fieldset>
     </form>
