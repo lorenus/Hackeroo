@@ -9,7 +9,9 @@ use App\Models\Tarea;
 use App\Models\Curso;
 use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
+use App\Models\RespuestasAlumno;
 use App\Models\RecursoMultimedia;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -186,62 +188,194 @@ class TareaController extends Controller
     }
     public function verTarea($curso_id, $tarea_id)
     {
+        // Obtener la tarea con sus preguntas y opciones de respuesta (si es un test)
         $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
-
+    
+        // Manejar cada tipo de tarea según su tipo
         switch ($tarea->tipo) {
             case 'test':
-                return view('tareas.ver', compact('tarea', 'curso_id')); // Vista para ver el test
+                // Verificar si el usuario ya ha respondido todas las preguntas de este test
+                $respuestasUsuario = RespuestasAlumno::where('usuario_dni', Auth::user()->DNI)
+                    ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
+                    ->get();
+    
+                $totalPreguntas = $tarea->preguntas->count();
+                $preguntasRespondidas = $respuestasUsuario->count();
+    
+                if ($preguntasRespondidas === $totalPreguntas) {
+                    // Si ha respondido a todas las preguntas, redirigir a la vista de resultados
+                    return redirect()->route('tarea.resultados', ['curso_id' => $curso_id, 'tarea_id' => $tarea_id]);
+                }
+    
+                // Si no ha respondido a todas las preguntas, mostrar la vista para realizar el test
+                return view('tareas.ver', compact('tarea', 'curso_id'));
+    
             case 'archivo':
+                // Obtener el recurso multimedia asociado a la tarea
                 $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
-                return view('tareas.ver-archivo', compact('tarea', 'curso_id', 'recurso')); // Vista para ver archivos
+    
+                if (!$recurso) {
+                    return redirect()->route('cursos.show', $curso_id)->with('error', 'No se encontró el archivo asociado a esta tarea.');
+                }
+    
+                // Mostrar la vista para ver archivos
+                return view('tareas.ver-archivo', compact('tarea', 'curso_id', 'recurso'));
+    
             case 'link':
+                // Obtener el recurso multimedia asociado a la tarea
                 $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
-                return redirect()->away($recurso->url); // Redirección externa para links
+    
+                if (!$recurso) {
+                    return redirect()->route('cursos.show', $curso_id)->with('error', 'No se encontró el enlace asociado a esta tarea.');
+                }
+    
+                // Redirigir al enlace externo
+                return redirect()->away($recurso->url);
+    
             default:
+                // Si el tipo de tarea no es reconocido, redirigir con un mensaje de error
                 return redirect()->route('cursos.show', $curso_id)->with('error', 'Tipo de tarea desconocido');
         }
     }
     public function enviarRespuestas(Request $request, $curso_id, $tarea_id)
     {
-        // Obtener la tarea y el curso
+        // Verificar si el usuario está autenticado
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para enviar respuestas.');
+        }
+    
         $curso = Curso::findOrFail($curso_id);
         $tarea = Tarea::findOrFail($tarea_id);
-
-
-        // Inicializar un array para almacenar los resultados
+    
+        // Inicializar variables
         $resultados = [];
-
-
-        // Evaluar cada pregunta
+        $puntuacion = 0;
+        $aciertos = 0; // Contador de aciertos
+        $total_preguntas = $tarea->preguntas->count();
+        $valor_pregunta = 10 / $total_preguntas; // Valor proporcional de cada pregunta
+        $penalizacion = $valor_pregunta / 3; // Penalización por pregunta incorrecta
+    
+        // Recorrer cada pregunta de la tarea
         foreach ($tarea->preguntas as $pregunta) {
+            // Verificar si el usuario ya ha respondido esta pregunta
+            $respuesta_previa = RespuestasAlumno::where('pregunta_id', $pregunta->id)
+                ->where('usuario_dni', Auth::user()->DNI)
+                ->first();
+    
+            if ($respuesta_previa) {
+                // Si ya respondió, saltar esta pregunta
+                continue;
+            }
+    
             // Verificar si se ha enviado una respuesta para esta pregunta
             $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
-
-
-            // Si el usuario ha respondido
+    
             if ($respuesta_usuario) {
                 // Obtener la opción seleccionada por el alumno
                 $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
-
-
-                // Verificar si la opción seleccionada es correcta
-                // Aquí comparamos con el campo `es_correcta`
-                $resultados[] = [
-                    'pregunta' => $pregunta->enunciado,
-                    'respuesta_usuario' => $opcion->respuesta,
-                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
-                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
-                ];
+    
+                // Guardar la respuesta del alumno en la tabla respuestas_alumnos
+                RespuestasAlumno::create([
+                    'pregunta_id' => $pregunta->id,
+                    'usuario_dni' => Auth::user()->DNI, // Suponemos que el usuario está autenticado
+                    'opcion_respuesta_id' => $opcion->id,
+                ]);
+    
+                // Evaluar si la respuesta es correcta
+                if ($opcion->es_correcta) {
+                    $puntuacion += $valor_pregunta; // Sumar el valor de la pregunta
+                    $aciertos++; // Incrementar el contador de aciertos
+                    $resultado = 'Correcta';
+                } else {
+                    $puntuacion -= $penalizacion; // Restar la penalización
+                    $resultado = 'Incorrecta';
+                }
+            } else {
+                // Si no se respondió, no suma ni resta puntos
+                RespuestasAlumno::create([
+                    'pregunta_id' => $pregunta->id,
+                    'usuario_dni' => Auth::user()->DNI,
+                    'opcion_respuesta_id' => null, // Sin respuesta
+                ]);
+                $resultado = 'Sin responder';
             }
+    
+            // Almacenar el resultado de esta pregunta
+            $resultados[] = [
+                'pregunta' => $pregunta->enunciado,
+                'respuesta_usuario' => $respuesta_usuario ? $opcion->respuesta : 'Sin responder',
+                'resultado' => $resultado,
+            ];
         }
-
-
-        // Calcular el puntaje (puedes hacerlo si quieres mostrar el puntaje total)
-        $aciertos = count(array_filter($resultados, fn($resultado) => $resultado['acertada']));
-        $total = count($tarea->preguntas);
-
-
-        // Pasar los resultados a la vista para mostrar al usuario
-        return view('tareas.resultado', compact('resultados', 'aciertos', 'total', 'curso', 'tarea'));
+    
+        // Asegurarse de que la puntuación no sea negativa
+        $puntuacion = max(0, $puntuacion);
+    
+        // Actualizar los puntos del usuario
+        $usuario = Auth::user(); // Obtener el usuario autenticado
+    
+        if ($usuario instanceof Usuario) { // Asegurarse de que $usuario sea una instancia de Usuario
+            $usuario->puntos += $puntuacion; // Sumar la puntuación obtenida al atributo 'puntos'
+            $usuario->save(); // Guardar los cambios en la base de datos
+        } else {
+            return redirect()->back()->with('error', 'No se pudo actualizar la puntuación del usuario.');
+        }
+    
+        // Pasar los resultados y la puntuación a la vista
+        return view('tareas.resultado', compact('resultados', 'puntuacion', 'aciertos', 'total_preguntas', 'curso', 'tarea'));
     }
+    public function mostrarResultados($curso_id, $tarea_id)
+    {
+        // Obtener el curso y la tarea
+        $curso = Curso::findOrFail($curso_id);
+        $tarea = Tarea::findOrFail($tarea_id);
+    
+        // Obtener las respuestas del usuario para esta tarea
+        $respuestasUsuario = RespuestasAlumno::where('usuario_dni', Auth::user()->DNI)
+            ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
+            ->get();
+    
+        // Inicializar variables
+        $resultados = [];
+        $puntuacion = 0;
+        $aciertos = 0;
+        $total_preguntas = $tarea->preguntas->count();
+        $valor_pregunta = 10 / $total_preguntas;
+        $penalizacion = $valor_pregunta / 3;
+    
+        // Recorrer las preguntas de la tarea
+        foreach ($tarea->preguntas as $pregunta) {
+            $respuesta = $respuestasUsuario->firstWhere('pregunta_id', $pregunta->id);
+    
+            if ($respuesta && $respuesta->opcion_respuesta_id) {
+                $opcion = $pregunta->opciones_respuestas()->find($respuesta->opcion_respuesta_id);
+    
+                if ($opcion->es_correcta) {
+                    $puntuacion += $valor_pregunta;
+                    $aciertos++;
+                    $resultado = 'Correcta';
+                } else {
+                    $puntuacion -= $penalizacion;
+                    $resultado = 'Incorrecta';
+                }
+            } else {
+                $resultado = 'Sin responder';
+            }
+    
+            $resultados[] = [
+                'pregunta' => $pregunta->enunciado,
+                'respuesta_usuario' => $respuesta && $respuesta->opcion_respuesta_id ? $opcion->respuesta : 'Sin responder',
+                'resultado' => $resultado,
+            ];
+        }
+    
+        // Asegurarse de que la puntuación no sea negativa
+        $puntuacion = max(0, $puntuacion);
+    
+        // Pasar los resultados a la vista
+        return view('tareas.resultado', compact('resultados', 'puntuacion', 'aciertos', 'total_preguntas', 'curso', 'tarea'));
+    }
+    
+
 }
+   

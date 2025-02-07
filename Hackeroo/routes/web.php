@@ -76,6 +76,7 @@ Route::post('/tareas/guardar', [TareaController::class, 'guardar'])->name('tarea
 
 Route::get('/tareas/test/crear/{curso_id}', [TareaController::class, 'crearTest'])->name('tarea.test.create');
 Route::post('/tareas/test/guardar/{curso_id}', [TareaController::class, 'guardarTest'])->name('tarea.test.guardar');
+Route::get('/tareas/{curso_id}/{tarea_id}/resultado', [TareaController::class, 'mostrarResultado'])->name('tarea.resultado');
 
 
 // Ruta para eliminar una tarea
@@ -99,7 +100,7 @@ Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class
 // Muestra las tareas de un curso específico para un alumno
 //Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
 
-Route::get('/cursos/{curso_id}/tareas/{tarea_id}', [TareaController::class, 'verTarea'])->name('tareas.ver');
+
 
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
     ->name('tarea.resultados');

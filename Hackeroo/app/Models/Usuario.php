@@ -24,6 +24,9 @@ class Usuario extends Authenticatable
         'email',
         'contraseña',
         'rol',
+        'puntos',
+        'color',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -35,13 +38,13 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
         'rol' => 'string',
     ];
-    
+
     // Autenticación: Indicar que el email es el identificador del usuario
     public function getAuthIdentifierName()
     {
         return 'email';
     }
-    
+
     public function getAuthPassword()
     {
         return $this->contraseña;
@@ -58,8 +61,5 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Curso::class, 'profesor_dni', 'DNI');
     }
-
-
-
 }
  
