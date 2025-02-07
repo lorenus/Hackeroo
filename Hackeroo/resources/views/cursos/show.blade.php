@@ -12,6 +12,29 @@
     </div>
 
 
+    <!-- MENSAJE DE TODO OK O TODO MAL -->
+    @if (session('status') || session('error'))
+    @php
+    $message = session('status') ?: session('error');
+    $statusType = session('status') ? 'success' : 'error';
+    @endphp
+
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-{{ $statusType }} d-flex align-items-center w-auto mx-3" role="alert" style="max-width: 500px;">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="{{ ucfirst($statusType) }}:">
+                <use xlink:href="#{{ $statusType === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill' }}" />
+            </svg>
+            <div>
+                {{ $message }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    @endif
+
+
+
+    
     <h2 class='text-center mb-3'>{{ $curso->nombre }}</h2>
 
 
@@ -34,8 +57,7 @@
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
-
-                            <a href="{{ route('tareas.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}">
+                            <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}">
                                 <h6>{{ $tarea->titulo }}</h6>
                             </a>
                             <p>{{$tarea->descripcion}}</p>
