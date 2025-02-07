@@ -17,7 +17,7 @@
         @csrf
         <fieldset>
             <legend>Mis Alumnos</legend>
-            <div class="tabla-scroll-container">
+            <div class="tabla-scroll-container tabla-mis-alumnos">
                 <table>
                     <thead>
                         <tr>
