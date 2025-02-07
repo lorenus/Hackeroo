@@ -54,14 +54,13 @@ h6 {
 .boton {
     @include boton;
 
-    >a,
+    > a,
     a.boton {
         font-family: $fuenteTitulos;
         margin-top: -7px;
         color: $amarillo_fondo;
         font-size: x-large;
     }
-
 }
 
 a.boton {
@@ -286,8 +285,7 @@ footer {
 /* H */
 .texto-animado-menu span:nth-child(3)
 
-/* / */
-    {
+/* / */ {
     opacity: 1;
     /* Este ya es visible */
 }
@@ -387,7 +385,8 @@ form {
 
     // Estilo específico para .libreta
     .libreta {
-        background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
+        background: linear-gradient(to bottom, $amarillo 2px, transparent 1px)
+            repeat-y;
         background-size: 100% 1.5em;
         padding-left: 5px;
         line-height: 1.5em;
@@ -395,7 +394,8 @@ form {
         resize: none;
 
         &:focus {
-            background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
+            background: linear-gradient(to bottom, $azul 2px, transparent 1px)
+                repeat-y;
             outline: none;
             /* Elimina el borde predeterminado del focus */
         }
@@ -532,8 +532,6 @@ form {
     object-fit: contain !important;
 }
 
-
-
 //CURSOS
 .contenido-cursos {
     min-height: 50vh;
@@ -548,14 +546,13 @@ fieldset {
     @media (min-width: 780px) {
         max-width: 50vw;
     }
-
 }
 
 legend {
     font-family: $fuenteTitulos;
     width: auto;
     font-size: 22px;
-    color: #455A64;
+    color: #455a64;
     background-color: $amarillo_fondo;
     padding: 0 10px;
     position: absolute;
@@ -572,6 +569,9 @@ legend {
 .tabla-scroll-container {
     height: 30vh;
     overflow-y: auto;
+    td{
+        font-family: 'Itim';
+    }
 }
 
 .contenedor-cursos {
@@ -640,13 +640,15 @@ tr {
     border: 5px solid $verde;
     border-radius: 20px;
     max-width: 300px;
-
 }
 
 .curso-acciones {
     border-left: 5px solid $verde;
 }
 
+.tarea-card{
+    color: $gris;
+}
 
 //RANKING
 .ranking-container {
@@ -660,19 +662,19 @@ tr {
         $color-width-list: (
             (amarillo, $amarillo, 100%),
             (verde, $verde, 85%),
-            (azul, $azul, 65%),
+            (azul, $azul, 65%)
         );
 
-    // Iterar sobre la lista para aplicar colores y tamaños
+        // Iterar sobre la lista para aplicar colores y tamaños
         @each $name, $color, $width in $color-width-list {
             &.#{$name} {
-            background-color: $color;
-            width: $width;
-            border-radius: 0 0 15px 0;
+                background-color: $color;
+                width: $width;
+                border-radius: 0 0 15px 0;
             }
         }
 
-        h4{
+        h4 {
             margin-bottom: 0;
         }
     }
@@ -682,4 +684,16 @@ tr {
     width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+
+//CURSOS-TAREAS DE ALUMNOS
+.ver-tareas-alumnos .pregunta {
+    text-align: left;
+    margin: 20px 15px 0 0;
+    padding-left: 7vh;
+}
+
+.text-danger, .text-success{
+    opacity: 100%;
 }

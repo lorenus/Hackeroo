@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cerrar = document.querySelector('.cerrar');
 
     if (toggler && abrir && cerrar) {
-        toggler.addEventListener('click', function() {
+        toggler.addEventListener('click', function () {
             const isExpanded = toggler.getAttribute('aria-expanded') === 'false';
             abrir.style.display = isExpanded ? 'block' : 'none';
             cerrar.style.display = isExpanded ? 'none' : 'block';
@@ -95,4 +95,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 archivoInput.removeAttribute('required');
             }
         });
+
+         ////////FILTRAR ALUMNOS
+    function filterAlumnos() {
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+        const rows = document.querySelectorAll('.alumno-row');
+
+        rows.forEach(row => {
+            const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+            if (nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // Añadir el event listener al campo de búsqueda
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('search');
+        if (searchInput) {
+            searchInput.addEventListener('input', filterAlumnos);
+        }
+    });
+});
 });

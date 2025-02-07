@@ -97,7 +97,7 @@ Route::get('/curso/{curso_id}/tarea/{tarea_id}', [TareaController::class, 'verTa
 Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class, 'enviarRespuestas'])->name('tarea.enviar');
 
 // Muestra las tareas de un curso específico para un alumno
-Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
+//Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
 
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}', [TareaController::class, 'verTarea'])->name('tareas.ver');
 

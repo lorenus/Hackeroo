@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row mb-3 volver">
         <div class="col-12 text-left">
@@ -13,10 +12,10 @@
 
     <h2 class='text-center'>Editar {{ $curso->nombre }}</h2>
     <div class='row'>
-    <div class='col-12 col-md-6'>
-        <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+        <div class='col-12 col-md-6'>
+            <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
                 <div class="mb-5 mt-3 text-md-start">
                     <x-input-label for="nombre" :value="__('Nombre del curso:')" />
