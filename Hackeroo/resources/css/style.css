@@ -712,4 +712,90 @@ tr {
   opacity: 100%;
 }
 
+/* Estilos para la cuadrícula de colores */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
+  gap: 10px;
+  padding: 10px;
+}
+
+.color-item {
+  width: 100%;
+  padding-top: 100%; /* Hace que los ítems sean cuadrados */
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Estilos para la cuadrícula de colores */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
+  gap: 10px;
+  padding: 10px;
+}
+
+.color-item {
+  width: 100%;
+  padding-top: 100%; /* Hace que los ítems sean cuadrados */
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Estilos para la cuadrícula de colores */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
+  gap: 10px;
+  padding: 10px;
+}
+
+.color-item {
+  width: 100%;
+  padding-top: 100%; /* Hace que los ítems sean cuadrados */
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Estilos para la cuadrícula de imágenes */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 10px;
+  padding: 10px;
+}
+
+.image-item {
+  width: 100px; /* Tamaño fijo para los contenedores */
+  height: 100px; /* Tamaño fijo para los contenedores */
+  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+  background-position: center; /* Centra la imagen */
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 50%; /* Opcional: para imágenes redondas */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .color-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en tamaño pequeño */
+  }
+  .image-item {
+    width: 80px; /* Tamaño más pequeño en pantallas pequeñas */
+    height: 80px;
+  }
+}
+@media (max-width: 576px) {
+  .color-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tamaño muy pequeño */
+  }
+  .image-item {
+    width: 60px; /* Tamaño más pequeño en pantallas muy pequeñas */
+    height: 60px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

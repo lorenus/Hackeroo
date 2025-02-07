@@ -90,8 +90,8 @@
             <img src="/img/iconos/corona.png" alt="Imagen 2" class="img-corona d-none d-md-block">
             <!-- Textos (nivel y puntos) -->
             <div class="d-flex flex-row flex-md-column">
-                <h5 class="me-3">Nivel 3</h5>
-                <h5>100 pts</h5>
+                <h5 class="text-center">Nivel 3</h5>
+                <h5>{{ Auth::user()->puntos }} puntos</h5>
             </div>
         </div>
     </div>
