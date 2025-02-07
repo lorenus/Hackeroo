@@ -13,7 +13,7 @@ class CreateTareasTable extends Migration
             $table->string('titulo');
             $table->text('descripcion');
             $table->enum('tipo', ['test', 'archivo', 'link']);
-            $table->integer('numero_preguntas')->nullable(); 
+           
             $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade'); // Relación con cursos
             $table->timestamps();
         });

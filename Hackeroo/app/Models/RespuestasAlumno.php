@@ -10,8 +10,8 @@ class RespuestasAlumno extends Model
     use HasFactory;
 
     protected $fillable = [
-        'alumno_id',        // Relación con el alumno
-        'opciones_respuesta_id', // Relación con la opción de respuesta seleccionada
+        'usuario_dni',        // Relación con el alumno
+        'opcion_respuesta_id', // Relación con la opción de respuesta seleccionada
         'pregunta_id',      // Relación con la pregunta
         'es_correcta',      // Indica si la respuesta es correcta o no
     ];

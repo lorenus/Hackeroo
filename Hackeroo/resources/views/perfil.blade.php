@@ -12,9 +12,9 @@
 @if(Auth::user()->rol == 'profesor')
 <div class="container contenedor-perfil d-flex flex-column justify-content-center">
 
-    <div class="perfil row-12 mb-3 d-flex justify-content-center align-items-center ps-5 pe-5">
+    <div class="perfil row-12 mb-3 d-flex justify-content-center align-items-center ps-5 pe-5 ">
         <!-- Imagen y nombre de usuario -->
-        <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
+        <div class="d-flex flex-row align-items-center mb-3 mb-md-0 " >
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
             <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
@@ -56,7 +56,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>
@@ -79,7 +79,7 @@
 
     <div class="perfil row-12 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-center ps-5 pe-5">
         <!-- Imagen y nombre de usuario -->
-        <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
+        <div class="d-flex flex-row align-items-center mb-3 mb-md-0" >
             <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3">
             <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
         </div>
@@ -90,8 +90,8 @@
             <img src="/img/iconos/corona.png" alt="Imagen 2" class="img-corona d-none d-md-block">
             <!-- Textos (nivel y puntos) -->
             <div class="d-flex flex-row flex-md-column">
-                <h5 class="me-3">Nivel 3</h5>
-                <h5>100 pts</h5>
+                <h5 class="text-center">Nivel 3</h5>
+                <h5>{{ Auth::user()->puntos }} puntos</h5>
             </div>
         </div>
     </div>
@@ -132,7 +132,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>
