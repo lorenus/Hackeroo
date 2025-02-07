@@ -9,6 +9,7 @@ use App\Models\Tarea;
 use App\Models\Curso;
 use App\Models\Pregunta;
 use App\Models\OpcionesRespuesta;
+use App\Models\RespuestasAlumno;
 use App\Models\RecursoMultimedia;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -206,42 +207,59 @@ class TareaController extends Controller
         // Obtener la tarea y el curso
         $curso = Curso::findOrFail($curso_id);
         $tarea = Tarea::findOrFail($tarea_id);
-
-
-        // Inicializar un array para almacenar los resultados
+    
+        // Inicializar variables
         $resultados = [];
-
-
-        // Evaluar cada pregunta
+        $puntuacion = 0;
+        $total_preguntas = $tarea->preguntas->count();
+        $valor_pregunta = 10 / $total_preguntas; // Valor proporcional de cada pregunta
+    
+        // Recorrer cada pregunta de la tarea
         foreach ($tarea->preguntas as $pregunta) {
             // Verificar si se ha enviado una respuesta para esta pregunta
             $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
-
-
-            // Si el usuario ha respondido
+    
             if ($respuesta_usuario) {
                 // Obtener la opción seleccionada por el alumno
                 $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
-
-
-                // Verificar si la opción seleccionada es correcta
-                // Aquí comparamos con el campo `es_correcta`
-                $resultados[] = [
-                    'pregunta' => $pregunta->enunciado,
-                    'respuesta_usuario' => $opcion->respuesta,
-                    'respuesta_correcta' => $opcion->es_correcta ? 'Correcta' : 'Incorrecta',  // Verificamos si es correcta
-                    'acertada' => $opcion->es_correcta // Aquí verificamos si la respuesta es correcta
-                ];
+    
+                // Guardar la respuesta del alumno en la tabla respuestas_alumnos
+                RespuestasAlumno::create([
+                    'pregunta_id' => $pregunta->id,
+                    'usuario_dni' => Auth::user()->DNI, // Suponemos que el usuario está autenticado
+                    'opcion_respuesta_id' => $opcion->id,
+                ]);
+    
+                // Evaluar si la respuesta es correcta
+                if ($opcion->es_correcta) {
+                    $puntuacion += $valor_pregunta; // Sumar el valor de la pregunta
+                    $resultado = 'Correcta';
+                } else {
+                    $puntuacion -= $valor_pregunta / 3; // Restar un tercio del valor de la pregunta
+                    $resultado = 'Incorrecta';
+                }
+            } else {
+                // Si no se respondió, no suma ni resta puntos
+                RespuestasAlumno::create([
+                    'pregunta_id' => $pregunta->id,
+                    'usuario_dni' => Auth::user()->DNI,
+                    'opcion_respuesta_id' => null, // Sin respuesta
+                ]);
+                $resultado = 'Sin responder';
             }
+    
+            // Almacenar el resultado de esta pregunta
+            $resultados[] = [
+                'pregunta' => $pregunta->enunciado,
+                'respuesta_usuario' => $respuesta_usuario ? $opcion->respuesta : 'Sin responder',
+                'resultado' => $resultado,
+            ];
         }
-
-
-        // Calcular el puntaje (puedes hacerlo si quieres mostrar el puntaje total)
-        $aciertos = count(array_filter($resultados, fn($resultado) => $resultado['acertada']));
-        $total = count($tarea->preguntas);
-
-
-        // Pasar los resultados a la vista para mostrar al usuario
-        return view('tareas.resultado', compact('resultados', 'aciertos', 'total', 'curso', 'tarea'));
+    
+        // Asegurarse de que la puntuación no sea negativa
+        $puntuacion = max(0, $puntuacion);
+    
+        // Pasar los resultados y la puntuación a la vista
+        return view('tareas.resultado', compact('resultados', 'puntuacion', 'total_preguntas', 'curso', 'tarea'));
     }
 }
