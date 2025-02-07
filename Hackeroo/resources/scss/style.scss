@@ -573,6 +573,9 @@ legend {
 .tabla-scroll-container {
     height: 30vh;
     overflow-y: auto;
+    td{
+        font-family: 'Itim';
+    }
 }
 
 .contenedor-cursos {

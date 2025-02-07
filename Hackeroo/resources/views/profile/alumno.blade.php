@@ -15,7 +15,7 @@
         @csrf
         <fieldset>
             <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }}</legend>
-            <div class="tabla-scroll-container">
+            <div class="tabla-scroll-container tabla-mis-alumnos">
                 <table>
                     <thead>
                         <tr>
