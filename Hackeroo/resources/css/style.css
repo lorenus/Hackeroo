@@ -6,13 +6,27 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  /* Asegura que el cuerpo ocupe toda la altura */
 }
 
 body {
   background-color: #FFD87F;
   font-family: "Itim";
   color: #455A64;
+}
+
+/* Cursor normal (flecha) */
+body {
+  cursor: url("/img/cursors/left_ptr.cur"), auto;
+}
+
+/* Cursor de texto (I-beam) */
+p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
+  cursor: url("/img/cursors/xterm.cur"), auto;
+}
+
+/* Cursor de mano (para enlaces y elementos interactivos) */
+a, button, .hand-cursor, .boton, .btn, input[type=checkbox] {
+  cursor: url("/img/cursors/pointer.cur"), auto !important;
 }
 
 a {
@@ -158,6 +172,7 @@ footer {
   justify-content: center;
   align-items: center;
   min-height: 75vh;
+  max-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -384,7 +399,6 @@ form {
 }
 form .form-lineas,
 form .libreta {
-  color: "Itim";
   display: block;
   width: 100%;
   font-family: "Itim";
@@ -596,7 +610,6 @@ td {
 
 tr {
   border-bottom: 3px solid #FFB300;
-  /* Color de borde */
 }
 
 .cursos-container {

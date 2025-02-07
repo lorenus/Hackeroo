@@ -12,7 +12,7 @@
     </div>
 
 
-    <h2 class='text-center'>{{ $curso->nombre }}</h2>
+    <h2 class='text-center mb-3'>{{ $curso->nombre }}</h2>
 
 
     <div class="row mb-3">
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <h2 class='text-center'>Tareas del curso</h2>
+    <h5 class='text-center'>Tareas del curso</h5>
     <div class="row contenido-cursos">
         <div class="col-12">
             @if ($curso->tareas->count() > 0)
@@ -30,13 +30,13 @@
 
                     @foreach ($curso->tareas as $tarea)
 
-                    <div class="curso-item col-md-5 ms-md-5 mb-3">
+                    <div class="curso-item col-md-5 me-3 mb-3">
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
 
                             <a href="{{ route('tareas.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}">
-                                <h5>{{ $tarea->titulo }}</h5>
+                                <h6>{{ $tarea->titulo }}</h6>
                             </a>
                             <p>{{$tarea->descripcion}}</p>
                         </div>
