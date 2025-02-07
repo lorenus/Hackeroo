@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form action="{{ route('tarea.enviar', ['curso_id' => $curso_id, 'tarea_id' => $tarea->id]) }}" method="POST">
+    <form action="{{ route('tarea.enviar', ['curso_id' => $curso_id, 'tarea_id' => $tarea->id]) }}" method="POST" class="d-flex justify-content-center align-items-center">
         @csrf
         <fieldset class="tabla-tarea">
             <legend>
@@ -19,7 +19,7 @@
                         <!-- <p>{{ $tarea->descripcion }}</p> -->
                     </div>
             </legend>
-            <div class="tabla-scroll-container tabla-scroll-container-tarea">
+            <div class="tabla-scroll-container">
                 <table class="ver-tareas-alumnos">
                     @foreach($tarea->preguntas as $pregunta)
                     <tr>

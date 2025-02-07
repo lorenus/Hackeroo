@@ -20,9 +20,9 @@
 
     <!-- Contenedor para centrar el fieldset -->
     <div class="d-flex justify-content-center">
-        <fieldset class="fieldset-solucion-tarea">
+        <fieldset class="mt-0">
             <div class="row">
-                <div class="tabla-scroll-container tabla-scroll-container-tarea">
+                <div class="tabla-scroll-container">
                     <table class="ver-tareas-alumnos">
                         @foreach($tarea->preguntas as $pregunta)
                         <tr>
