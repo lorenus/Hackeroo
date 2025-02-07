@@ -1,19 +1,19 @@
-import '../css/style.css'; // Importa el archivo CSS
+import "../css/style.css"; // Importa el archivo CSS
 
-console.log('El archivo animaciones.js se está ejecutando');
+console.log("El archivo animaciones.js se está ejecutando");
 
-document.addEventListener('DOMContentLoaded', function () {
-
+document.addEventListener("DOMContentLoaded", function () {
     /////////////////////////////////////////////////////////////MENU MOVIL
-    const toggler = document.querySelector('.navbar-toggler');
-    const abrir = document.querySelector('.abrir');
-    const cerrar = document.querySelector('.cerrar');
+    const toggler = document.querySelector(".navbar-toggler");
+    const abrir = document.querySelector(".abrir");
+    const cerrar = document.querySelector(".cerrar");
 
     if (toggler && abrir && cerrar) {
-        toggler.addEventListener('click', function () {
-            const isExpanded = toggler.getAttribute('aria-expanded') === 'false';
-            abrir.style.display = isExpanded ? 'block' : 'none';
-            cerrar.style.display = isExpanded ? 'none' : 'block';
+        toggler.addEventListener("click", function () {
+            const isExpanded =
+                toggler.getAttribute("aria-expanded") === "false";
+            abrir.style.display = isExpanded ? "block" : "none";
+            cerrar.style.display = isExpanded ? "none" : "block";
         });
     }
 

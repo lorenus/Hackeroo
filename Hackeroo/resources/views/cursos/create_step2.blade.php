@@ -10,52 +10,80 @@
             </a>
         </div>
     </div>
+    <fieldset class="reset">
+        <legend class="reset">Nuevo curso</legend>
+        <div class="mb-5 mt-3 text-md-start">
+            <h6>Selecciona los alumnos que quieras añadir</h6>
 
-    <div class="d-flex justify-content-center">
-        <fieldset class="reset">
-            <legend class="reset">Nuevo curso</legend>
-            <div class="mb-5 mt-3 text-center">
-                <h6>Selecciona los alumnos que quieras añadir</h6>
+            <div class="input-group mb-4">
+                <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" />
+            </div>
 
-                <div class="mb-5 mt-3 text-md-start">
-                    <div class="mb-3">
-                        <form action="{{ route('cursos.store.step2') }}" method="POST">
-                            @csrf
-                            <div class="tabla-scroll-container"> 
-                                <table class="tabla-con-fuente"> 
-                                    <thead>
-                                        <tr>
-                                            <td></td>
-                                            <td>Nombre</td>
-                                            <td>DNI</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($alumnos as $alumno)
-                                        <tr class="texto-tabla">
-                                            <td>
-                                                <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
-                                            </td>
-                                            <td class="texto-tabla">{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
-                                            <td class="texto-tabla">{{ $alumno->DNI }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-12 mt-3 text-center mt-4">
-                                <x-primary-button type="submit">Crear curso</x-primary-button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="mb-5 mt-3 text-md-start">
+                <div class="mb-3">
+                    <form action="{{ route('cursos.store.step2') }}" method="POST">
+                        @csrf
+                        <div class="tabla-scroll-container"> 
+                            <table id="alumnos-table"> 
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nombre</th>
+                                        <th>DNI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($alumnos as $alumno)
+                                    <tr class="alumno-row">
+                                        <td>
+                                            <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}">
+                                        </td>
+                                        <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
+                                        <td>{{ $alumno->DNI }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 mt-3 text-center mt-4">
+                            <x-primary-button type="submit">Crear curso</x-primary-button>
+                        </div>
+                    </form>
                 </div>
-
-        </fieldset>
-
-
-
-
-    </div>
-
+            </div>
+    </fieldset>
+    </form>
 </div>
+
+<script>
+    function filterAlumnos() {
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+        const rows = document.querySelectorAll('.alumno-row');
+
+        if (searchTerm === "") {
+            rows.forEach(row => {
+                row.style.display = ''; 
+            });
+        } else {
+            rows.forEach(row => {
+                const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const dni = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+              
+                if (nombre.includes(searchTerm) || dni.includes(searchTerm)) {
+                    row.style.display = ''; 
+                } else {
+                    row.style.display = 'none'; 
+                }
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search');
+        if (searchInput) {
+            searchInput.addEventListener('input', filterAlumnos); 
+        }
+    });
+</script>
 @endsection
