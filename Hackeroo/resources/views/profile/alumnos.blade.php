@@ -15,20 +15,22 @@
         @csrf
         <fieldset>
             <legend>Mis Alumnos</legend>
+            <div class="input-group mb-4">
+                    <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" />
+                </div>
             <div class="tabla-scroll-container">
-                <table>
+                <table id="alumnos-table">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Curso 1</th>
-                            <th>Curso 2</th>
+                            <td>Nombre</td>
+                            <td>Curso 1</td>
+                            <td>Curso 2</td>
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($alumnos) > 0)
                         @foreach($alumnos as $index => $alumno)
-                        <tr>
-                        <tr>
+                        <tr class="alumno-row">
                             <td>
                                 <a href="{{ route('ver.alumno', $alumno->DNI) }}" style="text-decoration: none; color: inherit; display: block;">
                                     {{ $alumno->nombre }} {{ $alumno->apellidos }}
@@ -57,6 +59,30 @@
         </fieldset>
     </form>
 </div>
+<script>
+    function filterAlumnos() {
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+        const rows = document.querySelectorAll('.alumno-row');
+
+        rows.forEach(row => {
+            const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+            if (searchTerm === "" || nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search');
+        if (searchInput) {
+            searchInput.addEventListener('input', filterAlumnos); // Correct event listener
+        }
+    });
+    </script>
 </div> <!-- fin contenedor principal-->
 
 @endsection
