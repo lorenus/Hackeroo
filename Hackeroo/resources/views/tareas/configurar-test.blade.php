@@ -1,82 +1,53 @@
+@extends('layouts.app')
+
+
+@section('content')
 <div class="container">
-    <h2>Crear Test</h2>
+    <!-- Botón para volver -->
+    <div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('cursos.show', ['id'=>$tarea->curso_id]) }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
+    </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    <form method="POST" action="{{ route('tarea.test.store') }}">
+    <h2 class='text-center'>Crear test</h2>
+    <div class='contenedor-cursos'>
+    <form action="{{ route('tarea.test.guardar', ['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}"
+        method="POST">
         @csrf
-        <div class="mb-3">
-            <label for="titulo" class="form-label">Título de la tarea</label>
-            <input type="text" class="form-control" name="titulo" required>
-        </div>
 
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea class="form-control" name="descripcion" required></textarea>
-        </div>
+        @for ($i = 1; $i <= $numero_preguntas; $i++) <div class="form-group mb-5">
+            <h4>Pregunta {{ $i}}</h4>
+            <div class="form-group d-flex align-items-center mb-2">
 
-        <div class="mb-3">
-            <label for="curso_id" class="form-label">Selecciona el curso</label>
-            <select class="form-control" name="curso_id" required>
-                @foreach(Auth::user()->cursos_profesor as $curso)
-                    <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
+                <label class='text-nowrap me-2' for="pregunta{{ $i }}">Enunciado:</label>
+                <x-text-input id="pregunta{{ $i }}" class="form-control block mb-3" type="text"
+                    name="preguntas[{{ $i }}][enunciado]" required />
+            </div>
+            <h4>Respuestas</h4>
+            @for ($j = 1; $j <= 4; $j++) <div class="form-group d-flex align-items-center mb-2">
+                <label class='text-nowrap me-2' for="opcion{{ $i }}{{ $j }}">Opción {{ $j }}:</label>
+                <x-text-input id="opcion{{ $i }}{{ $j }}" class="form-control me-2" type="text"
+                    name="preguntas[{{ $i }}][opciones][{{ $j }}][respuesta]" required />
 
-        <h4>Preguntas</h4>
-        <div id="preguntas-container">
-         
-        </div>
-        <button type="button" class="btn btn-secondary" id="add-question">Añadir pregunta</button>
-        <button type="submit" class="btn btn-primary">Guardar Test</button>
-    </form>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="preguntas[{{ $i }}][respuesta_correcta]"
+                        value="{{ $j }}" required>
+                    <label class="form-check-label" for="opcion{{ $i }}{{ $j }}">Correcta</label>
+                </div>
+</div>
+@endfor
+</div>
+@endfor
+<div class="col-12 mt-3 text-center mt-4">
+    <x-primary-button type="submit" class="btn btn-primary">Guardar</x-primary-button>
 </div>
 
-<script>
-    document.getElementById('add-question').addEventListener('click', function() {
-    let container = document.getElementById('preguntas-container');
-    let index = container.children.length;
-    let html = `
-        <div class="pregunta">
-            <label>Enunciado de la pregunta:</label>
-            <input type="text" class="form-control" name="preguntas[${index}][enunciado]" required>
 
-            <label>Respuestas:</label>
-            <div class="respuestas-container">
-                <div class="respuesta">
-                    <input type="text" class="form-control" name="preguntas[${index}][opcionesespuestas][0][respuesta]" required>
-                    <input type="radio" name="preguntas[${index}][respuesta_correcta]" value="0" required> Correcta
-                    <input type="hidden" name="preguntas[${index}][opcionesespuestas][0][es_correcta]" value="0">
-                </div>
-                <div class="respuesta">
-                    <input type="text" class="form-control" name="preguntas[${index}][opcionesespuestas][1][respuesta]" required>
-                    <input type="radio" name="preguntas[${index}][respuesta_correcta]" value="1" required> Correcta
-                    <input type="hidden" name="preguntas[${index}][opcionesespuestas][1][es_correcta]" value="1">
-                </div>
-                <div class="respuesta">
-                    <input type="text" class="form-control" name="preguntas[${index}][opcionesespuestas][2][respuesta]" required>
-                    <input type="radio" name="preguntas[${index}][respuesta_correcta]" value="2" required> Correcta
-                    <input type="hidden" name="preguntas[${index}][opcionesespuestas][2][es_correcta]" value="0">
-                </div>
-                <div class="respuesta">
-                    <input type="text" class="form-control" name="preguntas[${index}][opcionesespuestas][3][respuesta]" required>
-                    <input type="radio" name="preguntas[${index}][respuesta_correcta]" value="3" required> Correcta
-                    <input type="hidden" name="preguntas[${index}][opcionesespuestas][3][es_correcta]" value="0">
-                </div>
-            </div>
-
-            <button type="button" class="btn btn-danger remove-question">Eliminar</button>
-        </div>
-    `;
-    container.insertAdjacentHTML('beforeend', html);
-});
-
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('remove-question')) {
-        e.target.closest('.pregunta').remove();
-    }
-});
-</script>
+</form>
+</form>
+</div>
+</div>
+@endsection

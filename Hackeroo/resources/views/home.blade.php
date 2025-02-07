@@ -2,13 +2,15 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla Básica</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackeroo</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantilla Básica</title>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +41,7 @@
           </li>
           <li class="nav-item ms-4">
             <div class="enlace-con-subrayado">
-              <a class="nav-link" href="{{ route('info') }}">Contáctanos</a>
+              <a class="nav-link" href="{{ route('contacto') }}">Contáctanos</a>
               <div class="subrayado3"></div>
             </div>
           </li>
@@ -50,7 +52,7 @@
             </div>
           </li>
           <div class="boton col-12 d-flex justify-content-center mt-5 ms-4 d-block d-sm-none">
-            <a href="#">
+            <a href="{{route('login')}}">
               <p>Entrar</p>
             </a>
           </div>
@@ -67,17 +69,17 @@
 
         <div class="logo col-12 text-center mb-5">
             <h1 class="texto-animado">
-                <span>&lt;</span>
-                <span class="letra">H</span>
-                <span class="letra">a</span>
-                <span class="letra">c</span>
-                <span class="letra">k</span>
-                <span class="letra">e</span>
-                <span class="letra">r</span>
-                <span class="letra">o</span>
-                <span class="letra">o</span>
-                <span>/</span>
-                <span>&gt;</span>
+                <span class="hand-cursor">&lt;</span>
+                <span class="letra hand-cursor">H</span>
+                <span class="letra hand-cursor">a</span>
+                <span class="letra hand-cursor">c</span>
+                <span class="letra hand-cursor">k</span>
+                <span class="letra hand-cursor">e</span>
+                <span class="letra hand-cursor">r</span>
+                <span class="letra hand-cursor">o</span>
+                <span class="letra hand-cursor">o</span>
+                <span class="hand-cursor">/</span>
+                <span class="hand-cursor">&gt;</span>
             </h1>
         </div>
 
@@ -85,11 +87,11 @@
         <div class="boton col-12 d-flex justify-content-center">
             @if (Auth::check())
             <a href="{{ route('perfil') }}">
-                <p>Entrar</p>
+                <p class="hand-cursor">Entrar</p>
             </a>
             @else
             <a href="{{ route('login') }}">
-                <p>Entrar</p>
+                <p class="hand-cursor">Entrar</p>
             </a>
             @endif
         </div>

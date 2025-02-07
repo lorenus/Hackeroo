@@ -76,26 +76,26 @@ class CursoController extends Controller
         Session::forget('curso');
 
         // Redirigir con mensaje de éxito
-        return redirect()->route('cursos.create.step1')->with('success', 'Curso creado correctamente.');
+        return redirect()->route('cursos')->with('success', 'Curso creado correctamente.');
     }
     public function index()
     {
         // Verificar si el usuario está autenticado
-    if (!Auth::check()) {
-        return redirect()->route('login'); // Redirigir al login si no está autenticado
-    }
+        if (!Auth::check()) {
+            return redirect()->route('login'); // Redirigir al login si no está autenticado
+        }
 
-    // Verificar si el usuario es un profesor
-    if (Auth::user()->rol !== 'profesor') {
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
+        // Verificar si el usuario es un profesor
+        if (Auth::user()->rol !== 'profesor') {
+            return abort(403, 'No tienes permiso para acceder a esta página.');
+        }
 
-    // Obtener los cursos del profesor logueado
-    $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
+        // Obtener los cursos del profesor logueado
+        $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
 
 
-    // Retornar la vista con los cursos
-    return view('cursos.index', compact('cursos'));
+        // Retornar la vista con los cursos
+        return view('cursos.index', compact('cursos'));
     }
     public function indexForAlumnos()
     {
@@ -118,10 +118,12 @@ class CursoController extends Controller
         if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
             // Obtener todos los alumnos disponibles
             $alumnos = Usuario::where('rol', 'alumno')->get();
-
-            return view('cursos.edit', compact('curso', 'alumnos')); // Pasar el curso y los alumnos a la vista
+    
+            $cursos_alumnos = $curso->alumnos()->pluck('DNI');
+    
+            return view('cursos.edit', compact('curso', 'alumnos', 'cursos_alumnos'));
         }
-
+    
         // Si no es el profesor del curso, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para editar este curso.');
     }
@@ -150,7 +152,7 @@ class CursoController extends Controller
             $curso->alumnos()->sync($request->alumnos); // Esto reemplaza la lista de alumnos por la nueva selección
 
             // Redirigir con mensaje de éxito
-            return redirect()->route('cursos.index')->with('success', 'Curso actualizado correctamente.');
+            return redirect()->route('cursos')->with('success', 'Curso actualizado correctamente.');
         }
 
         // Si no es el profesor del curso, redirigir o abortar con un error 403
@@ -165,10 +167,32 @@ class CursoController extends Controller
             $curso->delete();
 
             // Redirigir con mensaje de éxito
-            return redirect()->route('cursos.index')->with('success', 'Curso eliminado correctamente.');
+            return redirect()->route('cursos')->with('success', 'Curso eliminado correctamente.');
         }
 
         // Si no es el profesor del curso, redirigir o abortar con un error 403
         return abort(403, 'No tienes permiso para eliminar este curso.');
+    }
+    public function show($id)
+    {
+
+        $curso = Curso::with('tareas')->findOrFail($id);
+
+
+        if ($curso->profesor_dni !== Auth::user()->DNI) {
+            return abort(403, 'No tienes permiso para ver este curso.');
+        }
+
+
+        return view('cursos.show', compact('curso'));
+    }
+    public function showAlumno($id)
+    {
+        $curso = Curso::findOrFail($id);
+
+
+        $tareas = $curso->tareas; // Obtener las tareas del curso
+
+        return view('cursos.show_alumno', compact('curso', 'tareas'));
     }
 }

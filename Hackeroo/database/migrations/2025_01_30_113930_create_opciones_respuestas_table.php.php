@@ -9,10 +9,11 @@ class CreateOpcionesRespuestasTable extends Migration
     {
         Schema::create('opciones_respuestas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pregunta_id')->constrained('preguntas')->onDelete('cascade');
+            $table->unsignedBigInteger('pregunta_id');        
             $table->text('respuesta'); // Texto de la respuesta
             $table->boolean('es_correcta')->default(false); // Indica si es la respuesta correcta
             $table->timestamps();
+            $table->foreign('pregunta_id')->references('id')->on('preguntas')->onDelete('cascade');
         });
     }
 

@@ -30,5 +30,8 @@ class Curso extends Model
         return $this->belongsTo(Usuario::class, 'profesor_dni', 'DNI')
             ->where('rol', 'profesor'); // Filtra solo profesores
     }
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class, 'curso_id'); // Ajusta la clave foránea si es diferente
+    }
 }
-

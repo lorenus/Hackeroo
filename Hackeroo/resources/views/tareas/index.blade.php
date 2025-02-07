@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2>Mis Test</h2>
-    
+    <h2>Mis Tareas</h2>
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -24,7 +24,9 @@
                     <td>{{ $tarea->descripcion }}</td>
                     <td>{{ $tarea->curso->nombre }}</td>
                     <td>
-                        <a href="{{ route('tarea.test.edit', $tarea->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                        @if ($tarea->tipo !== 'test')  {{-- Check if the task is NOT a test --}}
+                            <a href="{{ route('tarea.test.edit', $tarea->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                        @endif
                         <form action="{{ route('tarea.test.destroy', $tarea->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
