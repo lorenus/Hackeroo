@@ -17,6 +17,11 @@
             <h2>Mis Cursos</h2>
         </div>
     </div>
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
+<!-- Mostrar mensaje de estado -->
+
 
     <!-- Botón para crear nuevo curso -->
     <div class="row mb-3">

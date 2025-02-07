@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container">
+    
     <div class="row mb-3 volver">
         <div class="col-12 text-left">
             <a href="{{ route('cursos') }}">
@@ -12,6 +13,8 @@
     </div>
 
     <h2 class='text-center'>Editar {{ $curso->nombre }}</h2>
+  
+
     <div class='row'>
     <div class='col-12 col-md-6'>
         <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
@@ -70,6 +73,30 @@
         </form>
     
     </div>
-</div>
+
+    <script>
+        function filterAlumnos() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const rows = document.querySelectorAll('.alumno-row');
+
+            rows.forEach(row => {
+                const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (searchTerm === "" || nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search');
+            if (searchInput) {
+                searchInput.addEventListener('input', filterAlumnos); // Correct event listener
+            }
+        });
+    </script>
 </div>
 @endsection
