@@ -74,8 +74,8 @@ Route::get('/tareas/{curso_id}/crear', [TareaController::class, 'crear'])->name(
 
 Route::post('/tareas/guardar', [TareaController::class, 'guardar'])->name('tarea.guardar');
 
-Route::get('/tareas/test/crear/{curso_id}/{tarea_id}', [TareaController::class, 'crearTest'])->name('tarea.test.create');
-Route::post('/tareas/test/guardar/{curso_id}/{tarea_id}', [TareaController::class, 'guardarTest'])->name('tarea.test.guardar');
+Route::get('/tareas/test/crear/{curso_id}', [TareaController::class, 'crearTest'])->name('tarea.test.create');
+Route::post('/tareas/test/guardar/{curso_id}', [TareaController::class, 'guardarTest'])->name('tarea.test.guardar');
 
 
 // Ruta para eliminar una tarea

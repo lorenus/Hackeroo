@@ -6,7 +6,7 @@
     <!-- Botón para volver -->
     <div class="row mb-3 volver">
         <div class="col-12 text-left">
-            <a href="{{ route('cursos.show', ['id'=>$tarea->curso_id]) }}">
+        <a href="{{ route('cursos.show', ['id' => $curso_id]) }}">
                 <img src="/img/botones/volver.png" alt="Volver">
             </a>
         </div>
@@ -14,8 +14,7 @@
 
     <h2 class='text-center'>Crear test</h2>
     <div class='contenedor-cursos'>
-    <form action="{{ route('tarea.test.guardar', ['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}"
-        method="POST">
+    <form action="{{ route('tarea.test.guardar', ['curso_id' => $curso_id]) }}" method="POST">
         @csrf
 
         @for ($i = 1; $i <= $numero_preguntas; $i++) <div class="form-group mb-5">
