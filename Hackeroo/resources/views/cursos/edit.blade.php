@@ -34,18 +34,11 @@
                 <div class="mb-5 mt-3 text-md-start">
                     <h6>Selecciona los alumnos que quieras añadir:</h6>
 
-                    <!-- Campo de búsqueda -->
-                    <div class="input-group mb-4">
-                        <input type="text" id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos">
-                        <button type="button" class="btn btn-primary" onclick="filterAlumnos()">Filtrar</button>
-                    </div>
 
         <!-- Campo de selección de alumnos -->
         <!-- Campo de búsqueda -->
         <div class="input-group mb-4">
-            <input type="text" id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos">
-            <!-- El botón ya no es necesario, pero lo dejamos por si acaso -->
-            <button type="button" class="btn btn-primary" onclick="filterAlumnos()">Filtrar</button>
+            <x-text-input id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" onkeypress='filterAlumnos()'/>
         </div>
 
         <!-- Tabla de alumnos -->
