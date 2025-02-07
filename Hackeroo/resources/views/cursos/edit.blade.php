@@ -38,7 +38,7 @@
         <!-- Campo de selección de alumnos -->
         <!-- Campo de búsqueda -->
         <div class="input-group mb-4">
-            <x-text-input id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" onkeypress='filterAlumnos()'/>
+            <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" onkeypress='filterAlumnos()'/>
         </div>
 
         <!-- Tabla de alumnos -->
