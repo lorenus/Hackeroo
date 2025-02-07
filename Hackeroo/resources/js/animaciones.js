@@ -56,4 +56,59 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.log('Elementos del select personalizado no encontrados:', { options, selector, customSelect });
         }
+
+
+        //////////////////////////////////////MOSTRAR OCULTAR CREAR TAREAS PROFESOR
+        // Mostrar campos según el tipo de tarea seleccionado
+        document.getElementById('tipo').addEventListener('change', function() {
+            var tipo = this.value;
+            var numeroPreguntasContainer = document.getElementById('numero_preguntas_container');
+            var archivoContainer = document.getElementById('archivo_container');
+            var linkContainer = document.getElementById('link_container');
+            var urlInput = document.getElementById('url');
+            var archivoInput = document.getElementById('archivo');
+        
+            // Mostrar el campo para número de preguntas solo si es un test
+            if (tipo === 'test') {
+                numeroPreguntasContainer.style.display = 'block';
+                archivoContainer.style.display = 'none';
+                linkContainer.style.display = 'none';
+                urlInput.removeAttribute('required');
+                archivoInput.removeAttribute('required');
+            } 
+            // Mostrar el campo para archivo solo si es archivo
+            else if (tipo === 'archivo') {
+                numeroPreguntasContainer.style.display = 'none';
+                archivoContainer.style.display = 'block';
+                linkContainer.style.display = 'none';
+                urlInput.removeAttribute('required');
+                archivoInput.setAttribute('required', true);
+            } 
+            // Mostrar el campo para link solo si es link
+            else if (tipo === 'link') {
+                numeroPreguntasContainer.style.display = 'none';
+                archivoContainer.style.display = 'none';
+                linkContainer.style.display = 'block';
+                urlInput.setAttribute('required', true);
+                archivoInput.removeAttribute('required');
+            }
+        });
+
+        ////////FILTRAR BUSQUEDA ALUMNOS
+        function filterAlumnos() {
+            const searchTerm = document.getElementById('search').value.toLowerCase(); 
+            const rows = document.querySelectorAll('.alumno-row'); 
+    
+            rows.forEach(row => {
+                const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); 
+                const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+    
+              
+                if (nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
+                    row.style.display = ''; 
+                } else {
+                    row.style.display = 'none'; 
+                }
+            });
+        }
 });
