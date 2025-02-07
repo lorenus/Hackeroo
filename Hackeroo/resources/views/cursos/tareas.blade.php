@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mb-3">
         <div class="col-12 text-left">
-            <a href="{{ route('cursos') }}">
+            <a href="@if(Auth::user()->rol == 'profesor') {{ route('cursos') }} @else {{ route('cursos-alumno') }} @endif">
                 <img src="/img/botones/volver.png" alt="Volver">
             </a>
         </div>
