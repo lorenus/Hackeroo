@@ -34,38 +34,37 @@
                 <div class="mb-5 mt-3 text-md-start">
                     <h6>Selecciona los alumnos que quieras añadir:</h6>
 
-                    <!-- Campo de búsqueda -->
-                    <div class="input-group mb-4">
-                        <input type="text" id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos">
-                        <button type="button" class="btn btn-primary" onclick="filterAlumnos()">Filtrar</button>
-                    </div>
 
-                    <!-- Tabla de alumnos -->
-                    <div class="tabla-scroll-container">
-                        <table id="alumnos-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Nombre</th>
-                                    <th>DNI</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($alumnos as $alumno)
-                                <tr class="alumno-row">
-                                    <td>
-                                        <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}"
-                                        {{ $cursos_alumnos->contains($alumno->DNI) ? 'checked' : '' }}>
-                                    </td>
-                                    <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
-                                    <td>{{ $alumno->DNI }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <!-- Campo de selección de alumnos -->
+        <!-- Campo de búsqueda -->
+        <div class="input-group mb-4">
+            <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" onkeypress='filterAlumnos()'/>
+        </div>
+
+        <!-- Tabla de alumnos -->
+        <div class="tabla-scroll-container">
+            <table id="alumnos-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>DNI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($alumnos as $alumno)
+                    <tr class="alumno-row">
+                        <td>
+                            <input type="checkbox" name="alumnos[]" value="{{ $alumno->DNI }}"
+                                {{ $cursos_alumnos->contains($alumno->DNI) ? 'checked' : '' }}>
+                        </td>
+                        <td>{{ $alumno->nombre }} {{ $alumno->apellidos }}</td>
+                        <td>{{ $alumno->DNI }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
             <div class="col-12 mt-3 text-center mt-4">
                 <x-primary-button type="submit">Actualizar</x-primary-button>
