@@ -2,23 +2,43 @@
 
 @section('content')
 <div class="container">
-    <h1>Editar Curso: {{ $curso->nombre }}</h1>
-
-    <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="form-group">
-            <label for="nombre">Nombre del Curso</label>
-            <input type="text" class="form-control" id="nombre" name="nombre"
-                value="{{ old('nombre', $curso->nombre) }}" required>
+    <div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('cursos') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="4"
-                required>{{ old('descripcion', $curso->descripcion) }}</textarea>
-        </div>
+    <h2 class='text-center'>Editar {{ $curso->nombre }}</h2>
+    <div class='row'>
+        <div class='col-12 col-md-6'>
+            <form action="{{ route('cursos.update', $curso->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-5 mt-3 text-md-start">
+                    <x-input-label for="nombre" :value="__('Nombre del curso:')" />
+                    <x-text-input id="nombre" class="form-control block" type="text" name="nombre" :value="old('nombre', $curso->nombre)" required />
+                </div>
+
+                <div class="mb-5 mt-3 text-md-start">
+                    <x-input-label for="descripcion" :value="__('Descripción:')" />
+                    <x-text-area class="form-control" id="descripcion" name="descripcion">
+                        {{ old('descripcion', $curso->descripcion) }}
+                    </x-text-area>
+                </div>
+            </div>
+
+            <div class='col-12 col-md-6'>
+                <div class="mb-5 mt-3 text-md-start">
+                    <h6>Selecciona los alumnos que quieras añadir:</h6>
+
+                    <!-- Campo de búsqueda -->
+                    <div class="input-group mb-4">
+                        <input type="text" id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos">
+                        <button type="button" class="btn btn-primary" onclick="filterAlumnos()">Filtrar</button>
+                    </div>
 
         <!-- Campo de selección de alumnos -->
         <!-- Campo de búsqueda -->
@@ -53,9 +73,30 @@
             </table>
         </div>
 
-        <button type="submit" class="btn btn-success mt-3">Actualizar Curso</button>
-    </form>
-
-    <a href="{{ route('cursos.index') }}" class="btn btn-secondary mt-3">Cancelar</a>
+            <div class="col-12 mt-3 text-center mt-4">
+                <x-primary-button type="submit">Actualizar</x-primary-button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<!-- Script para filtrar alumnos -->
+<script>
+    function filterAlumnos() {
+        const searchTerm = document.getElementById('search').value.toLowerCase(); 
+        const rows = document.querySelectorAll('.alumno-row'); 
+
+        rows.forEach(row => {
+            const nombre = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); 
+            const apellidos = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+          
+            if (nombre.includes(searchTerm) || apellidos.includes(searchTerm)) {
+                row.style.display = ''; 
+            } else {
+                row.style.display = 'none'; 
+            }
+        });
+    }
+</script>
 @endsection

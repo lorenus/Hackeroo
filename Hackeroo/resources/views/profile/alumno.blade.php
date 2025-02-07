@@ -2,27 +2,45 @@
 
 @section('content')
 <div class="container">
-    <h1>¡Hola, Alumno {{ Auth::user()->nombre }}!</h1>
-    <p>Bienvenido a tu página de perfil.</p>
-    
-    <div class="alert alert-info">
-        Esta es tu página de alumno. Desde aquí podrás ver tus cursos y más.
+    <!-- Botón para volver -->
+    <div class="row mb-3 volver">
+        <div class="col-12 text-left">
+            <a href="{{ route('alumnos') }}">
+                <img src="/img/botones/volver.png" alt="Volver">
+            </a>
+        </div>
     </div>
 
-    <!-- Enlace al ranking de alumnos -->
-    <h2><a href="{{ route('ranking') }}" class="btn btn-primary mt-3">Ver Ranking de Alumnos</a></h2>
-
-    <h2><a href="{{ route('cursos.index.alumno') }}" class="btn btn-secondary mt-3">Ver tus cursos</a></h2>
-
-    <!-- Enlace para editar la cuenta -->
-    <a href="{{ route('profile.edit') }}" class="btn btn-secondary mt-3">Editar cuenta</a>
-
-    <!-- Si deseas añadir más funcionalidades en el futuro, puedes agregar más botones o enlaces aquí -->
+    <form action="#" method="" class='d-flex justify-content-center align-items-center'>
+        @csrf
+        <fieldset>
+            <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }}</legend>
+            <div class="tabla-scroll-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Ejercicio</th>
+                            <th>Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </form>
 </div>
-<form action="{{ route('logout') }}" method="POST" style="display: inline;">
-    @csrf
-    <button type="submit" class="btn btn-danger">
-        Cerrar sesión
-    </button>
-</form>
+</div> <!-- fin contenedor principal-->
+
 @endsection

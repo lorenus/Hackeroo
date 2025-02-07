@@ -56,7 +56,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>
@@ -90,8 +90,8 @@
             <img src="/img/iconos/corona.png" alt="Imagen 2" class="img-corona d-none d-md-block">
             <!-- Textos (nivel y puntos) -->
             <div class="d-flex flex-row flex-md-column">
-                <h5 class="me-3">Nivel 3</h5>
-                <h5>100 pts</h5>
+                <h5 class="text-center">Nivel 3</h5>
+                <h5>{{ Auth::user()->puntos }} puntos</h5>
             </div>
         </div>
     </div>
@@ -100,7 +100,7 @@
     <div class="row d-flex justify-content-between mb-3 text-center">
         <div class="col-12 col-md-6">
             <div class="div-enlace mb-3">
-                <a href="#">
+                <a href="{{route('cursos-alumno')}}">
                     <img src="/img/iconos/cursos.png" alt="Enlace 1" class="img-fluid img-perfil">
                     <h4>Mis cursos</h4>
                 </a>
@@ -132,7 +132,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>

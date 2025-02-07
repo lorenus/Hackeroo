@@ -10,7 +10,8 @@ class CreateRespuestasAlumnosTable extends Migration
         Schema::create('respuestas_alumnos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pregunta_id')->constrained('preguntas')->onDelete('cascade');
-            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->string('usuario_dni');
+            $table->foreign('usuario_dni')->references('dni')->on('usuarios')->onDelete('cascade');
             $table->foreignId('opcion_respuesta_id')->constrained('opciones_respuestas')->onDelete('cascade');
             $table->timestamps();
         });
