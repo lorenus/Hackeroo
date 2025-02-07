@@ -35,7 +35,7 @@
             <div class="contenedor-cursos mw-md-60">
                 <div class="row justify-content-center">
                     @foreach($cursos as $curso)
-                    <div class="curso-item col-md-5 ms-md-5 mb-3">
+                    <div class="curso-item col-md-5 mb-3 p-3">
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">

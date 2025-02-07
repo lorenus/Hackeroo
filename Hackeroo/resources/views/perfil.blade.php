@@ -56,7 +56,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>
@@ -132,7 +132,7 @@
             <div class="cerrar-sesion">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" style="background: none; border: none;">
+                    <button type="submit" style="background: none; border: none; color: #455A64;">
                         <img src="/img/iconos/sesion.png" alt="Enlace 4" class="img-fluid img-perfil">
                         <h4>Cerrar sesión</h4>
                     </button>

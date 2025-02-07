@@ -11,11 +11,9 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-12 text-center">
-            <h2>{{ $curso->nombre }}</h2>
-        </div>
-    </div>
+
+    <h2 class='text-center'>{{ $curso->nombre }}</h2>
+
 
     <div class="row mb-3">
         <div class="col-12 text-center">
@@ -37,7 +35,7 @@
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
 
-                            <a href="{{ route('cursos.show', ['id' => $curso->id]) }}">
+                            <a href="{{ route('tareas.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}">
                                 <h5>{{ $tarea->titulo }}</h5>
                             </a>
                             <p>{{$tarea->descripcion}}</p>
@@ -47,19 +45,23 @@
                         <div class="curso-acciones d-flex flex-column gap-2">
                             <!-- Enlace de editar -->
                             <div class="accion-editar">
-                                <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm ">
+                                <!-- <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm "> -->
+                                @if($tarea->tipo!=='test')
+                                <a href="#" class="btn btn-sm ">
                                     <img src="/img/iconos/editar.png" alt="">
                                 </a>
+                                @endif
                             </div>
 
                             <!-- Enlace de eliminar -->
                             <div class="accion-eliminar">
-                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST"
-                                    style="display:inline;">
+                                <form
+                                    action="{{ route('tarea.eliminar',['curso_id' => $tarea->curso_id, 'tarea_id' => $tarea->id]) }}"
+                                    method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm"
-                                        onclick="return confirm('¿Estás seguro de eliminar este curso?')">
+                                        onclick="return confirm('¿Estás seguro de eliminar esta tarea?')">
                                         <img src="/img/iconos/eliminar.png" alt="">
                                     </button>
                                 </form>

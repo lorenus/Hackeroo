@@ -5,7 +5,7 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* Asegura que el cuerpo ocupe toda la altura */
+    
 }
 
 body {
@@ -13,6 +13,29 @@ body {
     font-family: $fuenteTexto;
     color: $gris;
 }
+
+
+///////////////////////////////////////////////////// CURSORES
+/* Cursor normal (flecha) */
+body {
+    cursor: url('/img/cursors/left_ptr.cur'), auto;
+}
+
+/* Cursor de texto (I-beam) */
+p, h1, h2, h3, h4, h5, h6, span, input[type="text"], textarea, .text-cursor {
+    cursor: url('/img/cursors/xterm.cur'), auto;
+}
+
+/* Cursor de mano (para enlaces y elementos interactivos) */
+a, button, .hand-cursor {
+    cursor: url('/img/cursors/pointer.cur'), auto;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
 
 a {
     text-decoration: none;
@@ -523,7 +546,6 @@ fieldset {
 
     @media (min-width: 780px) {
         max-width: 50vw;
-        margin-left: 15%;
     }
 }
 
