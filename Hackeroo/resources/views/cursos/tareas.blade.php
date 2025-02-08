@@ -49,37 +49,42 @@
                                 download
                                 target="_blank"
                                 rel="noopener noreferrer">
-                                @else
-                                <!-- Enlace normal para otros tipos -->
+                                @elseif ($tarea->tipo === 'link')
+                                <!-- Enlace para tipo "link" (abre en nueva pestaña) -->
                                 <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}"
                                     class="text-decoration-none text-dark"
                                     target="_blank"
                                     rel="noopener noreferrer">
-                                    @endif
-                                    <!-- Contenido de la tarjeta -->
-                                    <div class="tarea-card d-flex align-items-center p-3">
-                                        <!-- Imagen a un lado -->
-                                        <div class="me-3">
-                                            @if ($tarea->tipo === 'test')
-                                            <img src="{{ asset('img/Imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
-                                            @elseif ($tarea->tipo === 'link')
-                                            <img src="{{ asset('img/Imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
-                                            @elseif ($tarea->tipo === 'archivo')
-                                            <img src="{{ asset('img/Imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
-                                            @endif
-                                        </div>
-                                        <!-- Contenido (título y descripción) -->
-                                        <div class="text-left">
-                                            <h5>
-                                                {{ $tarea->titulo }}
-                                                @if ($tarea->tipo === 'archivo')
-                                                <!-- Icono de descarga al lado del título -->
-                                                <img src="{{ asset('img/iconos/descargar.png') }}" alt="Descargar" class="img-fluid" style="max-width: 25px; margin-left: 5px;">
+                                    @else
+                                    <!-- Enlace para tipo "test" (abre en la misma pestaña) -->
+                                    <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}"
+                                        class="text-decoration-none text-dark">
+                                        @endif
+                                        <!-- Contenido de la tarjeta -->
+                                        <div class="tarea-card d-flex align-items-center p-3">
+                                            <!-- Imagen a un lado -->
+                                            <div class="me-3">
+                                                @if ($tarea->tipo === 'test')
+                                                <img src="{{ asset('img/Imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
+                                                @elseif ($tarea->tipo === 'link')
+                                                <img src="{{ asset('img/Imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
+                                                @elseif ($tarea->tipo === 'archivo')
+                                                <img src="{{ asset('img/Imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
                                                 @endif
-                                            </h5>
-                                            <p class="mb-0">{{ $tarea->descripcion }}</p>
+                                            </div>
+                                            <!-- Contenido (título y descripción) -->
+                                            <div class="text-left">
+                                                <h5>
+                                                    {{ $tarea->titulo }}
+                                                    @if ($tarea->tipo === 'archivo')
+                                                    <!-- Icono de descarga al lado del título -->
+                                                    <img src="{{ asset('img/iconos/descargar.png') }}" alt="Descargar" class="img-fluid" style="max-width: 25px; margin-left: 5px;">
+                                                    @endif
+                                                </h5>
+                                                <p class="mb-0">{{ $tarea->descripcion }}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </a>
                         </div>
                     </div>
