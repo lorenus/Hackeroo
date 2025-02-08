@@ -20,12 +20,27 @@ body {
 }
 
 /* Cursor de texto (I-beam) */
-p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input[type=text],
+textarea,
+.text-cursor {
   cursor: url("/img/cursors/xterm.cur"), auto;
 }
 
 /* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor, .boton, .btn, input[type=checkbox] {
+a,
+button,
+.hand-cursor,
+.boton,
+.btn,
+input[type=checkbox] {
   cursor: url("/img/cursors/pointer.cur"), auto !important;
 }
 
@@ -708,8 +723,12 @@ tr {
   padding-left: 7vh;
 }
 
-.text-danger, .text-success {
-  opacity: 100%;
+.text-danger {
+  color: #EF5350;
+}
+
+.text-success {
+  color: #8CC34C;
 }
 
 /*# sourceMappingURL=style.css.map */

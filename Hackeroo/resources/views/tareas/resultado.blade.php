@@ -21,20 +21,44 @@
     </div>
 
     <!-- Resultados detallados -->
-    <div class="row">
-        @foreach ($resultados as $resultado)
-        <div class="col-12 mb-3 border rounded p-3">
-            <h5>{{ $resultado['pregunta'] }}</h5>
-            <p><strong>Tu respuesta:</strong> {{ $resultado['respuesta_usuario'] }}</p>
-            @if ($resultado['resultado'] === 'Correcta')
-                <p class="text-success"><strong>¡Respuesta correcta!</strong></p>
-            @elseif ($resultado['resultado'] === 'Incorrecta')
-                <p class="text-danger"><strong>¡Respuesta incorrecta!</strong></p>
-            @else
-                <p class="text-secondary"><strong>No has respondido esta pregunta.</strong></p>
-            @endif
-        </div>
-        @endforeach
+    <!-- Contenedor para centrar el fieldset -->
+    <div class="d-flex justify-content-center">
+        <fieldset class="mt-0">
+            <div class="row">
+                <div class="tabla-scroll-container">
+                    <table class="ver-tareas-alumnos">
+                        @foreach ($resultados as $resultado)
+                        <tr>
+                            <td>
+                                <div class="col-12 mb-3 pregunta">
+                                    <h5>{{ $loop->iteration }}. {{ $resultado['pregunta'] }}</h5>
+                                    <p><strong>Tu respuesta:</strong> {{ $resultado['respuesta_usuario'] }}</p>
+                                    @if ($resultado['resultado'] === 'Correcta')
+                                    <p class="text-success"><strong>¡Respuesta correcta!</strong></p>
+                                    @elseif ($resultado['resultado'] === 'Incorrecta')
+                                    <p class="text-danger"><strong>¡Respuesta incorrecta!</strong></p>
+                                    <!-- Mostrar la respuesta correcta -->
+                                    @php
+                                    // Obtener la pregunta correspondiente
+                                    $pregunta = $tarea->preguntas->firstWhere('enunciado', $resultado['pregunta']);
+                                    // Obtener la respuesta correcta
+                                    $respuesta_correcta = $pregunta->opciones_respuestas->firstWhere('es_correcta', true);
+                                    @endphp
+                                    @if ($respuesta_correcta)
+                                    <p class="text-center"><strong>Respuesta correcta:</strong> {{ $respuesta_correcta->respuesta }}</p>
+                                    @endif
+                                    @else
+                                    <p class="text-secondary"><strong>No has respondido esta pregunta.</strong></p>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </fieldset>
     </div>
 </div>
+
 @endsection
