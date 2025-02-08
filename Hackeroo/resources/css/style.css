@@ -674,7 +674,7 @@ tr {
   border: 5px solid #8CC34C;
   border-radius: 20px;
   max-width: 300px;
-  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .curso-acciones {
@@ -729,6 +729,16 @@ tr {
 
 .text-success {
   color: #8CC34C;
+}
+
+.curso-item.border-test {
+  border: 5px solid #8CC34C;
+}
+.curso-item.border-link {
+  border: 5px solid #06AAF4;
+}
+.curso-item.border-archivo {
+  border: 5px solid #FFB300;
 }
 
 /*# sourceMappingURL=style.css.map */

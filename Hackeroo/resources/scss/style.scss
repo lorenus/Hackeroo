@@ -650,7 +650,7 @@ tr {
     border-radius: 20px;
     max-width: 300px;
     // max-height: 10vh;
-    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .curso-acciones {
@@ -709,4 +709,18 @@ tr {
 }
 .text-success {
     color: $verde;
+}
+
+.curso-item {
+    &.border-test {
+        border: 5px solid $verde;
+    }
+
+    &.border-link {
+        border: 5px solid $azul; 
+    }
+
+    &.border-archivo {
+        border: 5px solid $amarillo; 
+    }
 }
