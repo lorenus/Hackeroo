@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('contraseña', 255);
             $table->enum('rol', ['alumno', 'profesor'])->default('alumno');
             $table->integer('puntos')->default(0);
+            $table->string('color')->default('#06AAF4');
+            $table->string('avatar')->default('1.png');
             $table->rememberToken();
             $table->timestamps();
         });

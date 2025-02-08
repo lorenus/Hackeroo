@@ -12,11 +12,11 @@
     </div>
 
 
-    <form action="{{ route('cursos.store.step1') }}" method="POST">
+    <form action="{{ route('cursos.store.step1') }}" method="POST" class="d-flex justify-content-center">
         @csrf
 
         <fieldset class="reset">
-            <legend class="reset">Nuevo curso</legend>
+            <legend class="reset text-nowrap">Nuevo curso</legend>
             <div class="mb-5 mt-3 text-md-start">
                 <x-input-label for="nombre" :value="__('Nombre del curso')" />
                 <x-text-input id="nombre"

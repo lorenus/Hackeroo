@@ -152,7 +152,7 @@ class CursoController extends Controller
             $curso->alumnos()->sync($request->alumnos); // Esto reemplaza la lista de alumnos por la nueva selección
 
             // Redirigir con mensaje de éxito
-            return redirect()->route('cursos')->with('success', 'Curso actualizado correctamente.');
+            return redirect()->route('cursos')->with('status', 'Curso actualizado correctamente.');
         }
 
         // Si no es el profesor del curso, redirigir o abortar con un error 403
