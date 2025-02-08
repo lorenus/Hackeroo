@@ -24,47 +24,63 @@
             <div class="contenedor-cursos mw-md-60">
                 <div class="row justify-content-center">
                     @foreach($curso->tareas as $tarea)
-                           <!-- Asignar clase dinámica según el tipo de tarea -->
-                           @php
-                                $borderClass = ''; // Clase CSS para el borde
-                                switch ($tarea->tipo) {
-                                case 'test':
-                                $borderClass = 'border-test'; 
-                                break;
-                                case 'link':
-                                $borderClass = 'border-link'; 
-                                break;
-                                case 'archivo':
-                                $borderClass = 'border-archivo'; 
-                                break;
-                                }
-                                @endphp
+                    <!-- Asignar clase dinámica según el tipo de tarea -->
+                    @php
+                    $borderClass = ''; // Clase CSS para el borde
+                    switch ($tarea->tipo) {
+                    case 'test':
+                    $borderClass = 'border-test';
+                    break;
+                    case 'link':
+                    $borderClass = 'border-link';
+                    break;
+                    case 'archivo':
+                    $borderClass = 'border-archivo';
+                    break;
+                    }
+                    @endphp
                     <div class="curso-item col-md-5 me-3 mb-3 {{ $borderClass }}">
                         <div class="curso-nombre text-center">
-                            <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}"
+                            <!-- Enlace para descargar archivo o ver tarea -->
+                            @if ($tarea->tipo === 'archivo')
+                            <!-- Enlace de descarga directa para tipo "archivo" -->
+                            <a href="{{ asset('archivos/' . $tarea->archivo) }}"
                                 class="text-decoration-none text-dark"
+                                download
                                 target="_blank"
                                 rel="noopener noreferrer">
-                         
-                                <!-- Aplicar la clase dinámica al div -->
-                                <div class="tarea-card d-flex align-items-center p-3">
-                                    <!-- Imagen a un lado -->
-                                    <div class="me-3">
-                                        @if ($tarea->tipo === 'test')
-                                        <img src="{{ asset('img/Imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
-                                        @elseif ($tarea->tipo === 'link')
-                                        <img src="{{ asset('img/Imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
-                                        @elseif ($tarea->tipo === 'archivo')
-                                        <img src="{{ asset('img/Imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
-                                        @endif
+                                @else
+                                <!-- Enlace normal para otros tipos -->
+                                <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}"
+                                    class="text-decoration-none text-dark"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    @endif
+                                    <!-- Contenido de la tarjeta -->
+                                    <div class="tarea-card d-flex align-items-center p-3">
+                                        <!-- Imagen a un lado -->
+                                        <div class="me-3">
+                                            @if ($tarea->tipo === 'test')
+                                            <img src="{{ asset('img/Imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
+                                            @elseif ($tarea->tipo === 'link')
+                                            <img src="{{ asset('img/Imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
+                                            @elseif ($tarea->tipo === 'archivo')
+                                            <img src="{{ asset('img/Imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
+                                            @endif
+                                        </div>
+                                        <!-- Contenido (título y descripción) -->
+                                        <div class="text-left">
+                                            <h5>
+                                                {{ $tarea->titulo }}
+                                                @if ($tarea->tipo === 'archivo')
+                                                <!-- Icono de descarga al lado del título -->
+                                                <img src="{{ asset('img/iconos/descargar.png') }}" alt="Descargar" class="img-fluid" style="max-width: 25px; margin-left: 5px;">
+                                                @endif
+                                            </h5>
+                                            <p class="mb-0">{{ $tarea->descripcion }}</p>
+                                        </div>
                                     </div>
-                                    <!-- Contenido (título y descripción) -->
-                                    <div class="text-left">
-                                        <h5>{{ $tarea->titulo }}</h5>
-                                        <p class="mb-0">{{ $tarea->descripcion }}</p>
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
                         </div>
                     </div>
                     @endforeach

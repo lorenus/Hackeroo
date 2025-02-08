@@ -741,4 +741,9 @@ tr {
   border: 5px solid #FFB300;
 }
 
+h5.descargar {
+  border: 3px solid #FFB300;
+  border-radius: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */
