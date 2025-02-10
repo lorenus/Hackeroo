@@ -3,21 +3,14 @@
 @section('content')
 
 @php
-// Declara la variable $colores aquí para que esté disponible en toda la vista
-$colores = [
-'#FFD87F' => 0,
-'#455A64' => 0,
-'#EF5350' => 0,
-'#FFB300' => 0,
-'#06AAF4' => 0,
-'#8CC34C' => 0,
-'#00FF00' => 10,
-'#0000FF' => 20,
-'#FFFF00' => 40,
-'#FF00FF' => 80,
-'#00FFFF' => 160,
-'#808080' => 320
-];
+
+$colores = ['#FFD87F' => 0,'#455A64' => 0,'#EF5350' => 0,'#FFB300' => 0,'#06AAF4' => 0,'#8CC34C' => 0,'#00FF00' =>
+10,'#0000FF' => 20,
+'#FFFF00' => 40,'#FF00FF' => 80,'#00FFFF' => 160,'#808080' => 320];
+
+$avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6.png' => 0,'7.png' => 10,'8.png' => 20,
+'9.png' => 40,'10.png' => 80,'11.png' => 160,'12.png' => 320];
+
 @endphp
 
 <div class="container">
@@ -39,8 +32,9 @@ $colores = [
         @csrf
         @method('PUT')
         <input type="hidden" name="color" id="color" value="">
+        <input type="hidden" name="avatar" id="avatar" value="">
 
-        <!-- Resto del formulario -->
+
         <div class="row justify-content-center gx-5">
             <div class="col-md-5 d-flex justify-content-center">
                 <div class='editar-color mb-5'>
@@ -53,11 +47,28 @@ $colores = [
                                     style="background-color: {{ $color }}; width: 100px; height: 100px; border-radius: 20px;">
                                 </div>
                                 @else
-                                <div style="position: relative;">
-                                    <div
+                                <div
                                     style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain;width: 100px; height: 100px; border-radius: 20px;">
-                                    </div>
-    
+                                </div>
+                                @endif
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 d-flex justify-content-center">
+                <div class='editar-avatar mb-5'>
+                    <h5>Imagen perfil</h5>
+                    <div class='row row-cols-4 g-1'>
+                        @foreach ($avatares as $avatar => $valor)
+                        <div class="col">
+                            @if ($valor <= Auth::user()->puntos)
+                                <div
+                                    style="background-image: url('/img/avatares/{{ $avatar }}'); background-position: center center; background-size: contain;width: 100px; height: 100px; border-radius: 20px;">
+                                </div>
+                                @else
+                                <div
+                                    style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain;width: 100px; height: 100px; border-radius: 20px;">
                                 </div>
                                 @endif
                         </div>
@@ -66,24 +77,9 @@ $colores = [
                 </div>
             </div>
 
-
-            <div class="col-md-5 d-flex justify-content-center">
-                <div class='editar-avatar'>
-                    <h5>Imagen de perfil</h5>
-                    <div class='row row-cols-3 g-2 justify-content-center'>
-                        @for ($i = 1; $i < 8; $i++) <div class="col">
-                            <x-avatar src="/img/avatares/{{ $i }}.png"></x-avatar>
-                    </div>
-                    @endfor
-                    <div class="col">
-                        <x-avatar src="/img/iconos/candado.png"></x-avatar>
-                    </div>
-                    <div class="col">
-                        <x-avatar src="/img/iconos/candado.png"></x-avatar>
-                    </div>
-                </div>
-            </div>
         </div>
+
+</div>
 </div>
 
 <div class="d-flex justify-content-center align-items-center">
@@ -92,26 +88,26 @@ $colores = [
 </form>
 </div>
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
-        const colorBoxes = document.querySelectorAll('.color-box');
-        console.log('Número de cuadros de color:', colorBoxes.length); 
-    
-        colorBoxes.forEach(function (colorBox) {
-            colorBox.addEventListener('click', function () {
-                const colorSeleccionado = colorBox.getAttribute('data-color');
-                console.log('Color seleccionado:', colorSeleccionado); 
-    
-                document.getElementById('color').value = colorSeleccionado;
-    
+document.addEventListener('DOMContentLoaded', function() {
+    const colorBoxes = document.querySelectorAll('.color-box');
+    console.log('Número de cuadros de color:', colorBoxes.length);
 
-                colorBoxes.forEach(function (box) {
-                    box.style.border = ''; 
-                });
-    
-                colorBox.style.border = '3px solid #455A64';
-                console.log('Borde actualizado para el cuadro seleccionado');
+    colorBoxes.forEach(function(colorBox) {
+        colorBox.addEventListener('click', function() {
+            const colorSeleccionado = colorBox.getAttribute('data-color');
+            console.log('Color seleccionado:', colorSeleccionado);
+
+            document.getElementById('color').value = colorSeleccionado;
+
+
+            colorBoxes.forEach(function(box) {
+                box.style.border = '';
             });
+
+            colorBox.style.border = '3px solid #455A64';
+            console.log('Borde actualizado para el cuadro seleccionado');
         });
     });
+});
 </script>
 @endsection
