@@ -2,13 +2,25 @@
 
 @section('content')
 <div class="container">
-    <div class="row mb-3">
-        <div class="col-12 text-left">
+<div class="row mb-3">
+    <div class="col-12 text-left">
+        @if(auth()->check())
+            @if(auth()->user()->rol === 'profesor')
+                <a href="{{ route('cursos.show', $curso_id) }}">
+                    <img src="/img/botones/volver.png" alt="Volver">
+                </a>
+            @elseif(auth()->user()->rol === 'alumno')
+                <a href="{{ route('curso.tareas', $curso_id) }}">
+                    <img src="/img/botones/volver.png" alt="Volver">
+                </a>
+            @endif
+        @else
             <a href="{{ route('curso.tareas', $curso_id) }}">
                 <img src="/img/botones/volver.png" alt="Volver">
             </a>
-        </div>
+        @endif
     </div>
+</div>
 
     <form action="{{ route('tarea.enviar', ['curso_id' => $curso_id, 'tarea_id' => $tarea->id]) }}" method="POST" class="d-flex justify-content-center align-items-center">
         @csrf
