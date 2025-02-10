@@ -33,27 +33,38 @@ class ProfileController extends Controller
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:usuarios,email,' . Auth::user()->DNI . ',DNI',
+            'color' => 'required|string|max:7', // Validación de color (formato hexadecimal)
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Imagen opcional
         ]);
 
-        // Actualizamos los datos del usuario
+        // Obtener el usuario autenticado
         $user = $request->user();
-        $user->update($validated);
 
-        // Si el email fue cambiado, marcamos el email como no verificado
+        // Si hay una nueva imagen, procesarla
+        if ($request->hasFile('avatar')) {
+            // Guardar la imagen en la carpeta 'avatars' dentro del almacenamiento
+            $path = $request->file('avatar')->store('avatares', 'public');
+
+            // Asignar la nueva ruta al usuario
+            $user->avatar = $path;
+        }
+
+        // Actualizar los datos del usuario
+        $user->fill($validated);
+
+        // Si el email fue cambiado, marcarlo como no verificado
         if ($request->has('email') && $user->isDirty('email')) {
-            $user->email_verified_at = null;  // Restablecer la verificación del email
+            $user->email_verified_at = null;
         }
 
         // Guardar los cambios
         $user->save();
 
-        // Redirigir a la ruta correcta según el rol del usuario
-        if ($user->rol === 'profesor') {
-            return redirect()->route('profesor.index')->with('status', 'Perfil actualizado correctamente.');
-        } else {
-            return redirect()->route('alumno.index')->with('status', 'Perfil actualizado correctamente.');
-        }
+        // Redirigir según el rol del usuario
+        return redirect()->route($user->rol === 'profesor' ? 'profesor.index' : 'alumno.index')
+            ->with('status', 'Perfil actualizado correctamente.');
     }
+
     /**
      * Delete the user's account.
      */

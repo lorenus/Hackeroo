@@ -20,13 +20,28 @@ body {
 }
 
 /* Cursor de texto (I-beam) */
-p, h1, h2, h3, h4, h5, h6, span, input[type=text], textarea, .text-cursor {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input[type=text],
+textarea,
+.text-cursor {
   cursor: url("/img/cursors/xterm.cur"), auto;
 }
 
 /* Cursor de mano (para enlaces y elementos interactivos) */
-a, button, .hand-cursor {
-  cursor: url("/img/cursors/pointer.cur"), auto;
+a,
+button,
+.hand-cursor,
+.boton,
+.btn,
+input[type=checkbox] {
+  cursor: url("/img/cursors/pointer.cur"), auto !important;
 }
 
 a {
@@ -172,6 +187,7 @@ footer {
   justify-content: center;
   align-items: center;
   min-height: 75vh;
+  max-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -398,7 +414,6 @@ form {
 }
 form .form-lineas,
 form .libreta {
-  color: "Itim";
   display: block;
   width: 100%;
   font-family: "Itim";
@@ -570,7 +585,7 @@ legend {
   font-family: "Lilita One";
   width: auto;
   font-size: 22px;
-  color: #455A64;
+  color: #455a64;
   background-color: #FEFFEB;
   padding: 0 10px;
   position: absolute;
@@ -588,6 +603,9 @@ legend {
 .tabla-scroll-container {
   height: 30vh;
   overflow-y: auto;
+}
+.tabla-scroll-container td {
+  font-family: "Itim";
 }
 
 .contenedor-cursos {
@@ -610,7 +628,6 @@ td {
 
 tr {
   border-bottom: 3px solid #FFB300;
-  /* Color de borde */
 }
 
 .cursos-container {
@@ -657,10 +674,15 @@ tr {
   border: 5px solid #8CC34C;
   border-radius: 20px;
   max-width: 300px;
+  overflow-x: auto;
 }
 
 .curso-acciones {
   border-left: 5px solid #8CC34C;
+}
+
+.tarea-card {
+  color: #455A64;
 }
 
 .ranking-container .ranking-item {
@@ -695,90 +717,33 @@ tr {
   object-fit: contain;
 }
 
-/* Estilos para la cuadrícula de colores */
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
-  gap: 10px;
-  padding: 10px;
+.ver-tareas-alumnos .pregunta {
+  text-align: left;
+  margin: 20px 15px 0 0;
+  padding-left: 7vh;
 }
 
-.color-item {
-  width: 100%;
-  padding-top: 100%; /* Hace que los ítems sean cuadrados */
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  cursor: pointer;
+.text-danger {
+  color: #EF5350;
 }
 
-/* Estilos para la cuadrícula de colores */
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
-  gap: 10px;
-  padding: 10px;
+.text-success {
+  color: #8CC34C;
 }
 
-.color-item {
-  width: 100%;
-  padding-top: 100%; /* Hace que los ítems sean cuadrados */
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  cursor: pointer;
+.curso-item.border-test {
+  border: 5px solid #8CC34C;
+}
+.curso-item.border-link {
+  border: 5px solid #06AAF4;
+}
+.curso-item.border-archivo {
+  border: 5px solid #FFB300;
 }
 
-/* Estilos para la cuadrícula de colores */
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columnas en tamaño grande */
-  gap: 10px;
-  padding: 10px;
-}
-
-.color-item {
-  width: 100%;
-  padding-top: 100%; /* Hace que los ítems sean cuadrados */
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
-
-/* Estilos para la cuadrícula de imágenes */
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-  gap: 10px;
-  padding: 10px;
-}
-
-.image-item {
-  width: 100px; /* Tamaño fijo para los contenedores */
-  height: 100px; /* Tamaño fijo para los contenedores */
-  background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
-  background-position: center; /* Centra la imagen */
-  border: 1px solid #ccc;
-  cursor: pointer;
-  border-radius: 50%; /* Opcional: para imágenes redondas */
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  .color-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas en tamaño pequeño */
-  }
-  .image-item {
-    width: 80px; /* Tamaño más pequeño en pantallas pequeñas */
-    height: 80px;
-  }
-}
-@media (max-width: 576px) {
-  .color-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tamaño muy pequeño */
-  }
-  .image-item {
-    width: 60px; /* Tamaño más pequeño en pantallas muy pequeñas */
-    height: 60px;
-  }
+h5.descargar {
+  border: 3px solid #FFB300;
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
