@@ -46,9 +46,9 @@
                             <!-- Enlace de editar -->
                             <div class="accion-editar">
                                 <!-- <a href="{{ route('cursos.edit', $curso->id) }}" class="btn btn-sm "> -->
-                                @if($tarea->tipo!=='test')
-                                <a href="#" class="btn btn-sm ">
-                                    <img src="/img/iconos/editar.png" alt="">
+                                @if($tarea->tipo !== 'test')
+                                <a href="{{ route('tareas.edit.recurso', ['id' => $tarea->id]) }}" class="btn btn-sm">
+                                    <img src="/img/iconos/editar.png" alt="Editar">
                                 </a>
                                 @endif
                             </div>

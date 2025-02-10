@@ -21,8 +21,8 @@ class Tarea extends Model
         return $this->hasMany(Pregunta::class);
     }
 
-    public function recursosMultimedia()
+    public function recursoMultimedia()
     {
-        return $this->hasMany(RecursoMultimedia::class);
+        return $this->hasOne(RecursoMultimedia::class);
     }
 }
