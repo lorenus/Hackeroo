@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::middleware('auth')->get('/perfil', [ProfileController::class, 'index'])->name('perfil'); //perfil
+Route::middleware('auth')->get('/perfil', [PerfilController::class, 'index'])->name('perfil'); //perfil
 
 
 //TAREAS
@@ -55,6 +55,9 @@ Route::post('cursos/create/step1', [CursoController::class, 'storeStep1'])->name
 Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('cursos.create.step2'); //segundo paso de crear curso (pagina)
 Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2'); //segundo paso de crear curso (post)
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update'); //updatea el curso
+
+//PERFIL PROFESOR
+Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->middleware('auth')->name('profesor.index'); //perfil del profesor
 
 // ALUMNOS PROFESOR
 Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos'); //listado de alumnos del profesor

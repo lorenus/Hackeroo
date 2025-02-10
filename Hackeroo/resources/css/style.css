@@ -182,17 +182,21 @@ footer {
 }
 
 .contenido {
-  flex-grow: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 75vh;
-  max-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 }
 
+@media (min-width: 768px) {
+  .contenido {
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    min-height: 75vh;
+    max-height: 75vh;
+  }
+}
 .letra:nth-child(2),
 .letra:nth-child(6) {
   color: #EF5350;
@@ -430,20 +434,12 @@ form .form-lineas:focus {
   outline: none;
   /* Elimina el borde predeterminado del focus */
 }
-form .libreta {
-  background: linear-gradient(to bottom, #FFB300 2px, transparent 1px) repeat-y;
-  background-size: 100% 1.5em;
-  padding-left: 5px;
-  line-height: 1.5em;
-  padding-top: 5px;
-  resize: none;
-}
-form .libreta:focus {
-  background: linear-gradient(to bottom, #06AAF4 2px, transparent 1px) repeat-y;
-  outline: none;
-  /* Elimina el borde predeterminado del focus */
-}
 
+@media (min-width: 768px) {
+  .container {
+    max-height: 75vh;
+  }
+}
 .custom-select {
   position: relative;
   display: inline-flex;
