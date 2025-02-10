@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Usuario;
+use App\Models\RespuestasAlumno;
 use App\Models\Curso;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -80,10 +81,29 @@ class ProfileController extends Controller
     public function verAlumnos()
     {
         if (Auth::check() && Auth::user()->rol === 'profesor') {
-            $cursos = Auth::user()->cursos_profesor;
-            $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI');
-            return view('profile.alumnos', compact('alumnos'));
+            $cursos = Auth::user()->cursos_profesor; // Cursos del profesor
+            $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI'); // Alumnos únicos
+    
+            // Agregar información sobre las tareas completadas por cada alumno
+            $alumnosConDatos = $alumnos->map(function ($alumno) use ($cursos) {
+                $tareasCompletadas = RespuestasAlumno::where('usuario_dni', $alumno->DNI)
+                    ->whereIn('pregunta_id', function ($query) use ($cursos) {
+                        $query->select('id')
+                            ->from('preguntas')
+                            ->whereIn('tarea_id', $cursos->pluck('tareas')->flatten()->pluck('id'));
+                    })
+                    ->distinct('pregunta_id') // Evitar duplicados
+                    ->count();
+    
+                return [
+                    'alumno' => $alumno,
+                    'tareas_completadas' => $tareasCompletadas,
+                ];
+            });
+    
+            return view('profile.alumnos', compact('alumnosConDatos'));
         }
+    
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
 
