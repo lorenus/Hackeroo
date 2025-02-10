@@ -183,8 +183,6 @@ footer {
 
 .contenido {
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -192,6 +190,8 @@ footer {
 
 @media (min-width: 768px) {
   .contenido {
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
     display: flex;
     min-height: 75vh;

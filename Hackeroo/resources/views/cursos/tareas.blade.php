@@ -53,8 +53,7 @@
                                 <!-- Enlace normal para otros tipos -->
                                 <a href="{{ route('tarea.ver', ['curso_id' => $curso->id, 'tarea_id' => $tarea->id]) }}"
                                     class="text-decoration-none text-dark"
-                                    target="_blank"
-                                    rel="noopener noreferrer">
+                                    @if($tarea->tipo === 'link') target="_blank" rel="noopener noreferrer" @endif>
                                     @endif
                                     <!-- Contenido de la tarjeta -->
                                     <div class="tarea-card d-flex align-items-center p-3">
