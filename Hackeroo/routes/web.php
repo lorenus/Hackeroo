@@ -3,7 +3,6 @@
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PaginasEstaticasController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CursoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -25,7 +24,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::middleware('auth')->get('/perfil', [PerfilController::class, 'index'])->name('perfil'); //perfil
+Route::middleware('auth')->get('/perfil', [ProfileController::class, 'index'])->name('perfil'); //perfil
 
 
 //TAREAS
