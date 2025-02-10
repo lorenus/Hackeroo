@@ -87,7 +87,12 @@ Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])
     ->name('cursos.show.alumno');
 
 
-require __DIR__ . '/auth.php';
+        // Ruta para mostrar el formulario de edición
+Route::get('/tareas/{id}/editar-recurso', [TareaController::class, 'editRecurso'])->name('tareas.edit.recurso');
+    
+        // Ruta para procesar los cambios
+Route::put('/tareas/{id}/actualizar-recurso', [TareaController::class, 'updateRecurso'])->name('tareas.update.recurso');
+
 
 Route::post('/tareas/{curso_id}/{tarea_id}/responder', [TareaController::class, 'responder'])->name('tarea.responder');
 
@@ -97,10 +102,7 @@ Route::get('/curso/{curso_id}/tarea/{tarea_id}', [TareaController::class, 'verTa
 
 Route::post('/curso/{curso_id}/tarea/{tarea_id}/enviar', [TareaController::class, 'enviarRespuestas'])->name('tarea.enviar');
 
-// Muestra las tareas de un curso específico para un alumno
-//Route::get('/cursos/{curso_id}/tareas', [TareaController::class, 'mostrarTareas'])->name('tareas.show');
-
-
-
 Route::get('/cursos/{curso_id}/tareas/{tarea_id}/resultados', [TareaController::class, 'mostrarResultados'])
     ->name('tarea.resultados');
+
+    require __DIR__ . '/auth.php';

@@ -179,6 +179,72 @@ class TareaController extends Controller
         // Redirigir con mensaje de éxito
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
+    public function editRecurso($id)
+{
+    // Obtener la tarea por su ID
+    $tarea = Tarea::with('recursoMultimedia')->findOrFail($id);
+
+    // Verificar si el usuario es profesor
+    if (Auth::user()->rol !== 'profesor') {
+        abort(403, 'No tienes permiso para realizar esta acción.');
+    }
+
+    // Verificar si existe un recurso multimedia asociado
+    if (!$tarea->recursoMultimedia) {
+        return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
+    }
+
+    // Pasar la tarea y el recurso multimedia a la vista
+    return view('tareas.edit-recurso', compact('tarea'));
+}
+public function updateRecurso(Request $request, $id)
+{
+    // Validación
+    $request->validate([
+        'tipo' => 'required|in:archivo,link',
+        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Solo si tipo es archivo
+        'url' => 'nullable|url', // Solo si tipo es link
+    ]);
+
+    // Obtener la tarea por su ID
+    $tarea = Tarea::findOrFail($id);
+
+    // Verificar si el usuario es profesor
+    if (Auth::user()->rol !== 'profesor') {
+        abort(403, 'No tienes permiso para realizar esta acción.');
+    }
+
+    // Obtener el recurso multimedia asociado
+    $recurso = $tarea->recursoMultimedia;
+
+    if (!$recurso) {
+        return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
+    }
+
+    // Actualizar el recurso según el tipo
+    if ($request->tipo === 'archivo') {
+        // Eliminar el archivo anterior si existe
+        if ($recurso->tipo === 'archivo' && Storage::disk('public')->exists($recurso->url)) {
+            Storage::disk('public')->delete($recurso->url);
+        }
+
+        // Subir el nuevo archivo
+        $nombreArchivo = $request->file('archivo')->getClientOriginalName();
+        $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
+    } elseif ($request->tipo === 'link') {
+        $url = $request->url;
+    }
+
+    // Actualizar el recurso en la base de datos
+    $recurso->update([
+        'tipo' => $request->tipo,
+        'url' => $url,
+    ]);
+
+    // Redirigir con éxito
+    return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
+        ->with('success', 'Recurso actualizado correctamente.');
+}
     public function mostrarTareas($curso_id)
     {
         $curso = Curso::with('tareas')->findOrFail($curso_id);
