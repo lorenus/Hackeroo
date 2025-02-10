@@ -173,7 +173,6 @@ footer {
 
 .contenido {
     display: flex;
-
     background-color: $amarillo_fondo;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -184,9 +183,8 @@ footer {
         justify-content: center;
         align-items: center;
         flex-grow: 1;
-        display: flex;
-        min-height: 75vh;
-        max-height: 75vh;
+        min-height: 75vh; 
+        max-height: 75vh; 
     }
 }
 
@@ -401,19 +399,25 @@ form {
     }
 
     // Estilo específico para .libreta
-    .libreta {
-        background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
-        background-size: 100% 1.5em;
-        padding-left: 5px;
-        line-height: 1.5em;
-        padding-top: 5px;
-        resize: none;
+    // .libreta {
+    //     background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
+    //     background-size: 100% 1.5em;
+    //     padding-left: 5px;
+    //     line-height: 1.5em;
+    //     padding-top: 5px;
+    //     resize: none;
 
-        &:focus {
-            background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
-            outline: none;
-            /* Elimina el borde predeterminado del focus */
-        }
+    //     &:focus {
+    //         background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
+    //         outline: none;
+    //         /* Elimina el borde predeterminado del focus */
+    //     }
+    // }
+}
+
+  @media (min-width: 768px) {
+    .container {
+        max-height: 75vh;
     }
 }
 
