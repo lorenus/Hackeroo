@@ -462,7 +462,6 @@ form {
 
 .perfil {
     color: $amarillo_fondo;
-    background-color: $azul;
     border-radius: 20px;
     height: 20vh;
     padding: 20px;
@@ -502,7 +501,7 @@ form {
 }
 
 .div-enlace {
-    border: 3px solid $azul;
+    border: 3px solid;
     border-radius: 20px;
     height: 20vh;
     position: relative;

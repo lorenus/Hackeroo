@@ -16,6 +16,13 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function index(Request $request)
+    {
+        return view('perfil', [
+            'user' => $request->user(),
+        ]);
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -27,43 +34,28 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(Request $request): RedirectResponse
-    {
-        // Validación de los campos
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:usuarios,email,' . Auth::user()->DNI . ',DNI',
-            'color' => 'required|string|max:7', // Validación de color (formato hexadecimal)
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Imagen opcional
-        ]);
+{
+    // Validación de los campos
+    $validated = $request->validate([
+        'color' => 'required|string|max:7',
+        'avatar' => 'nullable|string' // Valida que sea una cadena (el nombre del archivo)
+    ]);
 
-        // Obtener el usuario autenticado
-        $user = $request->user();
+    $user = $request->user();
 
-        // Si hay una nueva imagen, procesarla
-        if ($request->hasFile('avatar')) {
-            // Guardar la imagen en la carpeta 'avatars' dentro del almacenamiento
-            $path = $request->file('avatar')->store('avatares', 'public');
+    // Actualizar el color
+    $user->color = $validated['color'];
 
-            // Asignar la nueva ruta al usuario
-            $user->avatar = $path;
-        }
+    // Actualizar el avatar (directamente desde el input validado)
+    $user->avatar = $validated['avatar'];
 
-        // Actualizar los datos del usuario
-        $user->fill($validated);
+    // Guardar los cambios
+    $user->save();
 
-        // Si el email fue cambiado, marcarlo como no verificado
-        if ($request->has('email') && $user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
+    // Redireccionar
+    return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
 
-        // Guardar los cambios
-        $user->save();
-
-        // Redirigir según el rol del usuario
-        return redirect()->route($user->rol === 'profesor' ? 'profesor.index' : 'alumno.index')
-            ->with('status', 'Perfil actualizado correctamente.');
-    }
+}
 
     /**
      * Delete the user's account.

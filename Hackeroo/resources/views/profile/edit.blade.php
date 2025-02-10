@@ -40,9 +40,11 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
                 <div class='editar-color mb-5'>
                     <h5>Color del perfil</h5>
                     <div class='row row-cols-4 g-1'>
+                    
                         @foreach ($colores as $color => $valor)
                         <div class="col">
                             @if ($valor <= Auth::user()->puntos)
+                               
                                 <div class="color-box hand-cursor" data-color="{{ $color }}"
                                     style="background-color: {{ $color }}; width: 100px; height: 100px; border-radius: 20px;">
                                 </div>
@@ -88,46 +90,46 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
 </form>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const colorBoxes = document.querySelectorAll('.color-box');
-    console.log('Número de cuadros de color:', colorBoxes.length);
+    document.addEventListener('DOMContentLoaded', function() {
+        const colorBoxes = document.querySelectorAll('.color-box');
+        console.log('Número de cuadros de color:', colorBoxes.length);
 
-    colorBoxes.forEach(function(colorBox) {
-        colorBox.addEventListener('click', function() {
-            const colorSeleccionado = colorBox.getAttribute('data-color');
-            console.log('Color seleccionado:', colorSeleccionado);
+        colorBoxes.forEach(function(colorBox) {
+            colorBox.addEventListener('click', function() {
+                const colorSeleccionado = colorBox.getAttribute('data-color');
+                console.log('Color seleccionado:', colorSeleccionado);
 
-            document.getElementById('color').value = colorSeleccionado;
+                document.getElementById('color').value = colorSeleccionado;
 
 
-            colorBoxes.forEach(function(box) {
-                box.style.border = '';
+                colorBoxes.forEach(function(box) {
+                    box.style.border = '';
+                });
+
+                colorBox.style.border = '3px solid #455A64';
+                console.log('Borde actualizado para el cuadro seleccionado');
             });
+        });
 
-            colorBox.style.border = '3px solid #455A64';
-            console.log('Borde actualizado para el cuadro seleccionado');
+        const avatarBoxes = document.querySelectorAll('.avatar-box');
+        console.log('Número de avatares:', avatarBoxes.length);
+
+        avatarBoxes.forEach(function(avatarBox) {
+            avatarBox.addEventListener('click', function() {
+                const avatarSeleccionado = avatarBox.getAttribute('data-avatar');
+                console.log('Avatar seleccionado:', avatarSeleccionado);
+
+                document.getElementById('avatar').value = avatarSeleccionado;
+
+
+                avatarBoxes.forEach(function(box) {
+                    box.style.border = '';
+                });
+
+                avatarBox.style.border = '3px solid #455A64';
+                console.log('Borde actualizado para el cuadro seleccionado');
+            });
         });
     });
-
-    const avatarBoxes = document.querySelectorAll('.avatar-box');
-    console.log('Número de avatares:', avatarBoxes.length);
-
-    avatarBoxes.forEach(function(avatarBox) {
-        avatarBox.addEventListener('click', function() {
-            const avatarSeleccionado = avatarBox.getAttribute('data-avatar');
-            console.log('Avatar seleccionado:', avatarSeleccionado);
-
-            document.getElementById('avatar').value = avatarSeleccionado;
-
-
-            avatarBoxes.forEach(function(box) {
-                box.style.border = '';
-            });
-
-            avatarBox.style.border = '3px solid #455A64';
-            console.log('Borde actualizado para el cuadro seleccionado');
-        });
-    });
-});
 </script>
 @endsection

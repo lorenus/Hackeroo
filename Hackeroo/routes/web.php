@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::middleware('auth')->get('/perfil', [PerfilController::class, 'index'])->name('perfil'); //perfil
+Route::middleware('auth')->get('/perfil', [ProfileController::class, 'index'])->name('perfil'); //perfil
 
 
 //TAREAS
