@@ -182,17 +182,22 @@ footer {
 }
 
 .contenido {
-  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 75vh;
-  max-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 }
 
+@media (min-width: 768px) {
+  .contenido {
+    flex-grow: 1;
+    display: flex;
+    min-height: 75vh;
+    max-height: 75vh;
+  }
+}
 .letra:nth-child(2),
 .letra:nth-child(6) {
   color: #EF5350;
