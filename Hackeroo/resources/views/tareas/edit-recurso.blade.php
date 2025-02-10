@@ -25,21 +25,18 @@
         </div>
 
         <!-- Campo para archivo -->
-        @php
-            $archivoClass = $tarea->recursoMultimedia->tipo === 'archivo' ? '' : 'hidden';
-        @endphp
-        <div id="archivo-container" class="mb-3 {{ $archivoClass }}">
+        <div id="archivo-container" class="mb-3 {{ $tarea->recursoMultimedia->tipo === 'archivo' ? '' : 'hidden' }}">
             <label for="archivo" class="form-label">Archivo:</label>
             <input type="file" name="archivo" id="archivo" class="form-control">
+            @if ($tarea->recursoMultimedia->tipo === 'archivo')
+                <p class="text-muted mt-2">Archivo actual: <a href="{{ Storage::url($tarea->recursoMultimedia->url) }}" target="_blank">{{ basename($tarea->recursoMultimedia->url) }}</a></p>
+            @endif
         </div>
 
         <!-- Campo para enlace -->
-        @php
-            $linkClass = $tarea->recursoMultimedia->tipo === 'link' ? '' : 'hidden';
-        @endphp
-        <div id="link-container" class="mb-3 {{ $linkClass }}">
+        <div id="link-container" class="mb-3 {{ $tarea->recursoMultimedia->tipo === 'link' ? '' : 'hidden' }}">
             <label for="url" class="form-label">URL:</label>
-            <input type="text" name="url" id="url" class="form-control" value="{{ $tarea->recursoMultimedia->url }}">
+            <input type="text" name="url" id="url" class="form-control" value="{{ $tarea->recursoMultimedia->tipo === 'link' ? $tarea->recursoMultimedia->url : '' }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
