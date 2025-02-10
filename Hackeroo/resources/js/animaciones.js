@@ -97,22 +97,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /////////////EDITAR PERFIL
-    const colorBoxes = document.querySelectorAll('.color-box');
-
-    // Añade un evento de clic a cada cuadro de color
-    colorBoxes.forEach(function (colorBox) {
-        colorBox.addEventListener('click', function () {
-            // Obtiene el valor del color seleccionado
-            const colorSeleccionado = colorBox.getAttribute('data-color');
-
-            // Actualiza el valor del campo oculto
-            document.getElementById('color').value = colorSeleccionado;
-
-            colorBoxes.forEach(function (box) {
-                box.style.border = '3px solid #455A64'; // Restablece el borde de todos los cuadros
-            });
-            colorBox.style.border = '6px solid #455A64'; // Resalta el cuadro seleccionado
-        });
-    });
+   
 });

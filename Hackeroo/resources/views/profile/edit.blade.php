@@ -38,7 +38,7 @@ $colores = [
     <form action="{{ route('profile.update') }}" method="POST">
         @csrf
         @method('PUT')
-        <input type="hidden" name="color_seleccionado" id="color_seleccionado" value="">
+        <input type="hidden" name="color" id="color" value="">
 
         <!-- Resto del formulario -->
         <div class="row justify-content-center gx-5">
@@ -50,12 +50,12 @@ $colores = [
                         <div class="col">
                             @if ($valor <= Auth::user()->puntos)
                                 <div class="color-box hand-cursor" data-color="{{ $color }}"
-                                    style="background-color: {{ $color }}; width: 100px; height: 100px; border: 3px solid #455A64; border-radius: 20px;">
+                                    style="background-color: {{ $color }}; width: 100px; height: 100px; border-radius: 20px;">
                                 </div>
                                 @else
                                 <div style="position: relative;">
                                     <div
-                                    style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain;width: 100px; height: 100px; border: 3px solid #455A64; border-radius: 20px;">
+                                    style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain;width: 100px; height: 100px; border-radius: 20px;">
                                     </div>
     
                                 </div>
@@ -91,4 +91,27 @@ $colores = [
 </div>
 </form>
 </div>
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+        const colorBoxes = document.querySelectorAll('.color-box');
+        console.log('Número de cuadros de color:', colorBoxes.length); 
+    
+        colorBoxes.forEach(function (colorBox) {
+            colorBox.addEventListener('click', function () {
+                const colorSeleccionado = colorBox.getAttribute('data-color');
+                console.log('Color seleccionado:', colorSeleccionado); 
+    
+                document.getElementById('color').value = colorSeleccionado;
+    
+
+                colorBoxes.forEach(function (box) {
+                    box.style.border = ''; 
+                });
+    
+                colorBox.style.border = '3px solid #455A64';
+                console.log('Borde actualizado para el cuadro seleccionado');
+            });
+        });
+    });
+</script>
 @endsection
