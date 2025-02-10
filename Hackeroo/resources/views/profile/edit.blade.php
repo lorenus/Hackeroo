@@ -2,6 +2,24 @@
 
 @section('content')
 
+@php
+// Declara la variable $colores aquí para que esté disponible en toda la vista
+$colores = [
+'#FFD87F' => 0,
+'#455A64' => 0,
+'#EF5350' => 0,
+'#FFB300' => 0,
+'#06AAF4' => 0,
+'#8CC34C' => 0,
+'#00FF00' => 10,
+'#0000FF' => 20,
+'#FFFF00' => 40,
+'#FF00FF' => 80,
+'#00FFFF' => 160,
+'#808080' => 320
+];
+@endphp
+
 <div class="container">
     <div class="row mb-3 volver">
         <div class="col-12 text-left">
@@ -20,60 +38,57 @@
     <form action="{{ route('profile.update') }}" method="POST">
         @csrf
         @method('PUT')
+        <input type="hidden" name="color_seleccionado" id="color_seleccionado" value="">
 
-        <div class="row justify-content-center gx-5">  
+        <!-- Resto del formulario -->
+        <div class="row justify-content-center gx-5">
             <div class="col-md-5 d-flex justify-content-center">
                 <div class='editar-color mb-5'>
                     <h5>Color del perfil</h5>
-                    <div class='row row-cols-4 g-1'>  
-                    @php
-                        $colores = [
-                        '#FFD87F',
-                        '#455A64',
-                        '#EF5350',
-                        '#FFB300',
-                        '#06AAF4',
-                        '#8CC34C',
-                        '#00FF00',
-                        '#0000FF',
-                        '#FFFF00',
-                        '#FF00FF',
-                        '#00FFFF',
-                        '#808080'
-                        ];
-                        @endphp
-                        @foreach ($colores as $color)
-                            <div class="col">
-                                <x-color-box color="{{ $color }}" />
-                            </div>
+                    <div class='row row-cols-4 g-1'>
+                        @foreach ($colores as $color => $valor)
+                        <div class="col">
+                            @if ($valor <= Auth::user()->puntos)
+                                <div class="color-box hand-cursor" data-color="{{ $color }}"
+                                    style="background-color: {{ $color }}; width: 100px; height: 100px; border: 3px solid #455A64; border-radius: 20px;">
+                                </div>
+                                @else
+                                <div style="position: relative;">
+                                    <div
+                                    style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain;width: 100px; height: 100px; border: 3px solid #455A64; border-radius: 20px;">
+                                    </div>
+    
+                                </div>
+                                @endif
+                        </div>
                         @endforeach
                     </div>
                 </div>
             </div>
 
+
             <div class="col-md-5 d-flex justify-content-center">
                 <div class='editar-avatar'>
                     <h5>Imagen de perfil</h5>
                     <div class='row row-cols-3 g-2 justify-content-center'>
-                        @for ($i = 1; $i < 8; $i++)
-                            <div class="col">
-                                <x-avatar src="/img/avatares/{{ $i }}.png"></x-avatar>
-                            </div>
-                        @endfor
-                        <div class="col">
-                            <x-avatar src="/img/iconos/candado.png"></x-avatar>
-                        </div>
-                        <div class="col">
-                            <x-avatar src="/img/iconos/candado.png"></x-avatar>
-                        </div>
+                        @for ($i = 1; $i < 8; $i++) <div class="col">
+                            <x-avatar src="/img/avatares/{{ $i }}.png"></x-avatar>
+                    </div>
+                    @endfor
+                    <div class="col">
+                        <x-avatar src="/img/iconos/candado.png"></x-avatar>
+                    </div>
+                    <div class="col">
+                        <x-avatar src="/img/iconos/candado.png"></x-avatar>
                     </div>
                 </div>
             </div>
         </div>
+</div>
 
-        <div class="d-flex justify-content-center align-items-center">
-            <x-primary-button type="submit" class="btn btn-primary mt-5 text-center">Actualizar Perfil</x-primary-button>
-        </div>
-    </form>
+<div class="d-flex justify-content-center align-items-center">
+    <x-primary-button type="submit" class="btn btn-primary mt-5 text-center">Actualizar</x-primary-button>
+</div>
+</form>
 </div>
 @endsection
