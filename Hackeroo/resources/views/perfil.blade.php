@@ -63,7 +63,7 @@
         @elseif(Auth::user()->rol == 'alumno')
             <div class="perfil row-12 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-center ps-5 pe-5 cuadrado" style="background-color: {{ Auth::user()->color }};">
                 <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
-                    <img src="/img/avatares/1.png" alt="Imagen 1" class="img-perfil-cabecera me-3 img-fluid">
+                    <img src="/img/avatares/{{ Auth::user()->avatar }}" alt="Avatar" class="img-perfil-cabecera me-3 img-fluid">
                     <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
                 </div>
 
