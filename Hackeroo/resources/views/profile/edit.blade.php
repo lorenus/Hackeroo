@@ -63,7 +63,7 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
                         @foreach ($avatares as $avatar => $valor)
                         <div class="col">
                             @if ($valor <= Auth::user()->puntos)
-                                <div
+                                <div class="avatar-box hand-cursor" data-avatar="{{ $avatar }}"
                                     style="background-image: url('/img/avatares/{{ $avatar }}'); background-position: center center; background-size: contain;width: 100px; height: 100px; border-radius: 20px;">
                                 </div>
                                 @else
@@ -105,6 +105,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             colorBox.style.border = '3px solid #455A64';
+            console.log('Borde actualizado para el cuadro seleccionado');
+        });
+    });
+
+    const avatarBoxes = document.querySelectorAll('.avatar-box');
+    console.log('Número de avatares:', avatarBoxes.length);
+
+    avatarBoxes.forEach(function(avatarBox) {
+        avatarBox.addEventListener('click', function() {
+            const avatarSeleccionado = avatarBox.getAttribute('data-avatar');
+            console.log('Avatar seleccionado:', avatarSeleccionado);
+
+            document.getElementById('avatar').value = avatarSeleccionado;
+
+
+            avatarBoxes.forEach(function(box) {
+                box.style.border = '';
+            });
+
+            avatarBox.style.border = '3px solid #455A64';
             console.log('Borde actualizado para el cuadro seleccionado');
         });
     });
