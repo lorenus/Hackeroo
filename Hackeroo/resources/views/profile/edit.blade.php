@@ -38,10 +38,10 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
                     @foreach ($colores as $color => $valor)
                     <div class="col">
                         @if ($valor <= Auth::user()->puntos)
-                            <div class="color-box hand-cursor p-3 text-center ratio ratio-1x1" data-color="{{ $color }}" style="background-color: {{ $color }}; border-radius: 20px; max-width: 100px; max-height: 100px;">
+                            <div class="color-box hand-cursor p-3 text-center ratio ratio-1x1" data-color="{{ $color }}" style="background-color: {{ $color }}; border-radius: 20px; max-width: 80px; max-height: 80px;">
                             </div>
                             @else
-                            <div class="p-3 text-center ratio ratio-1x1" style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain; border-radius: 20px; max-width: 100px; max-height: 100px;">
+                            <div class="p-3 text-center ratio ratio-1x1" style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain; border-radius: 20px; max-width: 80px; max-height: 80px;">
                             </div>
                             @endif
                     </div>
@@ -56,10 +56,10 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
                     @foreach ($avatares as $avatar => $valor)
                     <div class="col">
                         @if ($valor <= Auth::user()->puntos)
-                            <div class="avatar-box hand-cursor p-3 text-center ratio ratio-1x1" data-avatar="{{ $avatar }}" style="background-image: url('/img/avatares/{{ $avatar }}'); background-size: cover; background-position: center; border-radius: 20px; max-width: 100px; max-height: 100px;">
+                            <div class="avatar-box hand-cursor p-3 text-center ratio ratio-1x1" data-avatar="{{ $avatar }}" style="background-image: url('/img/avatares/{{ $avatar }}'); background-size: cover; background-position: center; border-radius: 20px; max-width: 80px;  max-height: 80px;">
                             </div>
                             @else
-                            <div class="p-3 text-center ratio ratio-1x1" style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain; border-radius: 20px; max-width: 100px; max-height: 100px;">
+                            <div class="p-3 text-center ratio ratio-1x1" style="background-image: url('/img/iconos/candado.png'); background-position: center center; background-size: contain; border-radius: 20px; max-width: 80px; max-height: 80px;">
                             </div>
                             @endif
                     </div>
