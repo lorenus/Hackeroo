@@ -13,9 +13,13 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+  
+
+     public function index()
+     {
+         // Puedes pasar el usuario a la vista si lo necesitas
+         return view('perfil', ['user' => Auth::user()]);
+     }
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -23,9 +27,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(Request $request): RedirectResponse
     {
         // Validación de los campos
@@ -74,27 +75,12 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-    public function profesorPage()
-    {
-        // Verificar si el usuario está autenticado y es un profesor
-        if (Auth::check() && Auth::user()->rol === 'profesor') {
-            // Obtener los cursos del profesor logueado, con la relación 'alumnos'
-            $cursos = Auth::user()->cursos_profesor()->with('alumnos')->get();
-            // Obtener todos los alumnos asociados a esos cursos
-            $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI');
 
-            return view('profile.profesor', compact('alumnos')); // Pasamos los alumnos a la vista
-        }
-
-        // Si no es profesor, redirigir o abortar con un error 403
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
-    // app/Http/Controllers/ProfileController.php
 
     public function verAlumnos()
     {
         if (Auth::check() && Auth::user()->rol === 'profesor') {
-            $cursos = Auth::user()->cursos_profesor()->with('alumnos')->get();
+            $cursos = Auth::user()->cursos_profesor;
             $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI');
             return view('profile.alumnos', compact('alumnos'));
         }
@@ -121,13 +107,11 @@ class ProfileController extends Controller
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
     public function alumnoCursos()
-    {
-        if (Auth::check() && Auth::user()->rol === 'alumno') {
-            // Obtener todos los cursos en los que está inscrito el alumno
-            $cursos = Auth::user()->cursos()->get(); // Asegúrate de que 'cursos' esté definido correctamente en el modelo de Usuario
-            return view('profile.alumno_cursos', compact('cursos'));
-        }
-        return abort(403, 'No tienes permiso para acceder a esta página.');
+    {   
+        $user = Auth::user();
+        $cursos = $user->cursos;
+
+        return view('profile.alumno_cursos', compact('cursos'));
     }
     public function verCursos()
     {
