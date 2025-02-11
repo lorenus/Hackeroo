@@ -67,13 +67,13 @@
                 </div>
 
                 
-                </form>
+               
             </div>
             
         </div>
         <div class="col-12 text-center ">
                     <x-primary-button type="submit">Actualizar</x-primary-button>
-                </div>
+                </div> </form>
     </div>
 
     <script>
