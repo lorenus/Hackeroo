@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="container container-perfil d-flex flex-column justify-content-center">
+    <div class="container container-perfil d-flex flex-column justify-content-center"  style="@media (min-width: 768px) { max-width: 60vw;}">
         @if(Auth::user()->rol == 'profesor')
             <div class="perfil row-12 mb-3 d-flex justify-content-center align-items-center ps-5 pe-5 cuadrado" style="background-color: {{ Auth::user()->color }};">
                 <div class="d-flex flex-row align-items-center mb-3 mb-md-0">

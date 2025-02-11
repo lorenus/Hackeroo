@@ -15,7 +15,7 @@ body {
 }
 
 /* Cursor normal (flecha) */
-body {
+body, .arrow-cursor {
   cursor: url("/img/cursors/left_ptr.cur"), auto;
 }
 
@@ -560,7 +560,8 @@ form .form-lineas:focus {
 }
 
 .contenido-cursos {
-  min-height: 50vh;
+  max-height: 40vh;
+  overflow-y: scroll;
 }
 
 fieldset {
@@ -604,7 +605,7 @@ legend {
 }
 
 .contenedor-cursos {
-  height: 50vh;
+  height: 40vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -630,6 +631,10 @@ tr {
   flex-direction: column;
   gap: 10px;
   /* Espacio entre cada curso */
+}
+
+.container-perfil {
+  max-width: 60vw !important;
 }
 
 .curso-item {
