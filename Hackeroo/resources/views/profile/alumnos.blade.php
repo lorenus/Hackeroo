@@ -43,7 +43,7 @@
                                                 {{ $curso['curso']->nombre }}
                                             </a>
                                         </td>
-                                        <td class='text-center'>{{ $curso['tareas_completadas'] }}</td>
+                                        <td class='text-center'>{{ $curso['tareas_completadas'] }}/{{ $curso['total_tareas'] }}</td>
                                     </tr>
                                 @endforeach
                             @endforeach
