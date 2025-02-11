@@ -16,6 +16,13 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function index(Request $request)
+    {
+        return view('perfil', [
+            'user' => $request->user(),
+        ]);
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -27,33 +34,29 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(Request $request): RedirectResponse
-    {
-        // Validación de los campos
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:usuarios,email,' . Auth::user()->DNI . ',DNI',
-        ]);
+{
+    // Validación de los campos
+    $validated = $request->validate([
+        'color' => 'required|string|max:7',
+        'avatar' => 'nullable|string' // Valida que sea una cadena (el nombre del archivo)
+    ]);
 
-        // Actualizamos los datos del usuario
-        $user = $request->user();
-        $user->update($validated);
+    $user = $request->user();
 
-        // Si el email fue cambiado, marcamos el email como no verificado
-        if ($request->has('email') && $user->isDirty('email')) {
-            $user->email_verified_at = null;  // Restablecer la verificación del email
-        }
+    // Actualizar el color
+    $user->color = $validated['color'];
 
-        // Guardar los cambios
-        $user->save();
+    // Actualizar el avatar (directamente desde el input validado)
+    $user->avatar = $validated['avatar'];
 
-        // Redirigir a la ruta correcta según el rol del usuario
-        if ($user->rol === 'profesor') {
-            return redirect()->route('profesor.index')->with('status', 'Perfil actualizado correctamente.');
-        } else {
-            return redirect()->route('alumno.index')->with('status', 'Perfil actualizado correctamente.');
-        }
-    }
+    // Guardar los cambios
+    $user->save();
+
+    // Redireccionar
+    return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
+
+}
+
     /**
      * Delete the user's account.
      */

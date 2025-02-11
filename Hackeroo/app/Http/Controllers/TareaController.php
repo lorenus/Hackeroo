@@ -179,6 +179,77 @@ class TareaController extends Controller
         // Redirigir con mensaje de éxito
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
+    public function editRecurso($id)
+{
+    // Obtener la tarea por su ID
+    $tarea = Tarea::with('recursoMultimedia')->findOrFail($id);
+
+    // Verificar si el usuario es profesor
+    if (Auth::user()->rol !== 'profesor') {
+        abort(403, 'No tienes permiso para realizar esta acción.');
+    }
+
+    // Verificar si existe un recurso multimedia asociado
+    if (!$tarea->recursoMultimedia) {
+        return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
+    }
+
+    // Pasar la tarea y el recurso multimedia a la vista
+    return view('tareas.edit-recurso', compact('tarea'));
+}
+public function updateRecurso(Request $request, $id)
+{
+    // Validación
+    $request->validate([
+        'tipo' => 'required|in:archivo,link',
+        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Solo si tipo es archivo
+        'url' => 'nullable|url', // Solo si tipo es link
+    ]);
+
+    // Obtener la tarea por su ID
+    $tarea = Tarea::findOrFail($id);
+
+    // Verificar si el usuario es profesor
+    if (Auth::user()->rol !== 'profesor') {
+        abort(403, 'No tienes permiso para realizar esta acción.');
+    }
+
+    // Obtener el recurso multimedia asociado
+    $recurso = $tarea->recursoMultimedia;
+
+    if (!$recurso) {
+        return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
+    }
+
+    // Actualizar el recurso según el tipo
+    if ($request->tipo === 'archivo') {
+        // Validar que se haya subido un archivo
+        if (!$request->hasFile('archivo')) {
+            return redirect()->back()->with('error', 'Debes subir un archivo.');
+        }
+
+        // Eliminar el archivo anterior si existe
+        if ($recurso->tipo === 'archivo' && Storage::disk('public')->exists($recurso->url)) {
+            Storage::disk('public')->delete($recurso->url);
+        }
+
+        // Subir el nuevo archivo
+        $nombreArchivo = $request->file('archivo')->getClientOriginalName();
+        $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
+    } elseif ($request->tipo === 'link') {
+        $url = $request->url;
+    }
+
+    // Actualizar el recurso en la base de datos
+    $recurso->update([
+        'tipo' => $request->tipo,
+        'url' => $url,
+    ]);
+
+    // Redirigir con éxito
+    return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
+        ->with('success', 'Recurso actualizado correctamente.');
+}
     public function mostrarTareas($curso_id)
     {
         $curso = Curso::with('tareas')->findOrFail($curso_id);
@@ -239,7 +310,7 @@ class TareaController extends Controller
     }
     public function enviarRespuestas(Request $request, $curso_id, $tarea_id)
     {
-        // Verificar si el usuario está autenticado
+       
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para enviar respuestas.');
         }
@@ -247,60 +318,60 @@ class TareaController extends Controller
         $curso = Curso::findOrFail($curso_id);
         $tarea = Tarea::findOrFail($tarea_id);
     
-        // Inicializar variables
+       
         $resultados = [];
         $puntuacion = 0;
-        $aciertos = 0; // Contador de aciertos
+        $aciertos = 0; 
         $total_preguntas = $tarea->preguntas->count();
-        $valor_pregunta = 10 / $total_preguntas; // Valor proporcional de cada pregunta
-        $penalizacion = $valor_pregunta / 3; // Penalización por pregunta incorrecta
+        $valor_pregunta = 10 / $total_preguntas;
+        $penalizacion = $valor_pregunta / 3; 
     
-        // Recorrer cada pregunta de la tarea
+      
         foreach ($tarea->preguntas as $pregunta) {
-            // Verificar si el usuario ya ha respondido esta pregunta
+        
             $respuesta_previa = RespuestasAlumno::where('pregunta_id', $pregunta->id)
                 ->where('usuario_dni', Auth::user()->DNI)
                 ->first();
     
             if ($respuesta_previa) {
-                // Si ya respondió, saltar esta pregunta
+             
                 continue;
             }
     
-            // Verificar si se ha enviado una respuesta para esta pregunta
+ 
             $respuesta_usuario = $request->input('pregunta.' . $pregunta->id);
     
             if ($respuesta_usuario) {
-                // Obtener la opción seleccionada por el alumno
+          
                 $opcion = $pregunta->opciones_respuestas()->find($respuesta_usuario);
     
-                // Guardar la respuesta del alumno en la tabla respuestas_alumnos
+               
                 RespuestasAlumno::create([
                     'pregunta_id' => $pregunta->id,
-                    'usuario_dni' => Auth::user()->DNI, // Suponemos que el usuario está autenticado
+                    'usuario_dni' => Auth::user()->DNI, 
                     'opcion_respuesta_id' => $opcion->id,
                 ]);
     
                 // Evaluar si la respuesta es correcta
                 if ($opcion->es_correcta) {
-                    $puntuacion += $valor_pregunta; // Sumar el valor de la pregunta
-                    $aciertos++; // Incrementar el contador de aciertos
+                    $puntuacion += $valor_pregunta; 
+                    $aciertos++; 
                     $resultado = 'Correcta';
                 } else {
-                    $puntuacion -= $penalizacion; // Restar la penalización
+                    $puntuacion -= $penalizacion; 
                     $resultado = 'Incorrecta';
                 }
             } else {
-                // Si no se respondió, no suma ni resta puntos
+              
                 RespuestasAlumno::create([
                     'pregunta_id' => $pregunta->id,
                     'usuario_dni' => Auth::user()->DNI,
-                    'opcion_respuesta_id' => null, // Sin respuesta
+                    'opcion_respuesta_id' => null, 
                 ]);
                 $resultado = 'Sin responder';
             }
     
-            // Almacenar el resultado de esta pregunta
+    
             $resultados[] = [
                 'pregunta' => $pregunta->enunciado,
                 'respuesta_usuario' => $respuesta_usuario ? $opcion->respuesta : 'Sin responder',
@@ -308,34 +379,34 @@ class TareaController extends Controller
             ];
         }
     
-        // Asegurarse de que la puntuación no sea negativa
+   
         $puntuacion = max(0, $puntuacion);
     
-        // Actualizar los puntos del usuario
-        $usuario = Auth::user(); // Obtener el usuario autenticado
+        
+        $usuario = Auth::user(); 
     
-        if ($usuario instanceof Usuario) { // Asegurarse de que $usuario sea una instancia de Usuario
-            $usuario->puntos += $puntuacion; // Sumar la puntuación obtenida al atributo 'puntos'
-            $usuario->save(); // Guardar los cambios en la base de datos
+        if ($usuario instanceof Usuario) { 
+            $usuario->puntos += $puntuacion; 
+            $usuario->save(); 
         } else {
             return redirect()->back()->with('error', 'No se pudo actualizar la puntuación del usuario.');
         }
     
-        // Pasar los resultados y la puntuación a la vista
+
         return view('tareas.resultado', compact('resultados', 'puntuacion', 'aciertos', 'total_preguntas', 'curso', 'tarea'));
     }
     public function mostrarResultados($curso_id, $tarea_id)
     {
-        // Obtener el curso y la tarea
+      
         $curso = Curso::findOrFail($curso_id);
         $tarea = Tarea::findOrFail($tarea_id);
     
-        // Obtener las respuestas del usuario para esta tarea
+    
         $respuestasUsuario = RespuestasAlumno::where('usuario_dni', Auth::user()->DNI)
             ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
             ->get();
     
-        // Inicializar variables
+     
         $resultados = [];
         $puntuacion = 0;
         $aciertos = 0;
@@ -343,7 +414,7 @@ class TareaController extends Controller
         $valor_pregunta = 10 / $total_preguntas;
         $penalizacion = $valor_pregunta / 3;
     
-        // Recorrer las preguntas de la tarea
+  
         foreach ($tarea->preguntas as $pregunta) {
             $respuesta = $respuestasUsuario->firstWhere('pregunta_id', $pregunta->id);
     
@@ -369,10 +440,10 @@ class TareaController extends Controller
             ];
         }
     
-        // Asegurarse de que la puntuación no sea negativa
+
         $puntuacion = max(0, $puntuacion);
     
-        // Pasar los resultados a la vista
+
         return view('tareas.resultado', compact('resultados', 'puntuacion', 'aciertos', 'total_preguntas', 'curso', 'tarea'));
     }
     

@@ -480,7 +480,6 @@ form .form-lineas:focus {
 
 .perfil {
   color: #FEFFEB;
-  background-color: #06AAF4;
   border-radius: 20px;
   height: 20vh;
   padding: 20px;
@@ -521,7 +520,7 @@ form .form-lineas:focus {
 }
 
 .div-enlace {
-  border: 3px solid #06AAF4;
+  border: 3px solid;
   border-radius: 20px;
   height: 20vh;
   position: relative;

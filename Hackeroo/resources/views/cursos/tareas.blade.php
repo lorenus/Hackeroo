@@ -44,7 +44,7 @@
                             <!-- Enlace para descargar archivo o ver tarea -->
                             @if ($tarea->tipo === 'archivo')
                             <!-- Enlace de descarga directa para tipo "archivo" -->
-                            <a href="{{ asset('archivos/' . $tarea->archivo) }}"
+                            <a href="{{ asset('storage/' . $tarea->recursoMultimedia->url) }}"
                                 class="text-decoration-none text-dark"
                                 download
                                 target="_blank"
