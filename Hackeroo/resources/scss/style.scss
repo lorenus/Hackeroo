@@ -63,7 +63,7 @@ h6 {
 .boton {
     @include boton;
 
-    > a,
+    >a,
     a.boton {
         font-family: $fuenteTitulos;
         margin-top: -7px;
@@ -172,15 +172,20 @@ footer {
 }
 
 .contenido {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 75vh;
-    max-height: 75vh;
     background-color: $amarillo_fondo;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
+}
+
+@media (min-width: 768px) {
+    .contenido {
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        min-height: 75vh; 
+        max-height: 75vh; 
+    }
 }
 
 .letra:nth-child(2),
@@ -294,7 +299,8 @@ footer {
 /* H */
 .texto-animado-menu span:nth-child(3)
 
-/* / */ {
+/* / */
+    {
     opacity: 1;
     /* Este ya es visible */
 }
@@ -393,21 +399,25 @@ form {
     }
 
     // Estilo específico para .libreta
-    .libreta {
-        background: linear-gradient(to bottom, $amarillo 2px, transparent 1px)
-            repeat-y;
-        background-size: 100% 1.5em;
-        padding-left: 5px;
-        line-height: 1.5em;
-        padding-top: 5px;
-        resize: none;
+    // .libreta {
+    //     background: linear-gradient(to bottom, $amarillo 2px, transparent 1px) repeat-y;
+    //     background-size: 100% 1.5em;
+    //     padding-left: 5px;
+    //     line-height: 1.5em;
+    //     padding-top: 5px;
+    //     resize: none;
 
-        &:focus {
-            background: linear-gradient(to bottom, $azul 2px, transparent 1px)
-                repeat-y;
-            outline: none;
-            /* Elimina el borde predeterminado del focus */
-        }
+    //     &:focus {
+    //         background: linear-gradient(to bottom, $azul 2px, transparent 1px) repeat-y;
+    //         outline: none;
+    //         /* Elimina el borde predeterminado del focus */
+    //     }
+    // }
+}
+
+  @media (min-width: 768px) {
+    .container {
+        max-height: 75vh;
     }
 }
 
@@ -551,6 +561,7 @@ fieldset {
     padding: 20px;
     margin: 20px 0;
     position: relative;
+
     @media (min-width: 780px) {
         max-width: 50vw;
     }
@@ -577,6 +588,7 @@ legend {
 .tabla-scroll-container {
     height: 30vh;
     overflow-y: auto;
+
     td {
         font-family: "Itim";
     }
@@ -618,6 +630,7 @@ tr {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    margin-left: 1em;
 }
 
 .curso-nombre {
@@ -675,19 +688,19 @@ tr {
             (azul, $azul, 65%)
         );
 
-        // Iterar sobre la lista para aplicar colores y tamaños
-        @each $name, $color, $width in $color-width-list {
-            &.#{$name} {
-                background-color: $color;
-                width: $width;
-                border-radius: 0 0 15px 0;
-            }
-        }
-
-        h4 {
-            margin-bottom: 0;
+    // Iterar sobre la lista para aplicar colores y tamaños
+    @each $name, $color, $width in $color-width-list {
+        &.#{$name} {
+            background-color: $color;
+            width: $width;
+            border-radius: 0 0 15px 0;
         }
     }
+
+    h4 {
+        margin-bottom: 0;
+    }
+}
 }
 
 .img-responsive {
@@ -706,6 +719,7 @@ tr {
 .text-danger {
     color: $rojo;
 }
+
 .text-success {
     color: $verde;
 }
@@ -716,15 +730,15 @@ tr {
     }
 
     &.border-link {
-        border: 5px solid $azul; 
+        border: 5px solid $azul;
     }
 
     &.border-archivo {
-        border: 5px solid $amarillo; 
+        border: 5px solid $amarillo;
     }
 }
 
-h5.descargar{
+h5.descargar {
     border: 3px solid $amarillo;
     border-radius: 10px;
 }
