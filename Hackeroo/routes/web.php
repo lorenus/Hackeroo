@@ -34,6 +34,11 @@ Route::middleware('auth')->group(function () {
 
 //CURSOS
 Route::middleware('auth')->group(function () {
+
+      // Para alumnos
+      Route::get('/cursos/alumno', [CursoController::class, 'indexForAlumnos'])->name('cursos-alumno'); //cursos del alumno NO MOVAIS ESTA RUTA DEBAJO DE CURSOS SHOW(SE ROMPE)
+      Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])->name('cursos.show.alumno'); //cada curso en concreto de alumno
+    
     // Para profesores
     Route::get('/cursos', [CursoController::class, 'index'])->name('cursos'); //cursos del profesor
     Route::get('/cursos/{id}', [CursoController::class, 'show'])->name('cursos.show'); //Vista de cada curso en concreto
@@ -48,9 +53,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy'); //Borrar el curso
 
-    // Para alumnos
-    Route::get('/cursos/alumno', [CursoController::class, 'indexForAlumnos'])->name('cursos-alumno'); //cursos del alumno   
-    Route::get('/cursos/{id}/alumno', [CursoController::class, 'showAlumno'])->name('cursos.show.alumno'); //cada curso en concreto de alumno
+  
 });
 
 
