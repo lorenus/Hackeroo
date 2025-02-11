@@ -74,7 +74,7 @@ class TareaController extends Controller
         }
     
         return redirect()->route('cursos.show', ['id' => $request->curso_id])
-            ->with('success', ucfirst($request->tipo) . ' creado correctamente');
+            ->with('status', ucfirst($request->tipo) . ' creado correctamente');
     }
 
 
@@ -152,7 +152,7 @@ class TareaController extends Controller
     
         $tarea->delete();
     
-        return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
+        return redirect()->route('cursos.show', ['id' => $curso_id])->with('status', 'Tarea eliminada correctamente');
     }
     public function editRecurso($id)
 {
