@@ -15,7 +15,7 @@ body {
 }
 
 /* Cursor normal (flecha) */
-body, .arrow-cursor {
+body {
   cursor: url("/img/cursors/left_ptr.cur"), auto;
 }
 
@@ -167,21 +167,16 @@ footer {
 }
 
 .contenido {
+  flex-grow: 1;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
   background-color: #FEFFEB;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 }
 
-@media (min-width: 768px) {
-  .contenido {
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    min-height: 75vh;
-    max-height: 75vh;
-  }
-}
 .letra:nth-child(2),
 .letra:nth-child(6) {
   color: #EF5350;
@@ -403,6 +398,7 @@ form {
 }
 form .form-lineas,
 form .libreta {
+  color: "Itim";
   display: block;
   width: 100%;
   font-family: "Itim";
@@ -419,12 +415,20 @@ form .form-lineas:focus {
   outline: none;
   /* Elimina el borde predeterminado del focus */
 }
-
-@media (min-width: 768px) {
-  .container {
-    max-height: 75vh;
-  }
+form .libreta {
+  background: linear-gradient(to bottom, #FFB300 2px, transparent 1px) repeat-y;
+  background-size: 100% 1.5em;
+  padding-left: 5px;
+  line-height: 1.5em;
+  padding-top: 5px;
+  resize: none;
 }
+form .libreta:focus {
+  background: linear-gradient(to bottom, #06AAF4 2px, transparent 1px) repeat-y;
+  outline: none;
+  /* Elimina el borde predeterminado del focus */
+}
+
 .custom-select {
   position: relative;
   display: inline-flex;
@@ -465,6 +469,7 @@ form .form-lineas:focus {
 
 .perfil {
   color: #FEFFEB;
+  background-color: #06AAF4;
   border-radius: 20px;
   height: 20vh;
   padding: 20px;
@@ -505,7 +510,7 @@ form .form-lineas:focus {
 }
 
 .div-enlace {
-  border: 3px solid;
+  border: 3px solid #06AAF4;
   border-radius: 20px;
   height: 20vh;
   position: relative;
@@ -545,8 +550,7 @@ form .form-lineas:focus {
 }
 
 .contenido-cursos {
-  max-height: 40vh;
-  overflow-y: scroll;
+  min-height: 50vh;
 }
 
 fieldset {
@@ -566,7 +570,7 @@ legend {
   font-family: "Lilita One";
   width: auto;
   font-size: 22px;
-  color: #455a64;
+  color: #455A64;
   background-color: #FEFFEB;
   padding: 0 10px;
   position: absolute;
@@ -585,12 +589,9 @@ legend {
   height: 30vh;
   overflow-y: auto;
 }
-.tabla-scroll-container td {
-  font-family: "Itim";
-}
 
 .contenedor-cursos {
-  height: 40vh;
+  height: 50vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -609,6 +610,7 @@ td {
 
 tr {
   border-bottom: 3px solid #FFB300;
+  /* Color de borde */
 }
 
 .cursos-container {
@@ -618,10 +620,6 @@ tr {
   /* Espacio entre cada curso */
 }
 
-.container-perfil {
-  max-width: 60vw !important;
-}
-
 .curso-item {
   display: flex;
   justify-content: space-between;
@@ -629,7 +627,6 @@ tr {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-left: 1em;
 }
 
 .curso-nombre {
@@ -660,15 +657,10 @@ tr {
   border: 5px solid #8CC34C;
   border-radius: 20px;
   max-width: 300px;
-  overflow-x: auto;
 }
 
 .curso-acciones {
   border-left: 5px solid #8CC34C;
-}
-
-.tarea-card {
-  color: #455A64;
 }
 
 .ranking-container .ranking-item {
@@ -701,35 +693,6 @@ tr {
   width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-.ver-tareas-alumnos .pregunta {
-  text-align: left;
-  margin: 20px 15px 0 0;
-  padding-left: 7vh;
-}
-
-.text-danger {
-  color: #EF5350;
-}
-
-.text-success {
-  color: #8CC34C;
-}
-
-.curso-item.border-test {
-  border: 5px solid #8CC34C;
-}
-.curso-item.border-link {
-  border: 5px solid #06AAF4;
-}
-.curso-item.border-archivo {
-  border: 5px solid #FFB300;
-}
-
-h5.descargar {
-  border: 3px solid #FFB300;
-  border-radius: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
