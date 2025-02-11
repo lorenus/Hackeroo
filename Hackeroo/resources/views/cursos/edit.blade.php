@@ -23,7 +23,7 @@
                 <div class="mb-5 mt-3 text-md-start">
                     <x-input-label for="nombre" :value="__('Nombre del curso:')" />
                     <x-text-input id="nombre" class="form-control block" type="text" name="nombre"
-                        :value="old('nombre', $curso->nombre)" required />
+                        :value="old('nombre', $curso->nombre) maxlength=25" required />
                 </div>
 
                 <div class="mb-5 mt-3 text-md-start">
