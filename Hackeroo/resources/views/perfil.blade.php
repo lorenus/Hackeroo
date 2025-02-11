@@ -70,7 +70,7 @@
                 <div class="puntuacion d-flex flex-column align-items-center ps-3 pe-3">
                     <img src="/img/iconos/corona.png" alt="Imagen 2" class="img-corona d-none d-md-block img-fluid">
                     <div class="d-flex flex-row flex-md-column">
-                        <h5 class="text-center">Nivel {{ Auth::user()->puntos /10 }} &nbsp </h5>
+                        <h5 class="text-center">Nivel {{ Auth::user()->puntos / 10}}</h5>
                         <h5>{{ Auth::user()->puntos }} puntos</h5>
                     </div>
                 </div>

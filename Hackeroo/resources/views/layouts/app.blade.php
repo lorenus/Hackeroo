@@ -40,7 +40,7 @@
     @endif
 
 
-    <div class="contenido container-fluid d-flex flex-column flex-md-row p-5">
+    <div class="contenido container-fluid d-flex flex-column flex-md-row md-p-5">
       @yield('content')
     </div>
     @include('layouts.footer')
