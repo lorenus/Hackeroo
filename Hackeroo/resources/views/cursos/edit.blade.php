@@ -39,7 +39,7 @@
                 <h6>Selecciona los alumnos que quieras añadir:</h6>
 
                 <div class="input-group mb-4">
-                    <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" />
+                    <x-search-bar id="search" class="form-control" placeholder="Buscar alumno" />
                 </div>
 
                 <div class="tabla-scroll-container">
