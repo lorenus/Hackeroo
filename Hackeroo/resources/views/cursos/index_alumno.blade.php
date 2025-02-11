@@ -32,7 +32,7 @@
                          <!-- Enlace al curso -->
                          <a href="{{ route('curso.tareas', $curso->id) }}" class="text-decoration-none text-dark">
                             <div class="tarea-card">
-                                <h5 class="text-center">{{ $curso->nombre }}</h5>
+                                <h5 class="text-center hand-cursor">{{ $curso->nombre }}</h5>
                                 <p>{{ $curso->descripcion }}</p>
                             </div>
                             </a>

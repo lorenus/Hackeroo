@@ -81,7 +81,7 @@
                                         </div>
                                         <!-- Contenido (título y descripción) -->
                                         <div class="text-left">
-                                            <h5>
+                                            <h5 class="hand-cursor">
                                                 {{ $tarea->titulo }}
                                                 @if ($tarea->tipo === 'archivo')
                                                 <!-- Icono de descarga al lado del título -->
