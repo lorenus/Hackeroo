@@ -13,21 +13,19 @@ return new class extends Migration
     {
         // Crear la tabla 'cursos'
         Schema::create('cursos', function (Blueprint $table) {
-            $table->id(); // ID único del curso
-            $table->string('nombre'); // Nombre del curso
-            $table->text('descripcion'); // Descripción del curso
-            $table->string('profesor_dni'); // Clave foránea para el profesor (DNI)
-            $table->timestamps(); // Tiempos de creación y actualización
+            $table->id(); 
+            $table->string('nombre');
+            $table->text('descripcion'); 
+            $table->string('profesor_dni'); 
+            $table->timestamps();
 
-            // Relación con el profesor
             $table->foreign('profesor_dni')->references('DNI')->on('usuarios')->onDelete('cascade');
         });
 
-        // Crear la tabla intermedia 'curso_usuario' para la relación muchos a muchos
         Schema::create('curso_usuario', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('curso_id')->constrained()->onDelete('cascade'); // Relación con la tabla 'cursos'
-            $table->string('usuario_dni'); // Clave foránea hacia 'usuarios' (DNI del alumno)
+            $table->foreignId('curso_id')->constrained()->onDelete('cascade'); 
+            $table->string('usuario_dni');
             $table->foreign('usuario_dni')->references('DNI')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
@@ -38,7 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('curso_usuario'); // Eliminar la tabla intermedia
-        Schema::dropIfExists('cursos'); // Eliminar la tabla 'cursos'
+        Schema::dropIfExists('curso_usuario'); 
+        Schema::dropIfExists('cursos'); 
     }
 };
