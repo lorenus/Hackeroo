@@ -25,6 +25,7 @@
     </div>
 @endif
 
+<h2 class='text-center mb-3'>Mis cursos</h2>
    
     <!-- Botón para crear nuevo curso -->
     <div class="row mb-3">

@@ -38,7 +38,7 @@
         <div class="col-12">
             @if ($curso->tareas->count() > 0)
             <div class='contenedor-cursos mw-md-60'>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center .contenido-cursos">
 
                     <!-- Asignar clase dinámica según el tipo de tarea -->
                     

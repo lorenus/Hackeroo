@@ -542,7 +542,8 @@ form {
 
 //CURSOS
 .contenido-cursos {
-    min-height: 50vh;
+    max-height: 40vh;
+  overflow-y: scroll;
 }
 
 fieldset {
@@ -583,7 +584,7 @@ legend {
 }
 
 .contenedor-cursos {
-    height: 50vh;
+    height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -730,4 +731,3 @@ h5.descargar{
     border: 3px solid $amarillo;
     border-radius: 10px;
 }
-
