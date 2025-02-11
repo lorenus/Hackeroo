@@ -623,8 +623,12 @@ tr {
     gap: 10px;
     /* Espacio entre cada curso */
 }
-.container-perfil{
-    max-width: 60vw !important;
+.container-perfil {
+    max-width: 80vw !important;
+
+    @media (min-width: 576px) { 
+        max-width: 60vw !important;
+    } 
 }
 .curso-item {
     display: flex;

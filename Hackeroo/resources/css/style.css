@@ -634,7 +634,12 @@ tr {
 }
 
 .container-perfil {
-  max-width: 60vw !important;
+  max-width: 80vw !important;
+}
+@media (min-width: 576px) {
+  .container-perfil {
+    max-width: 60vw !important;
+  }
 }
 
 .curso-item {
