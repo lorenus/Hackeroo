@@ -19,4 +19,8 @@ class PaginasEstaticasController extends Controller
     {
         return view('info'); 
     }
+    public function contacto()
+    {
+        return view('contacto');
+    }
 }
