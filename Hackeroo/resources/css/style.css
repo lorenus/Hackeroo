@@ -1,0 +1,750 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #FFD87F;
+  font-family: "Itim";
+  color: #455A64;
+}
+
+/* Cursor normal (flecha) */
+body, .arrow-cursor {
+  cursor: url("/img/cursors/left_ptr.cur"), auto;
+}
+
+/* Cursor de texto (I-beam) */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input[type=text],
+textarea,
+.text-cursor {
+  cursor: url("/img/cursors/xterm.cur"), auto;
+}
+
+/* Cursor de mano (para enlaces y elementos interactivos) */
+a,
+button,
+.hand-cursor,
+.boton,
+.btn,
+input[type=checkbox] {
+  cursor: url("/img/cursors/pointer.cur"), auto !important;
+}
+
+a {
+  text-decoration: none;
+  color: #455A64;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lilita One";
+}
+
+.boton {
+  background-image: url("/img/botones/boton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+.boton > a,
+.boton a.boton {
+  font-family: "Lilita One";
+  margin-top: -7px;
+  color: #FEFFEB;
+  font-size: x-large;
+}
+
+a.boton {
+  font-family: "Lilita One";
+  margin-top: -7px;
+  color: #455A64;
+  font-size: large;
+}
+
+h1 {
+  font-family: "Lilita One";
+  font-size: 5rem;
+}
+
+#info {
+  font-size: 2rem;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggler {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  outline: none;
+  /* Elimina el borde cuando el botón está enfocado */
+  box-shadow: none;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  /* Elimina el borde de enfoque */
+  box-shadow: none;
+  /* Elimina cualquier sombra en foco */
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .navbar-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+  }
+  .texto-info {
+    margin-left: 10vw;
+  }
+  #accordion {
+    width: 40vw;
+  }
+  .img-fluid {
+    max-width: 30vw;
+  }
+}
+.custom-menu {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin: 0;
+  /* Elimina el margen predeterminado */
+  padding: 0;
+  /* Elimina el padding predeterminado */
+  list-style: none;
+  /* Elimina los estilos de lista */
+}
+
+/* Aplicar height: 100vh solo en pantallas pequeñas (menú colapsado) */
+@media (max-width: 576px) {
+  .custom-menu {
+    height: 100vh;
+    /* Ocupa el 100% del alto de la ventana */
+  }
+}
+.boton-menu {
+  background-image: url("/img/botones/boton.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 60px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navbar {
+  font-family: "Lilita One";
+  font-size: x-large;
+  background-color: #FEFFEB;
+}
+
+footer {
+  min-height: 15vh;
+}
+
+.contenido {
+  display: flex;
+  background-color: #FEFFEB;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+@media (min-width: 768px) {
+  .contenido {
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    min-height: 75vh;
+    max-height: 75vh;
+  }
+}
+.letra:nth-child(2),
+.letra:nth-child(6) {
+  color: #EF5350;
+}
+
+.letra:nth-child(3),
+.letra:nth-child(7) {
+  color: #FFB300;
+}
+
+.letra:nth-child(4),
+.letra:nth-child(9) {
+  color: #06AAF4;
+}
+
+.letra:nth-child(5),
+.letra:nth-child(8) {
+  color: #8CC34C;
+}
+
+.texto-animado {
+  font-size: 8vw;
+  font-family: "Lilita One";
+  text-align: center;
+  /* Centra el texto horizontalmente */
+}
+
+.texto-animado span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.1s ease-in-out;
+}
+
+.texto-animado span:hover {
+  transform: scale(1.5);
+}
+
+.enlace-con-subrayado {
+  position: relative;
+  display: inline-block;
+}
+
+.subrayado1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea1.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subrayado2 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea2.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subrayado3 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background-image: url("/img/botones/linea3.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.enlace-con-subrayado:hover .subrayado1,
+.enlace-con-subrayado:hover .subrayado2,
+.enlace-con-subrayado:hover .subrayado3 {
+  opacity: 1;
+}
+
+.enlace-bolita {
+  position: relative;
+  display: inline-block;
+}
+
+.bolitaI {
+  position: absolute; /* Para posicionarlas respecto a su contenedor */
+  left: -20px; /* Ajusta la distancia de la bolita desde el borde izquierdo */
+  top: 40%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta la bolita al centro exacto */
+  width: 15px; /* Ajusta el tamaño de la bolita */
+  height: 15px; /* Ajusta el tamaño de la bolita */
+  background-image: url(/img/botones/bolita.png); /* Ruta a la imagen de la bolita */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0; /* Las bolitas no son visibles por defecto */
+  transition: opacity 0.3s ease; /* Transición suave al hacer hover */
+}
+
+.bolitaD {
+  position: absolute; /* Para posicionarlas respecto a su contenedor */
+  right: -20px; /* Ajusta la distancia de la bolita desde el borde derecho */
+  top: 40%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta la bolita al centro exacto */
+  width: 15px; /* Ajusta el tamaño de la bolita */
+  height: 15px; /* Ajusta el tamaño de la bolita */
+  background-image: url(/img/botones/bolita.png); /* Ruta a la imagen de la bolita */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0; /* Las bolitas no son visibles por defecto */
+  transition: opacity 0.3s ease; /* Transición suave al hacer hover */
+}
+
+.enlace-bolita:hover .bolitaI,
+.enlace-bolita:hover .bolitaD {
+  opacity: 1;
+}
+
+.logo {
+  font-family: sans-serif;
+  /* Usa la fuente que prefieras */
+  font-size: 3rem;
+  /* Tamaño grande para el logo */
+  overflow: hidden;
+  /* Evita que el contenido se vea antes de tiempo */
+  display: inline-block;
+}
+
+/* Contenedor de las letras */
+.texto-animado-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* Las letras por defecto, solo el <H> visible */
+.texto-animado-menu .letra {
+  opacity: 0;
+  /* Las letras estarán ocultas por defecto */
+  transition: opacity 0.3s ease;
+  /* Transición para mostrar las letras */
+}
+
+/* El primer span con el <H> visible */
+.texto-animado-menu span:first-child,
+.texto-animado-menu span:nth-child(2),
+.texto-animado-menu span:nth-child(3) {
+  opacity: 1;
+  /* Este ya es visible */
+}
+
+/* Cuando se hace hover, las letras aparecerán */
+.logo:hover .letra {
+  opacity: 1;
+  /* Las letras se muestran */
+}
+
+/* Para el efecto de expansión: De izquierda a derecha */
+.logo:hover .texto-animado-menu {
+  animation: expand 0.6s forwards;
+}
+
+/* La animación que expande el texto */
+@keyframes expand {
+  0% {
+    transform: translateX(-100%);
+    /* Empieza fuera de la pantalla */
+  }
+  100% {
+    transform: translateX(0);
+    /* Se mueve a su posición original */
+  }
+}
+.card-header a h3 {
+  font-family: "Lilita One";
+}
+
+#accordion {
+  width: 40vw;
+}
+
+.card {
+  background-color: #FEFFEB;
+  border: 3px solid #FFD87F;
+  border-radius: 15px;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+#accordion {
+  width: 80vw;
+}
+
+.img-fluid {
+  width: 60vw;
+}
+
+form .form-label.custom-label {
+  font-family: "Lilita One";
+}
+
+.custom-input#email {
+  border-color: #FFD87F;
+  border: 4px solid;
+}
+
+form {
+  padding: 0.32rem 0.7rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Lilita One";
+}
+form .form-lineas,
+form .libreta {
+  display: block;
+  width: 100%;
+  font-family: "Itim";
+  border: none;
+}
+form .form-lineas {
+  line-height: 1.2;
+  background-color: transparent;
+  background-clip: padding-box;
+  border-bottom: 2px solid #FFB300;
+}
+form .form-lineas:focus {
+  border-bottom: 2px solid #06AAF4;
+  outline: none;
+  /* Elimina el borde predeterminado del focus */
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-height: 75vh;
+  }
+}
+.custom-select {
+  position: relative;
+  display: inline-flex;
+  border: 2px solid #FFB300;
+  border-radius: 50px;
+  /* Bordes muy redondeados */
+  overflow: hidden;
+  background-color: #FEFFEB;
+  padding: 5px;
+}
+
+.option {
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.selector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #FFD87F;
+  border-radius: 50px;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.contenedor-perfil {
+  max-width: 50vw;
+}
+@media (max-width: 576px) {
+  .contenedor-perfil {
+    min-width: 70vw;
+  }
+}
+
+.perfil {
+  color: #FEFFEB;
+  border-radius: 20px;
+  height: 20vh;
+  padding: 20px;
+}
+
+.img-perfil-cabecera {
+  height: 80px;
+  /* Tamaño fijo para la imagen en móvil */
+  width: auto;
+  border-radius: 15px;
+}
+@media (min-width: 768px) {
+  .img-perfil-cabecera {
+    height: 120px;
+  }
+}
+
+.puntuacion {
+  width: auto;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #455A64;
+  background-color: #FEFFEB;
+  border-radius: 15px;
+}
+@media (min-width: 768px) {
+  .puntuacion {
+    min-width: 110px;
+    min-height: 120px;
+  }
+}
+
+.puntuacion img {
+  max-height: 100%;
+  width: auto;
+}
+
+.div-enlace {
+  border: 3px solid;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+
+.cerrar-sesion {
+  border: 3px solid #EF5350;
+  border-radius: 20px;
+  height: 20vh;
+  position: relative;
+}
+
+.div-enlace,
+.cerrar-sesion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-perfil {
+  max-height: 8vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.div-enlace p {
+  margin-bottom: 10px;
+}
+
+.img-corona {
+  max-height: 50px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+.contenido-cursos {
+  max-height: 40vh;
+  overflow-y: scroll;
+}
+
+fieldset {
+  border: 5px solid #FFB300;
+  border-radius: 25px;
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+}
+@media (min-width: 780px) {
+  fieldset {
+    max-width: 50vw;
+  }
+}
+
+legend {
+  font-family: "Lilita One";
+  width: auto;
+  font-size: 22px;
+  color: #455a64;
+  background-color: #FEFFEB;
+  padding: 0 10px;
+  position: absolute;
+  top: -23px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (min-width: 600px) {
+  legend {
+    font-size: xx-large;
+    top: -27px;
+  }
+}
+
+.tabla-scroll-container {
+  height: 30vh;
+  overflow-y: auto;
+}
+.tabla-scroll-container td {
+  font-family: "Itim";
+}
+
+.contenedor-cursos {
+  height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  table-layout: fixed;
+}
+
+th,
+td {
+  padding: 10px;
+  word-wrap: break-word;
+}
+
+tr {
+  border-bottom: 3px solid #FFB300;
+}
+
+.cursos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Espacio entre cada curso */
+}
+
+.container-perfil {
+  max-width: 60vw !important;
+}
+
+.curso-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-left: 1em;
+}
+
+.curso-nombre {
+  flex: 1;
+  /* Ocupa el espacio restante */
+}
+
+.curso-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  /* Espacio entre los botones */
+}
+
+.accion-editar,
+.accion-eliminar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.curso-item {
+  border: 5px solid #8CC34C;
+  border-radius: 20px;
+  max-width: 300px;
+  overflow-x: auto;
+}
+
+.curso-acciones {
+  border-left: 5px solid #8CC34C;
+}
+
+.tarea-card {
+  color: #455A64;
+}
+
+.ranking-container .ranking-item {
+  color: #FEFFEB;
+  font-size: large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ranking-container .ranking-item.amarillo {
+  background-color: #FFB300;
+  width: 100%;
+  border-radius: 0 0 15px 0;
+}
+.ranking-container .ranking-item.verde {
+  background-color: #8CC34C;
+  width: 85%;
+  border-radius: 0 0 15px 0;
+}
+.ranking-container .ranking-item.azul {
+  background-color: #06AAF4;
+  width: 65%;
+  border-radius: 0 0 15px 0;
+}
+.ranking-container .ranking-item h4 {
+  margin-bottom: 0;
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ver-tareas-alumnos .pregunta {
+  text-align: left;
+  margin: 20px 15px 0 0;
+  padding-left: 7vh;
+}
+
+.text-danger {
+  color: #EF5350;
+}
+
+.text-success {
+  color: #8CC34C;
+}
+
+.curso-item.border-test {
+  border: 5px solid #8CC34C;
+}
+.curso-item.border-link {
+  border: 5px solid #06AAF4;
+}
+.curso-item.border-archivo {
+  border: 5px solid #FFB300;
+}
+
+h5.descargar {
+  border: 3px solid #FFB300;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */

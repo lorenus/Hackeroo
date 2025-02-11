@@ -8,6 +8,6 @@ class ContactoController extends Controller
 {
     public function contacto()
     {
-        return view('contacto'); // Esto va a buscar una vista llamada 'home.blade.php'
+        return view('contacto');
     }
 }

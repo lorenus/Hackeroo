@@ -8,15 +8,15 @@ class PaginasEstaticasController extends Controller
 {
     public function index()
     {
-        return view('home'); // Esto va a buscar una vista llamada 'home.blade.php'
+        return view('home'); 
     }
 
     public function faq(){
-        return view('faq'); // Esto va a buscar una vista llamada 'home.blade.php'
+        return view('faq'); 
 
     }
     public function info()
     {
-        return view('info'); // Esto va a buscar una vista llamada 'home.blade.php'
+        return view('info'); 
     }
 }
