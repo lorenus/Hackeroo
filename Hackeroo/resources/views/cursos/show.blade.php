@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-
+ <!-- Botón para volver -->
     <div class="row mb-3 mt-5">
         <div class="col-12 text-left">
             <a href="{{ route('cursos') }}">
@@ -25,7 +25,7 @@
     </div>
 @endif
 
-    <h2 class='text-center mb-3'>{{ $curso->nombre }}</h2>
+    <h2 class='text-center mb-3'>{{ $curso->nombre }} - Tareas</h2>
 
 
     <div class="row mb-3">
@@ -34,7 +34,6 @@
         </div>
     </div>
 
-    <h5 class='text-center'>Tareas del curso</h5>
     <div class="row contenido-cursos">
         <div class="col-12">
             @if ($curso->tareas->count() > 0)

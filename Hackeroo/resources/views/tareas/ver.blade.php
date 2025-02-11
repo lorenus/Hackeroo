@@ -4,8 +4,14 @@
 <div class="container">
     <div class="row mb-3">
         <div class="col-12 text-left">
-            <a href="{{ route('curso.tareas', $curso_id) }}">
-                <img src="/img/botones/volver.png" alt="Volver">
+           
+                @if(Auth::user()->rol=='alumno')
+                <a href="{{ route('curso.tareas', $curso_id) }}">
+                @else
+                <a href="{{ route('cursos.show', $curso_id) }}">
+                
+            @endif
+            <img src="/img/botones/volver.png" alt="Volver">
             </a>
         </div>
     </div>

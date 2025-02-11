@@ -610,7 +610,9 @@ tr {
     gap: 10px;
     /* Espacio entre cada curso */
 }
-
+.container-perfil{
+    max-width: 60vw !important;
+}
 .curso-item {
     display: flex;
     justify-content: space-between;
