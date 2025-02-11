@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\RespuestasAlumno;
 
 class ProfileController extends Controller
 {
@@ -35,24 +36,26 @@ class ProfileController extends Controller
      */
     public function update(Request $request): RedirectResponse
 {
-    // Validación de los campos
     $validated = $request->validate([
-        'color' => 'required|string|max:7',
-        'avatar' => 'nullable|string' // Valida que sea una cadena (el nombre del archivo)
+        'color' => 'nullable|string|max:7',
+        'avatar' => 'nullable|string' 
     ]);
-
     $user = $request->user();
 
-    // Actualizar el color
-    $user->color = $validated['color'];
-
-    // Actualizar el avatar (directamente desde el input validado)
+if(isset($request->avatar)){
     $user->avatar = $validated['avatar'];
+}
+if(isset($request->color)){
+    $user->color = $validated['color'];
+}
+   
+    
 
-    // Guardar los cambios
+   
+    
+
     $user->save();
 
-    // Redireccionar
     return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
 
 }
@@ -77,73 +80,107 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-    
-    public function profesorPage()
-    {
-        // Verificar si el usuario está autenticado y es un profesor
-        if (Auth::check() && Auth::user()->rol === 'profesor') {
-            // Obtener los cursos del profesor logueado, con la relación 'alumnos'
-            $cursos = Auth::user()->cursos_profesor()->with('alumnos')->get();
-            // Obtener todos los alumnos asociados a esos cursos
-            $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI');
-
-            return view('profile.profesor', compact('alumnos')); // Pasamos los alumnos a la vista
-        }
-
-        // Si no es profesor, redirigir o abortar con un error 403
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
-    // app/Http/Controllers/ProfileController.php
-
+ 
     public function verAlumnos()
     {
         if (Auth::check() && Auth::user()->rol === 'profesor') {
-            $cursos = Auth::user()->cursos_profesor()->with('alumnos')->get();
-            $alumnos = $cursos->pluck('alumnos')->flatten()->unique('DNI');
-            return view('profile.alumnos', compact('alumnos'));
+            $cursos = Auth::user()->cursos_profesor; 
+    
+            $alumnosPorCurso = [];
+    
+            foreach ($cursos as $curso) {
+                $alumnosDelCurso = $curso->alumnos;
+    
+                foreach ($alumnosDelCurso as $alumno) {
+                    $tareasCompletadas = RespuestasAlumno::where('usuario_dni', $alumno->DNI)
+                        ->whereIn('pregunta_id', function ($query) use ($curso) {
+                            $query->select('id')
+                                ->from('preguntas')
+                                ->whereIn('tarea_id', $curso->tareas->pluck('id'));
+                        })
+                        ->distinct('pregunta_id')
+                        ->pluck('pregunta_id') 
+                        ->map(function ($preguntaId) use ($curso) {
+                            return $curso->tareas->filter(function ($tarea) use ($preguntaId) {
+                                return $tarea->preguntas->pluck('id')->contains($preguntaId);
+                            })->unique('id'); 
+                        })
+                        ->collapse() 
+                        ->unique('id') 
+                        ->count(); 
+    
+                    $alumnosPorCurso[] = [
+                        'alumno' => $alumno,
+                        'curso' => $curso,
+                        'tareas_completadas' => $tareasCompletadas,
+                    ];
+                }
+            }
+    
+            return view('profile.alumnos', compact('alumnosPorCurso'));
         }
+    
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
+   
+    
+    public function verAlumnoEnCurso($alumnoDNI, $curso_id)
+{
 
-    public function verAlumno($dni)
-    {
-        $alumno = Usuario::where('dni', $dni)->firstOrFail();
-        return view('profile.alumno', compact('alumno'));
-    }
+    $curso = Curso::findOrFail($curso_id);
+    $alumno = Usuario::where('DNI', $alumnoDNI)->firstOrFail();
 
-    public function alumnoPage()
-    {
-        // Verificar si el usuario está autenticado y es un alumno
-        if (Auth::check() && Auth::user()->rol === 'alumno') {
-            // Obtener los cursos asociados al alumno logueado
-            $cursos = Auth::user()->cursos;  // Esto es posible gracias a la relación definida en el modelo Usuario
+    $tareasDelCurso = $curso->tareas()->where('tipo', 'test')->get();
 
-            return view('profile.alumno', compact('cursos')); // Pasamos los cursos a la vista
+    $resultadosTareas = [];
+
+    foreach ($tareasDelCurso as $tarea) {
+        $respuestasUsuario = RespuestasAlumno::where('usuario_dni', $alumnoDNI)
+            ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
+            ->get();
+
+        if ($respuestasUsuario->isNotEmpty()) {
+            $puntuacion = 0;
+            $aciertos = 0;
+            $total_preguntas = $tarea->preguntas->count();
+            $valor_pregunta = 10 / $total_preguntas;
+            $penalizacion = $valor_pregunta / 3;
+
+            foreach ($tarea->preguntas as $pregunta) {
+                $respuesta = $respuestasUsuario->firstWhere('pregunta_id', $pregunta->id);
+
+                if ($respuesta && $respuesta->opcion_respuesta_id) {
+                    $opcion = $pregunta->opciones_respuestas()->find($respuesta->opcion_respuesta_id);
+
+                    if ($opcion->es_correcta) {
+                        $puntuacion += $valor_pregunta;
+                        $aciertos++;
+                    } else {
+                        $puntuacion -= $penalizacion;
+                    }
+                }
+            }
+
+            $puntuacion = max(0, $puntuacion);
+
+            $resultadosTareas[] = [
+                'tarea' => $tarea,
+                'nota' => number_format($puntuacion, 2),
+            ];
+        } else {
+            $resultadosTareas[] = [
+                'tarea' => $tarea,
+                'nota' => 'No completada',
+            ];
         }
-
-        // Si no es alumno, redirigir o abortar con un error 403
-        return abort(403, 'No tienes permiso para acceder a esta página.');
     }
-    public function alumnoCursos()
-    {
-        if (Auth::check() && Auth::user()->rol === 'alumno') {
-            // Obtener todos los cursos en los que está inscrito el alumno
-            $cursos = Auth::user()->cursos()->get(); // Asegúrate de que 'cursos' esté definido correctamente en el modelo de Usuario
-            return view('profile.alumno_cursos', compact('cursos'));
-        }
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
-    public function verCursos()
-    {
-        // Verificar si el usuario está autenticado y es un alumno
-        if (Auth::check() && Auth::user()->rol === 'alumno') {
-            // Obtener los cursos asociados al alumno logueado
-            $cursos = Auth::user()->cursos;  // Esto es posible gracias a la relación definida en el modelo Usuario
 
-            return view('profile.alumno_cursos', compact('cursos')); // Pasamos los cursos a la vista
-        }
-
-        // Si no es alumno, redirigir o abortar con un error 403
-        return abort(403, 'No tienes permiso para acceder a esta página.');
+    if ($tareasDelCurso->isEmpty()) {
+        return view('profile.alumno', compact('alumno', 'curso'))->with('noTareas', true);
     }
+
+    return view('profile.alumno', compact('alumno', 'curso', 'resultadosTareas'));
+}
+
+
 }
