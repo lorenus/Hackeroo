@@ -105,8 +105,16 @@ if(isset($request->color)){
                                 ->from('preguntas')
                                 ->whereIn('tarea_id', $curso->tareas->pluck('id'));
                         })
-                        ->distinct('pregunta_id') // Evitar duplicados
-                        ->count();
+                        ->distinct('pregunta_id') // Obtener preguntas únicas
+                        ->pluck('pregunta_id') // Obtener IDs de preguntas respondidas
+                        ->map(function ($preguntaId) use ($curso) {
+                            return $curso->tareas->filter(function ($tarea) use ($preguntaId) {
+                                return $tarea->preguntas->pluck('id')->contains($preguntaId);
+                            })->unique('id'); // Filtrar tareas asociadas a las preguntas
+                        })
+                        ->collapse() // Aplanar la colección
+                        ->unique('id') // Eliminar duplicados
+                        ->count(); // Contar el número de tareas únicas
     
                     // Agregar los datos al arreglo
                     $alumnosPorCurso[] = [
@@ -122,7 +130,6 @@ if(isset($request->color)){
     
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
-
    
     
     public function verAlumnoEnCurso($alumnoDNI, $curso_id)
