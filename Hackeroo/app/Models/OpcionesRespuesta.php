@@ -10,12 +10,11 @@ class OpcionesRespuesta extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pregunta_id', // Relación con la pregunta
-        'respuesta',    // Texto de la respuesta
-        'es_correcta',  // Indica si es la respuesta correcta
+        'pregunta_id', 
+        'respuesta',  
+        'es_correcta',  
     ];
 
-    // Relación con el modelo Pregunta
     public function pregunta()
     {
         return $this->belongsTo(Pregunta::class);

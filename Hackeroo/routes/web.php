@@ -18,14 +18,7 @@ Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq');
 
 Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
 Route::middleware('auth')->get('/perfil', [ProfileController::class, 'index'])->name('perfil'); //perfil
-
 
 //TAREAS
 Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
@@ -55,12 +48,9 @@ Route::get('cursos/create/step2', [CursoController::class, 'step2'])->name('curs
 Route::post('cursos/create/step2', [CursoController::class, 'storeStep2'])->name('cursos.store.step2'); //segundo paso de crear curso (post)
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update'); //updatea el curso
 
-//PERFIL PROFESOR
-Route::get('/profile/profesor', [ProfileController::class, 'profesorPage'])->middleware('auth')->name('profesor.index'); //perfil del profesor
-
 // ALUMNOS PROFESOR
 Route::get('/alumnos', [ProfileController::class, 'verAlumnos'])->name('alumnos'); //listado de alumnos del profesor
-Route::get('/alumnos/{dni}', [ProfileController::class, 'verAlumno'])->name('ver.alumno'); //alumno seleccionado de la lista de alumnos del profesor
+Route::get('/alumno-en-curso/{alumnoDNI}/{curso_id}', [ProfileController::class, 'verAlumnoEnCurso'])->name('ver.alumno.en.curso');
 
 //ALUMNO
 Route::get('/alumno/cursos', [ProfileController::class, 'verCursos'])->name('alumno.cursos'); //cursos del ALUMNO
