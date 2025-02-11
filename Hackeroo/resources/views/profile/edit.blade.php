@@ -30,13 +30,13 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
         <input type="hidden" name="color" id="color" value="">
         <input type="hidden" name="avatar" id="avatar" value="">
 
-        <div class="row">
+        <div class="row gap-5 d-flex justify-content-center">
             <!-- Sección de colores -->
-            <div class="col-md-6 col-12 mb-4 mb-md-0">
+            <div class="col-md-5 col-12 mb-4 mb-md-0">
                 <h5 class="text-center mb-3">Color del perfil</h5>
                 <div class="row row-cols-4 g-2">
                     @foreach ($colores as $color => $valor)
-                    <div class="col">
+                    <div class="col d-flex justify-content-center">
                         @if ($valor <= Auth::user()->puntos)
                             <div class="color-box hand-cursor p-3 text-center ratio ratio-1x1" data-color="{{ $color }}" style="background-color: {{ $color }}; border-radius: 20px; max-width: 80px; max-height: 80px;">
                             </div>
@@ -50,11 +50,11 @@ $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6
             </div>
 
             <!-- Sección de avatares -->
-            <div class="col-md-6 col-12 mb-3 mb-md-0">
+            <div class="col-md-5 col-12 mb-3 mb-md-0">
                 <h5 class="text-center mb-3">Imagen perfil</h5>
                 <div class="row row-cols-4 g-2">
                     @foreach ($avatares as $avatar => $valor)
-                    <div class="col">
+                    <div class="col d-flex justify-content-center">
                         @if ($valor <= Auth::user()->puntos)
                             <div class="avatar-box hand-cursor p-3 text-center ratio ratio-1x1" data-avatar="{{ $avatar }}" style="background-image: url('/img/avatares/{{ $avatar }}'); background-size: cover; background-position: center; border-radius: 20px; max-width: 80px;  max-height: 80px;">
                             </div>
