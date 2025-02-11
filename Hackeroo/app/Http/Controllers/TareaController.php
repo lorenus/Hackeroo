@@ -19,14 +19,11 @@ use Illuminate\Support\Facades\Storage;
 
 class TareaController extends Controller
 {
-    // Mostrar formulario para crear una tarea
     public function crear($curso_id)
     {
         return view('tareas.crear', compact('curso_id'));
     }
 
-
-    // Guardar una nueva tarea
     public function guardar(Request $request)
     {
         $request->validate([
@@ -39,7 +36,6 @@ class TareaController extends Controller
             'url' => 'nullable|url', // Validación para URLs (solo si tipo es 'link')
         ]);
     
-        // Si la tarea es de tipo 'test', guardar los datos en la sesión
         if ($request->tipo === 'test') {
             Session::put('test_data', [
                 'titulo' => $request->titulo,
@@ -49,11 +45,9 @@ class TareaController extends Controller
                 'numero_preguntas' => $request->numero_preguntas ?? 5,
             ]);
         
-            // Redirigir a la vista para configurar el test (solo con curso_id)
             return redirect()->route('tarea.test.create', ['curso_id' => $request->curso_id]);
         }
     
-        // Crear la tarea para tipos 'archivo' o 'link'
         $tarea = Tarea::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
@@ -62,7 +56,6 @@ class TareaController extends Controller
             'profesor_dni' => Auth::user()->DNI,
         ]);
     
-        // Si la tarea es de tipo 'archivo' o 'link', creamos el recurso multimedia
         if ($request->tipo === 'archivo' || $request->tipo === 'link') {
             $url = null;
     
@@ -80,32 +73,26 @@ class TareaController extends Controller
             ]);
         }
     
-        // Redirigir al curso con mensaje de éxito
         return redirect()->route('cursos.show', ['id' => $request->curso_id])
             ->with('success', ucfirst($request->tipo) . ' creado correctamente');
     }
 
 
-    // Crear test - Vista para configurar el test
     public function crearTest($curso_id)
     {
-        // Obtener los datos del test desde la sesión
         $testData = Session::get('test_data');
     
-        // Si no hay datos en la sesión, redirigir con un mensaje de error
         if (!$testData) {
             return redirect()->route('cursos.show', ['id' => $curso_id])
                 ->with('error', 'No se encontraron datos para configurar el test.');
         }
     
-        // Obtener el número de preguntas de los datos almacenados
         $numero_preguntas = $testData['numero_preguntas'] ?? 5;
     
         return view('tareas.configurar-test', compact('curso_id', 'numero_preguntas'));
     }
     public function guardarTest(Request $request, $curso_id)
     {
-        // Validar los datos del test
         $request->validate([
             'preguntas' => 'required|array',
             'preguntas.*.enunciado' => 'required|string',
@@ -113,16 +100,13 @@ class TareaController extends Controller
             'preguntas.*.respuesta_correcta' => 'required|string',
         ]);
     
-        // Obtener los datos del test desde la sesión
         $testData = Session::get('test_data');
     
-        // Si no hay datos en la sesión, redirigir con un mensaje de error
         if (!$testData) {
             return redirect()->route('cursos.show', ['id' => $curso_id])
                 ->with('error', 'No se encontraron datos para guardar el test.');
         }
     
-        // Crear la tarea
         $tarea = Tarea::create([
             'titulo' => $testData['titulo'],
             'descripcion' => $testData['descripcion'],
@@ -131,7 +115,6 @@ class TareaController extends Controller
             'profesor_dni' => $testData['profesor_dni'],
         ]);
     
-        // Guardar las preguntas y respuestas
         foreach ($request->preguntas as $preguntaData) {
             $pregunta = Pregunta::create([
                 'tarea_id' => $tarea->id,
@@ -148,105 +131,83 @@ class TareaController extends Controller
             }
         }
     
-        // Limpiar los datos del test de la sesión
         Session::forget('test_data');
     
-        // Redirigir con mensaje de éxito
         return redirect()->route('cursos.show', ['id' => $curso_id])
             ->with('success', 'Test creado correctamente');
     }
     public function eliminar($curso_id, $tarea_id)
     {
-        // Buscar la tarea
         $tarea = Tarea::where('id', $tarea_id)->where('curso_id', $curso_id)->firstOrFail();
     
-        // Verificar si la tarea tiene un recurso multimedia asociado
         $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
     
         if ($recurso && $recurso->tipo === 'archivo') {
-            // Eliminar el archivo del sistema de archivos
             if (Storage::disk('public')->exists($recurso->url)) {
                 Storage::disk('public')->delete($recurso->url);
             }
     
-            // Eliminar el recurso multimedia de la base de datos
             $recurso->delete();
         }
     
-        // Eliminar la tarea
         $tarea->delete();
     
-        // Redirigir con mensaje de éxito
         return redirect()->route('cursos.show', ['id' => $curso_id])->with('success', 'Tarea eliminada correctamente');
     }
     public function editRecurso($id)
 {
-    // Obtener la tarea por su ID
     $tarea = Tarea::with('recursoMultimedia')->findOrFail($id);
 
-    // Verificar si el usuario es profesor
     if (Auth::user()->rol !== 'profesor') {
         abort(403, 'No tienes permiso para realizar esta acción.');
     }
 
-    // Verificar si existe un recurso multimedia asociado
     if (!$tarea->recursoMultimedia) {
         return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
     }
 
-    // Pasar la tarea y el recurso multimedia a la vista
     return view('tareas.edit-recurso', compact('tarea'));
 }
 public function updateRecurso(Request $request, $id)
 {
-    // Validación
     $request->validate([
         'tipo' => 'required|in:archivo,link',
-        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Solo si tipo es archivo
-        'url' => 'nullable|url', // Solo si tipo es link
+        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', 
+        'url' => 'nullable|url', 
     ]);
 
-    // Obtener la tarea por su ID
     $tarea = Tarea::findOrFail($id);
 
-    // Verificar si el usuario es profesor
     if (Auth::user()->rol !== 'profesor') {
         abort(403, 'No tienes permiso para realizar esta acción.');
     }
 
-    // Obtener el recurso multimedia asociado
     $recurso = $tarea->recursoMultimedia;
 
     if (!$recurso) {
         return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
     }
 
-    // Actualizar el recurso según el tipo
     if ($request->tipo === 'archivo') {
-        // Validar que se haya subido un archivo
         if (!$request->hasFile('archivo')) {
             return redirect()->back()->with('error', 'Debes subir un archivo.');
         }
 
-        // Eliminar el archivo anterior si existe
         if ($recurso->tipo === 'archivo' && Storage::disk('public')->exists($recurso->url)) {
             Storage::disk('public')->delete($recurso->url);
         }
 
-        // Subir el nuevo archivo
         $nombreArchivo = $request->file('archivo')->getClientOriginalName();
         $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
     } elseif ($request->tipo === 'link') {
         $url = $request->url;
     }
 
-    // Actualizar el recurso en la base de datos
     $recurso->update([
         'tipo' => $request->tipo,
         'url' => $url,
     ]);
 
-    // Redirigir con éxito
     return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
         ->with('success', 'Recurso actualizado correctamente.');
 }
@@ -259,13 +220,10 @@ public function updateRecurso(Request $request, $id)
     }
     public function verTarea($curso_id, $tarea_id)
     {
-        // Obtener la tarea con sus preguntas y opciones de respuesta (si es un test)
         $tarea = Tarea::with('preguntas.opciones_respuestas')->findOrFail($tarea_id);
     
-        // Manejar cada tipo de tarea según su tipo
         switch ($tarea->tipo) {
             case 'test':
-                // Verificar si el usuario ya ha respondido todas las preguntas de este test
                 $respuestasUsuario = RespuestasAlumno::where('usuario_dni', Auth::user()->DNI)
                     ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
                     ->get();
@@ -274,37 +232,30 @@ public function updateRecurso(Request $request, $id)
                 $preguntasRespondidas = $respuestasUsuario->count();
     
                 if ($preguntasRespondidas === $totalPreguntas) {
-                    // Si ha respondido a todas las preguntas, redirigir a la vista de resultados
                     return redirect()->route('tarea.resultados', ['curso_id' => $curso_id, 'tarea_id' => $tarea_id]);
                 }
     
-                // Si no ha respondido a todas las preguntas, mostrar la vista para realizar el test
                 return view('tareas.ver', compact('tarea', 'curso_id'));
     
             case 'archivo':
-                // Obtener el recurso multimedia asociado a la tarea
                 $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
     
                 if (!$recurso) {
                     return redirect()->route('cursos.show', $curso_id)->with('error', 'No se encontró el archivo asociado a esta tarea.');
                 }
     
-                // Mostrar la vista para ver archivos
                 return view('tareas.ver-archivo', compact('tarea', 'curso_id', 'recurso'));
     
             case 'link':
-                // Obtener el recurso multimedia asociado a la tarea
                 $recurso = RecursoMultimedia::where('tarea_id', $tarea->id)->first();
     
                 if (!$recurso) {
                     return redirect()->route('cursos.show', $curso_id)->with('error', 'No se encontró el enlace asociado a esta tarea.');
                 }
     
-                // Redirigir al enlace externo
                 return redirect()->away($recurso->url);
     
             default:
-                // Si el tipo de tarea no es reconocido, redirigir con un mensaje de error
                 return redirect()->route('cursos.show', $curso_id)->with('error', 'Tipo de tarea desconocido');
         }
     }
@@ -352,7 +303,6 @@ public function updateRecurso(Request $request, $id)
                     'opcion_respuesta_id' => $opcion->id,
                 ]);
     
-                // Evaluar si la respuesta es correcta
                 if ($opcion->es_correcta) {
                     $puntuacion += $valor_pregunta; 
                     $aciertos++; 

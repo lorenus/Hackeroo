@@ -18,14 +18,7 @@ Route::get('/faq', [PaginasEstaticasController::class, 'faq'])->name('faq');
 
 Route::get('/contacto', [ContactoController::class, 'contacto'])->name('contacto');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
 Route::middleware('auth')->get('/perfil', [ProfileController::class, 'index'])->name('perfil'); //perfil
-
 
 //TAREAS
 Route::get('/configurar-test', [TareaController::class, 'crearTest'])->name('tarea.test.create');
