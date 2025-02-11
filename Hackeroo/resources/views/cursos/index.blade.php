@@ -40,16 +40,16 @@
     </div>
 
     <!-- Mensaje o contenido de los cursos -->
-    <div class="row contenido-cursos">
+    <div class="row contenido-cursos ">
         <div class="col-12">
             @if($cursos->isEmpty())
             <p class="text-center">No tienes cursos creados aún.</p>
             @else
 
             <div class="contenedor-cursos mw-md-60">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center gap-2">
                     @foreach($cursos as $curso)
-                    <div class="curso-item col-md-5 mb-3 me-3">
+                    <div class="curso-item col-md-5 mb-3">
 
                         <!-- Parte izquierda: Nombre del curso -->
                         <div class="curso-nombre">
