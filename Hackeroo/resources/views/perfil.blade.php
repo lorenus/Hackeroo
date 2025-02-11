@@ -11,7 +11,7 @@
 @section('content')
     <div class="container container-perfil d-flex flex-column justify-content-center"  style="@media (min-width: 768px) { max-width: 60vw;}">
         @if(Auth::user()->rol == 'profesor')
-            <div class="perfil row-12 mb-3 d-flex justify-content-center align-items-center ps-5 pe-5 cuadrado" style="background-color: {{ Auth::user()->color }};">
+            <div class="perfil row-12 mb-3 d-flex justify-content-center align-items-center md-ps-5 md-pe-5 cuadrado" style="background-color: {{ Auth::user()->color }};">
                 <div class="d-flex flex-row align-items-center mb-3 mb-md-0">
                     <img src="/img/avatares/{{ Auth::user()->avatar }}" alt="Imagen 1" class="img-perfil-cabecera me-3 img-fluid">
                     <h2>Hola, <span id="nombreUsuario">{{ Auth::user()->nombre }}</span></h2>
