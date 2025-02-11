@@ -12,36 +12,36 @@
     </div>
 
     <div class="row justify-content-center">
-        <form action="#" method=""  class='d-flex justify-content-center align-items-center'>
+        <form action="#" method="" class='d-flex justify-content-center align-items-center'>
             @csrf
             <fieldset>
-                <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }}</legend>
+                <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }} - Curso: {{ $curso->nombre }}</legend>
                 <div class="tabla-scroll-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Curso</th>
-                                <th>Ejercicio</th>
-                                <th>Nota</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>3</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>4</td>
-                                <td>6</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    @if(isset($noTareas) && $noTareas)
+                        <!-- Mostrar mensaje si no hay tareas -->
+                        <p class="text-center">No hay tareas de tipo test en este curso.</p>
+                    @else
+                        <!-- Mostrar tabla con las tareas -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($resultadosTareas as $resultado)
+                                    <tr>
+                                        <td>{{ $resultado['tarea']->titulo }}</td>
+                                        <td>{{ $resultado['nota'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
             </fieldset>
         </form>
     </div>
 </div> <!-- fin contenedor principal-->
-
 @endsection
