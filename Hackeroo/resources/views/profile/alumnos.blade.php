@@ -21,10 +21,10 @@
 
             <div class="tabla-scroll-container">
                 <table id="alumnos-table">
-                    <thead>
-                        <tr>
-                            <th>Curso</th>
-                            <th>Tareas realizadas</th>
+                    <thead  style='position: sticky; top:0; background-color: #FFB300; padding-top:2px;'>
+                        <tr >
+                            <td class='text-center'><h6>Curso</h6></td>
+                            <td class='text-center'><h6>Tareas realizadas</h6></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +43,7 @@
                                                 {{ $curso['curso']->nombre }}
                                             </a>
                                         </td>
-                                        <td>{{ $curso['tareas_completadas'] }}</td>
+                                        <td class='text-center'>{{ $curso['tareas_completadas'] }}</td>
                                     </tr>
                                 @endforeach
                             @endforeach
