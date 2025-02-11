@@ -209,7 +209,7 @@ public function updateRecurso(Request $request, $id)
     ]);
 
     return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
-        ->with('success', 'Recurso actualizado correctamente.');
+        ->with('status', 'Recurso actualizado correctamente.');
 }
     public function mostrarTareas($curso_id)
     {
