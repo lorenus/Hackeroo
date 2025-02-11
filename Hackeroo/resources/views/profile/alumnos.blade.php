@@ -21,39 +21,36 @@
 
             <div class="tabla-scroll-container">
                 <table id="alumnos-table">
-                    <thead style='position: sticky; top:0; background-color: #FFB300'>
-                        <tr >
-                            <td>
-                                <h6>Curso</h6>
-                            </td>
-                            <td>
-                                <h6>Tareas realizadas</h6>
-                            </td>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Tareas realizadas</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($alumnosPorCurso) > 0)
-                        @foreach($alumnosPorCurso as $alumno) 
-                        <tr class="alumno-row nombre-alumno-row">
-                            <td colspan="2">
-                                <a href="{{ route('ver.alumno.en.curso', [$alumno['alumno']->DNI, $alumno['cursos'][0]['curso']->id ?? null]) }}" style="text-decoration: none; color: inherit; display: block;">
-                                    {{ $alumno['alumno']->nombre }} {{ $alumno['alumno']->apellidos }}
-                                </a>
-                            </td>
-                        </tr>
+                            @foreach($alumnosPorCurso as $alumno)
+                                <tr class="alumno-row nombre-alumno-row">
+                                    <td colspan="2">
+                                        {{ $alumno['alumno']->nombre }} {{ $alumno['alumno']->apellidos }}
+                                    </td>
+                                </tr>
 
-                        @foreach($alumno['cursos'] as $curso) 
-                        <tr>
-                            <td>{{ $curso['curso']->nombre }}</td>
-                           
-                            <td>{{ $curso['tareas_completadas'] }}</td>
-                        </tr>
-                        @endforeach
-                        @endforeach
+                                @foreach($alumno['cursos'] as $curso)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('ver.alumno.en.curso', [$alumno['alumno']->DNI, $curso['curso']->id]) }}" style="text-decoration: none; color: inherit; display: block;">
+                                                {{ $curso['curso']->nombre }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $curso['tareas_completadas'] }}</td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                         @else
-                        <tr>
-                            <td colspan="2" class="text-center">No tienes alumnos asociados a tus cursos.</td>
-                        </tr>
+                            <tr>
+                                <td colspan="2" class="text-center">No tienes alumnos asociados a tus cursos.</td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
