@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Editar Recurso Multimedia</h2>
+    <h2>Editar tarea</h2>
 
     <!-- Agregar una clase para ocultar elementos -->
     <style>
