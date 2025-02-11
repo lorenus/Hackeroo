@@ -9,7 +9,19 @@
             </a>
         </div>
     </div>
-
+    @if (session('status'))
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success d-flex align-items-center w-auto mx-3" role="alert" style="max-width: 500px;">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+                {{ session('status') }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+@endif
     <div class="row mb-3">
         <div class="col-12 text-center">
             <h2>Tareas del curso: {{ $curso->nombre }}</h2>

@@ -21,13 +21,13 @@
             <h4>Pregunta {{ $i}}</h4>
             <div class="form-group d-flex align-items-center mb-2">
 
-                <label class='text-nowrap me-2' for="pregunta{{ $i }}">Enunciado:</label>
+                <label class='text-nowrap me-2 text-cursor' for="pregunta{{ $i }}">Enunciado:</label>
                 <x-text-input id="pregunta{{ $i }}" class="form-control block mb-3" type="text"
                     name="preguntas[{{ $i }}][enunciado]" required />
             </div>
             <h4>Respuestas</h4>
             @for ($j = 1; $j <= 4; $j++) <div class="form-group d-flex align-items-center mb-2">
-                <label class='text-nowrap me-2' for="opcion{{ $i }}{{ $j }}">Opción {{ $j }}:</label>
+                <label class='text-nowrap me-2 text-cursor' for="opcion{{ $i }}{{ $j }}">Opción {{ $j }}:</label>
                 <x-text-input id="opcion{{ $i }}{{ $j }}" class="form-control me-2" type="text"
                     name="preguntas[{{ $i }}][opciones][{{ $j }}][respuesta]" required />
 

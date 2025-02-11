@@ -10,9 +10,10 @@
             </a>
         </div>
     </div>
+    <div class='d-flex justify-content-center'>
     <fieldset class="reset">
         <legend class="reset">Nuevo curso</legend>
-        <div class="mb-5 mt-3 text-md-start">
+        <div class="mb-5 mt-3 text-md-center">
             <h6>Selecciona los alumnos que quieras añadir</h6>
 
             <div class="input-group mb-4">
@@ -52,7 +53,7 @@
                 </div>
             </div>
     </fieldset>
-    </form>
+    </div>
 </div>
 
 <script>

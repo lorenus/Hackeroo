@@ -7,7 +7,7 @@
     width: 100%; 
     border:none;
     margin-bottom: 15px;
-    min-height: 150px; 
+    min-height: 100px; 
     padding-top: 2px; 
     font-family: "Itim"; 
     font-size: 18px;

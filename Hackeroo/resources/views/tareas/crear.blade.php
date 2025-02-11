@@ -3,13 +3,14 @@
 @section('content')
 <div class="container">
     <!-- Boton volver -->
-    <div class="row mb-3 volver">
+    <div class="row mb-3">
         <div class="col-12 text-left">
             <a href="{{ route('cursos') }}">
                 <img src="/img/botones/volver.png" alt="Volver">
             </a>
         </div>
     </div>
+
 
 
     <h2 class='text-center'>Crear nuevo contenido</h2>
@@ -20,10 +21,10 @@
             <!-- Contenedor padre con Flexbox -->
             <div class="row d-flex justify-content-center align-items-stretch mb-3">
                 <!-- Primer contenedor -->
-                <div class="form-group col-md-5 col-lg-4 col-xl-3">
-                    <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3 h-100">
+                <div class="form-group col-md-5 col-lg-4 col-xl-3 mb-3">
+                    <div class="d-flex align-items-center mb- border border-3 rounded border-warning p-2 me-3 h-100">
                         <label for="tipo" class='text-nowrap'>Tipo de contenido</label>
-                        <select class="form-select custom-select border-0 text-center" id="tipo" name="tipo" required>
+                        <select class="form-select custom-select border-0 text-center hand-cursor" id="tipo" name="tipo" required>
                             <option value="test">Test</option>
                             <option value="archivo">Archivo</option>
                             <option value="link">Link</option>
@@ -32,10 +33,10 @@
                 </div>
 
                 <!-- Segundo contenedor -->
-                <div class="form-group col-md-5 col-lg-4 col-xl-3" id="numero_preguntas_container">
+                <div class="form-group col-md-5 col-lg-4 col-xl-3 mb-3" id="numero_preguntas_container">
                     <div class="d-flex align-items-center border border-3 rounded border-warning p-2 me-3 h-100">
-                        <label for="numero_preguntas" class='text-nowrap me-3'>Número de preguntas</label>
-                        <x-number-input class="form-control" id="numero_preguntas" name="numero_preguntas" min='1'
+                        <label for="numero_preguntas" class='text-nowrap me-3 '>Número de preguntas</label>
+                        <x-number-input class="form-control text-center" id="numero_preguntas" name="numero_preguntas" min='1'
                             max='25' value='1' />
                     </div>
                 </div>

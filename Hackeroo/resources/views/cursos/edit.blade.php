@@ -35,7 +35,7 @@
         </div>
 
         <div class='col-12 col-md-6'>
-            <div class="mb-5 mt-3 text-md-start">
+            <div class="mt-3 text-md-start">
                 <h6>Selecciona los alumnos que quieras añadir:</h6>
 
                 <div class="input-group mb-4">
@@ -66,12 +66,14 @@
                     </table>
                 </div>
 
-                <div class="col-12 mt-3 text-center mt-4">
-                    <x-primary-button type="submit">Actualizar</x-primary-button>
-                </div>
+                
                 </form>
             </div>
+            
         </div>
+        <div class="col-12 text-center ">
+                    <x-primary-button type="submit">Actualizar</x-primary-button>
+                </div>
     </div>
 
     <script>
