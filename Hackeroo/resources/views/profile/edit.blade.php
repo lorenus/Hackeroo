@@ -7,7 +7,7 @@ $colores = ['#6AA9CF' => 0,'#D58FCA' => 0,'#254E63' => 0,'#D3B92D' => 0,'#99334F
 $avatares = ['1.png' => 0,'2.png' => 0,'3.png' => 0,'4.png' => 0,'5.png' => 0,'6.png' => 0,'7.png' => 10,'8.png' => 20, '9.png' => 40,'10.png' => 80,'11.png' => 160,'12.png' => 320];
 @endphp
 
-<div class="container mb-5 pb-5">
+<div class="container pb-3">
     <div class="row mb-3 volver">
         <div class="col-6 col-md-12 text-left">
             <a href="{{ route('perfil') }}">
