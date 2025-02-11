@@ -10,6 +10,23 @@ use Illuminate\Support\Facades\Session;
 
 class CursoController extends Controller
 {
+    public function index()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login'); 
+        }
+
+        if (Auth::user()->rol !== 'profesor') {
+            return abort(403, 'No tienes permiso para acceder a esta página.');
+        }
+
+        $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
+
+
+        return view('cursos.index', compact('cursos'));
+    }
+
+
     public function step1()
     {
         if (Auth::check() && Auth::user()->rol === 'profesor') {
@@ -62,33 +79,6 @@ class CursoController extends Controller
         return redirect()->route('cursos')->with('status', 'Curso creado correctamente.');
     }
 
-
-    public function index()
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login'); 
-        }
-
-        if (Auth::user()->rol !== 'profesor') {
-            return abort(403, 'No tienes permiso para acceder a esta página.');
-        }
-
-        $cursos = Curso::where('profesor_dni', Auth::user()->DNI)->get();
-
-
-        return view('cursos.index', compact('cursos'));
-    }
-    public function indexForAlumnos()
-    {
-        if (Auth::check() && Auth::user()->rol === 'alumno') {
-            $cursos = Auth::user()->cursos; 
-
-            return view('cursos.index_alumno', compact('cursos'));
-        }
-
-        return abort(403, 'No tienes permiso para acceder a esta página.');
-    }
-
     public function edit(Curso $curso)
     {
         if (Auth::check() && Auth::user()->DNI === $curso->profesor_dni) {
@@ -136,6 +126,19 @@ class CursoController extends Controller
 
         return abort(403, 'No tienes permiso para eliminar este curso.');
     }
+
+    public function indexForAlumnos()
+    {
+        if (Auth::check() && Auth::user()->rol === 'alumno') {
+            $cursos = Auth::user()->cursos; 
+
+            return view('cursos.index_alumno', compact('cursos'));
+        }
+
+        return abort(403, 'No tienes permiso para acceder a esta página.');
+    }
+
+
     public function show($id)
     {
 

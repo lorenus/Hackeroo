@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Curso;
@@ -172,7 +171,7 @@ public function updateRecurso(Request $request, $id)
 {
     $request->validate([
         'tipo' => 'required|in:archivo,link',
-        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', 
+        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,php,txt,html,js,css|max:2048', 
         'url' => 'nullable|url', 
     ]);
 
