@@ -59,8 +59,10 @@ class CursoController extends Controller
 
         Session::forget('curso');
 
-        return redirect()->route('cursos')->with('success', 'Curso creado correctamente.');
+        return redirect()->route('cursos')->with('status', 'Curso creado correctamente.');
     }
+
+
     public function index()
     {
         if (!Auth::check()) {
