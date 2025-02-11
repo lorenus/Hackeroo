@@ -15,7 +15,7 @@ body {
 
 ///////////////////////////////////////////////////// CURSORES
 /* Cursor normal (flecha) */
-body {
+body, .arrow-cursor {
     cursor: url("/img/cursors/left_ptr.cur"), auto;
 }
 

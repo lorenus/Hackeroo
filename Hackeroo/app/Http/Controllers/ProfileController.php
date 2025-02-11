@@ -77,6 +77,7 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    
     public function profesorPage()
     {
         // Verificar si el usuario está autenticado y es un profesor
