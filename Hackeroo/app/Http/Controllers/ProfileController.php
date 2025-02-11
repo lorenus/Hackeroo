@@ -82,46 +82,55 @@ if(isset($request->color)){
     }
  
     public function verAlumnos()
-    {
-        if (Auth::check() && Auth::user()->rol === 'profesor') {
-            $cursos = Auth::user()->cursos_profesor; 
-    
-            $alumnosPorCurso = [];
-    
-            foreach ($cursos as $curso) {
-                $alumnosDelCurso = $curso->alumnos;
-    
-                foreach ($alumnosDelCurso as $alumno) {
-                    $tareasCompletadas = RespuestasAlumno::where('usuario_dni', $alumno->DNI)
-                        ->whereIn('pregunta_id', function ($query) use ($curso) {
-                            $query->select('id')
-                                ->from('preguntas')
-                                ->whereIn('tarea_id', $curso->tareas->pluck('id'));
-                        })
-                        ->distinct('pregunta_id')
-                        ->pluck('pregunta_id') 
-                        ->map(function ($preguntaId) use ($curso) {
-                            return $curso->tareas->filter(function ($tarea) use ($preguntaId) {
-                                return $tarea->preguntas->pluck('id')->contains($preguntaId);
-                            })->unique('id'); 
-                        })
-                        ->collapse() 
-                        ->unique('id') 
-                        ->count(); 
-    
-                    $alumnosPorCurso[] = [
+{
+    if (Auth::check() && Auth::user()->rol === 'profesor') {
+        $cursos = Auth::user()->cursos_profesor;
+
+        $alumnosPorCurso = [];
+
+        foreach ($cursos as $curso) {
+            $alumnosDelCurso = $curso->alumnos;
+
+            foreach ($alumnosDelCurso as $alumno) {
+                // Check if the alumno is already in the array (to avoid duplicates)
+                $alumnoKey = $alumno->DNI; // Use DNI as a unique key for the alumno
+
+                if (!isset($alumnosPorCurso[$alumnoKey])) {
+                    $alumnosPorCurso[$alumnoKey] = [
                         'alumno' => $alumno,
-                        'curso' => $curso,
-                        'tareas_completadas' => $tareasCompletadas,
+                        'cursos' => [], // Initialize an array for the alumno's courses
                     ];
                 }
+
+                $tareasCompletadas = RespuestasAlumno::where('usuario_dni', $alumno->DNI)
+                    ->whereIn('pregunta_id', function ($query) use ($curso) {
+                        $query->select('id')
+                            ->from('preguntas')
+                            ->whereIn('tarea_id', $curso->tareas->pluck('id'));
+                    })
+                    ->distinct('pregunta_id')
+                    ->pluck('pregunta_id')
+                    ->map(function ($preguntaId) use ($curso) {
+                        return $curso->tareas->filter(function ($tarea) use ($preguntaId) {
+                            return $tarea->preguntas->pluck('id')->contains($preguntaId);
+                        })->unique('id');
+                    })
+                    ->collapse()
+                    ->unique('id')
+                    ->count();
+
+                $alumnosPorCurso[$alumnoKey]['cursos'][] = [
+                    'curso' => $curso,
+                    'tareas_completadas' => $tareasCompletadas,
+                ];
             }
-    
-            return view('profile.alumnos', compact('alumnosPorCurso'));
         }
-    
-        return abort(403, 'No tienes permiso para acceder a esta página.');
+
+        return view('profile.alumnos', compact('alumnosPorCurso'));
     }
+
+    return abort(403, 'No tienes permiso para acceder a esta página.');
+}
    
     
     public function verAlumnoEnCurso($alumnoDNI, $curso_id)
