@@ -8,7 +8,7 @@
             @if(Auth::user()->rol=='alumno')
             <a href="{{ route('curso.tareas', $curso->id) }}">
                 @else
-                <a href="{{ route('cursos.show', $curso_id) }}">
+                <a href="{{ route('cursos.show', $curso->id) }}">
                     @endif
                     <img src="/img/botones/volver.png" alt="Volver">
                 </a>
