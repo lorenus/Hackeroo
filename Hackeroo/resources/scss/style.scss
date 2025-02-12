@@ -552,7 +552,8 @@ form {
 
 //CURSOS
 .contenido-cursos {
-    min-height: 50vh;
+    max-height: 40vh;
+  overflow-y: scroll;
 }
 
 fieldset {
@@ -595,7 +596,7 @@ legend {
 }
 
 .contenedor-cursos {
-    height: 50vh;
+    height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -622,7 +623,13 @@ tr {
     gap: 10px;
     /* Espacio entre cada curso */
 }
+.container-perfil {
+    max-width: 80vw !important;
 
+    @media (min-width: 576px) { 
+        max-width: 60vw !important;
+    } 
+}
 .curso-item {
     display: flex;
     justify-content: space-between;
@@ -742,4 +749,15 @@ h5.descargar {
     border: 3px solid $amarillo;
     border-radius: 10px;
 }
+
+
+
+.nombre-alumno{
+    background-color: $amarillo_footer;
+}
+
+
+
+
+
 

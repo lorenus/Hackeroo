@@ -23,7 +23,7 @@
                 <div class="mb-5 mt-3 text-md-start">
                     <x-input-label for="nombre" :value="__('Nombre del curso:')" />
                     <x-text-input id="nombre" class="form-control block" type="text" name="nombre"
-                        :value="old('nombre', $curso->nombre)" required />
+                        :value="old('nombre', $curso->nombre) maxlength=25" required />
                 </div>
 
                 <div class="mb-5 mt-3 text-md-start">
@@ -39,7 +39,7 @@
                 <h6>Selecciona los alumnos que quieras añadir:</h6>
 
                 <div class="input-group mb-4">
-                    <x-search-bar id="search" class="form-control" placeholder="Buscar alumno por nombre o apellidos" />
+                    <x-search-bar id="search" class="form-control" placeholder="Buscar alumno" />
                 </div>
 
                 <div class="tabla-scroll-container">
@@ -67,13 +67,13 @@
                 </div>
 
                 
-                </form>
+               
             </div>
             
         </div>
         <div class="col-12 text-center ">
                     <x-primary-button type="submit">Actualizar</x-primary-button>
-                </div>
+                </div> </form>
     </div>
 
     <script>

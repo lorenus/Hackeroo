@@ -10,14 +10,14 @@
             </a>
         </div>
     </div>
-
-     <!-- Título centrado -->
-     <div class="row mb-3">
+    
+    <!-- Título centrado -->
+    <div class="row mb-3">
         <div class="col-12 text-center">
             <h2>Editar tarea</h2>
         </div>
     </div>
-    
+
 
     <!-- Agregar una clase para ocultar elementos -->
     <style>
@@ -42,28 +42,28 @@
         <!-- Campo para archivo -->
         <div id="archivo-container" class="mb-3 {{ $tarea->recursoMultimedia->tipo === 'archivo' ? '' : 'hidden' }}">
             <label for="archivo" class="form-label">Archivo:</label>
-            <x-file-input name="archivo" id="archivo" class="form-control"/>
+            <x-file-input name="archivo" id="archivo" class="form-control" />
             @if ($tarea->recursoMultimedia->tipo === 'archivo')
-                <p class="text-muted mt-2">Archivo actual: <a href="{{ Storage::url($tarea->recursoMultimedia->url) }}" target="_blank">{{ basename($tarea->recursoMultimedia->url) }}</a></p>
+            <p class="text-muted mt-2">Archivo actual: <a href="{{ Storage::url($tarea->recursoMultimedia->url) }}" target="_blank">{{ basename($tarea->recursoMultimedia->url) }}</a></p>
             @endif
         </div>
 
         <!-- Campo para enlace -->
         <div id="link-container" class="mb-3 {{ $tarea->recursoMultimedia->tipo === 'link' ? '' : 'hidden' }}">
             <label for="url" class="form-label">URL:</label>
-            <x-text-input name="url" id="url" class="form-control" value="{{ $tarea->recursoMultimedia->tipo === 'link' ? $tarea->recursoMultimedia->url : '' }}"/>
+            <x-text-input name="url" id="url" class="form-control" value="{{ $tarea->recursoMultimedia->tipo === 'link' ? $tarea->recursoMultimedia->url : '' }}" />
         </div>
-
-    </form>
-    <div class="col-12 mt-3 text-center mt-4">
+        <div class="col-12 mt-3 text-center mt-4">
             <x-primary-button type="submit" class="btn btn-primary">Guardar</x-primary-button>
         </div>
+    </form>
+
 
 </div>
 
 <script>
     // Mostrar/ocultar campos según el tipo seleccionado
-    document.getElementById('tipo').addEventListener('change', function () {
+    document.getElementById('tipo').addEventListener('change', function() {
         const tipo = this.value;
         const archivoContainer = document.getElementById('archivo-container');
         const linkContainer = document.getElementById('link-container');

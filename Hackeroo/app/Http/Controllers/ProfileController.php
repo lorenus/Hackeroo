@@ -35,35 +35,29 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(Request $request): RedirectResponse
-{
-    // Validación de los campos
-    $validated = $request->validate([
-        'color' => 'nullable|string|max:7',
-        'avatar' => 'nullable|string' // Valida que sea una cadena (el nombre del archivo)
-    ]);
-    $user = $request->user();
+    {
+        $validated = $request->validate([
+            'color' => 'nullable|string|max:7',
+            'avatar' => 'nullable|string'
+        ]);
+        $user = $request->user();
 
-     // Actualizar el avatar (directamente desde el input validado)
-if(isset($request->avatar)){
-    $user->avatar = $validated['avatar'];
-}
-   // Actualizar el color
-if(isset($request->color)){
-    $user->color = $validated['color'];
-}
-   
-    
+        if (isset($request->avatar)) {
+            $user->avatar = $validated['avatar'];
+        }
+        if (isset($request->color)) {
+            $user->color = $validated['color'];
+        }
 
-   
-    
 
-    // Guardar los cambios
-    $user->save();
 
-    // Redireccionar
-    return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
 
-}
+
+
+        $user->save();
+
+        return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
+    }
 
     /**
      * Delete the user's account.
@@ -85,117 +79,117 @@ if(isset($request->color)){
 
         return Redirect::to('/');
     }
- 
+
     public function verAlumnos()
     {
         if (Auth::check() && Auth::user()->rol === 'profesor') {
-            $cursos = Auth::user()->cursos_profesor; // Cursos del profesor
-    
-            // Crear una colección para almacenar los datos de alumnos por curso
+            $cursos = Auth::user()->cursos_profesor;
+
             $alumnosPorCurso = [];
-    
+
             foreach ($cursos as $curso) {
-                $alumnosDelCurso = $curso->alumnos; // Alumnos inscritos en este curso
-    
+                $alumnosDelCurso = $curso->alumnos;
+
                 foreach ($alumnosDelCurso as $alumno) {
-                    // Contar las tareas completadas por el alumno en este curso
+                    // Check if the alumno is already in the array (to avoid duplicates)
+                    $alumnoKey = $alumno->DNI; // Use DNI as a unique key for the alumno
+
+                    if (!isset($alumnosPorCurso[$alumnoKey])) {
+                        $alumnosPorCurso[$alumnoKey] = [
+                            'alumno' => $alumno,
+                            'cursos' => [], // Initialize an array for the alumno's courses
+                        ];
+                    }
+
                     $tareasCompletadas = RespuestasAlumno::where('usuario_dni', $alumno->DNI)
                         ->whereIn('pregunta_id', function ($query) use ($curso) {
                             $query->select('id')
                                 ->from('preguntas')
                                 ->whereIn('tarea_id', $curso->tareas->pluck('id'));
                         })
-                        ->distinct('pregunta_id') // Obtener preguntas únicas
-                        ->pluck('pregunta_id') // Obtener IDs de preguntas respondidas
+                        ->distinct('pregunta_id')
+                        ->pluck('pregunta_id')
                         ->map(function ($preguntaId) use ($curso) {
                             return $curso->tareas->filter(function ($tarea) use ($preguntaId) {
                                 return $tarea->preguntas->pluck('id')->contains($preguntaId);
-                            })->unique('id'); // Filtrar tareas asociadas a las preguntas
+                            })->unique('id');
                         })
-                        ->collapse() // Aplanar la colección
-                        ->unique('id') // Eliminar duplicados
-                        ->count(); // Contar el número de tareas únicas
-    
-                    // Agregar los datos al arreglo
-                    $alumnosPorCurso[] = [
-                        'alumno' => $alumno,
+                        ->collapse()
+                        ->unique('id')
+                        ->count();
+
+                    $totalTareas = $curso->tareas->count();
+
+                    $alumnosPorCurso[$alumnoKey]['cursos'][] = [
                         'curso' => $curso,
                         'tareas_completadas' => $tareasCompletadas,
+                        'total_tareas' => $totalTareas, // Agregar el total de tareas al array
                     ];
                 }
             }
-    
+
             return view('profile.alumnos', compact('alumnosPorCurso'));
         }
-    
+
         return abort(403, 'No tienes permiso para acceder a esta página.');
     }
-   
-    
+
+
     public function verAlumnoEnCurso($alumnoDNI, $curso_id)
-{
-    // Obtener el curso y el alumno
-    $curso = Curso::findOrFail($curso_id);
-    $alumno = Usuario::where('DNI', $alumnoDNI)->firstOrFail();
+    {
 
-    // Obtener solo las tareas de tipo "test" del curso
-    $tareasDelCurso = $curso->tareas()->where('tipo', 'test')->get();
+        $curso = Curso::findOrFail($curso_id);
+        $alumno = Usuario::where('DNI', $alumnoDNI)->firstOrFail();
 
-    // Inicializar un arreglo para almacenar los resultados
-    $resultadosTareas = [];
+        $tareasDelCurso = $curso->tareas()->where('tipo', 'test')->get();
 
-    foreach ($tareasDelCurso as $tarea) {
-        // Obtener las respuestas del alumno para esta tarea
-        $respuestasUsuario = RespuestasAlumno::where('usuario_dni', $alumnoDNI)
-            ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
-            ->get();
+        $resultadosTareas = [];
 
-        if ($respuestasUsuario->isNotEmpty()) {
-            // Calcular la nota de la tarea
-            $puntuacion = 0;
-            $aciertos = 0;
-            $total_preguntas = $tarea->preguntas->count();
-            $valor_pregunta = 10 / $total_preguntas;
-            $penalizacion = $valor_pregunta / 3;
+        foreach ($tareasDelCurso as $tarea) {
+            $respuestasUsuario = RespuestasAlumno::where('usuario_dni', $alumnoDNI)
+                ->whereIn('pregunta_id', $tarea->preguntas->pluck('id'))
+                ->get();
 
-            foreach ($tarea->preguntas as $pregunta) {
-                $respuesta = $respuestasUsuario->firstWhere('pregunta_id', $pregunta->id);
+            if ($respuestasUsuario->isNotEmpty()) {
+                $puntuacion = 0;
+                $aciertos = 0;
+                $total_preguntas = $tarea->preguntas->count();
+                $valor_pregunta = 10 / $total_preguntas;
+                $penalizacion = $valor_pregunta / 3;
 
-                if ($respuesta && $respuesta->opcion_respuesta_id) {
-                    $opcion = $pregunta->opciones_respuestas()->find($respuesta->opcion_respuesta_id);
+                foreach ($tarea->preguntas as $pregunta) {
+                    $respuesta = $respuestasUsuario->firstWhere('pregunta_id', $pregunta->id);
 
-                    if ($opcion->es_correcta) {
-                        $puntuacion += $valor_pregunta;
-                        $aciertos++;
-                    } else {
-                        $puntuacion -= $penalizacion;
+                    if ($respuesta && $respuesta->opcion_respuesta_id) {
+                        $opcion = $pregunta->opciones_respuestas()->find($respuesta->opcion_respuesta_id);
+
+                        if ($opcion->es_correcta) {
+                            $puntuacion += $valor_pregunta;
+                            $aciertos++;
+                        } else {
+                            $puntuacion -= $penalizacion;
+                        }
                     }
                 }
+
+                $puntuacion = max(0, $puntuacion);
+
+                $resultadosTareas[] = [
+                    'tarea' => $tarea,
+                    'nota' => number_format($puntuacion, 2),
+                ];
+            } else {
+                $resultadosTareas[] = [
+                    'tarea' => $tarea,
+                    'nota' => 'No completada',
+                ];
             }
-
-            // Asegurarse de que la puntuación no sea negativa
-            $puntuacion = max(0, $puntuacion);
-
-            $resultadosTareas[] = [
-                'tarea' => $tarea,
-                'nota' => number_format($puntuacion, 2),
-            ];
-        } else {
-            // Si no hay respuestas, marcar como "No completada"
-            $resultadosTareas[] = [
-                'tarea' => $tarea,
-                'nota' => 'No completada',
-            ];
         }
+
+        if ($tareasDelCurso->isEmpty()) {
+            return view('profile.alumno', compact('alumno', 'curso'))->with('noTareas', true);
+        }
+
+        return view('profile.alumno', compact('alumno', 'curso', 'resultadosTareas'));
     }
-
-    // Si no hay tareas de tipo test, enviar un mensaje
-    if ($tareasDelCurso->isEmpty()) {
-        return view('profile.alumno', compact('alumno', 'curso'))->with('noTareas', true);
-    }
-
-    return view('profile.alumno', compact('alumno', 'curso', 'resultadosTareas'));
-}
-
-
 }

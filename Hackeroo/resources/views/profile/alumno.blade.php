@@ -12,10 +12,11 @@
     </div>
 
     <div class="row justify-content-center">
+        <h2 class="text-center">{{ $alumno->nombre }} {{ $alumno->apellidos }}</h2>
         <form action="#" method="" class='d-flex justify-content-center align-items-center'>
             @csrf
             <fieldset>
-                <legend>{{ $alumno->nombre }} {{ $alumno->apellidos }} - Curso: {{ $curso->nombre }}</legend>
+                <legend class="text-nowrap">{{ $curso->nombre }}</legend>
                 <div class="tabla-scroll-container">
                     @if(isset($noTareas) && $noTareas)
                         <!-- Mostrar mensaje si no hay tareas -->

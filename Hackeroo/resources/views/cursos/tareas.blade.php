@@ -72,11 +72,11 @@
                                         <!-- Imagen a un lado -->
                                         <div class="me-3">
                                             @if ($tarea->tipo === 'test')
-                                            <img src="{{ asset('img/Imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
+                                            <img src="{{ asset('img/imagenes/todo.png') }}" alt="Test" class="img-fluid" style="max-width: 80px;">
                                             @elseif ($tarea->tipo === 'link')
-                                            <img src="{{ asset('img/Imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
+                                            <img src="{{ asset('img/imagenes/link.png') }}" alt="Link" class="img-fluid" style="max-width: 80px;">
                                             @elseif ($tarea->tipo === 'archivo')
-                                            <img src="{{ asset('img/Imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
+                                            <img src="{{ asset('img/imagenes/apuntes.png') }}" alt="Archivo" class="img-fluid" style="max-width: 80px;">
                                             @endif
                                         </div>
                                         <!-- Contenido (título y descripción) -->

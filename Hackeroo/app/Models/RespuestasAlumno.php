@@ -10,25 +10,22 @@ class RespuestasAlumno extends Model
     use HasFactory;
 
     protected $fillable = [
-        'usuario_dni',        // Relación con el alumno
-        'opcion_respuesta_id', // Relación con la opción de respuesta seleccionada
-        'pregunta_id',      // Relación con la pregunta
-        'es_correcta',      // Indica si la respuesta es correcta o no
+        'usuario_dni',        
+        'opcion_respuesta_id', 
+        'pregunta_id',     
+        'es_correcta',    
     ];
 
-    // Relación con el alumno
     public function alumno()
     {
         return $this->belongsTo(Usuario::class);
     }
 
-    // Relación con la opción de respuesta seleccionada
     public function opciones_respuesta()
     {
         return $this->belongsTo(OpcionesRespuesta::class);
     }
 
-    // Relación con la pregunta
     public function pregunta()
     {
         return $this->belongsTo(Pregunta::class);

@@ -12,10 +12,10 @@ class Usuario extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'usuarios'; // Se especifica el nombre de la tabla
-    protected $primaryKey = 'DNI'; // La clave primaria es el DNI
-    public $incrementing = false; // Ya que el DNI no es auto-incremental
-    protected $keyType = 'string'; // El DNI es de tipo string
+    protected $table = 'usuarios'; 
+    protected $primaryKey = 'DNI';
+    public $incrementing = false; 
+    protected $keyType = 'string'; 
 
     protected $fillable = [
         'DNI',
@@ -39,7 +39,6 @@ class Usuario extends Authenticatable
         'rol' => 'string',
     ];
 
-    // Autenticación: Indicar que el email es el identificador del usuario
     public function getAuthIdentifierName()
     {
         return 'email';
@@ -50,13 +49,11 @@ class Usuario extends Authenticatable
         return $this->contraseña;
     }
 
-    // 🔹 Relación muchos a muchos con los cursos (para los alumnos)
     public function cursos()
     {
         return $this->belongsToMany(Curso::class, 'curso_usuario', 'usuario_dni', 'curso_id');
     }
 
-    // 🔹 Relación uno a muchos con los cursos (para los profesores)
     public function cursos_profesor()
     {
         return $this->hasMany(Curso::class, 'profesor_dni', 'DNI');
