@@ -5,9 +5,13 @@
     <!-- Botón para volver -->
     <div class="row mb-3">
         <div class="col-12 text-left">
+            @if(Auth::user()->rol=='alumno')
             <a href="{{ route('curso.tareas', $curso->id) }}">
-                <img src="/img/botones/volver.png" alt="Volver">
-            </a>
+                @else
+                <a href="{{ route('cursos.show', $curso_id) }}">
+                    @endif
+                    <img src="/img/botones/volver.png" alt="Volver">
+                </a>
         </div>
     </div>
 
