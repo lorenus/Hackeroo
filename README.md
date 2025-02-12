@@ -22,7 +22,7 @@ Una plataforma web diseñada para hacer el aprendizaje y la enseñanza más inte
 ## 🛠️ Tecnologías Utilizadas
 //cambiar segun lo q hayamos usado
 - **Frontend**: HTML, CSS, SCSS, Bootstrap, JavaScript 
-- **Backend**:Laravel con Breeze
+- **Backend**: Laravel con Breeze
 - **Base de Datos**: MySQL
 - **Despliegue**: AWS
 
