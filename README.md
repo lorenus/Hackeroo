@@ -4,6 +4,27 @@
 ¡Bienvenido a **Hackeroo**!
 Una plataforma web diseñada para hacer el aprendizaje y la enseñanza más interactivos, divertidos y efectivos. 
 
+## 👥 Integrantes del Equipo
+
+Este proyecto ha sido desarrollado:
+
+- **Alejandro Moreno** - Rol (Backend)
+- **Lorena Sanchis** - Rol (Frontend)
+- **Pablo Abellán** - Rol (Backend)
+- **Sofía García** - Rol (Frontend)
+
+¡Gracias a todos por su esfuerzo y dedicación! 💪
+
+## 📅 Metodología y Organización
+
+Hemos utilizado la metodología **Scrum** para gestionar el desarrollo del proyecto. Esto nos ha permitido trabajar de manera ágil, iterativa y colaborativa. El trabajo se ha distribuido principalmente en dos áreas:
+
+- **Frontend**: Desarrollo de la interfaz de usuario, diseño visual y experiencia de usuario (UX/UI).
+- **Backend**: Implementación de la lógica del servidor, bases de datos y despliegue.
+
+Además, hemos realizado reuniones diarias (**daily meetings**) y planificado sprints semanales para asegurar que el proyecto avanzara de manera eficiente.
+
+
 ## 🌟 Características Principales
 
 ### Para Alumnos:
