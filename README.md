@@ -1,4 +1,4 @@
-![logo](Hackeroo\public\img\Imagenes\logo-fondo.png)
+![logo](Hackeroo/public/img/Imagenes/logo-fondo.png)
 # 🎓✨ Aprende y Diviértete
 
 ¡Bienvenido a **Hackeroo**!
