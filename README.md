@@ -20,7 +20,6 @@ Una plataforma web diseñada para hacer el aprendizaje y la enseñanza más inte
 - **Diseño Único**: Una interfaz agradable y divertida que mejora la experiencia de usuario y aumenta la interacción.
 
 ## 🛠️ Tecnologías Utilizadas
-//cambiar segun lo q hayamos usado
 - **Frontend**: HTML, CSS, SCSS, Bootstrap, JavaScript 
 - **Backend**: Laravel con Breeze
 - **Base de Datos**: MySQL
