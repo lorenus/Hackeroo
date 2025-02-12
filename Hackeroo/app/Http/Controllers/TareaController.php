@@ -171,40 +171,54 @@ public function updateRecurso(Request $request, $id)
 {
     $request->validate([
         'tipo' => 'required|in:archivo,link',
-        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,php,txt,html,js,css|max:2048', 
-        'url' => 'nullable|url', 
+        'archivo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,txt,html,js,css|max:2048',
+        'url' => 'nullable|url',
     ]);
 
     $tarea = Tarea::findOrFail($id);
-
     if (Auth::user()->rol !== 'profesor') {
         abort(403, 'No tienes permiso para realizar esta acción.');
     }
 
     $recurso = $tarea->recursoMultimedia;
-
     if (!$recurso) {
-        return redirect()->route('cursos.show', $tarea->curso_id)->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
+        return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
+            ->with('error', 'No se encontró ningún recurso asociado a esta tarea.');
     }
 
-    if ($request->tipo === 'archivo') {
+    $nuevoTipo = $request->input('tipo');
+    $url = null;
+
+    if ($nuevoTipo === 'archivo') {
         if (!$request->hasFile('archivo')) {
             return redirect()->back()->with('error', 'Debes subir un archivo.');
         }
 
+        $nombreArchivo = $request->file('archivo')->getClientOriginalName();
+        $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
+
         if ($recurso->tipo === 'archivo' && Storage::disk('public')->exists($recurso->url)) {
             Storage::disk('public')->delete($recurso->url);
         }
+    } elseif ($nuevoTipo === 'link') {
+        if (!$request->input('url')) {
+            return redirect()->back()->with('error', 'Debes proporcionar una URL válida.');
+        }
 
-        $nombreArchivo = $request->file('archivo')->getClientOriginalName();
-        $url = $request->file('archivo')->storeAs('archivos', $nombreArchivo, 'public');
-    } elseif ($request->tipo === 'link') {
-        $url = $request->url;
+        $url = $request->input('url');
+
+        if ($recurso->tipo === 'archivo' && Storage::disk('public')->exists($recurso->url)) {
+            Storage::disk('public')->delete($recurso->url);
+        }
     }
 
     $recurso->update([
-        'tipo' => $request->tipo,
+        'tipo' => $nuevoTipo,
         'url' => $url,
+    ]);
+
+    $tarea->update([
+        'tipo' => $nuevoTipo,
     ]);
 
     return redirect()->route('cursos.show', ['id' => $tarea->curso_id])
