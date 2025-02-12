@@ -10,13 +10,13 @@
         </div>
     </div>
 
-    <form action="#" method="POST" class='d-flex justify-content-center align-items-center'>
+    <div class='d-flex justify-content-center align-items-center'>
         @csrf
         <fieldset style="min-height: 50vh;">
             <legend class="text-nowrap">Mis Alumnos</legend>
 
             <div class="input-group mb-4">
-                <x-search-bar id="search" class="form-control" placeholder="Buscar alumno" />
+            <x-search-bar id="search" class="form-control" placeholder="Buscar alumno" oninput="filterAlumnos()" />
             </div>
 
             <div class="tabla-scroll-container">
@@ -56,69 +56,41 @@
                 </table>
             </div>
         </fieldset>
-    </form>
+</div>
 
     <script>
-        function filterAlumnos() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const rows = document.querySelectorAll('.alumno-row');
-            rows.forEach(row => {
-                const nombre = row.querySelector('td:nth-child(1) a').textContent.toLowerCase(); // Select the link text
-                if (searchTerm === "" || nombre.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('search');
-            if (searchInput) {
-                searchInput.addEventListener('input', filterAlumnos);
+       function filterAlumnos() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const rows = document.querySelectorAll('.nombre-alumno-row');
+    
+    rows.forEach(row => {
+        const nombre = row.querySelector('td').textContent.toLowerCase();
+        if (searchTerm === "" || nombre.includes(searchTerm)) {
+            row.style.display = '';
+            // Mostrar las filas de cursos asociados al alumno
+            let nextRow = row.nextElementSibling;
+            while (nextRow && !nextRow.classList.contains('nombre-alumno-row')) {
+                nextRow.style.display = '';
+                nextRow = nextRow.nextElementSibling;
             }
+        } else {
+            row.style.display = 'none';
+            // Ocultar las filas de cursos asociados al alumno
+            let nextRow = row.nextElementSibling;
+            while (nextRow && !nextRow.classList.contains('nombre-alumno-row')) {
+                nextRow.style.display = 'none';
+                nextRow = nextRow.nextElementSibling;
+            }
+        }
+    });
+}
 
-            // Sticky header
-            const table = document.getElementById('alumnos-table');
-            const thead = table.querySelector('thead');
-            const tbody = table.querySelector('tbody');
-
-            tbody.addEventListener('scroll', function() {
-                if (tbody.scrollTop > 0) {
-                    thead.style.position = 'sticky';
-                    thead.style.top = '0';
-                    thead.style.zIndex = '1'; // Ensure it's on top
-                    thead.style.backgroundColor = '#f2f2f2'; // Set background color
-                } else {
-                    thead.style.position = 'relative'; // Reset to default when at the top
-                    thead.style.backgroundColor = 'transparent'; // Reset background color (or whatever you want)
-                }
-            });
-        });
     </script>
 
     <style>
-        .tabla-scroll-container {
-            overflow-y: auto;
-            max-height: 50vh;
-            /* Adjust as needed */
-        }
-
-        #alumnos-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        #alumnos-table th,
-        #alumnos-table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
+      
         .nombre-alumno-row {
             background-color: #ffe5b4;
-            /* Light orange */
             font-weight: bold;
         }
 
