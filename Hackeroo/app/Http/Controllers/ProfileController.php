@@ -118,7 +118,7 @@ class ProfileController extends Controller
                         ->unique('id')
                         ->count();
 
-                    $totalTareas = $curso->tareas->count();
+                    $totalTareas = $curso->tareas->where('tipo','=','test')->count();
 
                     $alumnosPorCurso[$alumnoKey]['cursos'][] = [
                         'curso' => $curso,

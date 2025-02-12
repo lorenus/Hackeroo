@@ -12,17 +12,11 @@
         <input id="email" type="email" name="email" class="form-control border-0 border-bottom  border-3 border-warning bg-transparent rounded-0" value="{{ old('email') }}" required autofocus autocomplete="username">  <x-input-error :messages="$errors->get('email')" class="mt-2" />
     </div>
 
-    <div class="mb-3  text-center">  
+    <div class="mb-5  text-center">  
         <label for="password" class="form-label text-center custom-label"><h4>{{ __('Contraseña') }}</h4></label>  
     <input id="password" type="password" name="password" class="form-control border-0 border-bottom  border-3 border-warning bg-transparent rounded-0" required autocomplete="current-password">  <x-input-error :messages="$errors->get('password')" class="mt-2" />
     </div>
 
-    <div class="mb-3 form-check text-center d-flex justify-content-center align-items-center gap-2">
-    <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
-    <label class="form-check-label" for="remember_me">
-        {{ __('Remember me') }}
-    </label>
-</div>
 
     
     <div class="mt-3 mb-3 text-center">
